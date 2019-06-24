@@ -1,1 +1,15 @@
+@import 'themes';
+
+@import '~@nebular/theme/styles/globals';
+@import '~@nebular/auth/styles/all';
+//@import '~@nebular/bootstrap/styles/globals';
+
+@include nb-install() {
+  @include nb-theme-global();
+  @include nb-auth-global();
+//  @include nb-bootstrap-global();
+
+  // loading progress bar
+  //@include ngx-pace-theme();
+};
 /* You can add global styles to this file, and also import other style files */

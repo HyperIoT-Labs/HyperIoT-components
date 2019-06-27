@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'h-input',
@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hinput.component.css']
 })
 export class HInputComponent implements OnInit {
+
+  @Input() disabled: boolean;
+
+  @Input() placeholder: string;
 
   constructor() { }
 

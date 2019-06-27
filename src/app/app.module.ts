@@ -17,7 +17,6 @@ import {
   NbStepperModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { AppRoutingModule } from './app-routing.module';
 
 import { HCardModule } from '../../projects/components/src/lib/h-card/h-card.module';
 import { HActionModule } from '../../projects/components/src/lib/h-action/h-action.module';
@@ -27,9 +26,32 @@ import { HRadioModule } from '../../projects/components/src/lib/h-radio/h-radio.
 import { HCheckboxModule } from '../../projects/components/src/lib/h-checkbox/h-checkbox.module';
 import { HStepperModule } from '../../projects/components/src/lib/h-stepper/h-stepper.module';
 
+import { Routes, RouterModule } from '@angular/router';
+import { InputsComponent } from './inputs/inputs.component';
+import { ButtonsComponent } from './buttons/buttons.component';
+import { ActionsComponent } from './actions/actions.component';
+import { StepperComponent } from './stepper/stepper.component';
+import { CardsComponent } from './cards/cards.component';
+import { TablesComponent } from './tables/tables.component';
+
+const routes: Routes = [
+  { path: 'inputs', component: InputsComponent },
+  { path: 'buttons', component: ButtonsComponent },
+  { path: 'actions', component: ActionsComponent },
+  { path: 'stepper', component: StepperComponent },
+  { path: 'cards', component: CardsComponent },
+  { path: 'tables', component: TablesComponent }
+];
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    InputsComponent,
+    ButtonsComponent,
+    ActionsComponent,
+    StepperComponent,
+    CardsComponent,
+    TablesComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +61,7 @@ import { HStepperModule } from '../../projects/components/src/lib/h-stepper/h-st
     NbSidebarModule,
     NbMenuModule.forRoot(),
     NbEvaIconsModule,
-    AppRoutingModule,
+    RouterModule.forRoot(routes),
     HCardModule,
     HActionModule,
     HButtonModule,

@@ -15,17 +15,13 @@ export class AppComponent {
       children: [
         {
           title: 'Inputs',
-          link: [],
+          link: ['/inputs'],
         },
         {
           title: 'Buttons',
-          link: [],
+          link: ['/buttons'],
         }
       ],
-    },
-    {
-      title: 'Cards',
-      link: [],
     },
     {
       title: 'UI Elements',
@@ -33,13 +29,17 @@ export class AppComponent {
       children: [
         {
           title: 'Actions',
-          link: [],
+          link: ['/actions'],
         },
         {
           title: 'Stepper',
-          link: [],
+          link: ['/stepper'],
         }
       ],
+    },
+    {
+      title: 'Cards',
+      link: ['/cards'],
     },
     {
       title: 'Tables',

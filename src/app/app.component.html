@@ -1,32 +1,22 @@
 <nb-layout>
 
   <nb-layout-header fixed>
+    <div class="img-center">
+      <img src="./../assets/images/h-logo.jpg" alt="Logo" height="42" width="42">
+    </div>
     <div class="center">
-      <h5>HyperIOT Components Showcase</h5>
+      <h5>HyperIoT Components Showcase</h5>
     </div>
   </nb-layout-header>
 
   <nb-sidebar>
     <p>UI Components</p>
-
     <nb-menu [items]="items">
     </nb-menu>
   </nb-sidebar>
 
   <nb-layout-column>
-    <h-stepper></h-stepper>
-    <br>
-    <h-action></h-action>
-    <br>
-    <h-card>TEST</h-card>
-    <br>
-    <h-button></h-button>
-    <br><br>
-    <h-input></h-input>
-    <br><br>
-    <h-radio></h-radio>
-    <br><br>
-    <h-checkbox></h-checkbox>
+    <router-outlet></router-outlet>
   </nb-layout-column>
 
   <nb-layout-footer fixed>

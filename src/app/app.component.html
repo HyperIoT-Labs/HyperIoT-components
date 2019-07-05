@@ -1,3 +1,23 @@
-<mat-toolbar id="h-toolbar">
-  <span>{{ title }}</span>
+<mat-toolbar id="toolbar">
+    <span>{{title}}</span>
 </mat-toolbar>
+
+<span>
+    <p>Input Text</p>
+</span>
+<h-input [placeHolder]="placeHolder"></h-input>
+
+<span>
+    <p>Button</p>
+</span>
+<h-button>Click me!</h-button>
+
+<span>
+    <p>Radio Button</p>
+</span>
+<h-radio-button></h-radio-button>
+
+<span>
+    <p>Checkbox</p>
+</span>
+<h-checkbox>Check me!</h-checkbox>

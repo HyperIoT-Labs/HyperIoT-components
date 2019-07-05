@@ -119,6 +119,41 @@
           }
         }
       }
+    },
+    "hyperiot-components": {
+      "projectType": "library",
+      "root": "projects/hyperiot-components",
+      "sourceRoot": "projects/hyperiot-components/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/hyperiot-components/tsconfig.lib.json",
+            "project": "projects/hyperiot-components/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/hyperiot-components/src/test.ts",
+            "tsConfig": "projects/hyperiot-components/tsconfig.spec.json",
+            "karmaConfig": "projects/hyperiot-components/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/hyperiot-components/tsconfig.lib.json",
+              "projects/hyperiot-components/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "hyperiot"
 }

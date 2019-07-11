@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HButtonComponent } from './h-button.component';
+import { HytStepComponent } from './hyt-step.component';
 
-describe('HBottonComponent', () => {
-  let component: HButtonComponent;
-  let fixture: ComponentFixture<HButtonComponent>;
+describe('HytStepComponent', () => {
+  let component: HytStepComponent;
+  let fixture: ComponentFixture<HytStepComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HButtonComponent]
+      declarations: [ HytStepComponent ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HButtonComponent);
+    fixture = TestBed.createComponent(HytStepComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

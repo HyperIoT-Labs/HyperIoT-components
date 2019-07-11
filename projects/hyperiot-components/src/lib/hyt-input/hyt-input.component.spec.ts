@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HButtonComponent } from './h-button.component';
+import { HInputComponent } from './hyt-input.component';
 
-describe('HBottonComponent', () => {
-  let component: HButtonComponent;
-  let fixture: ComponentFixture<HButtonComponent>;
+describe('HInputComponent', () => {
+  let component: HInputComponent;
+  let fixture: ComponentFixture<HInputComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HButtonComponent]
+      declarations: [HInputComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HButtonComponent);
+    fixture = TestBed.createComponent(HInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

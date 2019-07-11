@@ -1,4 +1,6 @@
+import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component } from '@angular/core';
+import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'HyperIoT UI-Components';
+  title = 'HyperIoT UI-Components Showcase';
+
+  constructor() {
+  }
 
 }

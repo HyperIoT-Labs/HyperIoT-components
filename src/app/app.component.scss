@@ -4,10 +4,21 @@
 }
 
 .basic-container {
-  padding: 20px;
+  padding: 10px 0px 20px 20px;
 }
 
 .h-sidenav {
-  width: 200px;
-  background-color: #eee;
+  width: 250px;
+  min-height: 100%;
+  background-color: #ebf1f7;
+}
+
+.img-logo {
+  padding-right: 20px;
+  padding-left: 20px;
+  //  mix-blend-mode: multiply;
+}
+
+.mat-list-item {
+  font-size: 14px;
 }

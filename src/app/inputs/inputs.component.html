@@ -6,13 +6,14 @@
 </div>
 <div class="ui-element">
   <span>
-    <h4>Text area</h4>
+    <h4>Validated e-mail</h4>
   </span>
-  <hyt-input-text [placeholder]="'Insert text here'"></hyt-input-text>
+  <hyt-input-text [isEmail]="true" [hint]="'Errors appears instantly!'" [placeholder]="'Insert your e-mail'">
+  </hyt-input-text>
 </div>
 <div class="ui-element">
   <span>
-    <h4>Validated input</h4>
+    <h4>Text area</h4>
   </span>
-  <hyt-input-text [placeholder]="'Insert text here'"></hyt-input-text>
+  <hyt-text-area [placeholder]="'Leave a comment'"></hyt-text-area>
 </div>

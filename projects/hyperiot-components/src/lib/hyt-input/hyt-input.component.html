@@ -1,5 +1,11 @@
 <form class="hyt-form">
-    <mat-form-field class="hyt-full-width">
-        <input matInput placeholder="{{placeholder}}" value="{{fieldValue}}">
-    </mat-form-field>
+  <mat-form-field class="hyt-full-width">
+    <input matInput class="hyt-input" id="{{id}}" placeholder="{{placeholder}}" value="{{fieldValue}}"
+      (blur)="onBlur(event)" [formControl]="formControl" [errorStateMatcher]="matcher">
+    <mat-hint *ngIf="hint">{{hint}}</mat-hint>
+    <mat-error *ngIf="formControl.hasError('email')">
+      Please enter a valid email address
+    </mat-error>
+  </mat-form-field>
+
 </form>

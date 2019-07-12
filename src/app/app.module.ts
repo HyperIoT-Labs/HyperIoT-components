@@ -20,12 +20,14 @@ import { InputsComponent } from './inputs/inputs.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { StepperComponent } from './stepper/stepper.component';
 import { CardsComponent } from './cards/cards.component';
+import { LayoutComponent } from './layout/layout.component';
 
 const appRoutes: Routes = [
   { path: 'inputs', component: InputsComponent },
   { path: 'buttons', component: ButtonsComponent },
   { path: 'stepper', component: StepperComponent },
   { path: 'cards', component: CardsComponent },
+  { path: 'layout', component: LayoutComponent },
 ];
 
 @NgModule({
@@ -34,7 +36,8 @@ const appRoutes: Routes = [
     InputsComponent,
     ButtonsComponent,
     StepperComponent,
-    CardsComponent
+    CardsComponent,
+    LayoutComponent
   ],
   imports: [
     RouterModule.forRoot(

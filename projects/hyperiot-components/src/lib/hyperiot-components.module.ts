@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HInputComponent } from './hyt-input/hyt-input.component';
+import { CommonModule } from '@angular/common';
+import { HytInputComponent } from './hyt-input/hyt-input.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
@@ -15,18 +16,21 @@ import { HCheckboxComponent } from './h-checkbox/h-checkbox.component';
 import { HCardComponent } from './h-card/h-card.component';
 import { HytStepperComponent } from './hyt-stepper/hyt-stepper.component';
 import { HytStepComponent } from './hyt-stepper/hyt-step/hyt-step.component';
+import { HytTextAreaComponent } from './hyt-text-area/hyt-text-area.component';
 
 @NgModule({
   declarations: [
-    HInputComponent,
+    HytInputComponent,
     HButtonComponent,
     HRadioButtonComponent,
     HCheckboxComponent,
     HCardComponent,
     HytStepperComponent,
-    HytStepComponent
+    HytStepComponent,
+    HytTextAreaComponent
   ],
   imports: [
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
@@ -39,13 +43,14 @@ import { HytStepComponent } from './hyt-stepper/hyt-step/hyt-step.component';
     DemoMaterialModule
   ],
   exports: [
-    HInputComponent,
+    HytInputComponent,
     HButtonComponent,
     HRadioButtonComponent,
     HCheckboxComponent,
     HCardComponent,
     HytStepperComponent,
-    HytStepComponent
+    HytStepComponent,
+    HytTextAreaComponent
   ]
 })
 export class HyperiotComponentsModule { }

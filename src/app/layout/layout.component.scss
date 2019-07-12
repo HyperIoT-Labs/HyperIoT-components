@@ -1,0 +1,12 @@
+.row>.col,
+.row>[class^=col-] {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  background-color: rgb(241, 241, 241);
+  border: 1px solid rgb(160, 160, 160);
+}
+
+.row {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

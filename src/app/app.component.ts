@@ -1,6 +1,4 @@
-import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component } from '@angular/core';
-import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 
 @Component({
   selector: 'app-root',

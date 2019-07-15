@@ -1,9 +1,18 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, forwardRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroupDirective, NgForm, FormControl, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
-/** 
- * Error when invalid control is dirty, touched, or submitted. 
+/**
+ * Custom provider for NG_VALUE_ACCESSOR
+ */
+export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => HytInputComponent),
+  multi: true
+};
+
+/**
+ * Error when invalid control is dirty, touched, or submitted
  */
 export class CustomErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -26,29 +35,38 @@ export class CustomErrorStateMatcher implements ErrorStateMatcher {
   selector: 'hyt-input-text',
   templateUrl: './hyt-input.component.html',
   styleUrls: ['./hyt-input.component.css'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => HytInputComponent),
-    multi: true,
-  }]
+  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
+  encapsulation: ViewEncapsulation.None
 })
 export class HytInputComponent implements OnInit, ControlValueAccessor {
+  /**
+   * Binding variables with the input element
+   */
   @Input() formControl: FormControl;
   @Input() placeholder: any = '';
   @Input() fieldValue: string;
-  @Input() type: string;
   @Input() id = '';
   @Input() hint = '';
 
-  innerValue: any = '';
   @ViewChild('inputElement', { static: false }) private inputElement: ElementRef;
+
+  @Input() errorMsgRequired: string;
+  @Input() errorMsgEmail: string;
 
   @Input() isRequired = false;
   @Input() isEmail = false;
   @Input() isPassword = false;
 
-  @Input() errorMsgRequired: string;
-  @Input() errorMsgEmail: string;
+  /**
+   * The internal data
+   */
+  private innerValue: any = '';
+
+  /**
+   * Callback functions for change and blur
+   */
+  private onChangeFn = (_: any) => { };
+  private onTouchedFn = () => { };
 
   matcher = new CustomErrorStateMatcher();
 
@@ -100,9 +118,6 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
       }
     }
   }
-
-  private onChangeFn = (_: any) => { };
-  private onTouchedFn = () => { };
 
   writeValue(value: any): void {
     this.innerValue = value;

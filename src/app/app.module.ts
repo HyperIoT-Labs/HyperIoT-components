@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
@@ -44,6 +45,8 @@ const appRoutes: Routes = [
       appRoutes,
     ),
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     HyperiotComponentsModule,
     MatToolbarModule,
     MatSidenavModule,

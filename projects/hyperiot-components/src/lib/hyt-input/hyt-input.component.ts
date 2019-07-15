@@ -13,7 +13,7 @@ export class CustomErrorStateMatcher implements ErrorStateMatcher {
 }
 
 /**
- * Wrapper for text input, this componenet allow to insert a text field.
+ * Wrapper for text input, this component allows to insert a text field.
  * Input validation is performed using an attribute that specifies validation type.
  * Supported validations are:
  *
@@ -47,21 +47,33 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   @Input() isEmail = false;
   @Input() isPassword = false;
 
+  @Input() errorMsgRequired: string;
+  @Input() errorMsgEmail: string;
+
   matcher = new CustomErrorStateMatcher();
+
+  errorMap = {
+    required: 'The field is required.',
+    email: 'Please insert a valid email.'
+  };
 
   constructor(
   ) { }
 
   ngOnInit() {
     const validators = [];
-
     if (this.isRequired) {
       validators.push(Validators.required);
     }
     if (this.isEmail) {
       validators.push(Validators.email);
     }
-
+    if (this.errorMsgRequired) {
+      this.errorMap.required = this.errorMsgRequired;
+    }
+    if (this.errorMsgEmail) {
+      this.errorMap.email = this.errorMsgEmail;
+    }
     this.formControl = new FormControl('', Validators.compose(validators));
     //  this.form.addControl(this.fieldName, this.formControl);
   }
@@ -79,9 +91,9 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     for (const key in this.formControl.errors) {
       if (this.formControl.errors.hasOwnProperty(key)) {
         if (key === 'required') {
-          return 'The field is required.';
+          return this.errorMap.required;
         } else if (key === 'email') {
-          return 'Please insert a valid email.';
+          return this.errorMap.email;
         } else {
           return '';
         }

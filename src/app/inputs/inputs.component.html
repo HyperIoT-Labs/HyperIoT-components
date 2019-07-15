@@ -2,20 +2,23 @@
   <span>
     <h4>Input Text</h4>
   </span>
-  <hyt-input-text [placeholder]="'Insert text here'"></hyt-input-text>
+  <hyt-input-text [placeholder]="'Insert text here'" [(ngModel)]="inputText" (change)="onChange($event)">
+  </hyt-input-text>
 </div>
 <div class="ui-element">
   <span>
     <h4>Required field</h4>
   </span>
-  <hyt-input-text [isRequired]="true" [hint]="'Errors appears instantly!'" [placeholder]="'Insert text here'">
+  <hyt-input-text [isRequired]="true" [hint]="'Errors appears instantly!'"
+    [errorMsgRequired]="'Il campo è obbligatorio.'" [placeholder]="'Insert text here'">
   </hyt-input-text>
 </div>
 <div class="ui-element">
   <span>
     <h4>Validated e-mail</h4>
   </span>
-  <hyt-input-text [isEmail]="true" [hint]="'Errors appears instantly!'" [placeholder]="'Insert your e-mail'">
+  <hyt-input-text [isEmail]="true" [errorMsgEmail]="'Inserire un indirizzo email valido.'"
+    [hint]="'Errors appears instantly!'" [placeholder]="'Insert your e-mail'">
   </hyt-input-text>
 </div>
 <div class="ui-element">

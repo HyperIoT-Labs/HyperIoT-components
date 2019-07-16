@@ -22,9 +22,11 @@ import { ButtonsComponent } from './buttons/buttons.component';
 import { StepperComponent } from './stepper/stepper.component';
 import { CardsComponent } from './cards/cards.component';
 import { LayoutComponent } from './layout/layout.component';
+import { SelectComponent } from './select/select.component';
 
 const appRoutes: Routes = [
   { path: 'inputs', component: InputsComponent },
+  { path: 'select', component: SelectComponent },
   { path: 'buttons', component: ButtonsComponent },
   { path: 'stepper', component: StepperComponent },
   { path: 'cards', component: CardsComponent },
@@ -38,7 +40,8 @@ const appRoutes: Routes = [
     ButtonsComponent,
     StepperComponent,
     CardsComponent,
-    LayoutComponent
+    LayoutComponent,
+    SelectComponent,
   ],
   imports: [
     RouterModule.forRoot(

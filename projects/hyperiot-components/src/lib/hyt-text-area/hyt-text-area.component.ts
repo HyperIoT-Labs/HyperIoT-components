@@ -56,6 +56,7 @@ export class HytTextAreaComponent implements OnInit, ControlValueAccessor {
     const validators = [];
     if (this.isRequired) {
       validators.push(Validators.required);
+      this.placeholder += '*';
     }
     if (this.errorMsgRequired) {
       this.errMsgRequired = this.errorMsgRequired;

@@ -17,6 +17,7 @@ import { HCardComponent } from './h-card/h-card.component';
 import { HytStepperComponent } from './hyt-stepper/hyt-stepper.component';
 import { HytStepComponent } from './hyt-stepper/hyt-step/hyt-step.component';
 import { HytTextAreaComponent } from './hyt-text-area/hyt-text-area.component';
+import { HytSelectComponent } from './hyt-select/hyt-select.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { HytTextAreaComponent } from './hyt-text-area/hyt-text-area.component';
     HCardComponent,
     HytStepperComponent,
     HytStepComponent,
-    HytTextAreaComponent
+    HytTextAreaComponent,
+    HytSelectComponent,
   ],
   imports: [
     CommonModule,
@@ -50,7 +52,8 @@ import { HytTextAreaComponent } from './hyt-text-area/hyt-text-area.component';
     HCardComponent,
     HytStepperComponent,
     HytStepComponent,
-    HytTextAreaComponent
+    HytTextAreaComponent,
+    HytSelectComponent
   ]
 })
 export class HyperiotComponentsModule { }

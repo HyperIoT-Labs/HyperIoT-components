@@ -53,6 +53,9 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
 
   @Input() errorMsgRequired: string;
   @Input() errorMsgEmail: string;
+  @Input() errorMsgMinLength: string;
+  @Input() errorMsgOneNumber: string;
+  @Input() errorMsgUpperCase: string;
 
   @Input() isRequired = false;
   @Input() isEmail = false;
@@ -69,7 +72,8 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     required: 'The field is required.',
     email: 'Please insert a valid email.',
     minlength: 'Password should be at least 6 char long.',
-    pattern: 'Password should be alphanumeric.'
+    validateNumber: 'Password should contain at least one number.',
+    validateUperCase: 'Password should contain at least one uppercase letter.'
   };
 
   /**
@@ -83,22 +87,49 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit() {
     const validators = [];
+    function validateUperCase(c: FormControl) {
+      const PASS_REGEX: RegExp = new RegExp('^(?=.*[a-z])(?=.*[A-Z]).*$');
+      return PASS_REGEX.test(c.value) || c.value.length === 0 ? null : {
+        validateUperCase: {
+          valid: false
+        }
+      };
+    }
+    function validateNumber(c: FormControl) {
+      const PASS_REGEX: RegExp = new RegExp('^(?=.*[a-z])(?=.*[1-9]).*$');
+      return PASS_REGEX.test(c.value) || c.value.length === 0 ? null : {
+        validateNumber: {
+          valid: false
+        }
+      };
+    }
     if (this.isRequired) {
       validators.push(Validators.required);
+      this.placeholder += '*';
     }
     if (this.isEmail) {
       validators.push(Validators.email);
     }
     if (this.isPassword) {
       validators.push(Validators.minLength(6));
-      //    validators.push(Validators.pattern('^(?=.*[a-z])(?=.*[A-Z]).*$'));
-      validators.push(Validators.pattern('^(?=.*[a-z])(?=.*[1-9]).*$'));
+      validators.push(validateUperCase);
+      validators.push(validateNumber);
     }
+
     if (this.errorMsgRequired) {
       this.errorMap.required = this.errorMsgRequired;
     }
     if (this.errorMsgEmail) {
       this.errorMap.email = this.errorMsgEmail;
+    }
+    if (this.errorMsgMinLength) {
+      this.errorMap.minlength = this.errorMsgMinLength;
+    }
+    if (this.errorMsgOneNumber) {
+      this.errorMap.validateNumber = this.errorMsgOneNumber;
+    }
+    if (this.errorMsgUpperCase) {
+      this.errorMap.validateUperCase = this.errorMsgUpperCase;
     }
     this.formControl = new FormControl('', Validators.compose(validators));
     //  this.form.addControl(this.fieldName, this.formControl);
@@ -128,8 +159,6 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     const errorList: string[] = [];
     for (const key in this.formControl.errors) {
       if (this.formControl.errors.hasOwnProperty(key)) {
-        //       errorList.push(key);
-
         if (this.errorMap.hasOwnProperty(key)) {
           errorList.push(this.errorMap[key]);
         }

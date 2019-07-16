@@ -1,6 +1,10 @@
 {
-  "name": "hyperiot-components",
+  "name": "@hyperiot/components",
   "version": "0.0.1",
+  "publishConfig": {
+    "registry": "https://nexus.acsoftware.it/nexus/repository/acs-npm/",
+    "always-auth": "true"
+  },
   "peerDependencies": {
     "@angular/common": "^8.1.0",
     "@angular/core": "^8.1.0"

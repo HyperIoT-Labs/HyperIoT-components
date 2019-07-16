@@ -56,6 +56,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   @Input() errorMsgMinLength: string;
   @Input() errorMsgOneNumber: string;
   @Input() errorMsgUpperCase: string;
+  @Input() errorMsgSpecialChar: string;
 
   @Input() isRequired = false;
   @Input() isEmail = false;
@@ -73,7 +74,8 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     email: 'Please insert a valid email.',
     minlength: 'Password should be at least 6 char long.',
     validateNumber: 'Password should contain at least one number.',
-    validateUperCase: 'Password should contain at least one uppercase letter.'
+    validateUperCase: 'Password should contain at least one uppercase letter.',
+    validateSpecialChar: 'Password should contain at least one special character.'
   };
 
   /**
@@ -103,6 +105,14 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
         }
       };
     }
+    function validateSpecialChar(c: FormControl) {
+      const PASS_REGEX: RegExp = new RegExp('[^A-Za-z0-9]');
+      return PASS_REGEX.test(c.value) || c.value.length === 0 ? null : {
+        validateSpecialChar: {
+          valid: false
+        }
+      };
+    }
     if (this.isRequired) {
       validators.push(Validators.required);
       this.placeholder += '*';
@@ -114,6 +124,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
       validators.push(Validators.minLength(6));
       validators.push(validateUperCase);
       validators.push(validateNumber);
+      validators.push(validateSpecialChar);
     }
 
     if (this.errorMsgRequired) {
@@ -130,6 +141,9 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     }
     if (this.errorMsgUpperCase) {
       this.errorMap.validateUperCase = this.errorMsgUpperCase;
+    }
+    if (this.errorMsgSpecialChar) {
+      this.errorMap.validateSpecialChar = this.errorMsgSpecialChar;
     }
     this.formControl = new FormControl('', Validators.compose(validators));
     //  this.form.addControl(this.fieldName, this.formControl);

@@ -48,6 +48,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   @Input() id = '';
   @Input() type = '';
   @Input() hint = '';
+  @Input() errorPosition = '';
 
   @ViewChild('inputElement', { static: false }) private inputElement: ElementRef;
 

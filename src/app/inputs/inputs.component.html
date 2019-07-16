@@ -1,30 +1,46 @@
-<div class="ui-element">
-  <span>
-    <h4>Input Text</h4>
-  </span>
-  <hyt-input-text [placeholder]="'Insert text here'" [(ngModel)]="inputText" (change)="onChange($event)">
-  </hyt-input-text>
-</div>
-<div class="ui-element">
-  <span>
-    <h4>Required field</h4>
-  </span>
-  <hyt-input-text [isRequired]="true" [hint]="'Errors appears instantly!'"
-    [errorMsgRequired]="'Il campo è obbligatorio.'" [placeholder]="'Insert text here'">
-  </hyt-input-text>
-</div>
-<div class="ui-element">
-  <span>
-    <h4>Validated e-mail</h4>
-  </span>
-  <hyt-input-text [isEmail]="true" [errorMsgEmail]="'Inserire un indirizzo email valido.'"
-    [hint]="'Errors appears instantly!'" [placeholder]="'Insert your e-mail'">
-  </hyt-input-text>
-</div>
-<div class="ui-element">
-  <span>
-    <h4>Text area</h4>
-  </span>
-  <hyt-text-area [placeholder]="'Leave a comment'" [hint]="'Errors appears instantly!'" [isRequired]="true">
-  </hyt-text-area>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6">
+      <div class="ui-element">
+        <span>
+          <h4>Input Text</h4>
+        </span>
+        <hyt-input-text [placeholder]="'Insert text here'" [(ngModel)]="inputText" (change)="onChange($event)">
+        </hyt-input-text>
+      </div>
+      <div class="ui-element">
+        <span>
+          <h4>Validated e-mail</h4>
+        </span>
+        <hyt-input-text [isEmail]="true" [errorMsgEmail]="'Inserire un indirizzo email valido.'"
+          [hint]="'Errors appears instantly!'" [placeholder]="'Insert your e-mail'">
+        </hyt-input-text>
+      </div>
+      <div class="ui-element">
+        <span>
+          <h4>Text area</h4>
+        </span>
+        <hyt-text-area [placeholder]="'Leave a comment'" [hint]="'Errors appears instantly!'">
+        </hyt-text-area>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="ui-element">
+        <span>
+          <h4>Required field</h4>
+        </span>
+        <hyt-input-text [isRequired]="true" [hint]="'Errors appears instantly!'"
+          [errorMsgRequired]="'Il campo è obbligatorio.'" [placeholder]="'Insert text here'">
+        </hyt-input-text>
+      </div>
+      <div class="ui-element">
+        <span>
+          <h4>Validated password</h4>
+        </span>
+        <hyt-input-text [isPassword]="true" type="password" [isRequired]="true" [hint]="'Errors appears instantly!'"
+          [placeholder]="'Insert password'">
+        </hyt-input-text>
+      </div>
+    </div>
+  </div>
 </div>

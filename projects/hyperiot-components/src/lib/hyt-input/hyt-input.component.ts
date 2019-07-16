@@ -46,6 +46,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   @Input() placeholder: any = '';
   @Input() fieldValue: string;
   @Input() id = '';
+  @Input() type = '';
   @Input() hint = '';
 
   @ViewChild('inputElement', { static: false }) private inputElement: ElementRef;
@@ -62,18 +63,20 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
    */
   private innerValue: any = '';
 
+  matcher = new CustomErrorStateMatcher();
+
+  errorMap = {
+    required: 'The field is required.',
+    email: 'Please insert a valid email.',
+    minlength: 'Password should be at least 6 char long.',
+    pattern: 'Password should be alphanumeric.'
+  };
+
   /**
    * Callback functions for change and blur
    */
   private onChangeFn = (_: any) => { };
   private onTouchedFn = () => { };
-
-  matcher = new CustomErrorStateMatcher();
-
-  errorMap = {
-    required: 'The field is required.',
-    email: 'Please insert a valid email.'
-  };
 
   constructor(
   ) { }
@@ -85,6 +88,11 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     }
     if (this.isEmail) {
       validators.push(Validators.email);
+    }
+    if (this.isPassword) {
+      validators.push(Validators.minLength(6));
+      //    validators.push(Validators.pattern('^(?=.*[a-z])(?=.*[A-Z]).*$'));
+      validators.push(Validators.pattern('^(?=.*[a-z])(?=.*[1-9]).*$'));
     }
     if (this.errorMsgRequired) {
       this.errorMap.required = this.errorMsgRequired;
@@ -108,15 +116,26 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   getErrorMessage(): string {
     for (const key in this.formControl.errors) {
       if (this.formControl.errors.hasOwnProperty(key)) {
-        if (key === 'required') {
-          return this.errorMap.required;
-        } else if (key === 'email') {
-          return this.errorMap.email;
-        } else {
-          return '';
+        if (this.errorMap.hasOwnProperty(key)) {
+          return this.errorMap[key];
         }
       }
     }
+    return '';
+  }
+
+  getErrorList(): string[] {
+    const errorList: string[] = [];
+    for (const key in this.formControl.errors) {
+      if (this.formControl.errors.hasOwnProperty(key)) {
+        //       errorList.push(key);
+
+        if (this.errorMap.hasOwnProperty(key)) {
+          errorList.push(this.errorMap[key]);
+        }
+      }
+    }
+    return errorList;
   }
 
   writeValue(value: any): void {

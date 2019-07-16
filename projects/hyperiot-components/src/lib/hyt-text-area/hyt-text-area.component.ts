@@ -47,19 +47,20 @@ export class HytTextAreaComponent implements OnInit, ControlValueAccessor {
   @Input() errorMsgRequired: string;
   errMsgRequired = 'The field is required';
 
-  formControl = new FormControl('', [
-    Validators.required,
-  ]);
-
   matcher = new CustomErrorStateMatcher();
 
   constructor(
   ) { }
 
   ngOnInit() {
+    const validators = [];
+    if (this.isRequired) {
+      validators.push(Validators.required);
+    }
     if (this.errorMsgRequired) {
       this.errMsgRequired = this.errorMsgRequired;
     }
+    this.formControl = new FormControl('', Validators.compose(validators));
   }
 
   private onChangeFn = (_: any) => { };

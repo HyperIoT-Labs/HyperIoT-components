@@ -25,7 +25,7 @@ export class CustomErrorStateMatcher implements ErrorStateMatcher {
   // tslint:disable-next-line: component-selector
   selector: 'hyt-text-area',
   templateUrl: './hyt-text-area.component.html',
-  styleUrls: ['./hyt-text-area.component.css'],
+  styleUrls: ['./hyt-text-area.component.scss'],
   providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
 })
 export class HytTextAreaComponent implements OnInit, ControlValueAccessor {

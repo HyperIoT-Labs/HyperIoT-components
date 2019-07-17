@@ -34,7 +34,7 @@ export class CustomErrorStateMatcher implements ErrorStateMatcher {
   // tslint:disable-next-line: component-selector
   selector: 'hyt-input-text',
   templateUrl: './hyt-input.component.html',
-  styleUrls: ['./hyt-input.component.css'],
+  styleUrls: ['./hyt-input.component.scss'],
   providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
   encapsulation: ViewEncapsulation.None
 })
@@ -150,6 +150,19 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     //  this.form.addControl(this.fieldName, this.formControl);
   }
 
+  // get accessor
+  get value(): any {
+    return this.innerValue;
+  }
+
+  // set accessor including call the onchange callback
+  set value(v: any) {
+    if (v !== this.innerValue) {
+      this.innerValue = v;
+      this.onChangeFn(v);
+    }
+  }
+
   hasErrorForm(): boolean {
     for (const key in this.formControl.errors) {
       if (this.formControl.errors.hasOwnProperty(key)) {
@@ -205,7 +218,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     this.onChangeFn(event.target.value);
   }
 
-  onBlur(event: any) {
+  onBlur() {
     console.log('onBlur called');
     this.onTouchedFn();
   }

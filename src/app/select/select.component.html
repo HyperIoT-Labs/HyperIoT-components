@@ -2,8 +2,9 @@
   <div class="row">
     <div class="col-6">
       <div class="ui-element">
-        <h4>Simple select</h4>
-        <hyt-select [title]="'Favourite Food'" [options]="options"></hyt-select>
+        <h4>Simple select with 2 way binding</h4>
+        <hyt-select [label]="'Favourite Food'" [(ngModel)]="selected" [options]="options"></hyt-select>
+        <p>You selected: {{selected}}</p>
       </div>
     </div>
   </div>

@@ -3,10 +3,11 @@
     <div class="col-6">
       <div class="ui-element">
         <span>
-          <h4>Input Text</h4>
+          <h4>Input Text with 2 way binding</h4>
         </span>
         <hyt-input-text [placeholder]="'Insert text here'" [(ngModel)]="inputText" (change)="onChange($event)">
         </hyt-input-text>
+        <p>You insert: {{ inputText }}</p>
       </div>
       <div class="ui-element">
         <span>

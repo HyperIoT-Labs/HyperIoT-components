@@ -70,6 +70,8 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
 
   matcher = new CustomErrorStateMatcher();
 
+  visibilityIcon = 'visibility';
+
   errorMap = {
     required: 'The field is required.',
     email: 'Please insert a valid email.',
@@ -195,6 +197,15 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     return errorList;
   }
 
+  tooglePassword() {
+    if (this.type === 'password') {
+      this.type = 'text';
+      this.visibilityIcon = 'visibility_off';
+    } else {
+      this.type = 'password';
+      this.visibilityIcon = 'visibility';
+    }
+  }
   writeValue(value: any): void {
     this.innerValue = value;
   }

@@ -1,10 +1,17 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-6">
+    <div class="col-4">
       <div class="ui-element">
         <h4>Simple select with 2 way binding</h4>
         <hyt-select [label]="'Favourite Food'" [(ngModel)]="selected" [options]="options"></hyt-select>
         <p>You selected: {{selected}}</p>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="ui-element">
+        <h4>Required select</h4>
+        <hyt-select [label]="'Favourite Food'" [isRequired]="true" [errorMsgRequired]="'Prego selezionare un cibo'"
+          [options]="options"></hyt-select>
       </div>
     </div>
   </div>

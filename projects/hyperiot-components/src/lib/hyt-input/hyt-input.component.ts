@@ -118,7 +118,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     }
     if (this.isRequired) {
       validators.push(Validators.required);
-      this.placeholder += '*';
+      this.placeholder += ' *';
     }
     if (this.isEmail) {
       validators.push(Validators.email);
@@ -165,26 +165,6 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  hasErrorForm(): boolean {
-    for (const key in this.formControl.errors) {
-      if (this.formControl.errors.hasOwnProperty(key)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  getErrorMessage(): string {
-    for (const key in this.formControl.errors) {
-      if (this.formControl.errors.hasOwnProperty(key)) {
-        if (this.errorMap.hasOwnProperty(key)) {
-          return this.errorMap[key];
-        }
-      }
-    }
-    return '';
-  }
-
   getErrorList(): string[] {
     const errorList: string[] = [];
     for (const key in this.formControl.errors) {
@@ -206,6 +186,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
       this.visibilityIcon = 'visibility';
     }
   }
+
   writeValue(value: any): void {
     this.innerValue = value;
   }

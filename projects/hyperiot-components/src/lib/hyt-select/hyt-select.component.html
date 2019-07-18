@@ -1,8 +1,13 @@
 <mat-form-field>
   <mat-label>{{ label }}</mat-label>
-  <mat-select [formControl]="formControl" [(ngModel)]="value">
-    <mat-option *ngFor="let opt of options" [value]="opt.value">
-      {{ opt.label }}
+  <mat-select [formControl]="formControl" [(ngModel)]="value" [disabled]="disabled" [multiple]="isMultiple ? '' : null">
+    <mat-optgroup *ngFor="let group of groups" [label]="group.name" [disabled]="group.disabled">
+      <mat-option *ngFor="let option of group.options" [value]="option.value">
+        {{ option.label }}
+      </mat-option>
+    </mat-optgroup>
+    <mat-option *ngFor="let option of options" [value]="option.value">
+      {{ option.label }}
     </mat-option>
   </mat-select>
   <mat-hint>{{ hint }}</mat-hint>

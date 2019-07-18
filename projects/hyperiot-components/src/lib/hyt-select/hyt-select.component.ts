@@ -3,8 +3,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, Validators } from
 
 /** Interface for select option element */
 export interface SelectOption {
-  value: string;
+  value?: string;
   label: string;
+}
+
+/** Interface for a group of select options element */
+export interface SelectOptionGroup {
+  disabled?: boolean;
+  name: string;
+  options: SelectOption[];
 }
 
 /** Custom provider for NG_VALUE_ACCESSOR */
@@ -39,6 +46,9 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
   /** Array of displayed options */
   @Input() options: SelectOption[] = [];
 
+  /** Array of displayed group options */
+  @Input() groups: SelectOptionGroup[] = [];
+
   /** Optional select hint */
   @Input() hint: string;
 
@@ -47,6 +57,12 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
 
   /** Error displayed in case of required form */
   @Input() errorMsgRequired: string;
+
+  /** Disable the select */
+  @Input() disabled = false;
+
+  /** Specifies if it is a multiple select */
+  @Input() isMultiple = false;
 
   errorMap = {
     required: 'The field is required.',

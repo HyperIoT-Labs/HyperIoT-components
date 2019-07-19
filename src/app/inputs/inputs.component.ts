@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-inputs',
   templateUrl: './inputs.component.html',
-  styleUrls: ['./inputs.component.scss']
+  styleUrls: ['./inputs.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class InputsComponent implements OnInit {
 

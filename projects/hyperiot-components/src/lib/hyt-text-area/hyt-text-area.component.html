@@ -1,10 +1,18 @@
 <form class="hyt-form">
   <mat-form-field class="hyt-full-width">
-    <textarea matInput class="hyt-input" id="{{id}}" placeholder="{{placeholder}}" value="{{fieldValue}}"
-      [formControl]="formControl" [errorStateMatcher]="matcher"></textarea>
+    <textarea 
+      matInput 
+      class="hyt-input" 
+      id="{{id}}" 
+      placeholder="{{placeholder}}" 
+      value="{{fieldValue}}"
+      [formControl]="formControl" 
+      [errorStateMatcher]="matcher"
+    ></textarea>
+
+      <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
+      <mat-error *ngIf="isRequired && formControl.hasError('required')">
+        {{ errMsgRequired }}
+      </mat-error>
   </mat-form-field>
-  <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
-  <mat-error *ngIf="isRequired && formControl.hasError('required')">
-    {{ errMsgRequired }}
-  </mat-error>
 </form>

@@ -2,14 +2,26 @@
   min-width: 150px;
   max-width: 500px;
   width: 100%;
+
+  mat-form-field {
+
+    &.hyt-full-width  {
+      width: 100%;
+    }
+
+    textarea {
+      padding: 10px;
+
+      &.hyt-input {
+        width: 100%;
+        min-height: 135px;
+        background-color: rgb(246, 246, 246);
+      }
+
+    }
+
+  }
+
 }
 
-.hyt-full-width {
-  width: 100%;
-}
 
-.hyt-input {
-  width: 100%;
-  min-height: 135px;
-  background-color: rgb(246, 246, 246);
-}

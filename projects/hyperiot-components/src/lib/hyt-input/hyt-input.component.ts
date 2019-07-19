@@ -91,7 +91,9 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   ) { }
 
   ngOnInit() {
+
     const validators = [];
+
     function validateUperCase(c: FormControl) {
       const PASS_REGEX: RegExp = new RegExp('^(?=.*[a-z])(?=.*[A-Z]).*$');
       return PASS_REGEX.test(c.value) || c.value.length === 0 ? null : {
@@ -100,6 +102,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
         }
       };
     }
+
     function validateNumber(c: FormControl) {
       const PASS_REGEX: RegExp = new RegExp('^(?=.*[a-z])(?=.*[1-9]).*$');
       return PASS_REGEX.test(c.value) || c.value.length === 0 ? null : {
@@ -108,6 +111,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
         }
       };
     }
+
     function validateSpecialChar(c: FormControl) {
       const PASS_REGEX: RegExp = new RegExp('[^A-Za-z0-9]');
       return PASS_REGEX.test(c.value) || c.value.length === 0 ? null : {
@@ -116,13 +120,16 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
         }
       };
     }
+
     if (this.isRequired) {
       validators.push(Validators.required);
       this.placeholder += ' *';
     }
+
     if (this.isEmail) {
       validators.push(Validators.email);
     }
+
     if (this.isPassword) {
       validators.push(Validators.minLength(6));
       validators.push(validateUperCase);
@@ -133,23 +140,30 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     if (this.errorMsgRequired) {
       this.errorMap.required = this.errorMsgRequired;
     }
+
     if (this.errorMsgEmail) {
       this.errorMap.email = this.errorMsgEmail;
     }
+
     if (this.errorMsgMinLength) {
       this.errorMap.minlength = this.errorMsgMinLength;
     }
+
     if (this.errorMsgOneNumber) {
       this.errorMap.validateNumber = this.errorMsgOneNumber;
     }
+
     if (this.errorMsgUpperCase) {
       this.errorMap.validateUperCase = this.errorMsgUpperCase;
     }
+
     if (this.errorMsgSpecialChar) {
       this.errorMap.validateSpecialChar = this.errorMsgSpecialChar;
     }
+
     this.formControl = new FormControl('', Validators.compose(validators));
     //  this.form.addControl(this.fieldName, this.formControl);
+    
   }
 
   // get accessor

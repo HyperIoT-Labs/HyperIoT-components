@@ -29,9 +29,11 @@ export class CustomErrorStateMatcher implements ErrorStateMatcher {
   providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
 })
 export class HytTextAreaComponent implements OnInit, ControlValueAccessor {
+
   /**
    * Binding variables with text area element
    */
+
   @Input() formControl: FormControl;
   @Input() placeholder: any = '';
   @Input() fieldValue: string;
@@ -53,14 +55,17 @@ export class HytTextAreaComponent implements OnInit, ControlValueAccessor {
   ) { }
 
   ngOnInit() {
+    
     const validators = [];
     if (this.isRequired) {
       validators.push(Validators.required);
       this.placeholder += '*';
     }
+
     if (this.errorMsgRequired) {
       this.errMsgRequired = this.errorMsgRequired;
     }
+
     this.formControl = new FormControl('', Validators.compose(validators));
   }
 

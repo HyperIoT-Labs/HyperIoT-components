@@ -10,8 +10,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DemoMaterialModule } from './material-module';
-import { HButtonComponent } from './h-button/h-button.component';
-import { HRadioButtonComponent } from './h-radio-button/h-radio-button.component';
+import { HytButtonComponent } from './hyt-button/hyt-button.component';
+import { HytRadioButtonComponent } from './hyt-radio-button/hyt-radio-button.component';
 import { HCheckboxComponent } from './h-checkbox/h-checkbox.component';
 import { HCardComponent } from './h-card/h-card.component';
 import { HytStepperComponent } from './hyt-stepper/hyt-stepper.component';
@@ -22,8 +22,8 @@ import { HytSelectComponent } from './hyt-select/hyt-select.component';
 @NgModule({
   declarations: [
     HytInputComponent,
-    HButtonComponent,
-    HRadioButtonComponent,
+    HytButtonComponent,
+    HytRadioButtonComponent,
     HCheckboxComponent,
     HCardComponent,
     HytStepperComponent,
@@ -46,8 +46,8 @@ import { HytSelectComponent } from './hyt-select/hyt-select.component';
   ],
   exports: [
     HytInputComponent,
-    HButtonComponent,
-    HRadioButtonComponent,
+    HytButtonComponent,
+    HytRadioButtonComponent,
     HCheckboxComponent,
     HCardComponent,
     HytStepperComponent,

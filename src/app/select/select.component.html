@@ -8,7 +8,7 @@
       </div>
       <div class="ui-element">
         <h4>Select with group options</h4>
-        <hyt-select [label]="'Pokemon'" [(ngModel)]="selected" [groups]="pokemonGroups">
+        <hyt-select [label]="'Pokemon'" [groups]="pokemonGroups">
         </hyt-select>
       </div>
     </div>
@@ -18,7 +18,7 @@
         <hyt-select [label]="'Favourite Food'" [hint]="'Inserisci il tuo cibo preferito'" [isRequired]="true"
           [errorMsgRequired]="'Prego selezionare un cibo'" [options]="options"></hyt-select>
       </div>
-      <div class="ui-element">
+      <div class="ui-element multiselect">
         <h4>Multiple select</h4>
         <hyt-select [label]="'Favourite Food'" [hint]="'Inserisci i tuoi cibi preferiti'" [isMultiple]="true"
           [options]="options"></hyt-select>

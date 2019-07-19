@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HButtonComponent } from './h-button.component';
+import { HButtonComponent } from './hyt-button.component';
 
 describe('HBottonComponent', () => {
   let component: HButtonComponent;

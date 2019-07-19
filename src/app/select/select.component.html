@@ -6,12 +6,29 @@
         <hyt-select [label]="'Favourite Food'" [(ngModel)]="selected" [options]="options"></hyt-select>
         <p>You selected: {{selected}}</p>
       </div>
+      <div class="ui-element">
+        <h4>Select with group options</h4>
+        <hyt-select [label]="'Pokemon'" [groups]="pokemonGroups">
+        </hyt-select>
+      </div>
     </div>
     <div class="col-4">
       <div class="ui-element">
         <h4>Required select</h4>
-        <hyt-select [label]="'Favourite Food'" [isRequired]="true" [errorMsgRequired]="'Prego selezionare un cibo'"
+        <hyt-select [label]="'Favourite Food'" [hint]="'Inserisci il tuo cibo preferito'" [isRequired]="true"
+          [errorMsgRequired]="'Prego selezionare un cibo'" [options]="options"></hyt-select>
+      </div>
+      <div class="ui-element multiselect">
+        <h4>Multiple select</h4>
+        <hyt-select [label]="'Favourite Food'" [hint]="'Inserisci i tuoi cibi preferiti'" [isMultiple]="true"
           [options]="options"></hyt-select>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="ui-element">
+        <h4>Disabled select</h4>
+        <hyt-select [label]="'Favourite Food'" [hint]="'Inserisci il tuo cibo preferito'" [options]="options"
+          [disabled]="true"></hyt-select>
       </div>
     </div>
   </div>

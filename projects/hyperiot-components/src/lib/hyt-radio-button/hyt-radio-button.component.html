@@ -1,3 +1,8 @@
-<mat-radio-group aria-label="Select an option">
-  <mat-radio-button *ngFor="let option of options" value={{options.value}}>{{ option.label }}</mat-radio-button>
+<mat-radio-group [ngClass]="{'hyt-radio-group': verticalAlign==true}" class="" aria-label="label">
+
+  <mat-radio-button class="hyt-radio-button" *ngFor="let option of options" value="{{option.value}}"
+    (change)="onChange($event)" labelPosition="{{labelPosition}}">
+    {{ option.label }}
+  </mat-radio-button>
+
 </mat-radio-group>

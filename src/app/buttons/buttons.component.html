@@ -1,24 +1,24 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-2">
+    <div class="button">
       <h4>Default</h4>
-      <hyt-button>Click me!</hyt-button>
+      <hyt-button (clickFn)="onClick()">Click me!</hyt-button>
     </div>
-    <div class="col-2">
+    <div class="button">
       <h4>Primary</h4>
-      <hyt-button [color]="'primary'">Click me!</hyt-button>
+      <hyt-button [color]="'primary'" (clickFn)="onClick()">Click me!</hyt-button>
     </div>
-    <div class="col-2">
+    <div class="button">
       <h4>Accent</h4>
-      <hyt-button [color]="'accent'">Click me!</hyt-button>
+      <hyt-button [color]="'accent'" (clickFn)="onClick()">Click me!</hyt-button>
     </div>
-    <div class="col-2">
+    <div class="button">
       <h4>Warn</h4>
-      <hyt-button [color]="'warn'">Click me!</hyt-button>
+      <hyt-button [color]="'warn'" (clickFn)="onClick()">Click me!</hyt-button>
     </div>
-    <div class="col-2">
+    <div class="button">
       <h4>Disabled</h4>
-      <hyt-button [isDisabled]="true">Click me!</hyt-button>
+      <hyt-button [isDisabled]="true" (clickFn)="onClick()">Click me!</hyt-button>
     </div>
   </div>
   <div class="row">
@@ -26,13 +26,26 @@
       <span>
         <h4>Radio Button</h4>
       </span>
-      <hyt-radio-button [options]="options"></hyt-radio-button>
+      <hyt-radio-button [options]="options" (changeFn)="onChangeRadio($event)">
+      </hyt-radio-button>
     </div>
     <div class="col-4">
       <span>
-        <h4>Radio Button</h4>
+        <h4>Radio Button Vertical</h4>
       </span>
-      <hyt-radio-button [options]="options"></hyt-radio-button>
+      <hyt-radio-button [options]="options" (changeFn)="onChangeRadio($event)" [verticalAlign]="true">
+      </hyt-radio-button>
+    </div>
+    <div class="col-4">
+      <span>
+        <h4>Radio Button with 2 way binding</h4>
+      </span>
+      <hyt-radio-button [options]="options" (changeFn)="onChangeRadio($event)" [labelPosition]="'before'"
+        [(ngModel)]="selectedOption">
+      </hyt-radio-button>
+      <div class="select-text" *ngIf="selectedOption">
+        <p>You selected: {{ selectedOption.value }}</p>
+      </div>
     </div>
   </div>
   <div class="row">

@@ -8,19 +8,32 @@ import { Option } from '../../../projects/hyperiot-components/src/lib/hyt-radio-
 })
 export class ButtonsComponent implements OnInit {
 
+  selectedOption: any;
+
   options: Option[] = [
     {
-      value: 'Option1',
+      value: 'option1',
       label: 'Option1'
     },
     {
-      value: 'Option2',
+      value: 'option2',
       label: 'Option2'
     }
   ];
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  onClick() {
+    console.log('clicked');
+  }
+
+  onChangeRadio(e: any) {
+    if (this.selectedOption) {
+      console.log(this.selectedOption.value);
+    }
+    console.log('onChangeRadio: ' + e.value);
+  }
 }

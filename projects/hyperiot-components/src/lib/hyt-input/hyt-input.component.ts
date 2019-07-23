@@ -7,6 +7,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
  */
 export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
+  // tslint:disable-next-line: no-use-before-declare
   useExisting: forwardRef(() => HytInputComponent),
   multi: true
 };
@@ -50,7 +51,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   @Input() hint = '';
   @Input() errorPosition = '';
 
-  @ViewChild('inputElement', { static: false }) private inputElement: ElementRef;
+  // @ViewChild('inputElement', { static: false }) private inputElement: ElementRef;
 
   @Input() errorMsgRequired: string;
   @Input() errorMsgEmail: string;
@@ -63,15 +64,16 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   @Input() isEmail = false;
   @Input() isPassword = false;
 
-  /**
-   * The internal data
-   */
+  /** The internal data */
   private innerValue: any = '';
 
+  /** Custom error matcher */
   matcher = new CustomErrorStateMatcher();
 
+  /** The password visibility icon */
   visibilityIcon = 'visibility';
 
+  /** Map error type with default error string */
   errorMap = {
     required: 'The field is required.',
     email: 'Please insert a valid email.',
@@ -82,16 +84,25 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   };
 
   /**
-   * Callback functions for change and blur
+   * Callback function for change event
    */
   private onChangeFn = (_: any) => { };
+
+  /**
+   * Callback function for blur event
+   */
   private onTouchedFn = () => { };
 
+  /**
+   * constructor
+   */
   constructor(
   ) { }
 
+  /**
+   * ngOnInit
+   */
   ngOnInit() {
-
     const validators = [];
 
     function validateUperCase(c: FormControl) {
@@ -102,7 +113,6 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
         }
       };
     }
-
     function validateNumber(c: FormControl) {
       const PASS_REGEX: RegExp = new RegExp('^(?=.*[a-z])(?=.*[1-9]).*$');
       return PASS_REGEX.test(c.value) || c.value.length === 0 ? null : {
@@ -111,7 +121,6 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
         }
       };
     }
-
     function validateSpecialChar(c: FormControl) {
       const PASS_REGEX: RegExp = new RegExp('[^A-Za-z0-9]');
       return PASS_REGEX.test(c.value) || c.value.length === 0 ? null : {
@@ -125,11 +134,9 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
       validators.push(Validators.required);
       this.placeholder += ' *';
     }
-
     if (this.isEmail) {
       validators.push(Validators.email);
     }
-
     if (this.isPassword) {
       validators.push(Validators.minLength(6));
       validators.push(validateUperCase);
@@ -140,30 +147,24 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     if (this.errorMsgRequired) {
       this.errorMap.required = this.errorMsgRequired;
     }
-
     if (this.errorMsgEmail) {
       this.errorMap.email = this.errorMsgEmail;
     }
-
     if (this.errorMsgMinLength) {
       this.errorMap.minlength = this.errorMsgMinLength;
     }
-
     if (this.errorMsgOneNumber) {
       this.errorMap.validateNumber = this.errorMsgOneNumber;
     }
-
     if (this.errorMsgUpperCase) {
       this.errorMap.validateUperCase = this.errorMsgUpperCase;
     }
-
     if (this.errorMsgSpecialChar) {
       this.errorMap.validateSpecialChar = this.errorMsgSpecialChar;
     }
 
     this.formControl = new FormControl('', Validators.compose(validators));
     //  this.form.addControl(this.fieldName, this.formControl);
-    
   }
 
   // get accessor

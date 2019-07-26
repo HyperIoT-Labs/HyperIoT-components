@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, forwardRef, ViewEncapsulation } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroupDirective, NgForm, FormControl, Validators } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroupDirective, NgForm, FormControl, Validators, AsyncValidatorFn, AbstractControl } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { I18n } from '@ngx-translate/i18n-polyfill';
+import { Observable } from 'rxjs';
 
 /**
  * Custom provider for NG_VALUE_ACCESSOR
@@ -47,6 +49,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   @Input() placeholder: any = '';
   @Input() fieldValue: string;
   @Input() id = '';
+  @Input() name = '';
   @Input() type = '';
   @Input() hint = '';
   @Input() errorPosition = '';
@@ -59,10 +62,12 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   @Input() errorMsgOneNumber: string;
   @Input() errorMsgUpperCase: string;
   @Input() errorMsgSpecialChar: string;
+  @Input() errorMsgState: string;
 
   @Input() isRequired = false;
   @Input() isEmail = false;
   @Input() isPassword = false;
+  @Input() injectedErrorState = false;
 
   /** The internal data */
   private innerValue: any = '';
@@ -75,12 +80,13 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
 
   /** Map error type with default error string */
   errorMap = {
-    required: 'The field is required.',
+    required: this.i18n('HytIC_field_required'), // 'The field is required.',
     email: 'Please insert a valid email.',
     minlength: 'Password should be at least 6 char long.',
     validateNumber: 'Password should contain at least one number.',
     validateUperCase: 'Password should contain at least one uppercase letter.',
-    validateSpecialChar: 'Password should contain at least one special character.'
+    validateSpecialChar: 'Password should contain at least one special character.',
+    validateInjectedError: 'An error appears',
   };
 
   /**
@@ -97,6 +103,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
    * constructor
    */
   constructor(
+    private i18n: I18n,
   ) { }
 
   /**
@@ -104,6 +111,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
    */
   ngOnInit() {
     const validators = [];
+    const self = this;
 
     function validateUperCase(c: FormControl) {
       const PASS_REGEX: RegExp = new RegExp('^(?=.*[a-z])(?=.*[A-Z]).*$');
@@ -129,7 +137,22 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
         }
       };
     }
-
+    function validateInjectedError(c: FormControl) {
+      return (!self.injectedErrorState) ? null : {
+        validateInjectedError: {
+          valid: false
+        }
+      };
+    }
+    /*
+    function userValidator(): AsyncValidatorFn {
+      return (control: AbstractControl): Observable<{ [key: string]: any } | null> => {
+        return self.injectedErrorState ? null : { userNameExists: true };
+              }
+            })
+          );
+      };
+*/
     if (this.isRequired) {
       validators.push(Validators.required);
       this.placeholder += ' *';
@@ -142,6 +165,9 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
       validators.push(validateUperCase);
       validators.push(validateNumber);
       validators.push(validateSpecialChar);
+    }
+    if (this.injectedErrorState) {
+      validators.push(validateInjectedError);
     }
 
     if (this.errorMsgRequired) {
@@ -161,6 +187,9 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     }
     if (this.errorMsgSpecialChar) {
       this.errorMap.validateSpecialChar = this.errorMsgSpecialChar;
+    }
+    if (this.errorMsgState) {
+      this.errorMap.validateInjectedError = this.errorMsgState;
     }
 
     this.formControl = new FormControl('', Validators.compose(validators));

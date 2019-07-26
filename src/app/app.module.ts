@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, TRANSLATIONS, LOCALE_ID, TRANSLATIONS_FORMAT } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,6 +23,7 @@ import { StepperComponent } from './stepper/stepper.component';
 import { CardsComponent } from './cards/cards.component';
 import { LayoutComponent } from './layout/layout.component';
 import { SelectComponent } from './select/select.component';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 const appRoutes: Routes = [
   { path: 'inputs', component: InputsComponent },
@@ -66,7 +67,17 @@ const appRoutes: Routes = [
     MatSlideToggleModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [I18n,
+    { provide: TRANSLATIONS_FORMAT, useValue: "xlf" },
+    {
+      provide: TRANSLATIONS,
+      useFactory: (locale) => {
+        locale = locale || 'en-US'; // default to english if no locale provided
+        return require(`raw-loader!../locale/translations.${locale}.xlf`);
+      },
+      deps: [LOCALE_ID]
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

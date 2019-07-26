@@ -10,13 +10,22 @@ export class InputsComponent implements OnInit {
 
   inputText: string;
 
+  inputText2: string;
+
+  injectedErrorState = true;
+
   constructor() { }
 
   ngOnInit() {
   }
 
   onChange(event: any) {
-    console.log('onChenge2 called');
+    console.log('onChange2 called');
     console.log(event.target.value);
+  }
+
+  toogleErrorState() {
+    this.injectedErrorState = !this.injectedErrorState;
+    this.inputText2 += ' ';
   }
 }

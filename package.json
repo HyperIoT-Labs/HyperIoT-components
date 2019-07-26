@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "compodoc": "npx compodoc -p tsconfig.app.json"
+    "compodoc": "npx compodoc -p tsconfig.app.json",
+    "ngx-extractor": "ngx-extractor"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +24,7 @@
     "@angular/platform-browser": "~8.1.0",
     "@angular/platform-browser-dynamic": "~8.1.0",
     "@angular/router": "~8.1.0",
+    "@ngx-translate/i18n-polyfill": "^1.0.0",
     "bootstrap": "^4.3.1",
     "core-js": "^3.1.4",
     "cross-spawn": "^6.0.5",

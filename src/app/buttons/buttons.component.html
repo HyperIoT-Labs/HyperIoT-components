@@ -1,42 +1,43 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="button">
+    <div class="button ui-element">
       <h4>Default</h4>
       <hyt-button (clickFn)="onClick()">Click me!</hyt-button>
     </div>
-    <div class="button">
+    <div class="button ui-element">
       <h4>Primary</h4>
       <hyt-button [color]="'primary'" (clickFn)="onClick()">Click me!</hyt-button>
     </div>
-    <div class="button">
+    <div class="button ui-element">
       <h4>Accent</h4>
       <hyt-button [color]="'accent'" (clickFn)="onClick()">Click me!</hyt-button>
     </div>
-    <div class="button">
+    <div class="button ui-element">
       <h4>Warn</h4>
       <hyt-button [color]="'warn'" (clickFn)="onClick()">Click me!</hyt-button>
     </div>
-    <div class="button">
+    <div class="button ui-element">
       <h4>Disabled</h4>
       <hyt-button [isDisabled]="true" (clickFn)="onClick()">Click me!</hyt-button>
     </div>
   </div>
+  <mat-divider></mat-divider>
   <div class="row">
-    <div class="col-4">
+    <div class="col-4 ui-element">
       <span>
         <h4>Radio Button</h4>
       </span>
       <hyt-radio-button [options]="options" (changeFn)="onChangeRadio($event)">
       </hyt-radio-button>
     </div>
-    <div class="col-4">
+    <div class="col-4 ui-element">
       <span>
         <h4>Radio Button Vertical</h4>
       </span>
       <hyt-radio-button [options]="options" (changeFn)="onChangeRadio($event)" [verticalAlign]="true">
       </hyt-radio-button>
     </div>
-    <div class="col-4">
+    <div class="col-4 ui-element">
       <span>
         <h4>Radio Button with 2 way binding</h4>
       </span>
@@ -48,8 +49,9 @@
       </div>
     </div>
   </div>
+  <mat-divider></mat-divider>
   <div class="row">
-    <div class="col-4">
+    <div class="col-4 ui-element">
       <span>
         <h4>Checkbox</h4>
       </span>

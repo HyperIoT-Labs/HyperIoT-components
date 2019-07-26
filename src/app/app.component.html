@@ -1,4 +1,4 @@
-<mat-toolbar id="toolbar" class="mat-elevation-z8">
+<mat-toolbar id="toolbar" class="mat-elevation-z4">
   <div class="img-logo">
     <img src="../assets/images/h-logo.jpg" alt="h-logo" width="50" height="50">
   </div>
@@ -8,15 +8,40 @@
 </mat-toolbar>
 <div class="mat-app-background basic-container">
   <mat-sidenav-container class="example-container" [hasBackdrop]="false">
-    <mat-sidenav #sidenav mode="side" opened class="mat-elevation-z8 h-sidenav">
-      <mat-nav-list>
+    <mat-sidenav #sidenav mode="side" opened class="h-sidenav">
+      <mat-accordion multi="true" displayMode="flat">
+        <mat-expansion-panel class="mat-elevation-z0">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <strong>Form Controls</strong>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <a mat-list-item routerLink='/inputs' [routerLinkActive]="['is-active']">Text inputs</a>
+          <a mat-list-item routerLink='/select' [routerLinkActive]="['is-active']">Select</a>
+          <a mat-list-item routerLink='/buttons' [routerLinkActive]="['is-active']">Buttons</a>
+        </mat-expansion-panel>
+        <mat-divider></mat-divider>
+        <mat-expansion-panel class=" mat-elevation-z0">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <strong>Layout</strong>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <a mat-list-item routerLink='/stepper' [routerLinkActive]="['is-active']">Stepper</a>
+          <a mat-list-item routerLink='/cards' [routerLinkActive]="['is-active']">Cards</a>
+          <a mat-list-item routerLink='/layout' [routerLinkActive]="['is-active']">Bootstrap grid</a>
+        </mat-expansion-panel>
+        <mat-divider></mat-divider>
+      </mat-accordion>
+
+      <!-- <mat-nav-list>
         <a mat-list-item routerLink='/inputs'>Text inputs</a>
         <a mat-list-item routerLink='/select'>Select</a>
         <a mat-list-item routerLink='/buttons'>Buttons</a>
         <a mat-list-item routerLink='/stepper'>Stepper</a>
         <a mat-list-item routerLink='/cards'>Cards</a>
         <a mat-list-item routerLink='/layout'>Bootstrap grid</a>
-      </mat-nav-list>
+      </mat-nav-list> -->
     </mat-sidenav>
     <mat-sidenav-content class="basic-container">
       <router-outlet></router-outlet>

@@ -1,13 +1,13 @@
-<form class="hyt-form">
+<div class="hyt-form">
 
   <mat-form-field class="hyt-full-width" [ngClass]="{'errorPositionBottom': errorPosition=='bottom'}">
 
-    <input matInput class=" hyt-input" name="{{name}}" [(ngModel)]="value" id="{{id}}" type="{{type}}"
+    <input matInput #input class="hyt-input form-control" name="{{name}}" id="{{id}}" type="{{type}}"
       placeholder="{{placeholder}}" value="{{fieldValue}}" (blur)="onBlur()" [formControl]="formControl"
       [errorStateMatcher]="matcher">
 
-    <mat-icon *ngIf="isPassword" matSuffix (click)="this.tooglePassword()">
-      {{visibilityIcon}}
+    <mat-icon *ngIf="isPassword || isInputPassword" matSuffix (click)="this.tooglePassword()">
+      {{ visibilityIcon }}
     </mat-icon>
 
     <mat-hint *ngIf="hint">
@@ -20,4 +20,4 @@
 
   </mat-form-field>
 
-</form>
+</div>

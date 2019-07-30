@@ -1,71 +1,79 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-6">
-      <div class="ui-element">
-        <span>
-          <h4>Input Text with 2 way binding</h4>
-        </span>
-        <hyt-input-text [placeholder]="'Insert text here'" [(ngModel)]="inputText" (change)="onChange($event)"
-          [name]="'Giona'">
-        </hyt-input-text>
-        <p>You inserted: {{ inputText }}</p>
+<form [formGroup]="form">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-6">
+        <div class="ui-element">
+          <span>
+            <h4>Input Text with 2 way binding</h4>
+          </span>
+          <hyt-input-text [form]="form" formControlName="input" [name]="'input'" [placeholder]="'Insert text here'"
+            (change)="onChange($event)">
+          </hyt-input-text>
+          <p>You inserted: {{ inputText }}</p>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="ui-element">
+          <span>
+            <h4>Required field</h4>
+          </span>
+          <hyt-input-text [form]="form" formControlName="required" [name]="'required'" [isRequired]="true"
+            [hint]="'Errors appears instantly!'" [placeholder]="'Insert text here'">
+          </hyt-input-text>
+        </div>
       </div>
     </div>
-    <div class="col-6">
-      <div class="ui-element">
-        <span>
-          <h4>Required field</h4>
-        </span>
-        <hyt-input-text [isRequired]="true" [hint]="'Errors appears instantly!'" [placeholder]="'Insert text here'">
-        </hyt-input-text>
+    <div class="row">
+      <div class="col-6">
+        <div class="ui-element">
+          <span>
+            <h4>Validated e-mail</h4>
+          </span>
+          <hyt-input-text [form]="form" formControlName="email" [name]="'email'" [isEmail]="true"
+            [hint]="'Errors appears instantly!'" [placeholder]="'Insert your e-mail'">
+          </hyt-input-text>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="ui-element">
+          <span>
+            <h4>Injected error</h4>
+          </span>
+          <hyt-input-text [form]="form" formControlName="username" [name]="'username'" id="'username'"
+            [injectedErrorState]="injectedErrorState" [hint]="'Errors appears instantly!'"
+            [injectedErrorMsg]="'Lo username esiste già'" [placeholder]="'Insert text here'">
+          </hyt-input-text>
+          <p></p>
+          State: {{ injectedErrorState }} <br>
+          <hyt-button type="button" [color]="'accent'" (clickFn)="toogleErrorState()">Toogle error state</hyt-button>
+        </div>
+      </div>
+    </div>
+    <div class="row ui-top">
+      <div class="col-6">
+        <div class="ui-element">
+          <span>
+            <h4>Text area</h4>
+          </span>
+          <hyt-text-area [form]="form" formControlName="textarea" [name]="'textarea'" [placeholder]="'Leave a comment'"
+            [hint]="'Errors appears instantly!'" [isRequired]="true">
+          </hyt-text-area>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="ui-element">
+          <span>
+            <h4>Validated password</h4>
+          </span>
+          <hyt-input-text [form]="form" formControlName="password" [name]="'password'" [isPassword]="true"
+            type="password" [isRequired]="true" [hint]="'Errors appears instantly!'" [placeholder]="'Insert password'"
+            [errorPosition]="'bottom'">
+          </hyt-input-text>
+          <div class="submit">
+            <hyt-button type="submit" [color]="'primary'">Submit</hyt-button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-6">
-      <div class="ui-element">
-        <span>
-          <h4>Validated e-mail</h4>
-        </span>
-        <hyt-input-text [isEmail]="true" [errorMsgEmail]="'Inserire un indirizzo email valido'"
-          [hint]="'Errors appears instantly!'" [placeholder]="'Insert your e-mail'">
-        </hyt-input-text>
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="ui-element">
-        <span>
-          <h4>Injected error</h4>
-        </span>
-        <hyt-input-text [injectedErrorState]="injectedErrorState" [hint]="'Errors appears instantly!'"
-          [errorMsgState]="'Lo username esiste già'" [placeholder]="'Insert text here'">
-        </hyt-input-text>
-      </div>
-      <hyt-button [color]="'accent'" (clickFn)="toogleErrorState()">Toogle error state</hyt-button>
-    </div>
-  </div>
-</div>
-<div class="row ui-top">
-  <div class="col-6">
-    <div class="ui-element">
-      <span>
-        <h4>Text area</h4>
-      </span>
-      <hyt-text-area [placeholder]="'Leave a comment'" [hint]="'Errors appears instantly!'" [isRequired]="true">
-      </hyt-text-area>
-    </div>
-  </div>
-  <div class="col-6">
-    <div class="ui-element">
-      <span>
-        <h4>Validated password</h4>
-      </span>
-      <hyt-input-text [isPassword]="true" type="password" [isRequired]="true" [hint]="'Errors appears instantly!'"
-        [placeholder]="'Insert password'" [errorMsgRequired]="'Il campo è obbligatorio'"
-        [errorMsgMinLength]="'almeno 6 caratteri'" [errorMsgOneNumber]="'almeno 1 numero'"
-        [errorMsgUpperCase]="'almeno 1 carattere maiuscolo'" [errorMsgSpecialChar]="'almeno 1 carattere speciale'"
-        [errorPosition]="'bottom'">
-      </hyt-input-text>
-    </div>
-  </div>
-</div>
+</form>

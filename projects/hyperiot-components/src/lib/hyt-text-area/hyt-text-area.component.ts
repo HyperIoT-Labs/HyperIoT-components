@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, Validators, FormGroupDirective, NgForm, FormGroup } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
 /**
@@ -33,12 +33,13 @@ export class HytTextAreaComponent implements OnInit, ControlValueAccessor {
   /**
    * Binding variables with text area element
    */
-
   @Input() formControl: FormControl;
+  @Input() form: FormGroup;
   @Input() placeholder: any = '';
   @Input() fieldValue: string;
   @Input() type: string;
   @Input() id: string;
+  @Input() name: string;
   @Input() hint = '';
 
   value: any = '';
@@ -55,11 +56,11 @@ export class HytTextAreaComponent implements OnInit, ControlValueAccessor {
   ) { }
 
   ngOnInit() {
-    
+
     const validators = [];
     if (this.isRequired) {
       validators.push(Validators.required);
-      this.placeholder += '*';
+      this.placeholder += ' *';
     }
 
     if (this.errorMsgRequired) {
@@ -67,6 +68,7 @@ export class HytTextAreaComponent implements OnInit, ControlValueAccessor {
     }
 
     this.formControl = new FormControl('', Validators.compose(validators));
+    this.form.addControl(this.name, this.formControl);
   }
 
   private onChangeFn = (_: any) => { };

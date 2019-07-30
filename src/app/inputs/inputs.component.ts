@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-inputs',
@@ -8,15 +9,18 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class InputsComponent implements OnInit {
 
-  inputText: string;
+  form: FormGroup;
 
-  inputText2: string;
+  inputText: string;
 
   injectedErrorState = true;
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit() {
+    this.form = this.fb.group({});
   }
 
   onChange(event: any) {
@@ -26,6 +30,5 @@ export class InputsComponent implements OnInit {
 
   toogleErrorState() {
     this.injectedErrorState = !this.injectedErrorState;
-    this.inputText2 += ' ';
   }
 }

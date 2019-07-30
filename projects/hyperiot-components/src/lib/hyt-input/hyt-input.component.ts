@@ -1,5 +1,22 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, forwardRef, ViewEncapsulation } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroupDirective, NgForm, FormControl, Validators, AsyncValidatorFn, AbstractControl } from '@angular/forms';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  ElementRef,
+  forwardRef,
+  ViewEncapsulation
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  FormGroupDirective,
+  NgForm,
+  FormControl,
+  Validators,
+  FormGroup,
+  FormControlName
+} from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Observable } from 'rxjs';
@@ -45,6 +62,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   /**
    * Binding variables with the input element
    */
+  @Input() form: FormGroup;
   @Input() formControl: FormControl;
   @Input() placeholder: any = '';
   @Input() fieldValue: string;
@@ -54,19 +72,14 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   @Input() hint = '';
   @Input() errorPosition = '';
 
-  // @ViewChild('inputElement', { static: false }) private inputElement: ElementRef;
+  @ViewChild('input', { static: false }) private inputElement: ElementRef;
 
-  @Input() errorMsgRequired: string;
-  @Input() errorMsgEmail: string;
-  @Input() errorMsgMinLength: string;
-  @Input() errorMsgOneNumber: string;
-  @Input() errorMsgUpperCase: string;
-  @Input() errorMsgSpecialChar: string;
-  @Input() errorMsgState: string;
+  @Input() injectedErrorMsg: string;
 
   @Input() isRequired = false;
   @Input() isEmail = false;
   @Input() isPassword = false;
+  @Input() isInputPassword = false;
   @Input() injectedErrorState = false;
 
   /** The internal data */
@@ -80,13 +93,13 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
 
   /** Map error type with default error string */
   errorMap = {
-    required: this.i18n('HytIC_field_required'), // 'The field is required.',
-    email: 'Please insert a valid email.',
-    minlength: 'Password should be at least 6 char long.',
-    validateNumber: 'Password should contain at least one number.',
-    validateUperCase: 'Password should contain at least one uppercase letter.',
-    validateSpecialChar: 'Password should contain at least one special character.',
-    validateInjectedError: 'An error appears',
+    required: this.i18n('HYT_field_required'), // 'The field is required.',
+    email: this.i18n('HYT_valid_email'),
+    minlength: this.i18n('HYT_min_length'),
+    validateNumber: this.i18n('HYT_min_one_number'),
+    validateUperCase: this.i18n('HYT_upper_case'),
+    validateSpecialChar: this.i18n('HYT_special_char'),
+    validateInjectedError: ''
   };
 
   /**
@@ -161,7 +174,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
       validators.push(Validators.email);
     }
     if (this.isPassword) {
-      validators.push(Validators.minLength(6));
+      validators.push(Validators.minLength(8));
       validators.push(validateUperCase);
       validators.push(validateNumber);
       validators.push(validateSpecialChar);
@@ -170,38 +183,20 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
       validators.push(validateInjectedError);
     }
 
-    if (this.errorMsgRequired) {
-      this.errorMap.required = this.errorMsgRequired;
-    }
-    if (this.errorMsgEmail) {
-      this.errorMap.email = this.errorMsgEmail;
-    }
-    if (this.errorMsgMinLength) {
-      this.errorMap.minlength = this.errorMsgMinLength;
-    }
-    if (this.errorMsgOneNumber) {
-      this.errorMap.validateNumber = this.errorMsgOneNumber;
-    }
-    if (this.errorMsgUpperCase) {
-      this.errorMap.validateUperCase = this.errorMsgUpperCase;
-    }
-    if (this.errorMsgSpecialChar) {
-      this.errorMap.validateSpecialChar = this.errorMsgSpecialChar;
-    }
-    if (this.errorMsgState) {
-      this.errorMap.validateInjectedError = this.errorMsgState;
+    if (this.injectedErrorMsg) {
+      this.errorMap.validateInjectedError = this.injectedErrorMsg;
     }
 
     this.formControl = new FormControl('', Validators.compose(validators));
-    //  this.form.addControl(this.fieldName, this.formControl);
+    this.form.addControl(this.name, this.formControl);
   }
 
-  // get accessor
+  /** get accessor */
   get value(): any {
     return this.innerValue;
   }
 
-  // set accessor including call the onchange callback
+  /** set accessor including call the onchange callback */
   set value(v: any) {
     if (v !== this.innerValue) {
       this.innerValue = v;

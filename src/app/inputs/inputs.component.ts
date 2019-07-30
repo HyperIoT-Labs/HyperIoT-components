@@ -13,7 +13,7 @@ export class InputsComponent implements OnInit {
 
   inputText: string;
 
-  injectedErrorState = true;
+  injectedErrorState = false;
 
   constructor(
     private fb: FormBuilder
@@ -30,5 +30,15 @@ export class InputsComponent implements OnInit {
 
   toogleErrorState() {
     this.injectedErrorState = !this.injectedErrorState;
+  }
+
+  submit() {
+    if (this.injectedErrorState) {
+      this.form.get('username').setErrors({
+        validateInjectedError: {
+          valid: false
+        }
+      });
+    }
   }
 }

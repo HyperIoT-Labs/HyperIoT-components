@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="submit()">
   <div class="container-fluid">
     <div class="row">
       <div class="col-6">
@@ -40,8 +40,7 @@
             <h4>Injected error</h4>
           </span>
           <hyt-input-text [form]="form" formControlName="username" [name]="'username'" id="'username'"
-            [injectedErrorState]="injectedErrorState" [hint]="'Errors appears instantly!'"
-            [injectedErrorMsg]="'Lo username esiste già'" [placeholder]="'Insert text here'">
+            [hint]="'Errors appears instantly!'" [injectedErrorMsg]="'Lo username esiste già'" [placeholder]="'Insert text here'">
           </hyt-input-text>
           <p></p>
           State: {{ injectedErrorState }} <br>

@@ -80,7 +80,6 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   @Input() isEmail = false;
   @Input() isPassword = false;
   @Input() isInputPassword = false;
-  @Input() injectedErrorState = false;
 
   /** The internal data */
   private innerValue: any = '';
@@ -150,13 +149,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
         }
       };
     }
-    function validateInjectedError(c: FormControl) {
-      return (!self.injectedErrorState) ? null : {
-        validateInjectedError: {
-          valid: false
-        }
-      };
-    }
+
     /*
     function userValidator(): AsyncValidatorFn {
       return (control: AbstractControl): Observable<{ [key: string]: any } | null> => {
@@ -178,9 +171,6 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
       validators.push(validateUperCase);
       validators.push(validateNumber);
       validators.push(validateSpecialChar);
-    }
-    if (this.injectedErrorState) {
-      validators.push(validateInjectedError);
     }
 
     if (this.injectedErrorMsg) {
@@ -206,6 +196,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
 
   getErrorList(): string[] {
     const errorList: string[] = [];
+
     for (const key in this.formControl.errors) {
       if (this.formControl.errors.hasOwnProperty(key)) {
         if (this.errorMap.hasOwnProperty(key)) {

@@ -49,6 +49,7 @@ export class CustomErrorStateMatcher implements ErrorStateMatcher {
  * isRequired: mandatory field
  * isEmail: email validation
  * isPassword: password validation
+ * isInputPassword: password without validators
  */
 @Component({
   // tslint:disable-next-line: component-selector
@@ -59,26 +60,49 @@ export class CustomErrorStateMatcher implements ErrorStateMatcher {
   encapsulation: ViewEncapsulation.None
 })
 export class HytInputComponent implements OnInit, ControlValueAccessor {
-  /**
-   * Binding variables with the input element
-   */
+  /** FormGroup */
   @Input() form: FormGroup;
+
+  /** FormControl */
   @Input() formControl: FormControl;
+
+  /** Foloating label of the input */
   @Input() placeholder: any = '';
+
+  /** Initial field value */
   @Input() fieldValue: string;
+
+  /** Element id */
   @Input() id = '';
+
+  /** Element name, connected to the formcontrol */
   @Input() name = '';
+
+  /** Type of the input: text or passowrd */
   @Input() type = '';
+
+  /** Optional additional hint */
   @Input() hint = '';
+
+  /** If 'bottom' is specified errors appears at the bottom */
   @Input() errorPosition = '';
 
+  /** ViewChild */
   @ViewChild('input', { static: false }) private inputElement: ElementRef;
 
+  /** This error appears in case of injected error */
   @Input() injectedErrorMsg: string;
 
+  /** Applies required validation */
   @Input() isRequired = false;
+
+  /** Applies email validation */
   @Input() isEmail = false;
+
+  /** Applies password validation */
   @Input() isPassword = false;
+
+  /** Applies password type but not password validation */
   @Input() isInputPassword = false;
 
   /** The internal data */
@@ -101,18 +125,14 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     validateInjectedError: ''
   };
 
-  /**
-   * Callback function for change event
-   */
+  /** Callback function for change event */
   private onChangeFn = (_: any) => { };
 
-  /**
-   * Callback function for blur event
-   */
+  /** Callback function for blur event */
   private onTouchedFn = () => { };
 
   /**
-   * constructor
+   * Constructor
    */
   constructor(
     private i18n: I18n,
@@ -186,7 +206,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     return this.innerValue;
   }
 
-  /** set accessor including call the onchange callback */
+  /** set accessor including call the onchange callback  */
   set value(v: any) {
     if (v !== this.innerValue) {
       this.innerValue = v;
@@ -194,6 +214,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     }
   }
 
+  /** returns the errors to be displayed in the mat-error tag */
   getErrorList(): string[] {
     const errorList: string[] = [];
 
@@ -207,6 +228,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     return errorList;
   }
 
+  /** Toggle the state of the input between text and password */
   tooglePassword() {
     if (this.type === 'password') {
       this.type = 'text';
@@ -217,29 +239,44 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     }
   }
 
+  /**
+   * ControlValueAccessor.
+   * Set the internal value
+   */
   writeValue(value: any): void {
     this.innerValue = value;
   }
 
+  /**
+   * ControlValueAccessor.
+   * Set onChange function
+   */
   registerOnChange(fn: any): void {
     this.onChangeFn = fn;
   }
 
+  /**
+   * ControlValueAccessor.
+   * Set onTouched function
+   */
   registerOnTouched(fn: any): void {
     this.onTouchedFn = fn;
   }
 
+  /** onChange callback */
   onChange(event: any) {
     console.log('onChange called');
     console.log(JSON.stringify(event));
     this.onChangeFn(event);
   }
 
+  /** onKeyup callback */
   onKeyup(event: any) {
     console.log('onKeyup called');
     this.onChangeFn(event.target.value);
   }
 
+  /** onBlur callback */
   onBlur() {
     console.log('onBlur called');
     this.onTouchedFn();

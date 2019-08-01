@@ -4,16 +4,46 @@
       <span>
         <h4>Stepper</h4>
       </span>
-      <hyt-stepper></hyt-stepper>
+
+      <ng-template #firstTemplate>
+        <form [formGroup]="firstFormGroup">
+          <h4>Fill out your name</h4>
+            <hyt-input-text placeholder="Last name, First name" [form]="firstFormGroup" 
+              formControlName="firstCtrl" name="firstCtrl" [isRequired]="true">
+            </hyt-input-text>
+          <div>
+            <hyt-button (clickFn)="stepper.next()">Next</hyt-button>
+          </div>
+        </form>
+      </ng-template>
+
+      <ng-template #secondTemplate>
+        <form [formGroup]="secondFormGroup">
+          <h4>Fill out your address</h4>
+          <hyt-input-text placeholder="Address" [form]="firstFormGroup" 
+            formControlName="secondCtrl" name="secondCtrl" [isRequired]="true">
+          </hyt-input-text>
+          <div>
+            <hyt-button (clickFn)="stepper.previous()">Back</hyt-button>
+            <hyt-button (clickFn)="stepper.next()">Next</hyt-button>
+          </div>
+        </form>
+      </ng-template>
+
+      <ng-template #thirdTemplate>
+        <form [formGroup]="thirdFormGroup">
+          <h4>You are Done.</h4>
+          <div>
+            <hyt-button (clickFn)="stepper.previous()">Back</hyt-button>
+          </div>
+        </form>
+      </ng-template>
+
+      <hyt-stepper #stepper [firstStep]="firstTemplate" [secondStep]="secondTemplate"
+        [thirdStep]="thirdTemplate">
+      </hyt-stepper>
     </div>
   </div>
   <mat-divider></mat-divider>
-  <div class="row">
-    <div class="col-12">
-      <span>
-        <h4>Stepper</h4>
-      </span>
-      <hyt-stepper></hyt-stepper>
-    </div>
-  </div>
+
 </div>

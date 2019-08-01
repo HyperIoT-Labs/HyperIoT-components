@@ -4,9 +4,9 @@
       <div class="col-6">
         <div class="ui-element">
           <span>
-            <h4>Input Text with 2 way binding</h4>
+            <h4>Input Text</h4>
           </span>
-          <hyt-input-text [form]="form" formControlName="input" [name]="'input'" [placeholder]="'Insert text here'"
+          <hyt-input-text [form]="form" formControlName="input" name="input" placeholder="Insert text here"
             (change)="onChange($event)">
           </hyt-input-text>
           <p>You inserted: {{ inputText }}</p>
@@ -17,8 +17,8 @@
           <span>
             <h4>Required field</h4>
           </span>
-          <hyt-input-text [form]="form" formControlName="required" [name]="'required'" [isRequired]="true"
-            [hint]="'Errors appears instantly!'" [placeholder]="'Insert text here'">
+          <hyt-input-text [form]="form" formControlName="required" name="required" [isRequired]="true"
+            hint="Errors appears instantly!" placeholder="Insert text here">
           </hyt-input-text>
         </div>
       </div>
@@ -27,10 +27,11 @@
       <div class="col-6">
         <div class="ui-element">
           <span>
-            <h4>Validated e-mail</h4>
+            <h4>Validated password</h4>
           </span>
-          <hyt-input-text [form]="form" formControlName="email" [name]="'email'" [isEmail]="true"
-            [hint]="'Errors appears instantly!'" [placeholder]="'Insert your e-mail'">
+          <hyt-input-text [form]="form" formControlName="password" name="password" [isPassword]="true"
+            type="password" [isRequired]="true" hint="Errors appears instantly!" placeholder="Insert password"
+            errorPosition="bottom">
           </hyt-input-text>
         </div>
       </div>
@@ -39,12 +40,12 @@
           <span>
             <h4>Injected error</h4>
           </span>
-          <hyt-input-text [form]="form" formControlName="username" [name]="'username'" id="'username'"
-            [hint]="'Errors appears instantly!'" [injectedErrorMsg]="'Lo username esiste già'" [placeholder]="'Insert text here'">
+          <hyt-input-text [form]="form" formControlName="username" name="username" id="username"
+            hint="Errors appears instantly!" injectedErrorMsg="Lo username esiste già" placeholder="Insert text here">
           </hyt-input-text>
           <p></p>
-          State: {{ injectedErrorState }} <br>
-          <hyt-button type="button" [color]="'accent'" (clickFn)="toogleErrorState()">Toogle error state</hyt-button>
+          <hyt-button type="button" color="accent" (clickFn)="toogleErrorState()">Toogle error state</hyt-button>
+          State: {{ injectedErrorState }}
         </div>
       </div>
     </div>
@@ -54,23 +55,22 @@
           <span>
             <h4>Text area</h4>
           </span>
-          <hyt-text-area [form]="form" formControlName="textarea" [name]="'textarea'" [placeholder]="'Leave a comment'"
-            [hint]="'Errors appears instantly!'" [isRequired]="true">
+          <hyt-text-area [form]="form" formControlName="textarea" name="textarea" placeholder="Leave a comment"
+            hint="Errors appears instantly!" [isRequired]="true">
           </hyt-text-area>
         </div>
       </div>
       <div class="col-6">
         <div class="ui-element">
           <span>
-            <h4>Validated password</h4>
+            <h4>Validated e-mail</h4>
           </span>
-          <hyt-input-text [form]="form" formControlName="password" [name]="'password'" [isPassword]="true"
-            type="password" [isRequired]="true" [hint]="'Errors appears instantly!'" [placeholder]="'Insert password'"
-            [errorPosition]="'bottom'">
+          <hyt-input-text [form]="form" formControlName="email" name="email" [isEmail]="true"
+            hint="Errors appears instantly!" placeholder="Insert your e-mail">
           </hyt-input-text>
-          <div class="submit">
-            <hyt-button type="submit" [color]="'primary'">Submit</hyt-button>
-          </div>
+        </div>
+        <div class="submit">
+          <hyt-button type="submit" color="primary">Submit</hyt-button>
         </div>
       </div>
     </div>

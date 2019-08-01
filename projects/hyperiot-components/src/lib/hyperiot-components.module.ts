@@ -12,10 +12,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { DemoMaterialModule } from './material-module';
 import { HytButtonComponent } from './hyt-button/hyt-button.component';
 import { HytRadioButtonComponent } from './hyt-radio-button/hyt-radio-button.component';
-import { HCheckboxComponent } from './h-checkbox/h-checkbox.component';
-import { HCardComponent } from './h-card/h-card.component';
+import { HytCheckboxComponent } from './hyt-checkbox/hyt-checkbox.component';
+import { HytCardComponent } from './hyt-card/hyt-card.component';
 import { HytStepperComponent } from './hyt-stepper/hyt-stepper.component';
-import { HytStepComponent } from './hyt-stepper/hyt-step/hyt-step.component';
 import { HytTextAreaComponent } from './hyt-text-area/hyt-text-area.component';
 import { HytSelectComponent } from './hyt-select/hyt-select.component';
 
@@ -24,10 +23,9 @@ import { HytSelectComponent } from './hyt-select/hyt-select.component';
     HytInputComponent,
     HytButtonComponent,
     HytRadioButtonComponent,
-    HCheckboxComponent,
-    HCardComponent,
+    HytCheckboxComponent,
+    HytCardComponent,
     HytStepperComponent,
-    HytStepComponent,
     HytTextAreaComponent,
     HytSelectComponent,
   ],
@@ -48,10 +46,9 @@ import { HytSelectComponent } from './hyt-select/hyt-select.component';
     HytInputComponent,
     HytButtonComponent,
     HytRadioButtonComponent,
-    HCheckboxComponent,
-    HCardComponent,
+    HytCheckboxComponent,
+    HytCardComponent,
     HytStepperComponent,
-    HytStepComponent,
     HytTextAreaComponent,
     HytSelectComponent
   ]

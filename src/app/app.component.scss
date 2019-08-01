@@ -1,17 +1,17 @@
 #toolbar {
   background-color: #008aff;
   color: #fff;
-  margin: 10px;
+  margin-bottom: 10px;
   height: 65px;
 }
 
 .basic-container {
-  padding: 5px 0px 20px 0px;
+//  padding: 10px;
   min-height: 450px;
 }
 
 .h-sidenav {
-  width: 250px;
+  width: 225px;
   min-height: 100%;
   background-color: #ecf1f3;
 }
@@ -27,15 +27,15 @@
 }
 
 .mat-list-item {
-  font-size: 13px;
-  padding: 5px;
+  font-size: 12px;
+  margin-left: 25px;
   color: rgb(92, 92, 92);
 }
 
 mat-expansion-panel-header {
-  font-size: 13px;
+  font-size: 12px;
   padding: 0px, 5px;
-  max-height: 45px;
+  max-height: 40px;
 }
 
 mat-expansion-panel {

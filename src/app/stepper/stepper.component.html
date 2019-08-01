@@ -2,46 +2,60 @@
   <div class="row">
     <div class="col-12">
       <span>
-        <h4>Stepper</h4>
+        <h4>Stepper - 4 step, linear</h4>
       </span>
 
       <ng-template #firstTemplate>
         <form [formGroup]="firstFormGroup">
-          <h4>Fill out your name</h4>
-            <hyt-input-text placeholder="Last name, First name" [form]="firstFormGroup" 
-              formControlName="firstCtrl" name="firstCtrl" [isRequired]="true">
-            </hyt-input-text>
-          <div>
-            <hyt-button (clickFn)="stepper.next()">Next</hyt-button>
-          </div>
+          <hyt-input-text placeholder="Last name, First name" [form]="firstFormGroup" 
+            formControlName="firstCtrl" name="firstCtrl" [isRequired]="true">
+          </hyt-input-text>
+          <hyt-button (clickFn)="stepper.next()">Next</hyt-button>
         </form>
       </ng-template>
 
       <ng-template #secondTemplate>
         <form [formGroup]="secondFormGroup">
-          <h4>Fill out your address</h4>
-          <hyt-input-text placeholder="Address" [form]="firstFormGroup" 
+          <hyt-input-text placeholder="Address" [form]="secondFormGroup" 
             formControlName="secondCtrl" name="secondCtrl" [isRequired]="true">
           </hyt-input-text>
-          <div>
-            <hyt-button (clickFn)="stepper.previous()">Back</hyt-button>
-            <hyt-button (clickFn)="stepper.next()">Next</hyt-button>
-          </div>
+          <hyt-button (clickFn)="stepper.previous()">Back</hyt-button>
+          <hyt-button (clickFn)="stepper.next()">Next</hyt-button>
         </form>
       </ng-template>
 
       <ng-template #thirdTemplate>
         <form [formGroup]="thirdFormGroup">
-          <h4>You are Done.</h4>
-          <div>
-            <hyt-button (clickFn)="stepper.previous()">Back</hyt-button>
-          </div>
+          <hyt-input-text placeholder="Email" [form]="thirdFormGroup" 
+            formControlName="thirdCtrl" name="thirdCtrl" [isEmail]="true">
+          </hyt-input-text>
+          <hyt-button (clickFn)="stepper.previous()">Back</hyt-button>
+          <hyt-button (clickFn)="stepper.next()">Next</hyt-button>
         </form>
       </ng-template>
 
-      <hyt-stepper #stepper [firstStep]="firstTemplate" [secondStep]="secondTemplate"
-        [thirdStep]="thirdTemplate">
+      <ng-template #fourthTemplate>
+        <form [formGroup]="fourthFormGroup">
+          <hyt-button (clickFn)="stepper.previous()">Back</hyt-button>
+        </form>
+      </ng-template>
+
+      <hyt-stepper #stepper 
+        [isLinear]="true" 
+        [firstStep]="firstTemplate" 
+        firstLabel="Fill out your name"
+        [firstStepControl]="firstFormGroup" 
+        [secondStep]="secondTemplate"
+        secondLabel="Fill out your address"
+        [secondStepControl]="secondFormGroup" 
+        [thirdStep]="thirdTemplate"
+        thirdLabel="Fill out your email"
+        [thirdStepControl]="thirdFormGroup" 
+        [fourthStep]="fourthTemplate"
+        fourthLabel="Done."
+      >
       </hyt-stepper>
+      
     </div>
   </div>
   <mat-divider></mat-divider>

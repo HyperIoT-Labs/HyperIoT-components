@@ -11,6 +11,7 @@ export class StepperComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
+  fourthFormGroup: FormGroup;
 
   constructor(
     private fb: FormBuilder
@@ -18,13 +19,16 @@ export class StepperComponent implements OnInit {
 
   ngOnInit() {
     this.firstFormGroup = this.fb.group({
-      firstCtrl: ['', Validators.required]
+
     });
     this.secondFormGroup = this.fb.group({
-      secondCtrl: ['', Validators.required]
+
     });
     this.thirdFormGroup = this.fb.group({
-      thirdCtrl: ['', Validators.required]
+
+    });
+    this.fourthFormGroup = this.fb.group({
+
     });
   }
 

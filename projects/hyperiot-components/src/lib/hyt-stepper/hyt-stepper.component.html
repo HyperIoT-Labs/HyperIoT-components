@@ -1,27 +1,28 @@
-  <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-  </button> -->
-  <mat-horizontal-stepper #stepper [linear]="isLinear">
+   <mat-horizontal-stepper #stepper [linear]="isLinear">
     
-    <mat-step *ngIf="firstStep" >
+    <mat-step *ngIf="firstStep" [stepControl]="firstStepControl">
+      <ng-template matStepLabel>{{ firstLabel }}</ng-template>
       <ng-container 
         *ngTemplateOutlet="firstStep">
       </ng-container>
     </mat-step>
 
-    <mat-step *ngIf="secondStep" >
+    <mat-step *ngIf="secondStep" [stepControl]="secondStepControl">
+      <ng-template matStepLabel>{{ secondLabel }}</ng-template>
       <ng-container 
         *ngTemplateOutlet="secondStep">
       </ng-container>
     </mat-step>
 
-    <mat-step *ngIf="thirdStep" >
+    <mat-step *ngIf="thirdStep" [stepControl]="thirdStepControl">
+      <ng-template matStepLabel>{{ thirdLabel }}</ng-template>
       <ng-container 
         *ngTemplateOutlet="thirdStep">
       </ng-container>
     </mat-step>
 
-    <mat-step *ngIf="fourthStep" >
+    <mat-step *ngIf="fourthStep" [stepControl]="fourthStepControl">
+      <ng-template matStepLabel>{{ fourthLabel }}</ng-template>
       <ng-container 
         *ngTemplateOutlet="fourthStep">
       </ng-container>

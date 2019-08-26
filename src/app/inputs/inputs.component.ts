@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
@@ -14,6 +14,8 @@ export class InputsComponent implements OnInit {
   inputText: string;
 
   injectedErrorState = false;
+
+  username = 'err';
 
   constructor(
     private fb: FormBuilder
@@ -35,6 +37,7 @@ export class InputsComponent implements OnInit {
 
   submit() {
     if (this.injectedErrorState) {
+      this.username = 'lo username esiste già';
       this.form.get('username').setErrors({
         validateInjectedError: {
           valid: false

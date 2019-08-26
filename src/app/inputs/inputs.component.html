@@ -40,8 +40,8 @@
           <span>
             <h4>Injected error</h4>
           </span>
-          <hyt-input-text [form]="form" formControlName="username" name="username" id="username"
-            hint="Errors appears instantly!" injectedErrorMsg="Lo username esiste già" placeholder="Insert text here">
+          <hyt-input-text #injectedErrInput [form]="form" formControlName="username" name="username" id="username"
+            hint="Errors appears instantly!" [injectedErrorMsg]="username" placeholder="Insert text here">
           </hyt-input-text>
           <p></p>
           <hyt-button type="button" color="accent" (clickFn)="toogleErrorState()">Toogle error state</hyt-button>

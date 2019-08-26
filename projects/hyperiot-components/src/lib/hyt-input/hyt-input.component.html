@@ -28,9 +28,15 @@
       {{ hint }}
     </mat-hint>
 
-    <mat-error *ngFor="let error of getErrorList()">
-      {{ error }}
-    </mat-error>
+    <div class="multiError">
+      <mat-error  *ngFor="let error of getMultiErrorList()">
+        {{ error }}
+      </mat-error>
+    </div>
+
+      <mat-error  *ngFor="let error of getDefaultErrorList()">
+        {{ error }}
+      </mat-error>
 
   </mat-form-field>
 

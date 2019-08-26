@@ -21,19 +21,24 @@
     }
 
     &.errorPositionBottom {
+      
+        .multiError {
 
-      .mat-form-field-subscript-wrapper[ng-reflect-ng-switch=error] {
-        background-color: #ffffff;
-        top: 50px;
-        padding: 15px 10px;
+        .mat-form-field-subscript-wrapper[ng-reflect-ng-switch=error] {
+        
+          background-color: #ffffff;
+          top: 50px;
+          padding: 15px 10px;
 
-        -moz-box-shadow: 0px 7px 10px -8px #b2b2b2;
-        -webkit-box-shadow: 0px 7px 10px -8px #b2b2b2;
-        box-shadow: 0px 7px 10px -8px #b2b2b2;
+          -moz-box-shadow: 0px 7px 10px -8px #b2b2b2;
+          -webkit-box-shadow: 0px 7px 10px -8px #b2b2b2;
+          box-shadow: 0px 7px 10px -8px #b2b2b2;
 
-        mat-error {
-          text-align: left;
-          margin-bottom: 3px;
+          mat-error {
+            text-align: left;
+            margin-bottom: 3px;
+          }
+
         }
 
       }

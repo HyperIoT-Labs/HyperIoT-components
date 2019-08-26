@@ -91,7 +91,11 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   @ViewChild('input', { static: false }) private inputElement: ElementRef;
 
   /** This error appears in case of injected error */
-  @Input() injectedErrorMsg: string;
+  @Input()
+  set injectedErrorMsg(msg: string) {
+    this.injectedError = msg;
+    this.errorMap.validateInjectedError = msg;
+  }
 
   /** Applies required validation */
   @Input() isRequired = false;
@@ -107,6 +111,8 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
 
   /** The internal data */
   private innerValue: any = '';
+
+  private injectedError = '';
 
   /** Custom error matcher */
   matcher = new CustomErrorStateMatcher();
@@ -215,12 +221,25 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   }
 
   /** returns the errors to be displayed in the mat-error tag */
-  getErrorList(): string[] {
+  getMultiErrorList(): string[] {
+    const errorList: string[] = [];
+
+    for (const key in this.formControl.errors) {
+      if (this.formControl.errors.hasOwnProperty(key) && key !== 'required') {
+        if (this.errorMap.hasOwnProperty(key)) {
+          errorList.push(this.errorMap[key]);
+        }
+      }
+    }
+    return errorList;
+  }
+
+  getDefaultErrorList(): string[] {
     const errorList: string[] = [];
 
     for (const key in this.formControl.errors) {
       if (this.formControl.errors.hasOwnProperty(key)) {
-        if (this.errorMap.hasOwnProperty(key)) {
+        if (this.errorMap.hasOwnProperty(key) && key === 'required') {
           errorList.push(this.errorMap[key]);
         }
       }

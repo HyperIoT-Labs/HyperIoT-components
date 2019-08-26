@@ -18,16 +18,23 @@ export class HytStepperComponent implements OnInit {
   @Input() secondStep: TemplateRef<any>;
   @Input() thirdStep: TemplateRef<any>;
   @Input() fourthStep: TemplateRef<any>;
+  @Input() fifthStep: TemplateRef<any>;
+  @Input() sixthStep: TemplateRef<any>;
 
   @Input() firstStepControl: FormGroup;
   @Input() secondStepControl: FormGroup;
   @Input() thirdStepControl: FormGroup;
   @Input() fourthStepControl: FormGroup;
+  @Input() fifthStepControl: FormGroup;
+  @Input() sixthStepControl: FormGroup;
+
 
   @Input() firstLabel: string;
   @Input() secondLabel: string;
   @Input() thirdLabel: string;
   @Input() fourthLabel: string;
+  @Input() fifthLabel: string;
+  @Input() sixthLabel: string;
 
   /**
    * constructor

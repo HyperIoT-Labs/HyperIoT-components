@@ -36,6 +36,26 @@
 
       <ng-template #fourthTemplate>
         <form [formGroup]="fourthFormGroup">
+          <hyt-input-text placeholder="Email" [form]="fourthFormGroup" 
+            formControlName="fourthCtrl" name="fourthCtrl" [isEmail]="true">
+          </hyt-input-text>
+          <hyt-button (clickFn)="stepper.previous()">Back</hyt-button>
+          <hyt-button (clickFn)="stepper.next()">Next</hyt-button>
+        </form>
+      </ng-template>
+
+      <ng-template #fifthTemplate>
+        <form [formGroup]="fifthFormGroup">
+          <hyt-input-text placeholder="Email" [form]="fifthFormGroup" 
+            formControlName="fifthCtrl" name="fifthCtrl" [isEmail]="true">
+          </hyt-input-text>
+          <hyt-button (clickFn)="stepper.previous()">Back</hyt-button>
+          <hyt-button (clickFn)="stepper.next()">Next</hyt-button>
+        </form>
+      </ng-template>
+
+      <ng-template #sixthTemplate>
+        <form [formGroup]="sixthFormGroup">
           <h4>You are now done.</h4>
           <hyt-button (clickFn)="stepper.previous()">Back</hyt-button>
         </form>
@@ -53,7 +73,13 @@
         thirdLabel="Fill out your email"
         [thirdStepControl]="thirdFormGroup" 
         [fourthStep]="fourthTemplate"
-        fourthLabel="Done."
+        fourthLabel="Fill out your email"
+        [fourthStepControl]="fourthFormGroup" 
+        [fifthStep]="fifthTemplate"
+        fifthLabel="Fill out your email"
+        [fifthStepControl]="fifthFormGroup" 
+        [sixthStep]="sixthTemplate"
+        sixthLabel="Done."
       >
       </hyt-stepper>
       

@@ -12,6 +12,8 @@ export class StepperComponent implements OnInit {
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
   fourthFormGroup: FormGroup;
+  fifthFormGroup: FormGroup;
+  sixthFormGroup: FormGroup;
 
   constructor(
     private fb: FormBuilder
@@ -28,6 +30,12 @@ export class StepperComponent implements OnInit {
 
     });
     this.fourthFormGroup = this.fb.group({
+
+    });
+    this.fifthFormGroup = this.fb.group({
+
+    });
+    this.sixthFormGroup = this.fb.group({
 
     });
   }

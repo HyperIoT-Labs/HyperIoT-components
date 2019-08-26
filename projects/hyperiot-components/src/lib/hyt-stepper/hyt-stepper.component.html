@@ -28,4 +28,18 @@
       </ng-container>
     </mat-step>
 
+    <mat-step *ngIf="fifthStep" [stepControl]="fifthStepControl">
+      <ng-template matStepLabel>{{ fifthLabel }}</ng-template>
+      <ng-container 
+        *ngTemplateOutlet="fifthStep">
+      </ng-container>
+    </mat-step>
+
+    <mat-step *ngIf="sixthStep" [stepControl]="sixthStepControl">
+      <ng-template matStepLabel>{{ sixthLabel }}</ng-template>
+      <ng-container 
+        *ngTemplateOutlet="sixthStep">
+      </ng-container>
+    </mat-step>
+
   </mat-horizontal-stepper>

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, forwardRef, ViewEncapsulation } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, Validators } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, Validators, FormGroup } from '@angular/forms';
 
 /** Interface for select option element */
 export interface SelectOption {
@@ -37,8 +37,14 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
   /** Selected element */
   selected: any;
 
+  /** FormGroup */
+  @Input() form: FormGroup;
+
   /** formControl */
   @Input() formControl: FormControl;
+
+  /** Element name, connected to the formcontrol */
+  @Input() name = '';
 
   /** Select main label */
   @Input() label = '';
@@ -83,6 +89,7 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
       this.label += ' *';
     }
     this.formControl = new FormControl('', Validators.compose(validators));
+    this.form.addControl(this.name, this.formControl);
   }
 
   // get accessor

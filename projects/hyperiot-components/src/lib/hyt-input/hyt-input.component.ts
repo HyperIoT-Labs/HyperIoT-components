@@ -14,8 +14,7 @@ import {
   NgForm,
   FormControl,
   Validators,
-  FormGroup,
-  FormControlName
+  FormGroup
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
@@ -109,6 +108,12 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   /** Applies password type but not password validation */
   @Input() isInputPassword = false;
 
+  /**
+   * Applies password type and add confirm validation.
+   * Validation will compare the actual value with the formControl specified by this field
+   */
+  @Input() confirmPassword = '';
+
   /** The internal data */
   private innerValue: any = '';
 
@@ -128,8 +133,19 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     validateNumber: this.i18n('HYT_min_one_number'),
     validateUperCase: this.i18n('HYT_upper_case'),
     validateSpecialChar: this.i18n('HYT_special_char'),
+    validateConfirmPassword: 'Password Mismatch',
     validateInjectedError: ''
   };
+
+  /**
+   * Default errors are displayed at the top of the field
+   */
+  private defaultErrors: string[] = [
+    'required',
+    'email',
+    'validateConfirmPassword',
+    'validateInjectedError'
+  ];
 
   /** Callback function for change event */
   private onChangeFn = (_: any) => { };
@@ -175,6 +191,18 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
         }
       };
     }
+    function validateConfirmPassword(c: FormControl) {
+      const passwordForm = self.form.get(self.confirmPassword);
+      let password = '';
+      if (passwordForm) {
+        password = self.form.get(self.confirmPassword).value;
+      }
+      return (c.value === password) || c.value.length === 0 ? null : {
+        validateConfirmPassword: {
+          valid: false
+        }
+      }
+    }
 
     /*
     function userValidator(): AsyncValidatorFn {
@@ -199,6 +227,10 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
       validators.push(validateSpecialChar);
     }
 
+    if (this.confirmPassword !== '') {
+      validators.push(validateConfirmPassword);
+    }
+
     if (this.injectedErrorMsg) {
       this.errorMap.validateInjectedError = this.injectedErrorMsg;
     }
@@ -220,12 +252,13 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     }
   }
 
+
   /** returns the errors to be displayed in the mat-error tag */
   getMultiErrorList(): string[] {
     const errorList: string[] = [];
 
     for (const key in this.formControl.errors) {
-      if (this.formControl.errors.hasOwnProperty(key) && key !== 'required') {
+      if (this.formControl.errors.hasOwnProperty(key) && !this.defaultErrors.includes(key)) {
         if (this.errorMap.hasOwnProperty(key)) {
           errorList.push(this.errorMap[key]);
         }
@@ -239,7 +272,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
 
     for (const key in this.formControl.errors) {
       if (this.formControl.errors.hasOwnProperty(key)) {
-        if (this.errorMap.hasOwnProperty(key) && key === 'required') {
+        if (this.errorMap.hasOwnProperty(key) && this.defaultErrors.includes(key)) {
           errorList.push(this.errorMap[key]);
         }
       }

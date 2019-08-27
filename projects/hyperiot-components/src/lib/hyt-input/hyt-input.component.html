@@ -18,7 +18,7 @@
     >
 
     <mat-icon matSuffix
-      *ngIf="isPassword || isInputPassword"  
+      *ngIf="isPassword || isInputPassword || (confirmPassword !== '')"  
       (click)="this.tooglePassword()"
     >
       {{ visibilityIcon }}

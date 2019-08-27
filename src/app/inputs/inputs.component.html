@@ -53,11 +53,12 @@
       <div class="col-6">
         <div class="ui-element">
           <span>
-            <h4>Text area</h4>
+            <h4>Confirm password</h4>
           </span>
-          <hyt-text-area [form]="form" formControlName="textarea" name="textarea" placeholder="Leave a comment"
-            hint="Errors appears instantly!" [isRequired]="true">
-          </hyt-text-area>
+          <hyt-input-text [form]="form" formControlName="confirmPassword" name="confirmPassword" confirmPassword="password"
+            type="password" [isRequired]="true" hint="Errors appears instantly!" placeholder="Confirm password"
+            errorPosition="bottom">
+          </hyt-input-text>
         </div>
       </div>
       <div class="col-6">
@@ -71,6 +72,18 @@
         </div>
         <div class="submit">
           <hyt-button type="submit" color="primary">Submit</hyt-button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="ui-element">
+          <span>
+            <h4>Text area</h4>
+          </span>
+          <hyt-text-area [form]="form" formControlName="textarea" name="textarea" placeholder="Leave a comment"
+            hint="Errors appears instantly!" [isRequired]="true">
+          </hyt-text-area>
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@
 
   <mat-radio-button 
     *ngFor="let option of options"
+    [formControl]="formControl"
     class="hyt-radio-button"  
     value="{{option.value}}"
     (change)="onChange($event)" 

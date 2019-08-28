@@ -6,8 +6,7 @@
   
   <mat-select 
     [formControl]="formControl" 
-    [(ngModel)]="value" 
-    [disabled]="disabled" 
+    (blur)="onBlur($event)"
     [multiple]="isMultiple ? '' : null"
   >
     

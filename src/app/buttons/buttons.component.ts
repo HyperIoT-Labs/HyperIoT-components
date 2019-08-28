@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Option } from '../../../projects/hyperiot-components/src/lib/hyt-radio-button/hyt-radio-button.component';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-buttons',
@@ -7,6 +8,7 @@ import { Option } from '../../../projects/hyperiot-components/src/lib/hyt-radio-
   styleUrls: ['./buttons.component.scss']
 })
 export class ButtonsComponent implements OnInit {
+  form: FormGroup;
 
   selectedOption: any;
 
@@ -23,9 +25,12 @@ export class ButtonsComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit() {
+    this.form = this.fb.group({});
   }
 
   onClick() {
@@ -42,4 +47,6 @@ export class ButtonsComponent implements OnInit {
     }
     console.log('onChangeRadio: ' + e.value);
   }
+
+  submit() { }
 }

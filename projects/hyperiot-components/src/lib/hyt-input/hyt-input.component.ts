@@ -128,12 +128,14 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   /** Map error type with default error string */
   errorMap = {
     required: this.i18n('HYT_field_required'), // 'The field is required.',
+    validateRequired: this.i18n('HYT_field_required'),
     email: this.i18n('HYT_valid_email'),
     minlength: this.i18n('HYT_min_length'),
     validateNumber: this.i18n('HYT_min_one_number'),
     validateUperCase: this.i18n('HYT_upper_case'),
     validateSpecialChar: this.i18n('HYT_special_char'),
     validateConfirmPassword: 'Password Mismatch',
+    validatePassword: 'Password must be valid',
     validateInjectedError: ''
   };
 
@@ -142,8 +144,10 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
    */
   private defaultErrors: string[] = [
     'required',
+    'validateRequired',
     'email',
     'validateConfirmPassword',
+    'validatePassword',
     'validateInjectedError'
   ];
 
@@ -194,14 +198,21 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     function validateConfirmPassword(c: FormControl) {
       const passwordForm = self.form.get(self.confirmPassword);
       let password = '';
+      let passwordValid = true;
       if (passwordForm) {
         password = self.form.get(self.confirmPassword).value;
+        passwordValid = passwordForm.valid;
       }
-      return (c.value === password) || c.value.length === 0 ? null : {
-        validateConfirmPassword: {
-          valid: false
-        }
-      }
+      return (passwordValid || c.value.length === 0) ?
+        (c.value === password || c.value.length === 0) ? null : {
+          validateConfirmPassword: {
+            valid: false
+          }
+        } : {
+          validatePassword: {
+            valid: false
+          }
+        };
     }
 
     /*
@@ -236,7 +247,12 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     }
 
     this.formControl = new FormControl('', Validators.compose(validators));
-    this.form.addControl(this.name, this.formControl);
+    if (this.fieldValue) {
+      this.formControl.setValue(this.fieldValue);
+    }
+    if (this.form) {
+      this.form.addControl(this.name, this.formControl);
+    }
   }
 
   /** get accessor */
@@ -265,6 +281,14 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
       }
     }
     return errorList;
+  }
+
+  hasErrors(): boolean {
+    if (this.formControl.errors == null) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   getDefaultErrorList(): string[] {

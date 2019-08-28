@@ -17,6 +17,7 @@ export interface SelectOptionGroup {
 /** Custom provider for NG_VALUE_ACCESSOR */
 export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
+  // tslint:disable-next-line: no-use-before-declare
   useExisting: forwardRef(() => HytSelectComponent),
   multi: true
 };
@@ -70,18 +71,31 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
   /** Specifies if it is a multiple select */
   @Input() isMultiple = false;
 
+  /**
+   * Map an error key with the displayed message
+   */
   errorMap = {
     required: 'The field is required.',
   };
 
   /**
-   * Callback functions for change and blur
+   * Callback functions for change
    */
   private onChangeFn = (_: any) => { };
+
+  /**
+   * Callback functions for blur
+   */
   private onTouchedFn = () => { };
 
+  /**
+   * Constructor
+   */
   constructor() { }
 
+  /**
+   * ngOnInit
+   */
   ngOnInit() {
     const validators = [];
     if (this.isRequired) {
@@ -89,7 +103,12 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
       this.label += ' *';
     }
     this.formControl = new FormControl('', Validators.compose(validators));
-    this.form.addControl(this.name, this.formControl);
+    if (this.disabled) {
+      this.formControl.disable();
+    }
+    if (this.form) {
+      this.form.addControl(this.name, this.formControl);
+    }
   }
 
   // get accessor
@@ -129,7 +148,8 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
     this.onTouchedFn = fn;
   }
 
-  onBlur() {
-    this.onTouchedFn();
+  onBlur(event: any) {
+    console.log("onBlur called");
+    this.onChangeFn(event.target.value);
   }
 }

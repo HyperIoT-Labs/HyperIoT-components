@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, forwardRef, ViewEncapsulation } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, FormGroup, Validators } from '@angular/forms';
 
 /**
  * Class used to represent a select option.
@@ -35,6 +35,15 @@ export class HytRadioButtonComponent implements OnInit, ControlValueAccessor {
   /** The internal data */
   private innerValue: any = '';
 
+  /** FormGroup */
+  @Input() form: FormGroup;
+
+  /** FormControl */
+  formControl: FormControl;
+
+  /** Element name, connected to the formcontrol */
+  @Input() name = '';
+
   /** Select main label */
   @Input() label: string;
 
@@ -49,6 +58,9 @@ export class HytRadioButtonComponent implements OnInit, ControlValueAccessor {
 
   /** Function called when click event is triggered */
   @Output() changeFn: EventEmitter<any> = new EventEmitter();
+
+  /** Applies required validation */
+  @Input() isRequired = false;
 
   /**
    * Callback function for change event
@@ -68,7 +80,18 @@ export class HytRadioButtonComponent implements OnInit, ControlValueAccessor {
   /**
    * ngOnInit
    */
-  ngOnInit() { }
+  ngOnInit() {
+    const validators = [];
+
+    if (this.isRequired) {
+      validators.push(Validators.required);
+    }
+
+    this.formControl = new FormControl('', Validators.compose(validators));
+    if (this.form) {
+      this.form.addControl(this.name, this.formControl);
+    }
+  }
 
   /**
    * get accessor

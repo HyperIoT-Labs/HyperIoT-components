@@ -28,8 +28,8 @@
       {{ hint }}
     </mat-hint>
 
-    <div class="multiError">
-      <mat-error  *ngFor="let error of getMultiErrorList()">
+    <div class="multiError" *ngIf="getMultiErrorList().length > 0">
+      <mat-error *ngFor="let error of getMultiErrorList()">
         {{ error }}
       </mat-error>
     </div>

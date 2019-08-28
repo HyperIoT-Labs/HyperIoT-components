@@ -6,7 +6,7 @@
     </div>
     <div class="button ui-element">
       <h4>Primary</h4>
-      <hyt-button [color]="'primary'" (clickFn)="onClick()">Click me!</hyt-button>
+      <hyt-button [color]="'primary'" (clickFn)="onClick()"><mat-icon>favorite</mat-icon>Click me!</hyt-button>
     </div>
     <div class="button ui-element">
       <h4>Accent</h4>
@@ -26,7 +26,7 @@
     </div>
   </div>
   <mat-divider></mat-divider>
-  <div class="row">
+  <div class="row" [formGroup]="form" (ngSubmit)="submit()">
     <div class="col-4 ui-element">
       <span>
         <h4>Radio Button</h4>
@@ -36,17 +36,16 @@
     </div>
     <div class="col-4 ui-element">
       <span>
-        <h4>Radio Button Vertical</h4>
+        <h4>Radio Button Vertical Required</h4>
       </span>
-      <hyt-radio-button [options]="options" (changeFn)="onChangeRadio($event)" [verticalAlign]="true">
+      <hyt-radio-button [form]="form" formControlName="radio" name="radio" [options]="options" (changeFn)="onChangeRadio($event)" [verticalAlign]="true" [isRequired]="true">
       </hyt-radio-button>
     </div>
     <div class="col-4 ui-element">
       <span>
         <h4>Radio Button with 2 way binding</h4>
       </span>
-      <hyt-radio-button [options]="options" (changeFn)="onChangeRadio($event)" [labelPosition]="'before'"
-        [(ngModel)]="selectedOption">
+      <hyt-radio-button [options]="options" (changeFn)="onChangeRadio($event)" [labelPosition]="'before'">
       </hyt-radio-button>
       <div class="select-text" *ngIf="selectedOption">
         <p>You selected: {{ selectedOption.value }}</p>

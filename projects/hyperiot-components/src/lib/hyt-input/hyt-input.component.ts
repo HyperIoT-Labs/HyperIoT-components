@@ -283,14 +283,6 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     return errorList;
   }
 
-  hasErrors(): boolean {
-    if (this.formControl.errors == null) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
   getDefaultErrorList(): string[] {
     const errorList: string[] = [];
 

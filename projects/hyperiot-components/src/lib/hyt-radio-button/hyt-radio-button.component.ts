@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, forwardRef, ViewEncapsulation } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, FormGroup, Validators, FormGroupDirective, NgForm } from '@angular/forms';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 /**
  * Class used to represent a select option.
@@ -39,7 +40,7 @@ export class HytRadioButtonComponent implements OnInit, ControlValueAccessor {
   @Input() form: FormGroup;
 
   /** FormControl */
-  formControl: FormControl;
+  @Input() formControl: FormControl;
 
   /** Element name, connected to the formcontrol */
   @Input() name = '';
@@ -62,6 +63,12 @@ export class HytRadioButtonComponent implements OnInit, ControlValueAccessor {
   /** Applies required validation */
   @Input() isRequired = false;
 
+  /** Map error type with default error string */
+  errorMap = {
+    required: this.i18n('HYT_field_required'), // 'The field is required.',
+    validateRequired: this.i18n('HYT_field_required'), // 'The field is required.',
+  };
+
   /**
    * Callback function for change event
    */
@@ -75,7 +82,9 @@ export class HytRadioButtonComponent implements OnInit, ControlValueAccessor {
   /**
    * constructor
    */
-  constructor() { }
+  constructor(
+    private i18n: I18n,
+  ) { }
 
   /**
    * ngOnInit
@@ -91,6 +100,19 @@ export class HytRadioButtonComponent implements OnInit, ControlValueAccessor {
     if (this.form) {
       this.form.addControl(this.name, this.formControl);
     }
+  }
+
+  getErrorList(): string[] {
+    const errorList: string[] = [];
+
+    for (const key in this.formControl.errors) {
+      if (this.formControl.errors.hasOwnProperty(key)) {
+        if (this.errorMap.hasOwnProperty(key)) {
+          errorList.push(this.errorMap[key]);
+        }
+      }
+    }
+    return errorList;
   }
 
   /**

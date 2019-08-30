@@ -16,6 +16,8 @@ export class StepperComponent implements OnInit {
   sixthFormGroup: FormGroup;
   seventhFormGroup: FormGroup;
 
+  firstCompleted = false;
+
   constructor(
     private fb: FormBuilder
   ) { }
@@ -44,4 +46,7 @@ export class StepperComponent implements OnInit {
     });
   }
 
+  completeFirst() {
+    this.firstCompleted = !this.firstCompleted;
+  }
 }

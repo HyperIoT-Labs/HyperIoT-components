@@ -10,6 +10,7 @@
           <hyt-input-text placeholder="Last name, First name" [form]="firstFormGroup" 
             formControlName="firstCtrl" name="firstCtrl" [isRequired]="true">
           </hyt-input-text>
+          <hyt-button (clickFn)="completeFirst()">Complete</hyt-button>
           <hyt-button (clickFn)="stepper.next()">Next</hyt-button>
         </form>
       </ng-template>
@@ -73,29 +74,12 @@
 
       <hyt-stepper #stepper 
         [isLinear]="true" 
-        [firstStep]="firstTemplate" 
-        firstLabel="Fill out your name"
-        [firstStepControl]="firstFormGroup" 
-        [secondStep]="secondTemplate"
-        secondLabel="Fill out your address"
-        [secondStepControl]="secondFormGroup" 
-        [thirdStep]="thirdTemplate"
-        thirdLabel="Fill out your email"
-        [thirdStepControl]="thirdFormGroup" 
-        [fourthStep]="fourthTemplate"
-        fourthLabel="Fill out your email"
-        [fourthStepControl]="fourthFormGroup" 
-        [fifthStep]="fifthTemplate"
-        fifthLabel="Fill out your email"
-        [fifthStepControl]="fifthFormGroup" 
-        [sixthStep]="sixthTemplate"
-        sixthLabel="Fill out your email"
-        [sixthStepControl]="sixthFormGroup" 
-        [seventhStep]="seventhTemplate"
-        seventhLabel="Done."
+        [stepArray]="[firstTemplate, secondTemplate, thirdTemplate]"
+        [labelArray]="['Fill out your name', 'Fill out your address', 'Fill out your email']"
+        [completedArray]="[firstCompleted, true, false]"
       >
       </hyt-stepper>
-      
+     
     </div>
   </div>
   <mat-divider></mat-divider>

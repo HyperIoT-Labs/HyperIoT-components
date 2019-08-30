@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectOption, SelectOptionGroup } from '../../../projects/hyperiot-components/src/lib/hyt-select/hyt-select.component';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-select',
@@ -9,6 +10,8 @@ import { SelectOption, SelectOptionGroup } from '../../../projects/hyperiot-comp
 export class SelectComponent implements OnInit {
   /** Selected element */
   selected: any;
+
+  form: FormGroup;
 
   /** Select options */
   options: SelectOption[] = [
@@ -53,13 +56,18 @@ export class SelectComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit() {
+    this.form = this.fb.group({});
   }
 
   onChange(event) {
-    console.log("onChange called");
+    console.log('onChange called');
     console.log(event);
   }
+
+  submit() { }
 }

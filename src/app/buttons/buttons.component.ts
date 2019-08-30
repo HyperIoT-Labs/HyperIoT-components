@@ -9,6 +9,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class ButtonsComponent implements OnInit {
   form: FormGroup;
+  form1: FormGroup;
+  form2: FormGroup;
 
   selectedOption: any;
 
@@ -31,6 +33,8 @@ export class ButtonsComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({});
+    this.form1 = this.fb.group({});
+    this.form2 = this.fb.group({});
   }
 
   onClick() {

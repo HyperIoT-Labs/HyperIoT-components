@@ -26,32 +26,35 @@
     </div>
   </div>
   <mat-divider></mat-divider>
-  <div class="row" [formGroup]="form" (ngSubmit)="submit()">
-    <div class="col-4 ui-element">
-      <span>
-        <h4>Radio Button</h4>
-      </span>
-      <hyt-radio-button [options]="options" (changeFn)="onChangeRadio($event)">
-      </hyt-radio-button>
-    </div>
-    <div class="col-4 ui-element">
-      <span>
-        <h4>Radio Button Vertical Required</h4>
-      </span>
-      <hyt-radio-button [form]="form" formControlName="radio" name="radio" [options]="options" (changeFn)="onChangeRadio($event)" [verticalAlign]="true" [isRequired]="true">
-      </hyt-radio-button>
-    </div>
-    <div class="col-4 ui-element">
-      <span>
-        <h4>Radio Button with 2 way binding</h4>
-      </span>
-      <hyt-radio-button [options]="options" (changeFn)="onChangeRadio($event)" [labelPosition]="'before'">
-      </hyt-radio-button>
-      <div class="select-text" *ngIf="selectedOption">
-        <p>You selected: {{ selectedOption.value }}</p>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="row">
+      <div class="col-4 ui-element">
+        <span>
+          <h4>Radio Button</h4>
+        </span>
+        <hyt-radio-button [form]="form" [options]="options" name="radio" formControlName="radio" (changeFn)="onChangeRadio($event)">
+        </hyt-radio-button>
       </div>
+      <div class="col-4 ui-element">
+        <span>
+          <h4>Radio Button Vertical Required</h4>
+        </span>
+        <hyt-radio-button [form]="form" name="radio1" formControlName="radio1" [options]="options" (changeFn)="onChangeRadio($event)" [verticalAlign]="true" [isRequired]="true">
+        </hyt-radio-button>
+      </div>
+      <div class="col-4 ui-element">
+        <span>
+          <h4>Radio Button with 2 way binding</h4>
+        </span>
+        <hyt-radio-button [form]="form" [options]="options" name="radio2" formControlName="radio2" (changeFn)="onChangeRadio($event)" [labelPosition]="'before'">
+        </hyt-radio-button>
+        <div class="select-text" *ngIf="selectedOption">
+          <p>You selected: {{ selectedOption.value }}</p>
+        </div>
+      </div>
+      <hyt-button type="submit" (clickFn)="onClick()">Submit</hyt-button>
     </div>
-  </div>
+  </form>
   <mat-divider></mat-divider>
   <div class="row">
     <div class="col-4 ui-element">

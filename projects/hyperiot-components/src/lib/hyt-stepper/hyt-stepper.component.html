@@ -1,6 +1,18 @@
    <mat-horizontal-stepper #stepper [linear]="isLinear">
     
-    <mat-step *ngIf="firstStep" [stepControl]="firstStepControl">
+    <mat-step 
+      *ngFor="let template of stepArray; let i = index" 
+      [completed]="completed[i]"
+    >
+      <ng-template matStepLabel>{{ labelArray[i] }}</ng-template>
+      <ng-container 
+        *ngTemplateOutlet="template">
+      </ng-container>
+    </mat-step>
+
+    <!-- 
+      [stepControl]="controlArray[i]"
+      <mat-step *ngIf="firstStep" [stepControl]="firstStepControl">
       <ng-template matStepLabel>{{ firstLabel }}</ng-template>
       <ng-container 
         *ngTemplateOutlet="firstStep">
@@ -47,6 +59,6 @@
       <ng-container 
         *ngTemplateOutlet="seventhStep">
       </ng-container>
-    </mat-step>
+    </mat-step> -->
 
   </mat-horizontal-stepper>

@@ -1,0 +1,39 @@
+<form>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-6">
+        <div class="ui-element">
+          <span>
+            <h4>Input Text</h4>
+          </span>
+          <hyt-input-template [(ngModel)]="inputText" name="input" placeholder="Insert text here">
+          </hyt-input-template>
+          <p>You inserted: {{ inputText }}</p>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="ui-element">
+          <span>
+            <h4>Required field</h4>
+          </span>
+          <hyt-input-template name="required" [isRequired]="true"
+            fieldValue="value" hint="Errors appears instantly!" placeholder="Insert text here">
+          </hyt-input-template>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="ui-element">
+          <span>
+              <h4>Pattern validation</h4>
+          </span>
+          <hyt-input-template pattern="[A-Za-z0-9 ]*" fieldValue="value" 
+            hint="Errors appears instantly!" placeholder="Insert text here">
+          </hyt-input-template>
+        </div>
+        <hyt-button type="submit" color="primary">Submit</hyt-button>
+      </div>
+    </div>
+  </div>
+</form>

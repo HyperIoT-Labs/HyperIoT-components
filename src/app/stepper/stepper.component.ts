@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { SelectOption } from 'projects/hyperiot-components/src/public-api';
 
 @Component({
   selector: 'app-stepper',
@@ -17,6 +18,13 @@ export class StepperComponent implements OnInit {
   seventhFormGroup: FormGroup;
 
   firstCompleted = false;
+
+  options: SelectOption[] = [
+    { label: 'None' },
+    { value: 'steak-0', label: 'Steak' },
+    { value: 'pizza-1', label: 'Pizza' },
+    { value: 'tacos-2', label: 'Tacos' },
+  ];
 
   constructor(
     private fb: FormBuilder

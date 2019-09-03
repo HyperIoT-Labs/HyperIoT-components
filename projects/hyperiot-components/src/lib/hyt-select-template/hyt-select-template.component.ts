@@ -18,31 +18,22 @@ export interface SelectOptionGroup {
 export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
   // tslint:disable-next-line: no-use-before-declare
-  useExisting: forwardRef(() => HytSelectComponent),
+  useExisting: forwardRef(() => HytSelectTemplateComponent),
   multi: true
 };
 
-/**
- * Wrapper for a select element.
- * This compoenent allows to select an element in a set of options.
- */
 @Component({
   // tslint:disable-next-line: component-selector
-  selector: 'hyt-select',
-  templateUrl: './hyt-select.component.html',
-  styleUrls: ['./hyt-select.component.scss'],
+  selector: 'hyt-select-template',
+  templateUrl: './hyt-select-template.component.html',
+  styleUrls: ['./hyt-select-template.component.css'],
   providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
   encapsulation: ViewEncapsulation.None
 })
-export class HytSelectComponent implements OnInit, ControlValueAccessor {
+export class HytSelectTemplateComponent implements OnInit, ControlValueAccessor {
+
   /** Selected element */
   selected: any;
-
-  /** FormGroup */
-  @Input() form: FormGroup;
-
-  /** formControl */
-  @Input() formControl: FormControl;
 
   /** Element name, connected to the formcontrol */
   @Input() name = '';
@@ -97,18 +88,6 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
    * ngOnInit
    */
   ngOnInit() {
-    const validators = [];
-    if (this.isRequired) {
-      validators.push(Validators.required);
-      this.label += ' *';
-    }
-    this.formControl = new FormControl('', Validators.compose(validators));
-    if (this.disabled) {
-      this.formControl.disable();
-    }
-    if (this.form) {
-      this.form.addControl(this.name, this.formControl);
-    }
   }
 
   // get accessor
@@ -122,18 +101,6 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
       this.selected = v;
       this.onChangeFn(v);
     }
-  }
-
-  getErrorList(): string[] {
-    const errorList: string[] = [];
-    for (const key in this.formControl.errors) {
-      if (this.formControl.errors.hasOwnProperty(key)) {
-        if (this.errorMap.hasOwnProperty(key)) {
-          errorList.push(this.errorMap[key]);
-        }
-      }
-    }
-    return errorList;
   }
 
   writeValue(value: any): void {

@@ -1,0 +1,31 @@
+<form (ngSubmit)="submit()">
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-4">
+            <div class="ui-element">
+                <h4>Simple select</h4>
+                <hyt-select-template [label]="'Favourite Food'" (blur)="onChange($event)" [options]="options">
+                </hyt-select-template>
+                <p>You selected: {{selected}}</p>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="ui-element">
+                <h4>Required select</h4>
+                <hyt-select-template [label]="'Favourite Food'" [hint]="'Inserisci il tuo cibo preferito'" [isRequired]="true"
+                    [errorMsgRequired]="'Prego selezionare un cibo'" [options]="options">
+                </hyt-select-template>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="ui-element multiselect">
+                <h4>Multiple select</h4>
+                <hyt-select-template [label]="'Favourite Food'" [hint]="'Inserisci i tuoi cibi preferiti'" [isMultiple]="true"
+                    [options]="options">
+                </hyt-select-template>
+            </div>
+            <hyt-button type="submit" color="primary">Submit</hyt-button>
+        </div>
+        </div>
+    </div>
+</form>

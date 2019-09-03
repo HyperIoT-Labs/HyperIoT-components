@@ -9,6 +9,7 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 export class Option {
   value: string;
   label: string;
+  checked?: boolean;
 }
 
 /**

@@ -19,7 +19,8 @@ export class ButtonsComponent implements OnInit {
   options: Option[] = [
     {
       value: 'option1',
-      label: 'Option1'
+      label: 'Option1',
+      checked: true
     },
     {
       value: 'option2',

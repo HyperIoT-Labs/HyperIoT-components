@@ -17,7 +17,9 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
           <a mat-list-item routerLink='/inputs' [routerLinkActive]="['is-active']">Text inputs</a>
+          <a mat-list-item routerLink='/inputs-template' [routerLinkActive]="['is-active']">Text inputs template</a>
           <a mat-list-item routerLink='/select' [routerLinkActive]="['is-active']">Select</a>
+          <a mat-list-item routerLink='/select-template' [routerLinkActive]="['is-active']">Select template</a>
           <a mat-list-item routerLink='/buttons' [routerLinkActive]="['is-active']">Buttons</a>
         </mat-expansion-panel>
         <mat-divider></mat-divider>
@@ -28,20 +30,12 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
           <a mat-list-item routerLink='/stepper' [routerLinkActive]="['is-active']">Stepper</a>
+          <a mat-list-item routerLink='/treeview' [routerLinkActive]="['is-active']">Tree view</a>
           <a mat-list-item routerLink='/cards' [routerLinkActive]="['is-active']">Cards</a>
           <a mat-list-item routerLink='/layout' [routerLinkActive]="['is-active']">Bootstrap grid</a>
         </mat-expansion-panel>
         <mat-divider></mat-divider>
       </mat-accordion>
-
-      <!-- <mat-nav-list>
-        <a mat-list-item routerLink='/inputs'>Text inputs</a>
-        <a mat-list-item routerLink='/select'>Select</a>
-        <a mat-list-item routerLink='/buttons'>Buttons</a>
-        <a mat-list-item routerLink='/stepper'>Stepper</a>
-        <a mat-list-item routerLink='/cards'>Cards</a>
-        <a mat-list-item routerLink='/layout'>Bootstrap grid</a>
-      </mat-nav-list> -->
     </mat-sidenav>
     <mat-sidenav-content class="basic-container">
       <router-outlet></router-outlet>

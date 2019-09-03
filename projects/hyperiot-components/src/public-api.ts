@@ -4,3 +4,4 @@
 
 export * from './lib/hyperiot-components.module';
 export { SelectOption, SelectOptionGroup } from './lib/hyt-select/hyt-select.component';
+export { TreeNode } from './lib/hyt-tree-view/hyt-tree-view.component';

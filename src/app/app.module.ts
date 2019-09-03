@@ -19,31 +19,40 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { InputsComponent } from './inputs/inputs.component';
+import { InputsTemplateComponent } from './inputs-template/inputs-template.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { StepperComponent } from './stepper/stepper.component';
 import { CardsComponent } from './cards/cards.component';
 import { LayoutComponent } from './layout/layout.component';
 import { SelectComponent } from './select/select.component';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { TreeViewComponent } from './tree-view/tree-view.component';
+import { SelectTemplateComponent } from './select-template/select-template.component';
 
 const appRoutes: Routes = [
   { path: 'inputs', component: InputsComponent },
+  { path: 'inputs-template', component: InputsTemplateComponent },
   { path: 'select', component: SelectComponent },
+  { path: 'select-template', component: SelectTemplateComponent },
   { path: 'buttons', component: ButtonsComponent },
   { path: 'stepper', component: StepperComponent },
   { path: 'cards', component: CardsComponent },
   { path: 'layout', component: LayoutComponent },
+  { path: 'treeview', component: TreeViewComponent },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     InputsComponent,
+    InputsTemplateComponent,
     ButtonsComponent,
     StepperComponent,
     CardsComponent,
     LayoutComponent,
     SelectComponent,
+    TreeViewComponent,
+    SelectTemplateComponent,
   ],
   imports: [
     RouterModule.forRoot(

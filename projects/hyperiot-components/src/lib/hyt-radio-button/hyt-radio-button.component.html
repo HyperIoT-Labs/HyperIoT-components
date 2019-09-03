@@ -10,7 +10,9 @@
     *ngFor="let option of options"
     class="hyt-radio-button"  
     value="{{option.value}}"
-    labelPosition="{{labelPosition}}">
+    checked="{{option.checked == true}}"
+    labelPosition="{{labelPosition}}"
+  >
     {{ option.label }}
   </mat-radio-button>
 

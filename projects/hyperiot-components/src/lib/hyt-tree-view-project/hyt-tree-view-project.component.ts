@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FlatTreeControl} from '@angular/cdk/tree';
-import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
+import { FlatTreeControl } from '@angular/cdk/tree';
+import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 
 /**
  * Food data with nested structure.
@@ -15,9 +15,9 @@ const TREE_DATA: FoodNode[] = [
   {
     name: 'Fruit',
     children: [
-      {name: 'Apple'},
-      {name: 'Banana'},
-      {name: 'Fruit loops'},
+      { name: 'Apple' },
+      { name: 'Banana' },
+      { name: 'Fruit loops' },
     ]
   }, {
     name: 'Vegetables',
@@ -25,16 +25,16 @@ const TREE_DATA: FoodNode[] = [
       {
         name: 'Green',
         children: [
-          {name: 'Broccoli'},
-          {name: 'Brussel sprouts'},
+          { name: 'Broccoli' },
+          { name: 'Brussel sprouts' },
         ]
       }, {
         name: 'Orange',
         children: [
-          {name: 'Pumpkins'},
-          {name: 'Carrots'},
+          { name: 'Pumpkins' },
+          { name: 'Carrots' },
         ]
-      },
+      }
     ]
   },
 ];
@@ -61,10 +61,12 @@ export class HytTreeViewProjectComponent implements OnInit {
   }
 
   treeControl = new FlatTreeControl<ExampleFlatNode>(
-      node => node.level, node => node.expandable);
+    node => node.level, node => node.expandable
+  );
 
   treeFlattener = new MatTreeFlattener(
-      this._transformer, node => node.level, node => node.expandable, node => node.children);
+    this._transformer, node => node.level, node => node.expandable, node => node.children
+  );
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
@@ -77,4 +79,11 @@ export class HytTreeViewProjectComponent implements OnInit {
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 
+  getLevelTabs = (l: number) => {
+    const spacer = Array(l);
+    for (let i = 0; i < spacer.length; i++) {
+      spacer[i] = i;
+    }
+    return spacer;
+  }
 }

@@ -1,0 +1,54 @@
+/*
+.mat-icon-button {
+    width: 24px;
+    height: 24px;
+    line-height: initial;
+    min-height: auto;
+    vertical-align: middle;
+}
+.mat-icon-button[disabled] {
+    display: none;
+}
+*/
+.mat-tree {
+    background: transparent;
+}
+.mat-tree-node {
+    min-height: auto;
+}
+.mat-tree-node:hover {
+    color: white;
+    font-weight: 600;
+    background-color: rgba(0,0,255,0.75);
+}
+.mat-tree-node[role="group"] {
+    font-weight: 600;
+}
+.knob-open {
+    width: 12px;
+    height: 12px;
+    margin: 5px;
+    text-align: center;
+    border: solid 2px orange;
+    background-color: orange;
+    border-radius: 12px;
+}
+.knob-close {
+    width: 12px;
+    height: 12px;
+    margin: 5px;
+    text-align: center;
+    border: solid 2px orange;
+    border-radius: 12px;
+}
+.line-right {
+    display: block;
+    width: 12px;
+    height: 24px;
+    border-right: 1px dotted gray;
+}
+.spacer {
+    display: block;
+    width: 12px;
+    height: 24px;
+}

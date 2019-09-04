@@ -81,12 +81,17 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
   /**
    * Callback functions for change
    */
-  private onChangeFn = (_: any) => { };
+  @Input() onChangeFn = (_: any) => { };
 
   /**
    * Callback functions for blur
    */
-  private onTouchedFn = () => { };
+  @Input() onTouchedFn = () => { };
+
+  /**
+   * Callback functions for blur
+   */
+  @Input() onBlur = () => { };
 
   /**
    * Constructor

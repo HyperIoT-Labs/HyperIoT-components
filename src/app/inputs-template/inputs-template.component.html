@@ -17,7 +17,7 @@
             <h4>Required field</h4>
           </span>
           <hyt-input-template name="required" [isRequired]="true"
-            fieldValue="value" hint="Errors appears instantly!" placeholder="Insert text here">
+             hint="Errors appears instantly!" placeholder="Insert text here">
           </hyt-input-template>
         </div>
       </div>
@@ -28,11 +28,21 @@
           <span>
               <h4>Pattern validation</h4>
           </span>
-          <hyt-input-template pattern="[A-Za-z0-9 ]*" fieldValue="value" 
+          <hyt-input-template pattern="[A-Za-z0-9 ]*" 
             hint="Errors appears instantly!" placeholder="Insert text here">
           </hyt-input-template>
         </div>
         <hyt-button type="submit" color="primary">Submit</hyt-button>
+      </div>
+      <div class="col-6">
+        <div class="ui-element">
+          <span>
+            <h4>Disabled field</h4>
+          </span>
+          <hyt-input-template name="disabled" [isDisabled]="true"
+            fieldValue="value" hint="Errors appears instantly!" placeholder="Insert text here">
+          </hyt-input-template>
+        </div>
       </div>
     </div>
   </div>

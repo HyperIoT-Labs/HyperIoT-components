@@ -19,16 +19,16 @@ export interface TreeNode {
 })
 export class HytTreeViewComponent implements OnInit {
 
-  @Input() treeData: any;
+  @Input() treeData: TreeNode[];
 
   treeControl = new NestedTreeControl<TreeNode>(node => node.children);
   dataSource = new MatTreeNestedDataSource<TreeNode>();
 
   constructor() {
-    this.dataSource.data = this.treeData;
   }
 
   ngOnInit() {
+    this.dataSource.data = this.treeData;
   }
 
   hasChild = (_: number, node: TreeNode) => !!node.children && node.children.length > 0;

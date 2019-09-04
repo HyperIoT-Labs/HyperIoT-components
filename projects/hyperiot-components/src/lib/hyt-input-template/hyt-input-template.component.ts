@@ -86,6 +86,9 @@ export class HytInputTemplateComponent implements OnInit, ControlValueAccessor {
   /** Applies required validation */
   @Input() isRequired = false;
 
+  /** Applies required validation */
+  @Input() isDisabled = false;
+
   /** Applies pattern validation */
   @Input() pattern: RegExp;
 
@@ -141,10 +144,9 @@ export class HytInputTemplateComponent implements OnInit, ControlValueAccessor {
    * ngOnInit
    */
   ngOnInit() {
-    const validators = [];
-    const self = this;
-
-
+    if (this.fieldValue !== undefined) {
+      this.innerValue = this.fieldValue;
+    }
   }
 
   /** get accessor */

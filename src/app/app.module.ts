@@ -28,6 +28,7 @@ import { SelectComponent } from './select/select.component';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { TreeViewComponent } from './tree-view/tree-view.component';
 import { SelectTemplateComponent } from './select-template/select-template.component';
+import { TreeViewProjectComponent } from './tree-view-project/tree-view-project.component';
 
 const appRoutes: Routes = [
   { path: 'inputs', component: InputsComponent },
@@ -39,6 +40,7 @@ const appRoutes: Routes = [
   { path: 'cards', component: CardsComponent },
   { path: 'layout', component: LayoutComponent },
   { path: 'treeview', component: TreeViewComponent },
+  { path: 'treeview-project', component: TreeViewProjectComponent }
 ];
 
 @NgModule({
@@ -53,6 +55,7 @@ const appRoutes: Routes = [
     SelectComponent,
     TreeViewComponent,
     SelectTemplateComponent,
+    TreeViewProjectComponent,
   ],
   imports: [
     RouterModule.forRoot(

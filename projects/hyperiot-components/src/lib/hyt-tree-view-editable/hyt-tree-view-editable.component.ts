@@ -74,6 +74,18 @@ export class ChecklistDatabase {
     }
   }
 
+  /** Add an item to to-do list */
+  removeItem(parent: TodoItemNode, name: string) {
+    if (parent.children) {
+      parent.children.forEach((item, index) => {
+        if (item.item === name) {
+          parent.children.splice(index, 1);
+        }
+      });
+      this.dataChange.next(this.data);
+    }
+  }
+
   updateItem(node: TodoItemNode, name: string) {
     node.item = name;
     this.dataChange.next(this.data);
@@ -238,6 +250,12 @@ export class HytTreeViewEditableComponent implements OnInit {
     const parentNode = this.flatNodeMap.get(node);
     this._database.insertItem(parentNode!, '');
     this.treeControl.expand(node);
+  }
+
+  removeItem(node: TodoItemFlatNode) {
+    const parentNodeFlat = this.getParentNode(node);
+    const parentNode = this.flatNodeMap.get(parentNodeFlat);
+    this._database.removeItem(parentNode, node.item);
   }
 
   /** Save the node to database */

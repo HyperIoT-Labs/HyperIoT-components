@@ -1,29 +1,45 @@
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-    <!-- This is the tree node template for leaf nodes -->
-    <mat-tree-node *matTreeNodeDef="let node">
-        <!-- use a disabled button to provide padding for tree leaf -->
-        <span *ngFor="let i of getLevelTabs(node.level + 1)" [ngClass]="{
-            'line-right': i < node.level,
-            'spacer': i >= node.level
-        }"></span>
-        {{node.name}} {{node.level}}
-    </mat-tree-node>
-    <!-- This is the tree node template for expandable nodes -->
-    <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodeToggle>
-        <!--
-      <button mat-icon-button matTreeNodeToggle
-              [attr.aria-label]="'toggle ' + node.name">
-        {{treeControl.isExpanded(node) ? '-' : '+'}}
-        <mat-icon class="mat-icon-rtl-mirror">
-          {{treeControl.isExpanded(node) ? 'remove' : 'add'}}
-        </mat-icon>        
-      </button>
-        -->
-        <span *ngFor="let i of getLevelTabs(node.level)" class="line-right"></span>
-        <span [ngClass]="{
-            'knob-close': treeControl.isExpanded(node),
-            'knob-open': !treeControl.isExpanded(node)
-        }"></span>
-        {{node.name}}
-    </mat-tree-node>
+
+  <!-- This is the tree node template for leaf nodes -->
+  <mat-tree-node *matTreeNodeDef="let node">
+    <span *ngFor="let i of getLevelTabs(node.level)" [ngClass]="{
+      'line-right': (i === 0 || i === node.level - 1),
+      'line-straight': (i !== node.level - 1),
+      'line-end': i === node.level - 1 && node.last
+    }"></span>
+
+    <mat-icon *ngIf="node.icon">{{node.icon}}</mat-icon>
+    <mat-icon *ngIf="node.icon == null">radio_button_unchecked</mat-icon>
+    {{node.name}}
+
+  </mat-tree-node>
+
+  <!-- This is the tree node template for expandable nodes -->
+  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodeToggle>
+    <!--
+    <span *ngFor="let i of getLevelTabs(node.level)" class="line-right"></span>
+    <span [ngClass]="{
+      'knob-close': treeControl.isExpanded(node),
+      'knob-open': !treeControl.isExpanded(node)
+    }"></span>
+    -->
+    <span *ngFor="let i of getLevelTabs(node.level)" [ngClass]="{
+      'line-right': (i < node.level && !node.last) || (i !== node.level - 1 && node.last) || treeControl.isExpanded(node),
+      'line-end': i === node.level - 1 && node.last && !treeControl.isExpanded(node)
+    }"></span>
+
+    <mat-icon *ngIf="node.icon">{{node.icon}}</mat-icon>
+    <mat-icon *ngIf="node.icon == null">folder_open</mat-icon>
+    {{node.name}}
+
+    <span [ngClass]="{
+      'expand-close': treeControl.isExpanded(node),
+      'expand-open': !treeControl.isExpanded(node)
+    }">
+      <mat-icon *ngIf="!treeControl.isExpanded(node)">add</mat-icon>
+      <mat-icon *ngIf="treeControl.isExpanded(node)">remove</mat-icon>
+    </span>
+
+  </mat-tree-node>
+
 </mat-tree>

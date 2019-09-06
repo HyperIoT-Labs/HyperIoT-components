@@ -3,36 +3,40 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 
 /**
- * Food data with nested structure.
- * Each node has a name and an optiona list of children.
+ * Each node has a name and optional icon and list of children.
  */
-export interface FoodNode {
+export interface TreeViewDataNode {
   name: string;
-  children?: FoodNode[];
+  icon?: string;
+  children?: TreeViewDataNode[];
+  last?: boolean;
 }
 
-const TREE_DATA: FoodNode[] = [
+const TREE_DATA: TreeViewDataNode[] = [
   {
     name: 'Fruit',
+    icon: 'cake',
     children: [
-      { name: 'Apple' },
-      { name: 'Banana' },
-      { name: 'Fruit loops' },
+      { name: 'Apple', icon: 'drive_eta' },
+      { name: 'Banana', icon: 'adb' },
+      { name: 'Fruit loops', icon: 'train', last: true },
     ]
   }, {
     name: 'Vegetables',
+    icon: 'public',
     children: [
       {
         name: 'Green',
         children: [
-          { name: 'Broccoli' },
-          { name: 'Brussel sprouts' },
+          { name: 'Broccoli', icon: 'restaurant' },
+          { name: 'Brussel sprouts', icon: 'local_florist', last: true },
         ]
       }, {
         name: 'Orange',
+        last: true,
         children: [
-          { name: 'Pumpkins' },
-          { name: 'Carrots' },
+          { name: 'Pumpkins', icon: 'filter_drama' },
+          { name: 'Carrots', last: true },
         ]
       }
     ]
@@ -40,10 +44,12 @@ const TREE_DATA: FoodNode[] = [
 ];
 
 /** Flat node with expandable and level information */
-interface ExampleFlatNode {
+interface TreeViewFlatNode {
   expandable: boolean;
   name: string;
+  icon?: string;
   level: number;
+  last: boolean;
 }
 
 @Component({
@@ -52,15 +58,17 @@ interface ExampleFlatNode {
   styleUrls: ['./hyt-tree-view-project.component.css']
 })
 export class HytTreeViewProjectComponent implements OnInit {
-  private _transformer = (node: FoodNode, level: number) => {
+  private _transformer = (node: TreeViewDataNode, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
       name: node.name,
-      level: level,
+      icon: node.icon,
+      level,
+      last: node.last
     };
   }
 
-  treeControl = new FlatTreeControl<ExampleFlatNode>(
+  treeControl = new FlatTreeControl<TreeViewFlatNode>(
     node => node.level, node => node.expandable
   );
 
@@ -77,7 +85,7 @@ export class HytTreeViewProjectComponent implements OnInit {
   ngOnInit() {
   }
 
-  hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
+  hasChild = (_: number, node: TreeViewFlatNode) => node.expandable;
 
   getLevelTabs = (l: number) => {
     const spacer = Array(l);

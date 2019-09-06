@@ -1,97 +1,97 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 
 /**
- * Each node has a name and optional icon and list of children.
+ * Data node that is used in the `treeData` array passed by the hosting component
  */
-export interface TreeViewDataNode {
+export interface TreeDataNode {
   name: string;
   icon?: string;
-  children?: TreeViewDataNode[];
+  children?: TreeDataNode[];
   last?: boolean;
+  parent?: TreeDataNode;
+  data?: any;
 }
 
-const TREE_DATA: TreeViewDataNode[] = [
-  {
-    name: 'Fruit',
-    icon: 'cake',
-    children: [
-      { name: 'Apple', icon: 'drive_eta' },
-      { name: 'Banana', icon: 'adb' },
-      { name: 'Fruit loops', icon: 'train', last: true },
-    ]
-  }, {
-    name: 'Vegetables',
-    icon: 'public',
-    children: [
-      {
-        name: 'Green',
-        children: [
-          { name: 'Broccoli', icon: 'restaurant' },
-          { name: 'Brussel sprouts', icon: 'local_florist', last: true },
-        ]
-      }, {
-        name: 'Orange',
-        last: true,
-        children: [
-          { name: 'Pumpkins', icon: 'filter_drama' },
-          { name: 'Carrots', last: true },
-        ]
-      }
-    ]
-  },
-];
-
-/** Flat node with expandable and level information */
-interface TreeViewFlatNode {
+/**
+ * Internal node representation with `expandable`, `level`, `data` and `parent` information
+ */
+interface TreeViewNode {
   expandable: boolean;
   name: string;
   icon?: string;
   level: number;
   last: boolean;
+  parent?: TreeDataNode;
+  data?: any;
 }
 
 @Component({
   selector: 'hyt-tree-view-project',
   templateUrl: './hyt-tree-view-project.component.html',
-  styleUrls: ['./hyt-tree-view-project.component.css']
+  styleUrls: ['./hyt-tree-view-project.component.scss']
 })
 export class HytTreeViewProjectComponent implements OnInit {
-  private _transformer = (node: TreeViewDataNode, level: number) => {
-    return {
-      expandable: !!node.children && node.children.length > 0,
-      name: node.name,
-      icon: node.icon,
-      level,
-      last: node.last
-    };
-  }
-
-  treeControl = new FlatTreeControl<TreeViewFlatNode>(
+  @Input() treeData: TreeDataNode[] = [];
+  @Output() nodeClick = new EventEmitter<TreeViewNode>();
+  treeControl = new FlatTreeControl<TreeViewNode>(
     node => node.level, node => node.expandable
   );
-
   treeFlattener = new MatTreeFlattener(
-    this._transformer, node => node.level, node => node.expandable, node => node.children
+    this.transformer, node => node.level, node => node.expandable, node => node.children
   );
-
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
   constructor() {
-    this.dataSource.data = TREE_DATA;
   }
 
   ngOnInit() {
+    this.prepareData(this.treeData);
+    this.dataSource.data = this.treeData;
   }
 
-  hasChild = (_: number, node: TreeViewFlatNode) => node.expandable;
+  onNodeClicked(node: TreeViewNode) {
+    this.nodeClick.emit(node);
+  }
 
-  getLevelTabs = (l: number) => {
+  hasChild(i: number, node: TreeViewNode) {
+    return node.expandable;
+  }
+
+  getLevelTabs(l: number) {
     const spacer = Array(l);
     for (let i = 0; i < spacer.length; i++) {
       spacer[i] = i;
     }
     return spacer;
+  }
+
+  private prepareData(nodeList: TreeDataNode[], parent?: TreeDataNode) {
+    let lastNode;
+    nodeList.forEach((n) => {
+      if (parent) {
+        n.parent = parent;
+      }
+      if (n.children) {
+        this.prepareData(n.children, n);
+      }
+      lastNode = n;
+    });
+    if (lastNode) {
+      lastNode.last = true;
+    }
+  }
+
+  private transformer(node: TreeDataNode, level: number): TreeViewNode {
+    return {
+      name: node.name,
+      icon: node.icon,
+      level,
+      last: node.last || false,
+      parent: node.parent,
+      expandable: !!node.children && node.children.length > 0,
+      data: node.data
+    };
   }
 }

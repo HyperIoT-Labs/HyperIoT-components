@@ -2,42 +2,40 @@
 
   <!-- This is the tree node template for leaf nodes -->
   <mat-tree-node *matTreeNodeDef="let node">
+
     <span *ngFor="let i of getLevelTabs(node.level)" [ngClass]="{
-      'line-right': (i === 0 || i === node.level - 1),
-      'line-straight': (i !== node.level - 1),
-      'line-end': i === node.level - 1 && node.last
+      'line-right': (i === node.level - 1),
+      'line-straight': (i !== node.level - 1 && (node.parent == null || !node.parent.last)),
+      'line-end': i === node.level - 1 && node.last,
+      'line-empty': node.parent && node.parent.last
     }"></span>
 
-    <mat-icon *ngIf="node.icon">{{node.icon}}</mat-icon>
-    <mat-icon *ngIf="node.icon == null">radio_button_unchecked</mat-icon>
-    {{node.name}}
+    <span class="node-name" (click)="onNodeClicked(node)">
+      <mat-icon *ngIf="node.icon">{{node.icon}}</mat-icon>
+      <mat-icon *ngIf="node.icon == null">radio_button_unchecked</mat-icon>
+      {{node.name}}
+    </span>
 
   </mat-tree-node>
 
   <!-- This is the tree node template for expandable nodes -->
-  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodeToggle>
-    <!--
-    <span *ngFor="let i of getLevelTabs(node.level)" class="line-right"></span>
-    <span [ngClass]="{
-      'knob-close': treeControl.isExpanded(node),
-      'knob-open': !treeControl.isExpanded(node)
-    }"></span>
-    -->
+  <mat-tree-node *matTreeNodeDef="let node; when: hasChild">
+
     <span *ngFor="let i of getLevelTabs(node.level)" [ngClass]="{
       'line-right': (i < node.level && !node.last) || (i !== node.level - 1 && node.last) || treeControl.isExpanded(node),
-      'line-end': i === node.level - 1 && node.last && !treeControl.isExpanded(node)
+      'line-straight': (i !== node.level - 1 && (node.parent == null || !node.parent.last)),
+      'line-end': node.last
     }"></span>
 
-    <mat-icon *ngIf="node.icon">{{node.icon}}</mat-icon>
-    <mat-icon *ngIf="node.icon == null">folder_open</mat-icon>
-    {{node.name}}
+    <span class="node-name" (click)="onNodeClicked(node)">
+      <mat-icon *ngIf="node.icon">{{node.icon}}</mat-icon>
+      <mat-icon *ngIf="node.icon == null">folder_open</mat-icon>
+      {{node.name}}
+    </span>
 
-    <span [ngClass]="{
-      'expand-close': treeControl.isExpanded(node),
-      'expand-open': !treeControl.isExpanded(node)
-    }">
-      <mat-icon *ngIf="!treeControl.isExpanded(node)">add</mat-icon>
-      <mat-icon *ngIf="treeControl.isExpanded(node)">remove</mat-icon>
+    <span class="expand-collapse" matTreeNodeToggle>
+      <mat-icon *ngIf="!treeControl.isExpanded(node)" title="unfold">expand_more</mat-icon>
+      <mat-icon *ngIf="treeControl.isExpanded(node)" title="fold">expand_less</mat-icon>
     </span>
 
   </mat-tree-node>

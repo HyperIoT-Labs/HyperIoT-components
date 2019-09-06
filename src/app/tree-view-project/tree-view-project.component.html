@@ -1,5 +1,8 @@
 <h4 class="m-2">Project TreeView</h4>
 
-<div class="tree-container d-flex flex-row justify-content-center">
-    <hyt-tree-view-project></hyt-tree-view-project>
+<div class="p-4 d-flex flex-column align-items-center">
+    <hyt-tree-view-project
+        [treeData]="treeData"
+        (nodeClick)="onNodeClicked($event)"
+        class="m-auto"></hyt-tree-view-project>
 </div>

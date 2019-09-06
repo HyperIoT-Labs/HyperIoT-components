@@ -86,7 +86,7 @@ export class HytInputTemplateComponent implements OnInit, ControlValueAccessor {
   /** Applies required validation */
   @Input() isRequired = false;
 
-  /** Applies required validation */
+  /** Disabled option */
   @Input() isDisabled = false;
 
   /** Applies pattern validation */

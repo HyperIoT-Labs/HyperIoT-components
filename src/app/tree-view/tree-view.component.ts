@@ -36,6 +36,29 @@ export class TreeViewComponent implements OnInit {
     },
   ];
 
+  Tree = {
+    items: [
+      {
+        name: 'Temperature',
+        lom: 'Single',
+        type: 'Double'
+      }, {
+        name: 'GPS',
+        lom: 'Multiple',
+        type: 'Object',
+        items: [
+          {
+            name: 'Longitude',
+            type: 'Double'
+          }, {
+            name: 'Latitude',
+            type: 'Double'
+          }
+        ]
+      }
+    ]
+  };
+
   /**
    * The Json object for to-do list data.
    */

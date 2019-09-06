@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, Validators, FormGroup } from '@angular/forms';
 
 /** Interface for select option element */
@@ -66,7 +66,14 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
   @Input() errorMsgRequired: string;
 
   /** Disable the select */
-  @Input() disabled = false;
+  isDisabled = false;
+  @Input()
+  get disabled(): boolean {
+    return this.isDisabled;
+  }
+  set disabled(d: boolean) {
+    this.isDisabled = d;
+  }
 
   /** Specifies if it is a multiple select */
   @Input() isMultiple = false;
@@ -89,9 +96,9 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
   @Input() onTouchedFn = () => { };
 
   /**
-   * Callback functions for blur
+   * Callback functions for change
    */
-  @Input() onBlur = () => { };
+  @Output() changeFn: EventEmitter<any> = new EventEmitter();
 
   /**
    * Constructor
@@ -141,6 +148,10 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
     return errorList;
   }
 
+  change(event) {
+    this.changeFn.emit(event);
+  }
+
   writeValue(value: any): void {
     this.selected = value;
   }
@@ -152,5 +163,4 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
   registerOnTouched(fn: any): void {
     this.onTouchedFn = fn;
   }
-
 }

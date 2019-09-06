@@ -99,6 +99,9 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   /** Applies required validation */
   @Input() isRequired = false;
 
+  /** Disabled option */
+  @Input() isDisabled = false;
+
   /** Applies email validation */
   @Input() isEmail = false;
 

@@ -7,7 +7,7 @@
   <mat-select 
     [formControl]="formControl" 
     [multiple]="isMultiple ? '' : null"
-    (onChange)="onBlur()"
+    (selectionChange)="change($event)"
   >
     
     <mat-optgroup 

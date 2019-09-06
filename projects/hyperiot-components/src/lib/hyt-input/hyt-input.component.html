@@ -12,6 +12,7 @@
       type="{{type}}"
       placeholder="{{placeholder}}" 
       value="{{fieldValue}}" 
+      [disabled]="isDisabled"
       (blur)="onBlur()" 
       [formControl]="formControl"
       [errorStateMatcher]="matcher"

@@ -65,7 +65,7 @@ export class SelectComponent implements OnInit {
   }
 
   onChange(event) {
-    console.log('onChange called');
+    console.log('__onChange called');
     console.log(event);
   }
 

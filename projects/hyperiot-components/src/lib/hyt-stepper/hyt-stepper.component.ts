@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   // tslint:disable-next-line: component-selector
   selector: 'hyt-stepper',
   templateUrl: './hyt-stepper.component.html',
-  styleUrls: ['./hyt-stepper.component.css']
+  styleUrls: ['./hyt-stepper.component.scss']
 })
 export class HytStepperComponent implements OnInit {
   /** ViewChild */

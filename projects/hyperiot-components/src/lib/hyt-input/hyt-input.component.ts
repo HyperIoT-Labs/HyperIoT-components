@@ -100,7 +100,14 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   @Input() isRequired = false;
 
   /** Disabled option */
-  @Input() isDisabled = false;
+  isDisabled = false;
+  @Input()
+  get disabled(): boolean {
+    return this.isDisabled;
+  }
+  set disabled(d: boolean) {
+    this.isDisabled = d;
+  }
 
   /** Applies email validation */
   @Input() isEmail = false;
@@ -183,7 +190,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
       };
     }
     function validateNumber(c: FormControl) {
-      const PASS_REGEX: RegExp = new RegExp('^(?=.*[a-z])(?=.*[1-9]).*$');
+      const PASS_REGEX: RegExp = new RegExp('^(?=.*[a-z])(?=.*[0-9]).*$');
       return PASS_REGEX.test(c.value) || c.value.length === 0 ? null : {
         validateNumber: {
           valid: false

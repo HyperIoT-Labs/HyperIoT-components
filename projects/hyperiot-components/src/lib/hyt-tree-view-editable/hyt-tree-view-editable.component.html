@@ -1,12 +1,22 @@
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
-      <mat-icon>memory</mat-icon>
-      <button mat-icon-button disabled></button>
-        {{node.item}}
-        Single
-        Double
-      <div width="100%" style="float:right;">
-        <button mat-icon-button (click)="removeItem(node)"><mat-icon>close</mat-icon></button>
+      <div class="flex-container">
+        <div class="icon">
+          <mat-icon>memory</mat-icon>
+        </div>
+        <div class="node">
+          <button mat-icon-button disabled></button>
+            {{node.name}}
+        </div>
+        <div class="lom">
+            {{node.lom}}
+        </div>
+        <div class="type">
+            {{node.type}}
+        </div>
+        <div class="remove">
+          <button mat-icon-button (click)="removeItem(node)"><mat-icon>close</mat-icon></button>
+        </div>
       </div>
     </mat-tree-node>
   
@@ -25,7 +35,7 @@
           {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
         </mat-icon>
       </button>
-        {{node.item}}
+        {{node.name}}
       <button mat-icon-button (click)="addNewItem(node)"><mat-icon>add</mat-icon></button>
     </mat-tree-node>
 </mat-tree>

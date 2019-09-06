@@ -1,0 +1,43 @@
+.flex-container {
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items: baseline;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.icon {
+    width: 100%;
+    flex-grow: 1;
+    margin: auto;
+    order: 1;
+}
+
+.node {
+    width: 100%;
+    flex-grow: 4;
+    margin: auto;
+    order: 2;
+}
+
+.lod {
+    width: 100%;
+    flex-grow: 4;
+    margin: auto;
+    order: 3;
+}
+
+.type {
+    width: 100%;
+    flex-grow: 4;
+    margin: auto;
+    order: 4;
+}
+
+.remove {
+    width: 100%;
+    flex-grow: 1;
+    margin: auto;
+    order: 5;
+}

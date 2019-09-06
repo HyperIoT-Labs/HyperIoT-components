@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TreeNode } from 'projects/hyperiot-components/src/public-api';
+import { Node } from 'projects/hyperiot-components/src/lib/hyt-tree-view-editable/hyt-tree-view-editable.component';
 
 @Component({
   selector: 'app-tree-view',
@@ -36,28 +37,29 @@ export class TreeViewComponent implements OnInit {
     },
   ];
 
-  Tree = {
-    items: [
-      {
-        name: 'Temperature',
-        lom: 'Single',
-        type: 'Double'
-      }, {
-        name: 'GPS',
-        lom: 'Multiple',
-        type: 'Object',
-        items: [
-          {
-            name: 'Longitude',
-            type: 'Double'
-          }, {
-            name: 'Latitude',
-            type: 'Double'
-          }
-        ]
-      }
-    ]
-  };
+  Tree: Node[] = [
+    {
+      name: 'Temperature',
+      lom: 'Single',
+      type: 'Double'
+    }, {
+      name: 'GPS',
+      lom: 'Multiple',
+      type: 'Object',
+      children: [
+        {
+          name: 'Longitude',
+          lom: 'Single',
+          type: 'Double'
+        }, {
+          name: 'Latitude',
+          lom: 'Single',
+          type: 'Double'
+        }
+      ]
+    }
+  ];
+
 
   /**
    * The Json object for to-do list data.

@@ -98,6 +98,13 @@ export class HytRadioButtonComponent implements OnInit, ControlValueAccessor {
     }
 
     this.formControl = new FormControl('', Validators.compose(validators));
+
+    // set checked option
+    for (const option of this.options) {
+      if (option.checked) {
+        this.formControl.setValue(option.value);
+      }
+    }
     if (this.form) {
       this.form.addControl(this.name, this.formControl);
     }

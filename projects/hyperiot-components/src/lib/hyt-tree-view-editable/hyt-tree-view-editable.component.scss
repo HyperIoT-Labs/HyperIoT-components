@@ -1,43 +1,48 @@
 .flex-container {
     display: flex;
-    height: 50px;
+//    height: 50px;
     width: 100%;
-    align-items: baseline;
+    align-items: center;
     flex-direction: row;
     justify-content: space-between;
 }
 
 .icon {
-    width: 100%;
+    width: 15%;
     flex-grow: 1;
     margin: auto;
-    order: 1;
+
+    // order: 1;
 }
 
-.node {
-    width: 100%;
+.name {
+    width: 25%;
     flex-grow: 4;
     margin: auto;
-    order: 2;
+    // order: 2;
 }
 
-.lod {
-    width: 100%;
+.lom {
+    width: 25%;
     flex-grow: 4;
     margin: auto;
-    order: 3;
+    // order: 3;
 }
 
 .type {
-    width: 100%;
+    width: 25%;
     flex-grow: 4;
     margin: auto;
-    order: 4;
+    // order: 4;
 }
 
-.remove {
-    width: 100%;
+.button {
+    width: 10%;
     flex-grow: 1;
     margin: auto;
-    order: 5;
+    // order: 5;
+}
+
+.name, .lom, .type {
+    text-align: left;
 }

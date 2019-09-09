@@ -20,44 +20,22 @@ export class FlatNode {
 }
 
 /**
- * Node for to-do item
- */
-export class TodoItemNode {
-  children: TodoItemNode[];
-  item: string;
-}
-
-/** Flat to-do item node with expandable and level information */
-export class TodoItemFlatNode {
-  item: string;
-  level: number;
-  expandable: boolean;
-}
-
-/**
- * Checklist database, it can build a tree structured Json object.
- * Each node in Json object represents a to-do item or a category.
+ * Node database, it can build a tree structured Json object.
  * If a node is a category, it has children items and new items can be added under the category.
  */
 @Injectable()
-export class ChecklistDatabase {
+export class NodeDatabase {
 
-  //  dataChange = new BehaviorSubject<TodoItemNode[]>([]);
   dataChange = new BehaviorSubject<Node[]>([]);
 
-  //  get data(): TodoItemNode[] { return this.dataChange.value; }
   get data(): Node[] { return this.dataChange.value; }
 
   constructor() {
-    //    this.initialize();
   }
 
   public initialize(treeData) {
-    // Build the tree nodes from Json object. The result is a list of `TodoItemNode` with nested
-    //     file node as children.
     const data = this.buildFileTree(treeData, 0);
-
-    // Notify the change.
+    console.log(JSON.stringify(data));
     this.dataChange.next(data);
   }
 
@@ -65,49 +43,26 @@ export class ChecklistDatabase {
    * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
    * The return value is the list of `TodoItemNode`.
    */
-  // buildFileTree(obj: { [key: string]: any }, level: number): TodoItemNode[] {
-  //   return Object.keys(obj).reduce<TodoItemNode[]>((accumulator, key) => {
-  //     const value = obj[key];
-  //     const node = new TodoItemNode();
-  //     node.item = key;
-
-  //     if (value != null) {
-  //       if (typeof value === 'object') {
-  //         node.children = this.buildFileTree(value, level + 1);
-  //       } else {
-  //         node.item = value;
-  //       }
-  //     }
-
-  //     return accumulator.concat(node);
-  //   }, []);
-  // }
-
   buildFileTree(obj: { [key: string]: any }, level: number): Node[] {
-    return Object.keys(obj).reduce<Node[]>((accumulator, key) => {
-      const value = obj[key];
-      const node = new Node();
-      node.name = key;
-
-      if (value != null) {
-        if (typeof value === 'object') {
-          node.children = this.buildFileTree(value, level + 1);
-        } else {
-          node.name = value;
+    const nodeList: Node[] = [];
+    for (const i in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, i)) {
+        const newNode = new Node();
+        const node = obj[i];
+        newNode.name = node.name;
+        newNode.lom = node.lom;
+        newNode.type = node.type;
+        if (node.children) {
+          newNode.children = this.buildFileTree(node.children, level + 1);
         }
+        nodeList.push(newNode);
       }
+    }
 
-      return accumulator.concat(node);
-    }, []);
+    return nodeList;
   }
 
   /** Add an item to to-do list */
-  // insertItem(parent: TodoItemNode, name: string) {
-  //   if (parent.children) {
-  //     parent.children.push({ item: name } as TodoItemNode);
-  //     this.dataChange.next(this.data);
-  //   }
-  // }
   insertItem(parent: Node, name: string, lom: string, type: string) {
     if (parent.children) {
       parent.children.push({ name, lom, type } as Node);
@@ -116,16 +71,6 @@ export class ChecklistDatabase {
   }
 
   /** Add an item to to-do list */
-  // removeItem(parent: TodoItemNode, name: string) {
-  //   if (parent.children) {
-  //     parent.children.forEach((item, index) => {
-  //       if (item.item === name) {
-  //         parent.children.splice(index, 1);
-  //       }
-  //     });
-  //     this.dataChange.next(this.data);
-  //   }
-  // }
   removeItem(parent: Node, name: string) {
     if (parent.children) {
       parent.children.forEach((node, index) => {
@@ -137,10 +82,6 @@ export class ChecklistDatabase {
     }
   }
 
-  // updateItem(node: TodoItemNode, name: string) {
-  //   node.item = name;
-  //   this.dataChange.next(this.data);
-  // }
   updateItem(node: Node, name: string) {
     node.name = name;
     this.dataChange.next(this.data);
@@ -152,31 +93,26 @@ export class ChecklistDatabase {
   selector: 'hyt-tree-view-editable',
   templateUrl: './hyt-tree-view-editable.component.html',
   styleUrls: ['./hyt-tree-view-editable.component.scss'],
-  providers: [ChecklistDatabase]
+  providers: [NodeDatabase]
 })
 export class HytTreeViewEditableComponent implements OnInit {
 
   @Input() treeData: any;
 
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
-  //  flatNodeMap = new Map<TodoItemFlatNode, TodoItemNode>();
   flatNodeMap = new Map<FlatNode, Node>();
 
   /** Map from nested node to flattened node. This helps us to keep the same object for selection */
-  //  nestedNodeMap = new Map<TodoItemNode, TodoItemFlatNode>();
   nestedNodeMap = new Map<Node, FlatNode>();
 
   /** A selected parent node to be inserted */
-  //  selectedParent: TodoItemFlatNode | null = null;
   selectedParent: FlatNode | null = null;
 
   /** The new item's name */
   newItemName = '';
 
-  //  treeControl: FlatTreeControl<TodoItemFlatNode>;
   treeControl: FlatTreeControl<FlatNode>;
 
-  //  treeFlattener: MatTreeFlattener<TodoItemNode, TodoItemFlatNode>;
   treeFlattener: MatTreeFlattener<Node, FlatNode>;
 
   dataSource: MatTreeFlatDataSource<Node, FlatNode>;
@@ -184,19 +120,19 @@ export class HytTreeViewEditableComponent implements OnInit {
   /** The selection for checklist */
   checklistSelection = new SelectionModel<FlatNode>(true /* multiple */);
 
-  constructor(private _database: ChecklistDatabase) {
+  constructor(private database: NodeDatabase) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
       this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<FlatNode>(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-    _database.dataChange.subscribe(data => {
+    database.dataChange.subscribe(data => {
       this.dataSource.data = data;
     });
   }
 
   ngOnInit() {
-    this._database.initialize(this.treeData);
+    this.database.initialize(this.treeData);
   }
 
   getLevel = (node: FlatNode) => node.level;
@@ -205,9 +141,9 @@ export class HytTreeViewEditableComponent implements OnInit {
 
   getChildren = (node: Node): Node[] => node.children;
 
-  hasChild = (_: number, _nodeData: FlatNode) => _nodeData.expandable;
+  hasChild = (_: number, nodeData: FlatNode) => nodeData.expandable;
 
-  hasNoContent = (_: number, _nodeData: FlatNode) => _nodeData.name === '';
+  hasNoContent = (_: number, nodeData: FlatNode) => nodeData.name === '';
 
   /**
    * Transformer to convert nested node to flat node. Record the nodes in maps for later use.
@@ -218,6 +154,8 @@ export class HytTreeViewEditableComponent implements OnInit {
       ? existingNode
       : new FlatNode();
     flatNode.name = node.name;
+    flatNode.lom = node.lom;
+    flatNode.type = node.type;
     flatNode.level = level;
     flatNode.expandable = !!node.children;
     this.flatNodeMap.set(flatNode, node);
@@ -308,19 +246,19 @@ export class HytTreeViewEditableComponent implements OnInit {
   /** Select the category so we can insert the new item. */
   addNewItem(node: FlatNode) {
     const parentNode = this.flatNodeMap.get(node);
-    this._database.insertItem(parentNode!, '', '', '');
+    this.database.insertItem(parentNode!, '', '', '');
     this.treeControl.expand(node);
   }
 
   removeItem(node: FlatNode) {
     const parentNodeFlat = this.getParentNode(node);
     const parentNode = this.flatNodeMap.get(parentNodeFlat);
-    this._database.removeItem(parentNode, node.name);
+    this.database.removeItem(parentNode, node.name);
   }
 
   /** Save the node to database */
   saveNode(node: FlatNode, itemValue: string) {
     const nestedNode = this.flatNodeMap.get(node);
-    this._database.updateItem(nestedNode!, itemValue);
+    this.database.updateItem(nestedNode!, itemValue);
   }
 }

@@ -29,6 +29,7 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 import { TreeViewComponent } from './tree-view/tree-view.component';
 import { SelectTemplateComponent } from './select-template/select-template.component';
 import { TreeViewProjectComponent } from './tree-view-project/tree-view-project.component';
+import { ModalComponent } from './modal/modal.component';
 
 const appRoutes: Routes = [
   { path: 'inputs', component: InputsComponent },
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
   { path: 'cards', component: CardsComponent },
   { path: 'layout', component: LayoutComponent },
   { path: 'treeview', component: TreeViewComponent },
-  { path: 'treeview-project', component: TreeViewProjectComponent }
+  { path: 'treeview-project', component: TreeViewProjectComponent },
+  { path: 'modal', component: ModalComponent }
 ];
 
 @NgModule({
@@ -56,6 +58,7 @@ const appRoutes: Routes = [
     TreeViewComponent,
     SelectTemplateComponent,
     TreeViewProjectComponent,
+    ModalComponent
   ],
   imports: [
     RouterModule.forRoot(

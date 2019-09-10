@@ -22,6 +22,7 @@ import { HytInputTemplateComponent } from './hyt-input-template/hyt-input-templa
 import { HytSelectTemplateComponent } from './hyt-select-template/hyt-select-template.component';
 import { HytTreeViewProjectComponent } from './hyt-tree-view-project/hyt-tree-view-project.component';
 import { HytTreeViewEditableComponent } from './hyt-tree-view-editable/hyt-tree-view-editable.component';
+import { HytModalComponent } from './hyt-modal/hyt-modal.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { HytTreeViewEditableComponent } from './hyt-tree-view-editable/hyt-tree-
     HytSelectTemplateComponent,
     HytTreeViewProjectComponent,
     HytTreeViewEditableComponent,
+    HytModalComponent,
   ],
   imports: [
     CommonModule,
@@ -65,7 +67,8 @@ import { HytTreeViewEditableComponent } from './hyt-tree-view-editable/hyt-tree-
     HytInputTemplateComponent,
     HytSelectTemplateComponent,
     HytTreeViewProjectComponent,
-    HytTreeViewEditableComponent
+    HytTreeViewEditableComponent,
+    HytModalComponent
   ]
 })
 export class HyperiotComponentsModule { }

@@ -33,8 +33,14 @@ export class NodeDatabase {
   constructor() {
   }
 
-  public initialize(treeData) {
-    const data = this.buildFileTree(treeData, 0);
+  public initialize(treeData: any, deviceName: string) {
+    const root: Node[] = [{
+      name: deviceName,
+      lom: 'L.O.M.',
+      type: 'TYPE',
+      children: treeData
+    }];
+    const data = this.buildFileTree(root, 0);
     console.log(JSON.stringify(data));
     this.dataChange.next(data);
   }
@@ -82,8 +88,10 @@ export class NodeDatabase {
     }
   }
 
-  updateItem(node: Node, name: string) {
+  updateItem(node: Node, name: string, lom: string, type: string) {
     node.name = name;
+    node.lom = lom;
+    node.type = type;
     this.dataChange.next(this.data);
   }
 }
@@ -96,6 +104,8 @@ export class NodeDatabase {
   providers: [NodeDatabase]
 })
 export class HytTreeViewEditableComponent implements OnInit {
+
+  @Input() deviceName: string;
 
   @Input() treeData: any;
 
@@ -132,7 +142,7 @@ export class HytTreeViewEditableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.database.initialize(this.treeData);
+    this.database.initialize(this.treeData, this.deviceName);
   }
 
   getLevel = (node: FlatNode) => node.level;
@@ -257,8 +267,8 @@ export class HytTreeViewEditableComponent implements OnInit {
   }
 
   /** Save the node to database */
-  saveNode(node: FlatNode, itemValue: string) {
+  saveNode(node: FlatNode, name: string, lom: string, type: string) {
     const nestedNode = this.flatNodeMap.get(node);
-    this.database.updateItem(nestedNode!, itemValue);
+    this.database.updateItem(nestedNode!, name, lom, type);
   }
 }

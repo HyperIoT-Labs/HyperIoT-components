@@ -25,47 +25,51 @@
       <div class="flex-container">
         <div class="name">
           <mat-form-field>
-            <input matInput #itemValue placeholder="Name...">
+            <input matInput #itemValue placeholder="Name" value="Item">
           </mat-form-field>
         </div>
         <div class="lom">
           <mat-form-field>
-            <input matInput #itemLom placeholder="LOM...">
+            <input matInput #itemLom placeholder="L.O.M." value="  -  ">
+            <mat-icon matPrefix>warning</mat-icon>
           </mat-form-field>
         </div>
         <div class="type">
           <mat-form-field>
-            <input matInput #itemType placeholder="Type...">
+            <input matInput #itemType placeholder="Type" value="  -  ">
+            <mat-icon matPrefix>warning</mat-icon>
           </mat-form-field>
         </div>
-        <div class="button">
-          <button mat-button (click)="saveNode(node, itemValue.value)">Save</button>
-        </div>
+        <!-- <div class="button">
+          <button mat-button (click)="saveNode(node, itemValue.value, itemLom.value, itemType.value)">Save</button>
+        </div> -->
       </div>
     </mat-tree-node>
   
-    <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
-      <button mat-icon-button matTreeNodeToggle
-              [attr.aria-label]="'toggle ' + node.filename">
-        <mat-icon class="mat-icon-rtl-mirror">
-          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-        </mat-icon>
-      </button>
-      <div class="icon">
-        <mat-icon>memory</mat-icon>
-      </div>
-      <div class="name">
-        <!-- <button mat-icon-button disabled></button> -->
-          {{node.name}}
-      </div>
-      <div class="lom">
-          {{node.lom}}
-      </div>
-      <div class="type">
-          {{node.type}}
-      </div>
-      <div class="button">
-        <button mat-icon-button (click)="addNewItem(node)"><mat-icon>add</mat-icon></button>
+    <mat-tree-node *matTreeNodeDef="let node; when: hasChild"  [ngClass]="{'rootItem': node.level == 0}" matTreeNodePadding>
+      <div class="flex-container">
+        <button mat-icon-button matTreeNodeToggle
+                [attr.aria-label]="'toggle ' + node.filename">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </button>
+        <div class="icon">
+          <mat-icon>memory</mat-icon>
+        </div>
+        <div class="name">
+          <!-- <button mat-icon-button disabled></button> -->
+            {{node.name}}
+        </div>
+        <div class="lom">
+            {{node.lom}}
+        </div>
+        <div class="type">
+            {{node.type}}
+        </div>
+        <div class="button">
+          <button mat-icon-button (click)="addNewItem(node)"><mat-icon>add</mat-icon></button>
+        </div>
       </div>
     </mat-tree-node>
 </mat-tree>

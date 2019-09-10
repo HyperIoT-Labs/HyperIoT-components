@@ -1,3 +1,12 @@
+.rootItem {
+    background-color: rgb(207, 207, 207);
+    font-weight: bold;
+}
+
+// .left-container {
+//     width: 500px;
+// }
+
 .flex-container {
     display: flex;
 //    height: 50px;
@@ -11,36 +20,35 @@
     width: 15%;
     flex-grow: 1;
     margin: auto;
-
-    // order: 1;
+    order: 1;
 }
 
 .name {
     width: 25%;
     flex-grow: 4;
     margin: auto;
-    // order: 2;
+    order: 2;
 }
 
 .lom {
     width: 25%;
     flex-grow: 4;
     margin: auto;
-    // order: 3;
+    order: 3;
 }
 
 .type {
     width: 25%;
     flex-grow: 4;
     margin: auto;
-    // order: 4;
+    order: 4;
 }
 
 .button {
     width: 10%;
     flex-grow: 1;
     margin: auto;
-    // order: 5;
+    order: 5;
 }
 
 .name, .lom, .type {

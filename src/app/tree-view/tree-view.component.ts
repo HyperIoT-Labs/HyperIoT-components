@@ -37,6 +37,8 @@ export class TreeViewComponent implements OnInit {
     },
   ];
 
+  deviceName = 'Weather Station Data';
+
   Tree: Node[] = [
     {
       name: 'Temperature',
@@ -60,27 +62,6 @@ export class TreeViewComponent implements OnInit {
     }
   ];
 
-
-  /**
-   * The Json object for to-do list data.
-   */
-  editableTree = {
-    Groceries: {
-      'Almond Meal flour': null,
-      'Organic eggs': null,
-      'Protein Powder': null,
-      Fruits: {
-        Apple: null,
-        Berries: ['Blueberry', 'Raspberry'],
-        Orange: null
-      }
-    },
-    Reminders: [
-      'Cook dinner',
-      'Read the Material Design spec',
-      'Upgrade Application to Angular'
-    ]
-  };
   constructor() { }
 
   ngOnInit() {

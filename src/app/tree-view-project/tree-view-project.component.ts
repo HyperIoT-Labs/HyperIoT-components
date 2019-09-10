@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { TreeDataNode } from 'hyperiot-components/public-api';
+import { HytTreeViewProjectComponent } from 'projects/hyperiot-components/src/lib/hyt-tree-view-project/hyt-tree-view-project.component';
 
 @Component({
   selector: 'app-tree-view-project',
   templateUrl: './tree-view-project.component.html',
   styleUrls: ['./tree-view-project.component.scss']
 })
-export class TreeViewProjectComponent {
-
+export class TreeViewProjectComponent implements OnInit {
+  @ViewChild('treeView', {static: true}) treeView: HytTreeViewProjectComponent;
   treeData: TreeDataNode[] = [
     {
       data: {id: 1},
@@ -41,6 +42,10 @@ export class TreeViewProjectComponent {
       ]
     },
   ];
+
+  ngOnInit() {
+    this.treeView.setData(this.treeData);
+  }
 
   onNodeClicked(node: any) {
     console.log('onNodeClicked', node);

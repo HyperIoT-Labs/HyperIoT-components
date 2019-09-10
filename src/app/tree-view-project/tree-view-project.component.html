@@ -2,7 +2,7 @@
 
 <div class="p-4 d-flex flex-column align-items-center">
     <hyt-tree-view-project
-        [treeData]="treeData"
+        #treeView
         (nodeClick)="onNodeClicked($event)"
         class="m-auto"></hyt-tree-view-project>
 </div>

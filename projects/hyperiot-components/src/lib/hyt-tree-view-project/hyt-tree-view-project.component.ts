@@ -47,7 +47,14 @@ export class HytTreeViewProjectComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.prepareData(this.treeData);
+    if (this.treeData) {
+      this.setData(this.treeData);
+    }
+  }
+
+  setData(data: any) {
+    this.prepareData(data);
+    this.treeData = data;
     this.dataSource.data = this.treeData;
   }
 

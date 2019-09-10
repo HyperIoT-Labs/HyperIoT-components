@@ -15,7 +15,7 @@ export interface TreeNode {
   // tslint:disable-next-line: component-selector
   selector: 'hyt-tree-view',
   templateUrl: './hyt-tree-view.component.html',
-  styleUrls: ['./hyt-tree-view.component.css']
+  styleUrls: ['./hyt-tree-view.component.scss']
 })
 export class HytTreeViewComponent implements OnInit {
 

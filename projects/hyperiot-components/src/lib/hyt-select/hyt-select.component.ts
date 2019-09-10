@@ -51,7 +51,15 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
   @Input() label = '';
 
   /** Array of displayed options */
-  @Input() options: SelectOption[] = [];
+  selectOptions: SelectOption[] = [];
+
+  @Input()
+  get options(): SelectOption[] {
+    return this.selectOptions;
+  }
+  set options(opts: SelectOption[]) {
+    this.selectOptions = opts;
+  }
 
   /** Array of displayed group options */
   @Input() groups: SelectOptionGroup[] = [];

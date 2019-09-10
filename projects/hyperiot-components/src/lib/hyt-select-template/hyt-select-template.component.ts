@@ -26,7 +26,7 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   // tslint:disable-next-line: component-selector
   selector: 'hyt-select-template',
   templateUrl: './hyt-select-template.component.html',
-  styleUrls: ['./hyt-select-template.component.css'],
+  styleUrls: ['./hyt-select-template.component.scss'],
   providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
   encapsulation: ViewEncapsulation.None
 })

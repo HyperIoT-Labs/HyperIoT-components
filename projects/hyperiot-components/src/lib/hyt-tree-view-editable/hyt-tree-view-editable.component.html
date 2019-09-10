@@ -1,21 +1,47 @@
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
-      <mat-icon>memory</mat-icon>
-      <button mat-icon-button disabled></button>
-        {{node.item}}
-        Single
-        Double
-      <div width="100%" style="float:right;">
-        <button mat-icon-button (click)="removeItem(node)"><mat-icon>close</mat-icon></button>
+      <div class="flex-container">
+        <div class="icon">
+          <mat-icon>memory</mat-icon>
+        </div>
+        <div class="name">
+          <!-- <button mat-icon-button disabled></button> -->
+            {{node.name}}
+        </div>
+        <div class="lom">
+            {{node.lom}}
+        </div>
+        <div class="type">
+            {{node.type}}
+        </div>
+        <div class="button">
+          <button mat-icon-button (click)="removeItem(node)"><mat-icon>close</mat-icon></button>
+        </div>
       </div>
     </mat-tree-node>
   
     <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
       <button mat-icon-button disabled></button>
-      <mat-form-field>
-        <input matInput #itemValue placeholder="New item...">
-      </mat-form-field>
-      <button mat-button (click)="saveNode(node, itemValue.value)">Save</button>
+      <div class="flex-container">
+        <div class="name">
+          <mat-form-field>
+            <input matInput #itemValue placeholder="Name...">
+          </mat-form-field>
+        </div>
+        <div class="lom">
+          <mat-form-field>
+            <input matInput #itemLom placeholder="LOM...">
+          </mat-form-field>
+        </div>
+        <div class="type">
+          <mat-form-field>
+            <input matInput #itemType placeholder="Type...">
+          </mat-form-field>
+        </div>
+        <div class="button">
+          <button mat-button (click)="saveNode(node, itemValue.value)">Save</button>
+        </div>
+      </div>
     </mat-tree-node>
   
     <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
@@ -25,7 +51,21 @@
           {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
         </mat-icon>
       </button>
-        {{node.item}}
-      <button mat-icon-button (click)="addNewItem(node)"><mat-icon>add</mat-icon></button>
+      <div class="icon">
+        <mat-icon>memory</mat-icon>
+      </div>
+      <div class="name">
+        <!-- <button mat-icon-button disabled></button> -->
+          {{node.name}}
+      </div>
+      <div class="lom">
+          {{node.lom}}
+      </div>
+      <div class="type">
+          {{node.type}}
+      </div>
+      <div class="button">
+        <button mat-icon-button (click)="addNewItem(node)"><mat-icon>add</mat-icon></button>
+      </div>
     </mat-tree-node>
 </mat-tree>

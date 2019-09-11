@@ -74,4 +74,10 @@ export class HytStepperComponent implements OnInit {
     const stepper = this.stepperElement as any;
     stepper.previous();
   }
+
+  changeStep(index: number) {
+    const stepper = this.stepperElement as any;
+    stepper.selectedIndex = index;
+  }
+
 }

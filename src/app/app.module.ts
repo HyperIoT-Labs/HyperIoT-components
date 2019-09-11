@@ -30,6 +30,7 @@ import { TreeViewComponent } from './tree-view/tree-view.component';
 import { SelectTemplateComponent } from './select-template/select-template.component';
 import { TreeViewProjectComponent } from './tree-view-project/tree-view-project.component';
 import { TagsComponent } from './tags/tags.component';
+import { ModalComponent } from './modal/modal.component';
 
 const appRoutes: Routes = [
   { path: 'inputs', component: InputsComponent },
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
   { path: 'layout', component: LayoutComponent },
   { path: 'treeview', component: TreeViewComponent },
   { path: 'treeview-project', component: TreeViewProjectComponent },
+  { path: 'modal', component: ModalComponent }
   { path: 'tags', component: TagsComponent }
 ];
 
@@ -59,6 +61,7 @@ const appRoutes: Routes = [
     SelectTemplateComponent,
     TreeViewProjectComponent,
     TagsComponent,
+    ModalComponent
   ],
   imports: [
     RouterModule.forRoot(

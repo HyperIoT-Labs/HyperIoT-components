@@ -22,6 +22,7 @@ import { HytInputTemplateComponent } from './hyt-input-template/hyt-input-templa
 import { HytSelectTemplateComponent } from './hyt-select-template/hyt-select-template.component';
 import { HytTreeViewProjectComponent } from './hyt-tree-view-project/hyt-tree-view-project.component';
 import { HytTreeViewEditableComponent } from './hyt-tree-view-editable/hyt-tree-view-editable.component';
+import { HytModalComponent } from './hyt-modal/hyt-modal.component';
 import { HytTagComponent } from './hyt-tag/hyt-tag.component';
 import { HytTagListComponent } from './hyt-tag-list/hyt-tag-list.component';
 
@@ -40,6 +41,7 @@ import { HytTagListComponent } from './hyt-tag-list/hyt-tag-list.component';
     HytSelectTemplateComponent,
     HytTreeViewProjectComponent,
     HytTreeViewEditableComponent,
+    HytModalComponent,
     HytTagComponent,
     HytTagListComponent,
   ],

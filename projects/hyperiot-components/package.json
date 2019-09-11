@@ -1,6 +1,10 @@
 {
   "name": "@hyperiot/components",
+<<<<<<< HEAD
   "version": "0.0.9",
+=======
+  "version": "0.0.10",
+>>>>>>> master
   "publishConfig": {
     "registry": "https://nexus.acsoftware.it/nexus/repository/acs-npm/",
     "always-auth": "true"

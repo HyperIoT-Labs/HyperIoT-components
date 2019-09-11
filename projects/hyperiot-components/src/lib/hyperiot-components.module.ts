@@ -73,7 +73,8 @@ import { HytTagListComponent } from './hyt-tag-list/hyt-tag-list.component';
     HytTreeViewProjectComponent,
     HytTreeViewEditableComponent,
     HytTagComponent,
-    HytTagListComponent
+    HytTagListComponent,
+    HytModalComponent
   ]
 })
 export class HyperiotComponentsModule { }

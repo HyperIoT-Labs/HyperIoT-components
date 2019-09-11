@@ -265,10 +265,11 @@ export class HytTreeViewEditableComponent implements OnInit {
     this.addFn.emit(parentNode);
   }
 
-  removeItem(node: FlatNode) {
-    const parentNodeFlat = this.getParentNode(node);
+  removeItem(flatNode: FlatNode) {
+    const parentNodeFlat = this.getParentNode(flatNode);
     const parentNode: Node = this.flatNodeMap.get(parentNodeFlat);
-    this.database.removeItem(parentNode, node.name);
+    this.database.removeItem(parentNode, flatNode.name);
+    const node = this.flatNodeMap.get(flatNode);
     this.removeFn.emit(node);
   }
 

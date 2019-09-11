@@ -43,8 +43,8 @@ const appRoutes: Routes = [
   { path: 'layout', component: LayoutComponent },
   { path: 'treeview', component: TreeViewComponent },
   { path: 'treeview-project', component: TreeViewProjectComponent },
-  { path: 'modal', component: ModalComponent }
-  { path: 'tags', component: TagsComponent }
+  { path: 'modal', component: ModalComponent },
+  { path: 'tags', component: TagsComponent },
 ];
 
 @NgModule({

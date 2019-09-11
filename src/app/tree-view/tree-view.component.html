@@ -10,7 +10,13 @@
             <span>
                 <h4>Editable Tree</h4>
             </span>
-            <hyt-tree-view-editable [deviceName]="deviceName" [treeData]="Tree"></hyt-tree-view-editable>
+            <hyt-tree-view-editable 
+                [deviceName]="deviceName" 
+                [treeData]="Tree"
+                (addFn)="addCallback($event)"
+                (removeFn)="removeCallback($event)"
+            >
+            </hyt-tree-view-editable>
         </div>
     </div> 
 </div>

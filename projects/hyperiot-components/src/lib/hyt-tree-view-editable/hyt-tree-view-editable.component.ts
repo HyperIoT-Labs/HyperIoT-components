@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, Injectable, OnInit, Input } from '@angular/core';
+import { Component, Injectable, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { BehaviorSubject } from 'rxjs';
 
@@ -108,6 +108,10 @@ export class HytTreeViewEditableComponent implements OnInit {
   @Input() deviceName: string;
 
   @Input() treeData: any;
+
+  @Output() removeFn: EventEmitter<any> = new EventEmitter();
+
+  @Output() addFn: EventEmitter<any> = new EventEmitter();
 
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap = new Map<FlatNode, Node>();
@@ -255,15 +259,17 @@ export class HytTreeViewEditableComponent implements OnInit {
 
   /** Select the category so we can insert the new item. */
   addNewItem(node: FlatNode) {
-    const parentNode = this.flatNodeMap.get(node);
+    const parentNode: Node = this.flatNodeMap.get(node);
     this.database.insertItem(parentNode!, '', '', '');
     this.treeControl.expand(node);
+    this.addFn.emit(parentNode);
   }
 
   removeItem(node: FlatNode) {
     const parentNodeFlat = this.getParentNode(node);
-    const parentNode = this.flatNodeMap.get(parentNodeFlat);
+    const parentNode: Node = this.flatNodeMap.get(parentNodeFlat);
     this.database.removeItem(parentNode, node.name);
+    this.removeFn.emit(node);
   }
 
   /** Save the node to database */

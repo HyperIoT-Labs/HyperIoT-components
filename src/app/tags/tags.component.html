@@ -1,0 +1,19 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <hyt-tag-list>
+                <hyt-tag 
+                    *ngFor="let fruit of fruits"
+                    [color]="fruit.color"
+                    [selectable]="true"
+                    [selected]="true"
+                    [removable]="true"
+                    (clickFn)="click(fruit)"
+                    (removed)="remove(fruit)"
+                >
+                {{ fruit.name }}
+                </hyt-tag>
+            </hyt-tag-list>
+        </div>
+    </div>
+</div>

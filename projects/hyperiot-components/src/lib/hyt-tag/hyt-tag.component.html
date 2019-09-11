@@ -1,0 +1,11 @@
+<mat-chip 
+    [color]="color" 
+    [selected]="selected"
+    [selectable]="selectable"
+    [removable]="removable"
+    (click)="click($event)"
+    (removed)="removedFn($event)"
+>
+    <ng-content></ng-content>
+    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+</mat-chip>

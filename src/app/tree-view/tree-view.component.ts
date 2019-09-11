@@ -67,4 +67,11 @@ export class TreeViewComponent implements OnInit {
   ngOnInit() {
   }
 
+  addCallback(parent: Node) {
+    console.log('addCallback', parent);
+  }
+
+  removeCallback(node: Node) {
+    console.log('removeCallback', node);
+  }
 }

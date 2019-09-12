@@ -18,7 +18,6 @@ import {
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { Observable } from 'rxjs';
 
 /**
  * Custom provider for NG_VALUE_ACCESSOR
@@ -343,20 +342,17 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
 
   /** onChange callback */
   onChange(event: any) {
-    console.log('onChange called');
     console.log(JSON.stringify(event));
     this.onChangeFn(event);
   }
 
   /** onKeyup callback */
   onKeyup(event: any) {
-    console.log('onKeyup called');
     this.onChangeFn(event.target.value);
   }
 
   /** onBlur callback */
   onBlur() {
-    console.log('onBlur called');
     this.onTouchedFn();
   }
 

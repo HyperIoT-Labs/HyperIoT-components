@@ -43,20 +43,28 @@ export class TreeViewComponent implements OnInit {
     {
       name: 'Temperature',
       lom: 'Single',
-      type: 'Double'
+      type: 'Double',
+      id: 1,
+      root: false
     }, {
       name: 'GPS',
       lom: 'Multiple',
       type: 'Object',
+      id: 2,
+      root: false,
       children: [
         {
           name: 'Longitude',
           lom: 'Single',
-          type: 'Double'
+          type: 'Double',
+          id: 3,
+          root: false
         }, {
           name: 'Latitude',
           lom: 'Single',
-          type: 'Double'
+          type: 'Double',
+          id: 4,
+          root: false
         }
       ]
     }
@@ -73,5 +81,10 @@ export class TreeViewComponent implements OnInit {
 
   removeCallback(node: Node) {
     console.log('removeCallback', node);
+    this.Tree.forEach((n, i) => {
+      if (n.name === node.name) {
+        this.Tree.splice(i, 1);
+      }
+    });
   }
 }

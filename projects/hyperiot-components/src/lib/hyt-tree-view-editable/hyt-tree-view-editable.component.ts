@@ -6,6 +6,8 @@ import { BehaviorSubject } from 'rxjs';
 
 export class Node {
   name: string;
+  id: number;
+  root: boolean;
   lom: string;
   type: string;
   children?: Node[];
@@ -13,6 +15,8 @@ export class Node {
 
 export class FlatNode {
   name: string;
+  id: number;
+  root: boolean;
   lom: string;
   type: string;
   level: number;
@@ -36,6 +40,8 @@ export class NodeDatabase {
   public initialize(treeData: any, deviceName: string) {
     const root: Node[] = [{
       name: deviceName,
+      id: 0,
+      root: true,
       lom: 'L.O.M.',
       type: 'TYPE',
       children: treeData
@@ -56,6 +62,8 @@ export class NodeDatabase {
         const newNode = new Node();
         const node = obj[i];
         newNode.name = node.name;
+        newNode.id = node.id;
+        newNode.root = node.root;
         newNode.lom = node.lom;
         newNode.type = node.type;
         if (node.children) {
@@ -69,9 +77,9 @@ export class NodeDatabase {
   }
 
   /** Add an item to to-do list */
-  insertItem(parent: Node, name: string, lom: string, type: string) {
+  insertItem(parent: Node, name: string, lom: string, type: string, id: number, root: boolean) {
     if (parent.children) {
-      parent.children.push({ name, lom, type } as Node);
+      parent.children.push({ name, lom, type, id, root } as Node);
       this.dataChange.next(this.data);
     }
   }
@@ -88,10 +96,12 @@ export class NodeDatabase {
     }
   }
 
-  updateItem(node: Node, name: string, lom: string, type: string) {
+  updateItem(node: Node, name: string, lom: string, type: string, id: number, root: boolean) {
     node.name = name;
     node.lom = lom;
     node.type = type;
+    node.id = id;
+    node.root = root;
     this.dataChange.next(this.data);
   }
 }
@@ -107,7 +117,14 @@ export class HytTreeViewEditableComponent implements OnInit {
 
   @Input() deviceName: string;
 
-  @Input() treeData: any;
+  tree: any;
+  @Input()
+  get treeData(): any {
+    return this.tree;
+  }
+  set treeData(t: any) {
+    this.tree = t;
+  }
 
   @Output() removeFn: EventEmitter<any> = new EventEmitter();
 
@@ -134,6 +151,8 @@ export class HytTreeViewEditableComponent implements OnInit {
   /** The selection for checklist */
   checklistSelection = new SelectionModel<FlatNode>(true /* multiple */);
 
+  status = 'idle';
+
   constructor(private database: NodeDatabase) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
       this.isExpandable, this.getChildren);
@@ -146,7 +165,7 @@ export class HytTreeViewEditableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.database.initialize(this.treeData, this.deviceName);
+    this.database.initialize(this.tree, this.deviceName);
   }
 
   getLevel = (node: FlatNode) => node.level;
@@ -170,8 +189,10 @@ export class HytTreeViewEditableComponent implements OnInit {
     flatNode.name = node.name;
     flatNode.lom = node.lom;
     flatNode.type = node.type;
+    flatNode.id = node.id;
+    flatNode.root = node.root;
     flatNode.level = level;
-    flatNode.expandable = !!node.children;
+    flatNode.expandable = !((node.children == null) || (node.children === []));
     this.flatNodeMap.set(flatNode, node);
     this.nestedNodeMap.set(node, flatNode);
     return flatNode;
@@ -260,22 +281,33 @@ export class HytTreeViewEditableComponent implements OnInit {
   /** Select the category so we can insert the new item. */
   addNewItem(node: FlatNode) {
     const parentNode: Node = this.flatNodeMap.get(node);
-    this.database.insertItem(parentNode!, '', '', '');
-    this.treeControl.expand(node);
-    this.addFn.emit(parentNode);
+    if (this.status !== 'nodeInsertion') {
+      this.status = 'nodeInsertion';
+      this.database.insertItem(parentNode!, '', '', '', 0, false);
+      this.treeControl.expand(node);
+      this.addFn.emit(parentNode);
+    }
   }
 
   removeItem(flatNode: FlatNode) {
-    const parentNodeFlat = this.getParentNode(flatNode);
-    const parentNode: Node = this.flatNodeMap.get(parentNodeFlat);
-    this.database.removeItem(parentNode, flatNode.name);
+    // const parentNodeFlat = this.getParentNode(flatNode);
+    // const parentNode: Node = this.flatNodeMap.get(parentNodeFlat);
+    // this.database.removeItem(parentNode, flatNode.name);
     const node = this.flatNodeMap.get(flatNode);
+    this.treeControl.expand(flatNode);
     this.removeFn.emit(node);
   }
 
+  cancelInsertion(flatNode: FlatNode) {
+    const parentNodeFlat = this.getParentNode(flatNode);
+    const parentNode: Node = this.flatNodeMap.get(parentNodeFlat);
+    this.database.removeItem(parentNode, flatNode.name);
+    this.status = 'idle';
+  }
+
   /** Save the node to database */
-  saveNode(node: FlatNode, name: string, lom: string, type: string) {
+  saveNode(node: FlatNode, name: string, lom: string, type: string, id: number, root: boolean) {
     const nestedNode = this.flatNodeMap.get(node);
-    this.database.updateItem(nestedNode!, name, lom, type);
+    this.database.updateItem(nestedNode!, name, lom, type, id, root);
   }
 }

@@ -26,7 +26,7 @@ export class InputsComponent implements OnInit {
   }
 
   onChange(event: any) {
-    console.log('onChange2 called');
+    console.log('onChange called');
     console.log(event.target.value);
     this.inputText = event.target.value;
   }

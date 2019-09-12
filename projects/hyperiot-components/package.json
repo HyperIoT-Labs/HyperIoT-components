@@ -1,6 +1,6 @@
 {
   "name": "@hyperiot/components",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "publishConfig": {
     "registry": "https://nexus.acsoftware.it/nexus/repository/acs-npm/",
     "always-auth": "true"

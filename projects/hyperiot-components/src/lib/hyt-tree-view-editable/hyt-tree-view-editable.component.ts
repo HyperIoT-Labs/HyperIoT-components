@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, Injectable, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Injectable, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { BehaviorSubject } from 'rxjs';
 
@@ -114,6 +114,8 @@ export class NodeDatabase {
   providers: [NodeDatabase]
 })
 export class HytTreeViewEditableComponent implements OnInit {
+
+  @ViewChild('editableTree', { static: false }) private Element: ElementRef;
 
   @Input() deviceName: string;
 
@@ -296,6 +298,13 @@ export class HytTreeViewEditableComponent implements OnInit {
     const node = this.flatNodeMap.get(flatNode);
     this.treeControl.expand(flatNode);
     this.removeFn.emit(node);
+  }
+
+  removed(node: Node) {
+    const flatNode = this.nestedNodeMap.get(node);
+    const parentNodeFlat = this.getParentNode(flatNode);
+    const parentNode: Node = this.flatNodeMap.get(parentNodeFlat);
+    this.database.removeItem(parentNode, flatNode.name);
   }
 
   cancelInsertion(flatNode: FlatNode) {

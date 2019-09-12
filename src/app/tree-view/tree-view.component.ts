@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { TreeNode } from 'projects/hyperiot-components/src/public-api';
 import { Node } from 'projects/hyperiot-components/src/lib/hyt-tree-view-editable/hyt-tree-view-editable.component';
 
@@ -8,6 +8,8 @@ import { Node } from 'projects/hyperiot-components/src/lib/hyt-tree-view-editabl
   styleUrls: ['./tree-view.component.scss']
 })
 export class TreeViewComponent implements OnInit {
+
+  @ViewChild('editableTree', { static: false }) private editableTree: ElementRef;
 
   treeData: TreeNode[] = [
     {
@@ -86,5 +88,6 @@ export class TreeViewComponent implements OnInit {
         this.Tree.splice(i, 1);
       }
     });
+    this.editableTree['removed'](node);
   }
 }

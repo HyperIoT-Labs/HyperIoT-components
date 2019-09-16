@@ -46,26 +46,26 @@ export class TreeViewComponent implements OnInit {
       name: 'Temperature',
       lom: 'Single',
       type: 'Double',
-      id: 1,
+      data: 1,
       root: false
     }, {
       name: 'GPS',
       lom: 'Multiple',
       type: 'Object',
-      id: 2,
+      data: 2,
       root: false,
       children: [
         {
           name: 'Longitude',
           lom: 'Single',
           type: 'Double',
-          id: 3,
+          data: 3,
           root: false
         }, {
           name: 'Latitude',
           lom: 'Single',
           type: 'Double',
-          id: 4,
+          data: 4,
           root: false
         }
       ]

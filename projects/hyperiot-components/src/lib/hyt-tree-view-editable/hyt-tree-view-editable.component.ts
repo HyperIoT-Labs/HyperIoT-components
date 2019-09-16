@@ -47,7 +47,6 @@ export class NodeDatabase {
       children: treeData
     }];
     const data = this.buildFileTree(root, 0);
-    console.log(JSON.stringify(data));
     this.dataChange.next(data);
   }
 
@@ -131,6 +130,8 @@ export class HytTreeViewEditableComponent implements OnInit {
   @Output() removeFn: EventEmitter<any> = new EventEmitter();
 
   @Output() addFn: EventEmitter<any> = new EventEmitter();
+
+  @Output() cancelFn: EventEmitter<any> = new EventEmitter();
 
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap = new Map<FlatNode, Node>();
@@ -312,6 +313,7 @@ export class HytTreeViewEditableComponent implements OnInit {
     const parentNode: Node = this.flatNodeMap.get(parentNodeFlat);
     this.database.removeItem(parentNode, flatNode.name);
     this.status = 'idle';
+    this.cancelFn.emit(parentNode);
   }
 
   /** Save the node to database */

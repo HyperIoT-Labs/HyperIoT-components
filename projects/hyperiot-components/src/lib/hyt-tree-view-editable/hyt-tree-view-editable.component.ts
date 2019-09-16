@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 
 export class Node {
   name: string;
-  id: number;
+  data: any;
   root: boolean;
   lom: string;
   type: string;
@@ -15,7 +15,7 @@ export class Node {
 
 export class FlatNode {
   name: string;
-  id: number;
+  data: any;
   root: boolean;
   lom: string;
   type: string;
@@ -40,7 +40,7 @@ export class NodeDatabase {
   public initialize(treeData: any, deviceName: string) {
     const root: Node[] = [{
       name: deviceName,
-      id: 0,
+      data: null,
       root: true,
       lom: 'L.O.M.',
       type: 'TYPE',
@@ -62,7 +62,7 @@ export class NodeDatabase {
         const newNode = new Node();
         const node = obj[i];
         newNode.name = node.name;
-        newNode.id = node.id;
+        newNode.data = node.data;
         newNode.root = node.root;
         newNode.lom = node.lom;
         newNode.type = node.type;
@@ -77,9 +77,9 @@ export class NodeDatabase {
   }
 
   /** Add an item to to-do list */
-  insertItem(parent: Node, name: string, lom: string, type: string, id: number, root: boolean) {
+  insertItem(parent: Node, name: string, lom: string, type: string, data: any, root: boolean) {
     if (parent.children) {
-      parent.children.push({ name, lom, type, id, root } as Node);
+      parent.children.push({ name, lom, type, data, root } as Node);
       this.dataChange.next(this.data);
     }
   }
@@ -96,11 +96,11 @@ export class NodeDatabase {
     }
   }
 
-  updateItem(node: Node, name: string, lom: string, type: string, id: number, root: boolean) {
+  updateItem(node: Node, name: string, lom: string, type: string, data: any, root: boolean) {
     node.name = name;
     node.lom = lom;
     node.type = type;
-    node.id = id;
+    node.data = data;
     node.root = root;
     this.dataChange.next(this.data);
   }
@@ -191,7 +191,7 @@ export class HytTreeViewEditableComponent implements OnInit {
     flatNode.name = node.name;
     flatNode.lom = node.lom;
     flatNode.type = node.type;
-    flatNode.id = node.id;
+    flatNode.data = node.data;
     flatNode.root = node.root;
     flatNode.level = level;
     flatNode.expandable = !((node.children == null) || (node.children === []));
@@ -315,8 +315,8 @@ export class HytTreeViewEditableComponent implements OnInit {
   }
 
   /** Save the node to database */
-  saveNode(node: FlatNode, name: string, lom: string, type: string, id: number, root: boolean) {
+  saveNode(node: FlatNode, name: string, lom: string, type: string, data: any, root: boolean) {
     const nestedNode = this.flatNodeMap.get(node);
-    this.database.updateItem(nestedNode!, name, lom, type, id, root);
+    this.database.updateItem(nestedNode!, name, lom, type, data, root);
   }
 }

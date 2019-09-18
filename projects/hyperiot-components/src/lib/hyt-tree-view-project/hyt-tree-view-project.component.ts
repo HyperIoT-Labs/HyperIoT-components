@@ -18,6 +18,7 @@ export interface TreeDataNode {
  * Internal node representation with `expandable`, `level`, `data` and `parent` information
  */
 interface TreeViewNode {
+  active: boolean;
   expandable: boolean;
   name: string;
   icon?: string;
@@ -43,6 +44,7 @@ export class HytTreeViewProjectComponent implements OnInit {
   );
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
+  private lastActiveNode: TreeViewNode;
   constructor() {
   }
 
@@ -58,7 +60,16 @@ export class HytTreeViewProjectComponent implements OnInit {
     this.dataSource.data = this.treeData;
   }
 
+  setActiveNode(node: TreeViewNode) {
+    if (this.lastActiveNode) {
+      this.lastActiveNode.active = false;
+    }
+    node.active = true;
+    this.lastActiveNode = node;
+  }
+
   onNodeClicked(node: TreeViewNode) {
+    this.setActiveNode(node);
     this.nodeClick.emit(node);
   }
 
@@ -92,6 +103,7 @@ export class HytTreeViewProjectComponent implements OnInit {
 
   private transformer(node: TreeDataNode, level: number): TreeViewNode {
     return {
+      active: false,
       name: node.name,
       icon: node.icon,
       level,

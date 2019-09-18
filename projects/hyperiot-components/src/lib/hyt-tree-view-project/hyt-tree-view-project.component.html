@@ -1,7 +1,7 @@
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
 
   <!-- This is the tree node template for leaf nodes -->
-  <mat-tree-node *matTreeNodeDef="let node">
+  <mat-tree-node *matTreeNodeDef="let node" [ngClass]="{active: node.active}" class="d-flex flex-row align-items-center">
 
     <span *ngFor="let i of getLevelTabs(node.level)" [ngClass]="{
       'line-right': (i === node.level - 1),
@@ -10,16 +10,18 @@
       'line-empty': node.parent && node.parent.last
     }"></span>
 
-    <span class="node-name" (click)="onNodeClicked(node)">
+    <span class="node-name flex-grow-1" (click)="onNodeClicked(node)">
       <mat-icon *ngIf="node.icon">{{node.icon}}</mat-icon>
       <mat-icon *ngIf="node.icon == null">radio_button_unchecked</mat-icon>
       {{node.name}}
     </span>
 
+    <span class="leaf-end"></span>
+
   </mat-tree-node>
 
   <!-- This is the tree node template for expandable nodes -->
-  <mat-tree-node *matTreeNodeDef="let node; when: hasChild">
+  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" class="d-flex flex-row align-items-center" [ngClass]="{active: node.active}">
 
     <span *ngFor="let i of getLevelTabs(node.level)" [ngClass]="{
       'line-right': (i < node.level && !node.last) || (i !== node.level - 1 && node.last) || treeControl.isExpanded(node),
@@ -27,7 +29,7 @@
       'line-end': node.last
     }"></span>
 
-    <span class="node-name" (click)="onNodeClicked(node)">
+    <span class="node-name flex-grow-1" (click)="onNodeClicked(node)">
       <mat-icon *ngIf="node.icon">{{node.icon}}</mat-icon>
       <mat-icon *ngIf="node.icon == null">folder_open</mat-icon>
       {{node.name}}

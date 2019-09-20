@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { TreeNode } from 'projects/hyperiot-components/src/public-api';
 import { Node } from 'projects/hyperiot-components/src/lib/hyt-tree-view-editable/hyt-tree-view-editable.component';
+import { TreeNodeCategory } from 'projects/hyperiot-components/src/lib/hyt-tree-view-category/hyt-tree-view-category.component';
 
 @Component({
   selector: 'app-tree-view',
@@ -33,6 +34,42 @@ export class TreeViewComponent implements OnInit {
           children: [
             { name: 'Pumpkins' },
             { name: 'Carrots' },
+          ]
+        },
+      ]
+    },
+  ];
+
+  treeCategory: TreeNodeCategory[] = [
+    {
+      label: 'Fruit',
+      data: {},
+      active: true,
+      children: [
+        { label: 'Apple', data: {}, active: true },
+        { label: 'Banana', data: {}, active: true },
+        { label: 'Fruit loops', data: {}, active: true },
+      ]
+    }, {
+      label: 'Vegetables',
+      data: {},
+      active: true,
+      children: [
+        {
+          label: 'Green',
+          data: {},
+          active: true,
+          children: [
+            { label: 'Broccoli', data: {}, active: true },
+            { label: 'Brussel sprouts', data: {}, active: true },
+          ]
+        }, {
+          label: 'Orange',
+          data: {},
+          active: true,
+          children: [
+            { label: 'Pumpkins', data: {}, active: true },
+            { label: 'Carrots', data: {}, active: true },
           ]
         },
       ]
@@ -90,4 +127,9 @@ export class TreeViewComponent implements OnInit {
     });
     this.editableTree['removed'](node);
   }
+
+  cbChange(event) {
+    console.log(event);
+  }
+
 }

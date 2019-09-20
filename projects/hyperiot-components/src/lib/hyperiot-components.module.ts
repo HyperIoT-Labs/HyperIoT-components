@@ -25,6 +25,7 @@ import { HytTreeViewEditableComponent } from './hyt-tree-view-editable/hyt-tree-
 import { HytModalComponent } from './hyt-modal/hyt-modal.component';
 import { HytTagComponent } from './hyt-tag/hyt-tag.component';
 import { HytTagListComponent } from './hyt-tag-list/hyt-tag-list.component';
+import { HytTreeViewCategoryComponent } from './hyt-tree-view-category/hyt-tree-view-category.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { HytTagListComponent } from './hyt-tag-list/hyt-tag-list.component';
     HytModalComponent,
     HytTagComponent,
     HytTagListComponent,
+    HytTreeViewCategoryComponent,
   ],
   imports: [
     CommonModule,
@@ -68,6 +70,7 @@ import { HytTagListComponent } from './hyt-tag-list/hyt-tag-list.component';
     HytTextAreaComponent,
     HytSelectComponent,
     HytTreeViewComponent,
+    HytTreeViewCategoryComponent,
     HytInputTemplateComponent,
     HytSelectTemplateComponent,
     HytTreeViewProjectComponent,

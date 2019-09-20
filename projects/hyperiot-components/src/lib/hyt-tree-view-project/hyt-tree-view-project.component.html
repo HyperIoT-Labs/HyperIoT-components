@@ -4,9 +4,11 @@
   <mat-tree-node *matTreeNodeDef="let node" [ngClass]="{active: node.active}" class="d-flex flex-row align-items-center">
 
     <span *ngFor="let i of getLevelTabs(node.level)" [ngClass]="{
-      'line-right': (i === node.level - 1),
+      'line-right': (i === node.level - 1 && !node.active),
+      'line-right-active': (i === node.level - 1 && node.active),
       'line-straight': (i !== node.level - 1 && (node.parent == null || !node.parent.last)),
-      'line-end': i === node.level - 1 && node.last,
+      'line-end': i === node.level - 1 && node.last && !node.active,
+      'line-end-active': i === node.level - 1 && node.last && node.active,
       'line-empty': node.parent && node.parent.last
     }"></span>
 
@@ -24,9 +26,11 @@
   <mat-tree-node *matTreeNodeDef="let node; when: hasChild" class="d-flex flex-row align-items-center" [ngClass]="{active: node.active}">
 
     <span *ngFor="let i of getLevelTabs(node.level)" [ngClass]="{
-      'line-right': (i < node.level && !node.last) || (i !== node.level - 1 && node.last) || treeControl.isExpanded(node),
+      'line-right': !node.active && ((i < node.level && !node.last) || (i !== node.level - 1 && node.last) || treeControl.isExpanded(node)),
+      'line-right-active': node.active && ((i < node.level && !node.last) || (i !== node.level - 1 && node.last) || treeControl.isExpanded(node)),
       'line-straight': (i !== node.level - 1 && (node.parent == null || !node.parent.last)),
-      'line-end': node.last
+      'line-end': node.last && !node.active,
+      'line-end-active': node.last && node.active
     }"></span>
 
     <span class="node-name flex-grow-1" (click)="onNodeClicked(node)">

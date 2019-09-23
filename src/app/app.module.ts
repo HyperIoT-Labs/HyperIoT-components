@@ -31,6 +31,7 @@ import { SelectTemplateComponent } from './select-template/select-template.compo
 import { TreeViewProjectComponent } from './tree-view-project/tree-view-project.component';
 import { TagsComponent } from './tags/tags.component';
 import { ModalComponent } from './modal/modal.component';
+import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 
 const appRoutes: Routes = [
   { path: 'inputs', component: InputsComponent },
@@ -61,7 +62,8 @@ const appRoutes: Routes = [
     SelectTemplateComponent,
     TreeViewProjectComponent,
     TagsComponent,
-    ModalComponent
+    ModalComponent,
+    AutocompleteComponent
   ],
   imports: [
     RouterModule.forRoot(

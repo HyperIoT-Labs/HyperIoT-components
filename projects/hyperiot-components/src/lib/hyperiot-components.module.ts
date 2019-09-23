@@ -26,6 +26,7 @@ import { HytModalComponent } from './hyt-modal/hyt-modal.component';
 import { HytTagComponent } from './hyt-tag/hyt-tag.component';
 import { HytTagListComponent } from './hyt-tag-list/hyt-tag-list.component';
 import { HytTreeViewCategoryComponent } from './hyt-tree-view-category/hyt-tree-view-category.component';
+import { HytAutocompleteComponent } from './hyt-autocomplete/hyt-autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { HytTreeViewCategoryComponent } from './hyt-tree-view-category/hyt-tree-
     HytTagComponent,
     HytTagListComponent,
     HytTreeViewCategoryComponent,
+    HytAutocompleteComponent,
   ],
   imports: [
     CommonModule,
@@ -77,7 +79,8 @@ import { HytTreeViewCategoryComponent } from './hyt-tree-view-category/hyt-tree-
     HytTreeViewEditableComponent,
     HytTagComponent,
     HytTagListComponent,
-    HytModalComponent
+    HytModalComponent,
+    HytAutocompleteComponent
   ]
 })
 export class HyperiotComponentsModule { }

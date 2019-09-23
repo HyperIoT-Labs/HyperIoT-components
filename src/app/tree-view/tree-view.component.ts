@@ -40,41 +40,54 @@ export class TreeViewComponent implements OnInit {
     },
   ];
 
-  treeCategory: TreeNodeCategory[] = [
-    // {
-    //   label: 'Fruit',
-    //   data: {},
-    //   active: true,
-    //   children: [
-    //     { label: 'Apple', data: {}, active: true, children: [] },
-    //     { label: 'Banana', data: {}, active: true, children: [] },
-    //     { label: 'Fruit loops', data: {}, active: true, children: [] },
-    //   ]
-    // }, {
-    //   label: 'Vegetables',
-    //   data: {},
-    //   active: true,
-    //   children: [
-    //     {
-    //       label: 'Green',
-    //       data: {},
-    //       active: true,
-    //       children: [
-    //         { label: 'Broccoli', data: {}, active: true, children: [] },
-    //         { label: 'Brussel sprouts', data: {}, active: true, children: [] },
-    //       ]
-    //     }, {
-    //       label: 'Orange',
-    //       data: {},
-    //       active: true,
-    //       children: [
-    //         { label: 'Pumpkins', data: {}, active: true, children: [] },
-    //         { label: 'Carrots', data: {}, active: true, children: [] },
-    //       ]
-    //     },
-    //   ]
-    // },
-  ];
+  dataCategories: any[] = [
+    { "id": 365, "entityVersion": 1, "entityCreateDate": 1569165668042, "entityModifyDate": 1569165668042, "categoryIds": null, "tagIds": null, "name": "sasf", "owner": { "ownerResourceName": "it.acsoftware.hyperiot.hproject", "ownerResourceId": 364, "userId": 0, "resourceName": "it.acsoftware.hyperiot.hproject" }, "parent": null },
+    { "id": 366, "entityVersion": 1, "entityCreateDate": 1569165676734, "entityModifyDate": 1569165676734, "categoryIds": null, "tagIds": null, "name": "son", "owner": { "ownerResourceName": "it.acsoftware.hyperiot.hproject", "ownerResourceId": 364, "userId": 0, "resourceName": "it.acsoftware.hyperiot.hproject" }, "parent": { "id": 365, "entityVersion": 1, "entityCreateDate": 1569165668042, "entityModifyDate": 1569165668042, "categoryIds": null, "tagIds": null, "name": "sasf", "owner": { "ownerResourceName": "it.acsoftware.hyperiot.hproject", "ownerResourceId": 364, "userId": 0, "resourceName": "it.acsoftware.hyperiot.hproject" }, "parent": null } },
+    { "id": 367, "entityVersion": 1, "entityCreateDate": 1569165668042, "entityModifyDate": 1569165668042, "categoryIds": null, "tagIds": null, "name": "sasf", "owner": { "ownerResourceName": "it.acsoftware.hyperiot.hproject", "ownerResourceId": 364, "userId": 0, "resourceName": "it.acsoftware.hyperiot.hproject" }, "parent": { "id": 366, "entityVersion": 1, "entityCreateDate": 1569165676734, "entityModifyDate": 1569165676734, "categoryIds": null, "tagIds": null, "name": "son", "owner": { "ownerResourceName": "it.acsoftware.hyperiot.hproject", "ownerResourceId": 364, "userId": 0, "resourceName": "it.acsoftware.hyperiot.hproject" }, "parent": { "id": 365, "entityVersion": 1, "entityCreateDate": 1569165668042, "entityModifyDate": 1569165668042, "categoryIds": null, "tagIds": null, "name": "sasf", "owner": { "ownerResourceName": "it.acsoftware.hyperiot.hproject", "ownerResourceId": 364, "userId": 0, "resourceName": "it.acsoftware.hyperiot.hproject" }, "parent": null } } },
+  ]
+
+  createTreeCategory() {
+    this.dataCategories.forEach(x => {
+      this.treeCategory.push({
+        id: x.id,
+        label: x.name,
+        parent: null,
+        children: null,
+        data: x,
+        active: false
+      })
+    })
+    this.treeCategory.forEach(x => {
+      x.parent = (x.data.parent) ? this.treeCategory.find(y => y.id == x.data.parent.id) : null;
+    })
+  }
+
+  cbAdd(event) {
+    let newData = {
+      entityVersion: 1,
+      name: event.label,
+      owner: { ownerResourceName: "it.acsoftware.hyperiot.hproject", ownerResourceId: 364 },
+      parent: event.parent ? event.parent.data : null
+    }
+    let fakeRes = {
+      id: 987,
+      entityVersion: 1,
+      name: event.label,
+      owner: { ownerResourceName: "it.acsoftware.hyperiot.hproject", ownerResourceId: 364 },
+      parent: event.parent ? event.parent.data : null
+    }
+    this.treeCategory.push({
+      id: Math.random() * 10000,
+      label: fakeRes.name,
+      parent: event.parent,
+      children: [],
+      data: fakeRes,
+      active: false
+    })
+    this.treeCategory = [...this.treeCategory];
+  }
+
+  treeCategory: TreeNodeCategory[] = [];
 
   deviceName = 'Weather Station Data';
 
@@ -112,6 +125,7 @@ export class TreeViewComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.createTreeCategory();
   }
 
   addCallback(parent: Node) {

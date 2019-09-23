@@ -1,24 +1,15 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, ViewChild, OnChanges } from '@angular/core';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-// export namespace TreeNodeCategory {
-//   export type ActiveEnum = 'TRUE' | 'FALSE' | 'PARTIAL';
-//   export const TypeEnum = {
-//     TRUE: 'TRUE' as ActiveEnum,
-//     FALSE: 'FALSE' as ActiveEnum,
-//     PARTIAL: 'PARTIAL' as ActiveEnum
-//   };
-// }
-
 export interface TreeNodeCategory {
+  id: number;
   label: string;
   data: any;
-  // active: TreeNodeCategory.ActiveEnum;
-  active: boolean,
-  children: TreeNodeCategory[],
-  parent: TreeNodeCategory
+  active: any;
+  children: TreeNodeCategory[];
+  parent: TreeNodeCategory;
 }
 
 @Component({
@@ -27,9 +18,11 @@ export interface TreeNodeCategory {
   styleUrls: ['./hyt-tree-view-category.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class HytTreeViewCategoryComponent implements OnInit {
+export class HytTreeViewCategoryComponent implements OnInit, OnChanges {
 
-  @Input() treeData: TreeNodeCategory[];
+  @Input() treeDataFlat: TreeNodeCategory[] = [];
+
+  treeData: TreeNodeCategory[] = [];
 
   @Output() cbChange = new EventEmitter<TreeNodeCategory>();
 
@@ -41,11 +34,30 @@ export class HytTreeViewCategoryComponent implements OnInit {
 
   catForm: FormGroup;
 
-  constructor() {
+  constructor() { }
+
+  ngOnInit() { }
+
+  ngOnChanges() {
+    this.createTree();
   }
 
-  ngOnInit() {
+  createTree() {
+    this.treeData = [];
+    var lookup = {};
+    this.treeDataFlat.forEach((x) => {
+      lookup[x['id']] = x;
+      x['children'] = [];
+    });
+    this.treeDataFlat.forEach((x) => {
+      if (x['parent'] != null) {
+        lookup[x['parent'].id]['children'].push(x);
+      } else {
+        this.treeData.push(x);
+      }
+    });
     this.dataSource.data = this.treeData;
+    this.triggerChange();
   }
 
   hasChild = (_: number, node: TreeNodeCategory) => !!node.children && node.children.length > 0;
@@ -78,7 +90,7 @@ export class HytTreeViewCategoryComponent implements OnInit {
   creatingNode;
   creating: string = '';
 
-  addNode(node) {
+  addNode(parentNode) {
     if (this.creating != '') {
       this.cancelNode();
     }
@@ -88,20 +100,21 @@ export class HytTreeViewCategoryComponent implements OnInit {
     });
 
     let emptyNode: TreeNodeCategory = {
+      id: null,
       label: '',
       data: {},
       active: false,
       children: [],
       parent: null
     }
-    if (!node) {
+    if (!parentNode) {
       this.creating = 'root';
       this.dataSource.data.push(emptyNode);
       this.creatingNode = this.dataSource.data.find(x => x.label == '');
     }
     else {
       this.creating = '!root';
-      this.creatingParentNode = node;
+      this.creatingParentNode = parentNode;
       this.treeControl.expand(this.creatingParentNode);
       this.creatingParentNode.children.push(emptyNode);
       this.creatingNode = this.creatingParentNode.children.find(x => x.label == '');

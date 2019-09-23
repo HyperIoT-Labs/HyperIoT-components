@@ -41,39 +41,39 @@ export class TreeViewComponent implements OnInit {
   ];
 
   treeCategory: TreeNodeCategory[] = [
-    {
-      label: 'Fruit',
-      data: {},
-      active: true,
-      children: [
-        { label: 'Apple', data: {}, active: true },
-        { label: 'Banana', data: {}, active: true },
-        { label: 'Fruit loops', data: {}, active: true },
-      ]
-    }, {
-      label: 'Vegetables',
-      data: {},
-      active: true,
-      children: [
-        {
-          label: 'Green',
-          data: {},
-          active: true,
-          children: [
-            { label: 'Broccoli', data: {}, active: true },
-            { label: 'Brussel sprouts', data: {}, active: true },
-          ]
-        }, {
-          label: 'Orange',
-          data: {},
-          active: true,
-          children: [
-            { label: 'Pumpkins', data: {}, active: true },
-            { label: 'Carrots', data: {}, active: true },
-          ]
-        },
-      ]
-    },
+    // {
+    //   label: 'Fruit',
+    //   data: {},
+    //   active: true,
+    //   children: [
+    //     { label: 'Apple', data: {}, active: true, children: [] },
+    //     { label: 'Banana', data: {}, active: true, children: [] },
+    //     { label: 'Fruit loops', data: {}, active: true, children: [] },
+    //   ]
+    // }, {
+    //   label: 'Vegetables',
+    //   data: {},
+    //   active: true,
+    //   children: [
+    //     {
+    //       label: 'Green',
+    //       data: {},
+    //       active: true,
+    //       children: [
+    //         { label: 'Broccoli', data: {}, active: true, children: [] },
+    //         { label: 'Brussel sprouts', data: {}, active: true, children: [] },
+    //       ]
+    //     }, {
+    //       label: 'Orange',
+    //       data: {},
+    //       active: true,
+    //       children: [
+    //         { label: 'Pumpkins', data: {}, active: true, children: [] },
+    //         { label: 'Carrots', data: {}, active: true, children: [] },
+    //       ]
+    //     },
+    //   ]
+    // },
   ];
 
   deviceName = 'Weather Station Data';

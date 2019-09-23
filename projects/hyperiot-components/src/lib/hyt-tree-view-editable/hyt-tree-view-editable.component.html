@@ -1,78 +1,84 @@
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
-      <div class="flex-container">
-        <div class="icon">
-          <mat-icon>memory</mat-icon>
-        </div>
-        <div class="name">
-          <!-- <button mat-icon-button disabled></button> -->
-            {{node.name}}
-        </div>
-        <div class="lom">
-            {{node.lom}}
-        </div>
-        <div class="type">
-            {{node.type}}
-        </div>
-        <div class="button">
-          <button mat-icon-button (click)="removeItem(node)"><mat-icon>close</mat-icon></button>
-        </div>
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+    <div class="flex-container">
+      <div class="icon">
+        <mat-icon>memory</mat-icon>
       </div>
-    </mat-tree-node>
-  
-    <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
-      <button mat-icon-button disabled></button>
-      <div class="flex-container">
-        <div class="name">
-          <mat-form-field>
-            <input matInput #itemValue placeholder="Name" disabled>
-          </mat-form-field>
-        </div>
-        <div class="lom">
-          <mat-form-field>
-            <input matInput #itemLom placeholder="L.O.M." value="  -  " disabled>
-            <mat-icon matPrefix>warning</mat-icon>
-          </mat-form-field>
-        </div>
-        <div class="type">
-          <mat-form-field>
-            <input matInput #itemType placeholder="Type" value="  -  " disabled>
-            <mat-icon matPrefix>warning</mat-icon>
-          </mat-form-field>
-        </div>
-        <div class="button">
-          <button mat-button (click)="cancelInsertion(node)">Cancel</button>
-        </div>
+      <div class="name">
+        <!-- <button mat-icon-button disabled></button> -->
+        {{node.name}}
       </div>
-    </mat-tree-node>
-  
-    <mat-tree-node *matTreeNodeDef="let node; when: hasChild"  [ngClass]="{'rootItem': node.level == 0}" matTreeNodePadding>
-      <div class="flex-container">
-        <button mat-icon-button matTreeNodeToggle
-                [attr.aria-label]="'toggle ' + node.filename">
-          <mat-icon class="mat-icon-rtl-mirror">
-            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-          </mat-icon>
+      <div class="lom">
+        {{node.lom}}
+      </div>
+      <div class="type">
+        {{node.type}}
+      </div>
+      <div class="button">
+        <button mat-icon-button (click)="removeItem(node)">
+          <mat-icon>close</mat-icon>
         </button>
-        <div class="icon">
-          <mat-icon>memory</mat-icon>
-        </div>
-        <div class="name">
-          <!-- <button mat-icon-button disabled></button> -->
-            {{node.name}}
-        </div>
-        <div class="lom">
-            {{node.lom}}
-        </div>
-        <div class="type">
-            {{node.type}}
-        </div>
-        <div class="button">
-          <button mat-icon-button (click)="addNewItem(node)"><mat-icon>add</mat-icon></button>
-        </div>
-        <div *ngIf="node.level != 0" class="button">
-          <button mat-icon-button (click)="removeItem(node)"><mat-icon>close</mat-icon></button>
-        </div>
       </div>
-    </mat-tree-node>
+    </div>
+  </mat-tree-node>
+
+  <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
+    <button mat-icon-button disabled></button>
+    <div class="flex-container">
+      <div class="name">
+        <mat-form-field>
+          <input matInput #itemValue placeholder="Name" disabled>
+        </mat-form-field>
+      </div>
+      <div class="lom">
+        <mat-form-field>
+          <input matInput #itemLom placeholder="L.O.M." value="  -  " disabled>
+          <mat-icon matPrefix>warning</mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="type">
+        <mat-form-field>
+          <input matInput #itemType placeholder="Type" value="  -  " disabled>
+          <mat-icon matPrefix>warning</mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="button">
+        <button mat-button (click)="cancelInsertion(node)">Cancel</button>
+      </div>
+    </div>
+  </mat-tree-node>
+
+  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" [ngClass]="{'rootItem': node.level == 0}"
+    matTreeNodePadding>
+    <div class="flex-container">
+      <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.filename">
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+      </button>
+      <div class="icon">
+        <mat-icon>memory</mat-icon>
+      </div>
+      <div class="name">
+        <!-- <button mat-icon-button disabled></button> -->
+        {{node.name}}
+      </div>
+      <div class="lom">
+        {{node.lom}}
+      </div>
+      <div class="type">
+        {{node.type}}
+      </div>
+      <div class="button">
+        <button mat-icon-button (click)="addNewItem(node)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="node.level != 0" class="button">
+        <button mat-icon-button (click)="removeItem(node)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-tree-node>
 </mat-tree>

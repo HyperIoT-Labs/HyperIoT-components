@@ -16,6 +16,8 @@ export class ButtonsComponent implements OnInit {
 
   checked: boolean;
 
+  checked2: any;
+
   options: Option[] = [
     {
       value: 'option1',
@@ -42,8 +44,8 @@ export class ButtonsComponent implements OnInit {
     console.log('clicked');
   }
 
-  onClickCheckbox() {
-    console.log('checked=' + this.checked);
+  onClickCheckbox(event) {
+    console.log('checked=' + this.checked2, event.value);
   }
 
   onChangeRadio(e: any) {

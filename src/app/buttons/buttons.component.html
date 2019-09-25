@@ -63,5 +63,12 @@
       </span>
       <hyt-checkbox [(ngModel)]="checked" (onClick)="onClickCheckbox">Check me!</hyt-checkbox>
     </div>
+    <div class="col-4 ui-element">
+      <span>
+        <h4>Tri State Checkbox</h4>
+      </span>
+      <hyt-tri-checkbox [(ngModel)]="checked2" (clickFn)="onClickCheckbox($event)">Check me!</hyt-tri-checkbox>
+      {{ checked2 }}
+    </div>
   </div>
 </div>

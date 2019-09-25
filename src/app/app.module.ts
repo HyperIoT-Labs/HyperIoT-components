@@ -13,11 +13,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatFormFieldModule } from '@angular/material';
 import { InputsComponent } from './inputs/inputs.component';
 import { InputsTemplateComponent } from './inputs-template/inputs-template.component';
 import { ButtonsComponent } from './buttons/buttons.component';
@@ -46,6 +48,8 @@ const appRoutes: Routes = [
   { path: 'treeview-project', component: TreeViewProjectComponent },
   { path: 'modal', component: ModalComponent },
   { path: 'tags', component: TagsComponent },
+  { path: 'autocomplete', component: AutocompleteComponent },
+
 ];
 
 @NgModule({
@@ -81,6 +85,8 @@ const appRoutes: Routes = [
     MatListModule,
     MatInputModule,
     MatStepperModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
     ScrollingModule,
     CdkTreeModule,
     MatExpansionModule,

@@ -123,6 +123,8 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
    */
   @Input() confirmPassword = '';
 
+  @Input() autocomplete: HTMLElement;
+
   /** The internal data */
   private innerValue: any = '';
 

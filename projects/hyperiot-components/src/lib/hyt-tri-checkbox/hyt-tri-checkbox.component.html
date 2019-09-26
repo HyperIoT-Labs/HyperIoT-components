@@ -1,8 +1,17 @@
-<mat-checkbox
+<!-- <mat-checkbox
     [formControl]="doneControl" 
     [indeterminate]="doneControl.value === false" 
     (click)="onClick($event)"
     [color]="doneControl.value === false ? 'warn' : 'accent'"
+>
+    <ng-content></ng-content>
+</mat-checkbox> -->
+
+<mat-checkbox
+    [(ngModel)]="value" 
+    [indeterminate]="value === false" 
+    (click)="onClick($event)"
+    [color]="value === false ? 'warn' : 'accent'"
 >
     <ng-content></ng-content>
 </mat-checkbox>

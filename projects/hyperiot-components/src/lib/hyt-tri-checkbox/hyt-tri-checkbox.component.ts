@@ -1,5 +1,5 @@
 import { Component, OnInit, forwardRef, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor, FormControl } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
 import { MAT_CHECKBOX_CLICK_ACTION } from '@angular/material';
 
 /**
@@ -27,15 +27,11 @@ export class HytTriCheckboxComponent implements OnInit {
 
   tape = [null, true, false];
 
-  done = null;
-
-  doneControl = new FormControl(false);
-
   /** Function called when click event is triggered */
-  @Output() clickFn: EventEmitter<any> = new EventEmitter();
+  @Output() changeFn: EventEmitter<any> = new EventEmitter();
 
   /** The internal data */
-  innerValue: any = '';
+  innerValue: any = null;
 
   /** Callback function for change event */
   private onChangeFn = (_: any) => { };
@@ -49,10 +45,11 @@ export class HytTriCheckboxComponent implements OnInit {
   }
 
   onClick(event) {
-    const newValue: any = this.tape[(this.tape.indexOf(this.doneControl.value) + 1) % this.tape.length];
-    this.doneControl.setValue(newValue);
-    this.innerValue = this.done;
-    this.clickFn.emit(event);
+    // const newValue: any = this.tape[(this.tape.indexOf(this.doneControl.value) + 1) % this.tape.length];
+    // this.doneControl.setValue(newValue);
+    const newValue: any = this.tape[(this.tape.indexOf(this.innerValue) + 1) % this.tape.length];
+    this.innerValue = newValue;
+    this.changeFn.emit(event);
   }
 
   /** get accessor */

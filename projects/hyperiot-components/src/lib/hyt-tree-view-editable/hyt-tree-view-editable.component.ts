@@ -306,11 +306,13 @@ export class HytTreeViewEditableComponent implements OnInit {
     const parentNodeFlat = this.getParentNode(flatNode);
     const parentNode: Node = this.flatNodeMap.get(parentNodeFlat);
     this.database.removeItem(parentNode, flatNode.name);
+    this.status = 'idle';
   }
 
   refresh(treeData: any, deviceName: string) {
     this.database.initialize(treeData, deviceName);
     this.treeControl.expandAll();
+    this.status = 'idle';
   }
 
   cancelInsertion(flatNode: FlatNode) {

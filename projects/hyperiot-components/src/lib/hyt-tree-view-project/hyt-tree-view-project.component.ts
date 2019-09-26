@@ -85,6 +85,22 @@ export class HytTreeViewProjectComponent implements OnInit {
     return spacer;
   }
 
+  getLevelConnector(node, i) {
+    if ((i !== node.level - 1 && (node.parent == null || !node.parent.last))) {
+      return 'line-straight';
+    } else if (!node.active && (i === node.level - 1 && !node.last) && ((i < node.level && !node.last) || (i !== node.level - 1 && node.last) || this.treeControl.isExpanded(node))) {
+      return 'line-right';
+    } else if (node.active && (i === node.level - 1 && !node.last) && ((i < node.level && !node.last) || (i !== node.level - 1 && node.last) || this.treeControl.isExpanded(node))) {
+        return 'line-right-active';
+    } else if (i === node.level - 1 && node.last && !node.active) {
+        return 'line-end';
+    } else if (i === node.level - 1 && node.last && node.active) {
+      return 'line-end-active';
+    } else {
+      return 'line-empty';
+    }
+  }
+
   private prepareData(nodeList: TreeDataNode[], parent?: TreeDataNode) {
     let lastNode;
     nodeList.forEach((n) => {

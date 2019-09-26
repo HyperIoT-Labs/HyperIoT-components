@@ -8,34 +8,72 @@ import { HytTreeViewProjectComponent } from 'projects/hyperiot-components/src/li
   styleUrls: ['./tree-view-project.component.scss']
 })
 export class TreeViewProjectComponent implements OnInit {
-  @ViewChild('treeView', {static: true}) treeView: HytTreeViewProjectComponent;
-  treeData: TreeDataNode[] = [
+  // @ViewChild('treeView', {static: true}) treeView: HytTreeViewProjectComponent;
+  @ViewChild('treeView2', {static: true}) treeView2: HytTreeViewProjectComponent;
+
+  // treeData: TreeDataNode[] = [
+  //   {
+  //     data: {id: 1},
+  //     name: 'Fruit',
+  //     icon: 'cake',
+  //     children: [
+  //       { name: 'Apple', icon: 'drive_eta', data: {id: 10} },
+  //       { name: 'Banana', icon: 'adb', data: {id: 11} },
+  //       { name: 'Fruit loops', icon: 'train', data: {id: 12} },
+  //     ]
+  //   }, {
+  //     data: {id: 2},
+  //     name: 'Vegetables',
+  //     icon: 'public',
+  //     children: [
+  //       {
+  //         data: {id: 3},
+  //         name: 'Green',
+  //         children: [
+  //           { name: 'Broccoli', icon: 'restaurant', children: [{ name: 'Just a test!', data: {id: 15} }], data: {id: 13} },
+  //           { name: 'Brussel sprouts', icon: 'local_florist', data: {id: 14} },
+  //         ]
+  //       }, {
+  //         data: {id: 4},
+  //         name: 'Orange',
+  //         children: [
+  //           { name: 'Pumpkins', icon: 'filter_drama', data: {id: 21} },
+  //           { name: 'Carrots', data: {id: 1} },
+  //         ]
+  //       }
+  //     ]
+  //   },
+  // ];
+
+  /******************************************************/
+
+  treeData2: TreeDataNode[] = [
     {
       data: {id: 1},
-      name: 'Fruit',
-      icon: 'cake',
+      name: 'Project',
+      icon: 'icon-hyt_projectRSolo', /* cake */
       children: [
-        { name: 'Apple', icon: 'drive_eta', data: {id: 10} },
-        { name: 'Banana', icon: 'adb', data: {id: 11} },
-        { name: 'Fruit loops', icon: 'train', data: {id: 12} },
+        { name: 'Device 1', icon: 'icon-hyt_device', data: {id: 10} },
+        { name: 'Device 3', icon: 'icon-hyt_device', data: {id: 11} },
+        { name: 'Device 3', icon: 'icon-hyt_device', data: {id: 12} },
       ]
     }, {
       data: {id: 2},
-      name: 'Vegetables',
-      icon: 'public',
+      name: 'Project 2',
+      icon: 'icon-hyt_projectRSolo',
       children: [
         {
           data: {id: 3},
-          name: 'Green',
+          name: 'Device 4',
           children: [
-            { name: 'Broccoli', icon: 'restaurant', children: [{ name: 'Just a test!', data: {id: 15} }], data: {id: 13} },
-            { name: 'Brussel sprouts', icon: 'local_florist', data: {id: 14} },
+            { name: 'Packet_1', icon: 'icon-hyt_packets', children: [{ name: 'Just a test!', data: {id: 15} }], data: {id: 13} },
+            { name: 'Packet_2', icon: 'icon-hyt_packets', data: {id: 14} },
           ]
         }, {
           data: {id: 4},
           name: 'Orange',
           children: [
-            { name: 'Pumpkins', icon: 'filter_drama', data: {id: 21} },
+            { name: 'Pumpkins', icon: 'icon-hyt_packets', data: {id: 21} },
             { name: 'Carrots', data: {id: 1} },
           ]
         }
@@ -44,7 +82,8 @@ export class TreeViewProjectComponent implements OnInit {
   ];
 
   ngOnInit() {
-    this.treeView.setData(this.treeData);
+    // this.treeView.setData(this.treeData);
+    this.treeView2.setData(this.treeData2);
   }
 
   onNodeClicked(node: any) {

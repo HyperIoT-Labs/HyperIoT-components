@@ -13,9 +13,10 @@
     }"></span>
 
     <span class="node-name flex-grow-1" (click)="onNodeClicked(node)">
-      <mat-icon *ngIf="node.icon">{{node.icon}}</mat-icon>
-      <mat-icon *ngIf="node.icon == null">radio_button_unchecked</mat-icon>
-      {{node.name}}
+      <!-- <mat-icon *ngIf="node.icon">{{node.icon}}</mat-icon> -->
+      <span class="hyt-icon {{ node.icon }}" *ngIf="node.icon"></span> <!-- hyt-icon-sub -->
+      <span class="hyt-icon icon-hyt_stop" *ngIf="node.icon == null"></span> <!-- hyt-icon-sub-null -->
+      <span class="subtext-node-name">{{node.name}}</span>
     </span>
 
     <span class="leaf-end"></span>
@@ -34,14 +35,17 @@
     }"></span>
 
     <span class="node-name flex-grow-1" (click)="onNodeClicked(node)">
-      <mat-icon *ngIf="node.icon">{{node.icon}}</mat-icon>
-      <mat-icon *ngIf="node.icon == null">folder_open</mat-icon>
-      {{node.name}}
+      <!-- <mat-icon *ngIf="node.icon">{{node.icon}}</mat-icon> -->
+      <span class="hyt-icon {{ node.icon }}" *ngIf="node.icon"></span>
+      <span class="hyt-icon icon-hyt_stop" *ngIf="node.icon == null"></span> <!-- hyt-icon-null -->
+      <span class="text-node-name">{{node.name}}</span>
     </span>
 
     <span class="expand-collapse" matTreeNodeToggle>
-      <mat-icon *ngIf="!treeControl.isExpanded(node)" title="unfold">expand_more</mat-icon>
-      <mat-icon *ngIf="treeControl.isExpanded(node)" title="fold">expand_less</mat-icon>
+      <!-- <mat-icon *ngIf="!treeControl.isExpanded(node)" title="unfold">expand_more</mat-icon>
+      <mat-icon *ngIf="treeControl.isExpanded(node)" title="fold">expand_less</mat-icon> -->
+      <span *ngIf="!treeControl.isExpanded(node)" class="hyt-icon icon-hyt_caretDown"></span>
+      <span *ngIf="treeControl.isExpanded(node)" class="hyt-icon icon-hyt_caretUp"></span>
     </span>
 
   </mat-tree-node>

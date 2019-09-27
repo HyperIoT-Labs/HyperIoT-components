@@ -74,7 +74,16 @@ export class TreeViewProjectComponent implements OnInit {
           name: 'Orange',
           children: [
             { name: 'Pumpkins', icon: 'icon-hyt_packets', data: {id: 21} },
-            { name: 'Carrots', data: {id: 1} },
+            {
+              name: 'Carrots',
+              data: {id: 1},
+              children: [
+                {
+                  name: 'Test',
+                  data: {id: 1}
+                }
+              ]
+            },
           ]
         }
       ]

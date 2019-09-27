@@ -91,7 +91,6 @@ export class HytTreeViewProjectComponent implements OnInit {
     while (--levelDiff > 0) {
       parent = parent.parent;
     }
-    console.log(this, level, node.level, node, parent)
     return parent.last;
   }
 

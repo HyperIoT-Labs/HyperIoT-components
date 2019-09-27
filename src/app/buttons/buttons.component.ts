@@ -50,9 +50,9 @@ export class ButtonsComponent implements OnInit {
 
   onChangeRadio(e: any) {
     if (this.selectedOption) {
-      console.log(this.selectedOption.value);
+      console.log(this.selectedOption);
     }
-    console.log('onChangeRadio: ' + e.value);
+    console.log('onChangeRadio: ' + e);
   }
 
   submit() { }

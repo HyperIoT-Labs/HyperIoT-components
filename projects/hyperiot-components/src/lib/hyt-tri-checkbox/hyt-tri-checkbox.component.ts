@@ -32,7 +32,7 @@ export class HytTriCheckboxComponent implements OnInit, ControlValueAccessor {
   @Output() changeFn: EventEmitter<any> = new EventEmitter();
 
   /** The internal data */
-  @Input() value: any = null;
+  @Input() value: any = false;
 
   tape = [null, true, false];
 
@@ -45,31 +45,18 @@ export class HytTriCheckboxComponent implements OnInit, ControlValueAccessor {
   ngOnInit() {
   }
 
-  next() {
+  onClick() {
     this.onChange(this.value = this.tape[(this.tape.indexOf(this.value) + 1) % this.tape.length]);
     this.onTouched();
     this.changeFn.emit(this.value)
   }
 
-  onClick(event) {
-    // const newValue: any = this.tape[(this.tape.indexOf(this.doneControl.value) + 1) % this.tape.length];
-    // this.doneControl.setValue(newValue);
-    const newValue: any = this.tape[(this.tape.indexOf(this.value) + 1) % this.tape.length];
-    this.value = newValue;
-    this.changeFn.emit(event);
-  }
-
-  // /** get accessor */
-  // get value(): any {
-  //   return this.innerValue;
-  // }
-
-  // /** set accessor including call the onchange callback  */
-  // set value(v: any) {
-  //   if (v !== this.innerValue) {
-  //     this.innerValue = v;
-  //     this.onChangeFn(v);
-  //   }
+  // onClick(event) {
+  //   // const newValue: any = this.tape[(this.tape.indexOf(this.doneControl.value) + 1) % this.tape.length];
+  //   // this.doneControl.setValue(newValue);
+  //   const newValue: any = this.tape[(this.tape.indexOf(this.value) + 1) % this.tape.length];
+  //   this.value = newValue;
+  //   this.changeFn.emit(event);
   // }
 
   /**

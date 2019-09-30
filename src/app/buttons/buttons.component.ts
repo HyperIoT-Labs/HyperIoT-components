@@ -14,7 +14,7 @@ export class ButtonsComponent implements OnInit {
 
   selectedOption: any;
 
-  checked: boolean;
+  checked: any;
 
   checked2: any;
 
@@ -45,6 +45,10 @@ export class ButtonsComponent implements OnInit {
   }
 
   onClickCheckbox(value) {
+    console.log('checked=' + this.checked, value);
+  }
+
+  onClickCheckbox2(value) {
     console.log('checked=' + this.checked2, value);
   }
 

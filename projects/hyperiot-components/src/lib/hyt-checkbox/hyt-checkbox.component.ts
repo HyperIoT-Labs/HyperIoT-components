@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, forwardRef, ViewEncapsulation, Output, EventEmitter, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 /**
@@ -26,13 +26,11 @@ export class HytCheckboxComponent implements OnInit, ControlValueAccessor {
   @Output() changeFn: EventEmitter<any> = new EventEmitter();
 
   /** The internal data */
-  private value: any = '';
+  @Input() value: any = false;
 
-  /** Callback function for change event */
-  private onChangeFn = (_: any) => { };
+  private onChange: (val: boolean) => void;
 
-  /** Callback function for blur event */
-  private onTouchedFn = () => { };
+  private onTouched: () => void;
 
   constructor() { }
 
@@ -40,7 +38,9 @@ export class HytCheckboxComponent implements OnInit, ControlValueAccessor {
   }
 
   onClick() {
-    this.changeFn.emit(this.value);
+    this.onChange(!this.value);
+    this.onTouched();
+    this.changeFn.emit(!this.value);
   }
 
   /**
@@ -56,7 +56,7 @@ export class HytCheckboxComponent implements OnInit, ControlValueAccessor {
    * Set onChange function
    */
   registerOnChange(fn: any): void {
-    this.onChangeFn = fn;
+    this.onChange = fn;
   }
 
   /**
@@ -64,7 +64,7 @@ export class HytCheckboxComponent implements OnInit, ControlValueAccessor {
    * Set onTouched function
    */
   registerOnTouched(fn: any): void {
-    this.onTouchedFn = fn;
+    this.onTouched = fn;
   }
 
 }

@@ -75,7 +75,24 @@ export class HytTreeViewCategoryComponent implements OnInit, OnChanges {
 
   checkParent(node: TreeNodeCategory) {
     if (node.parent) {
-      node.parent.active = node.active;
+      //      node.parent.active = node.active;
+      let countActive = 0;
+      let countInactive = 0;
+      node.parent.children.forEach(children => {
+        console.log("children: " + children.active);
+        if (children.active) {
+          countActive++;
+        } else if (!children.active) {
+          countInactive++;
+        }
+      });
+      if ((countActive > 0) && (countInactive > 0)) {
+        node.parent.active = false;
+      } else if (countActive > 0) {
+        node.parent.active = true;
+      } else {
+        node.parent.active = undefined;
+      }
       this.checkParent(node.parent);
     }
   }

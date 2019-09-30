@@ -4,7 +4,7 @@
     <li class="mat-tree-node">
       <!-- use a disabled button to provide padding for tree leaf -->
       <button mat-icon-button disabled></button>
-      <hyt-tri-checkbox [(ngModel)]="node.active" (changeFn)="cbChanged(node)"></hyt-tri-checkbox>
+      <hyt-checkbox [(ngModel)]="node.active" (changeFn)="cbChanged(node)"></hyt-checkbox>
       {{node.label}} <button (click)="addNode(node)">+</button>
     </li>
   </mat-tree-node>

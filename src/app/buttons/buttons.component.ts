@@ -44,8 +44,8 @@ export class ButtonsComponent implements OnInit {
     console.log('clicked');
   }
 
-  onClickCheckbox(event) {
-    console.log('checked=' + this.checked2, event.value);
+  onClickCheckbox(value) {
+    console.log('checked=' + this.checked2, value);
   }
 
   onChangeRadio(e: any) {

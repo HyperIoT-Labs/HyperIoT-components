@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, forwardRef, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 /**
@@ -22,8 +22,11 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 
 export class HytCheckboxComponent implements OnInit, ControlValueAccessor {
 
+  /** Function called when click event is triggered */
+  @Output() changeFn: EventEmitter<any> = new EventEmitter();
+
   /** The internal data */
-  private innerValue: any = '';
+  private value: any = '';
 
   /** Callback function for change event */
   private onChangeFn = (_: any) => { };
@@ -36,12 +39,16 @@ export class HytCheckboxComponent implements OnInit, ControlValueAccessor {
   ngOnInit() {
   }
 
+  onClick() {
+    this.changeFn.emit(this.value);
+  }
+
   /**
    * ControlValueAccessor.
    * Set the internal value
    */
   writeValue(value: any): void {
-    this.innerValue = value;
+    this.value = value;
   }
 
   /**

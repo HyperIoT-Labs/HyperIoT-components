@@ -1,4 +1,7 @@
-   <mat-horizontal-stepper #stepper [linear]="isLinear">
+   <mat-horizontal-stepper 
+    #stepper [linear]="isLinear"
+    (selectionChange)="change($event)"
+   >
     
     <mat-step 
       *ngFor="let template of stepArray; let i = index" 
@@ -9,56 +12,5 @@
         *ngTemplateOutlet="template">
       </ng-container>
     </mat-step>
-
-    <!-- 
-      [stepControl]="controlArray[i]"
-      <mat-step *ngIf="firstStep" [stepControl]="firstStepControl">
-      <ng-template matStepLabel>{{ firstLabel }}</ng-template>
-      <ng-container 
-        *ngTemplateOutlet="firstStep">
-      </ng-container>
-    </mat-step>
-
-    <mat-step *ngIf="secondStep" [stepControl]="secondStepControl">
-      <ng-template matStepLabel>{{ secondLabel }}</ng-template>
-      <ng-container 
-        *ngTemplateOutlet="secondStep">
-      </ng-container>
-    </mat-step>
-
-    <mat-step *ngIf="thirdStep" [stepControl]="thirdStepControl">
-      <ng-template matStepLabel>{{ thirdLabel }}</ng-template>
-      <ng-container 
-        *ngTemplateOutlet="thirdStep">
-      </ng-container>
-    </mat-step>
-
-    <mat-step *ngIf="fourthStep" [stepControl]="fourthStepControl">
-      <ng-template matStepLabel>{{ fourthLabel }}</ng-template>
-      <ng-container 
-        *ngTemplateOutlet="fourthStep">
-      </ng-container>
-    </mat-step>
-
-    <mat-step *ngIf="fifthStep" [stepControl]="fifthStepControl">
-      <ng-template matStepLabel>{{ fifthLabel }}</ng-template>
-      <ng-container 
-        *ngTemplateOutlet="fifthStep">
-      </ng-container>
-    </mat-step>
-
-    <mat-step *ngIf="sixthStep" [stepControl]="sixthStepControl">
-      <ng-template matStepLabel>{{ sixthLabel }}</ng-template>
-      <ng-container 
-        *ngTemplateOutlet="sixthStep">
-      </ng-container>
-    </mat-step>
-
-    <mat-step *ngIf="seventhStep" [stepControl]="seventhStepControl">
-      <ng-template matStepLabel>{{ seventhLabel }}</ng-template>
-      <ng-container 
-        *ngTemplateOutlet="seventhStep">
-      </ng-container>
-    </mat-step> -->
 
   </mat-horizontal-stepper>

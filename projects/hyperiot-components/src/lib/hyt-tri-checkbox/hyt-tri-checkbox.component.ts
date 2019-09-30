@@ -1,5 +1,5 @@
-import { Component, OnInit, forwardRef, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
-import { NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
+import { Component, OnInit, forwardRef, ViewEncapsulation, Output, EventEmitter, Input } from '@angular/core';
+import { NG_VALUE_ACCESSOR, FormControl, ControlValueAccessor } from '@angular/forms';
 import { MAT_CHECKBOX_CLICK_ACTION } from '@angular/material';
 
 /**
@@ -23,54 +23,61 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   ],
   encapsulation: ViewEncapsulation.None
 })
-export class HytTriCheckboxComponent implements OnInit {
+export class HytTriCheckboxComponent implements OnInit, ControlValueAccessor {
 
-  tape = [null, true, false];
+  /** Disabled */
+  @Input() disabled: boolean;
 
   /** Function called when click event is triggered */
   @Output() changeFn: EventEmitter<any> = new EventEmitter();
 
   /** The internal data */
-  innerValue: any = null;
+  @Input() value: any = null;
 
-  /** Callback function for change event */
-  private onChangeFn = (_: any) => { };
+  tape = [null, true, false];
 
-  /** Callback function for blur event */
-  private onTouchedFn = () => { };
+  private onChange: (val: boolean) => void;
+
+  private onTouched: () => void;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  next() {
+    this.onChange(this.value = this.tape[(this.tape.indexOf(this.value) + 1) % this.tape.length]);
+    this.onTouched();
+    this.changeFn.emit(this.value)
+  }
+
   onClick(event) {
     // const newValue: any = this.tape[(this.tape.indexOf(this.doneControl.value) + 1) % this.tape.length];
     // this.doneControl.setValue(newValue);
-    const newValue: any = this.tape[(this.tape.indexOf(this.innerValue) + 1) % this.tape.length];
-    this.innerValue = newValue;
+    const newValue: any = this.tape[(this.tape.indexOf(this.value) + 1) % this.tape.length];
+    this.value = newValue;
     this.changeFn.emit(event);
   }
 
-  /** get accessor */
-  get value(): any {
-    return this.innerValue;
-  }
+  // /** get accessor */
+  // get value(): any {
+  //   return this.innerValue;
+  // }
 
-  /** set accessor including call the onchange callback  */
-  set value(v: any) {
-    if (v !== this.innerValue) {
-      this.innerValue = v;
-      this.onChangeFn(v);
-    }
-  }
+  // /** set accessor including call the onchange callback  */
+  // set value(v: any) {
+  //   if (v !== this.innerValue) {
+  //     this.innerValue = v;
+  //     this.onChangeFn(v);
+  //   }
+  // }
 
   /**
    * ControlValueAccessor.
    * Set the internal value
    */
   writeValue(value: any): void {
-    this.innerValue = value;
+    this.value = value;
   }
 
   /**
@@ -78,7 +85,7 @@ export class HytTriCheckboxComponent implements OnInit {
    * Set onChange function
    */
   registerOnChange(fn: any): void {
-    this.onChangeFn = fn;
+    this.onChange = fn;
   }
 
   /**
@@ -86,7 +93,7 @@ export class HytTriCheckboxComponent implements OnInit {
    * Set onTouched function
    */
   registerOnTouched(fn: any): void {
-    this.onTouchedFn = fn;
+    this.onTouched = fn;
   }
 
 }

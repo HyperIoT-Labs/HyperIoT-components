@@ -57,4 +57,8 @@ export class StepperComponent implements OnInit {
   completeFirst() {
     this.firstCompleted = !this.firstCompleted;
   }
+
+  selectionChange(event) {
+    console.log("event", event);
+  }
 }

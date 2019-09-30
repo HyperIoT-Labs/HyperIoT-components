@@ -9,8 +9,9 @@
 
 <mat-checkbox
     [(ngModel)]="value" 
+    (click)="next()"
+    [disabled]="disabled"
     [indeterminate]="value === false" 
-    (click)="onClick($event)"
     [color]="value === false ? 'warn' : 'accent'"
 >
     <ng-content></ng-content>

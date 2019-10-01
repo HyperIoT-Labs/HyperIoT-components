@@ -186,5 +186,6 @@ export class HytTreeViewProjectComponent implements OnInit {
     });
 
     this.setData(this.treeData);
+    this.treeControl.expandAll();
   }
 }

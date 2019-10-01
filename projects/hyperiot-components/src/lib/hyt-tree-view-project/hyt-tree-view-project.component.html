@@ -1,4 +1,4 @@
-<hyt-input-text  placeholder="Search for devices or packets..."(change)="onChangeInput($event.target.value)">
+<hyt-input-text  placeholder="Search for devices or packets..." (keyup)="onChangeInput($event.target.value)">
 </hyt-input-text>
 
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">

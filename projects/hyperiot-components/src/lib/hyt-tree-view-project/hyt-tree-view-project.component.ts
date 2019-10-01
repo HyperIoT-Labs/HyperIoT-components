@@ -13,7 +13,7 @@ export interface TreeDataNode {
   last?: boolean;
   parent?: TreeDataNode;
   data?: any;
-  visible: boolean;
+  visible?: boolean;
 }
 
 /**

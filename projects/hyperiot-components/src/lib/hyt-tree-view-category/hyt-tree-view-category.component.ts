@@ -89,12 +89,10 @@ export class HytTreeViewCategoryComponent implements OnInit, OnChanges {
           countNull++;
         }
       });
-      if ((countTrue > 0) && (countFalse > 0)) {
+      if ((countNull > 0) || (countTrue > 0) && (countFalse > 0)) {
         node.parent.active = null;
       } else if (countTrue > 0) {
         node.parent.active = true;
-      } else if (countNull > 0) {
-        node.parent.active = null;
       } else {
         node.parent.active = false;
       }

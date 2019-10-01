@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { LoggerService, Logger } from '@hyperiot/core';
 
 @Component({
   selector: 'app-tags',
@@ -6,6 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./tags.component.scss']
 })
 export class TagsComponent implements OnInit {
+
+  private logger: Logger;
 
   fruits: any[] = [
     {
@@ -26,13 +29,16 @@ export class TagsComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(private loggerService: LoggerService) {
+    this.logger = new Logger(this.loggerService);
+    this.logger.registerClass('TagsComponent');
+   }
 
   ngOnInit() {
   }
 
   click(fruit: any): void {
-    console.log('click', fruit);
+    this.logger.debug('click method called', fruit);
   }
 
   remove(fruit: any): void {

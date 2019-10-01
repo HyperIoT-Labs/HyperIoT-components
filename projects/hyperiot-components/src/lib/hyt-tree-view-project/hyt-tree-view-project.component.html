@@ -1,7 +1,10 @@
+<hyt-input-text  placeholder="Search for devices or packets..." (keyup)="onChangeInput($event.target.value)">
+</hyt-input-text>
+
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
 
   <!-- This is the tree node template for leaf nodes -->
-  <mat-tree-node *matTreeNodeDef="let node" [ngClass]="{active: node.active}" class="d-flex flex-row align-items-center">
+  <mat-tree-node *matTreeNodeDef="let node" [ngClass]="{active: node.active, show: node.visible, hide: !node.visible}" class="d-flex flex-row align-items-center">
 
     <span *ngFor="let i of getLevelTabs(node.level)" [ngClass]="{
       'line-right': (i === node.level - 1 && !node.active),
@@ -24,7 +27,7 @@
   </mat-tree-node>
 
   <!-- This is the tree node template for expandable nodes -->
-  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" class="d-flex flex-row align-items-center" [ngClass]="{active: node.active}">
+  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" class="d-flex flex-row align-items-center" [ngClass]="{active: node.active, show: node.visible, hide: !node.visible}">
 
     <span *ngFor="let i of getLevelTabs(node.level)" [ngClass]="getLevelConnector(node, i)"></span>
 

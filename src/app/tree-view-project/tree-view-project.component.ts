@@ -1,6 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { TreeDataNode } from 'hyperiot-components/public-api';
+import { TreeDataNode } from './../../../projects/hyperiot-components/src/public-api';
 import { HytTreeViewProjectComponent } from 'projects/hyperiot-components/src/lib/hyt-tree-view-project/hyt-tree-view-project.component';
+import { Logger, LoggerService } from '@hyperiot/core';
 
 @Component({
   selector: 'app-tree-view-project',
@@ -9,7 +10,10 @@ import { HytTreeViewProjectComponent } from 'projects/hyperiot-components/src/li
 })
 export class TreeViewProjectComponent implements OnInit {
   // @ViewChild('treeView', {static: true}) treeView: HytTreeViewProjectComponent;
-  @ViewChild('treeView2', {static: true}) treeView2: HytTreeViewProjectComponent;
+  @ViewChild('treeView2', { static: true }) treeView2: HytTreeViewProjectComponent;
+
+  /** logger */
+  private logger: Logger;
 
   // treeData: TreeDataNode[] = [
   //   {
@@ -46,50 +50,50 @@ export class TreeViewProjectComponent implements OnInit {
   // ];
 
   /******************************************************/
-/*
-  treeData2: TreeDataNode[] = [
-    {
-      data: {id: 1},
-      name: 'Project',
-      icon: 'icon-hyt_projectRSolo',
-      children: [
-        { name: 'Device 1', icon: 'icon-hyt_device', data: {id: 10} },
-        { name: 'Device 3', icon: 'icon-hyt_device', data: {id: 11} },
-        { name: 'Device 3', icon: 'icon-hyt_device', data: {id: 12} },
-      ]
-    }, {
-      data: {id: 2},
-      name: 'Project 2',
-      icon: 'icon-hyt_projectRSolo',
-      children: [
-        {
-          data: {id: 3},
-          name: 'Device 4',
-          children: [
-            { name: 'Packet_1', icon: 'icon-hyt_packets', children: [{ name: 'Just a test!', data: {id: 15} }], data: {id: 13} },
-            { name: 'Packet_2', icon: 'icon-hyt_packets', data: {id: 14} },
-          ]
-        }, {
-          data: {id: 4},
-          name: 'Orange',
-          children: [
-            { name: 'Pumpkins', icon: 'icon-hyt_packets', data: {id: 21} },
-            {
-              name: 'Carrots',
-              data: {id: 1},
-              children: [
-                {
-                  name: 'Test',
-                  data: {id: 1}
-                }
-              ]
-            },
-          ]
-        }
-      ]
-    },
-  ];
-*/
+  /*
+    treeData2: TreeDataNode[] = [
+      {
+        data: {id: 1},
+        name: 'Project',
+        icon: 'icon-hyt_projectRSolo',
+        children: [
+          { name: 'Device 1', icon: 'icon-hyt_device', data: {id: 10} },
+          { name: 'Device 3', icon: 'icon-hyt_device', data: {id: 11} },
+          { name: 'Device 3', icon: 'icon-hyt_device', data: {id: 12} },
+        ]
+      }, {
+        data: {id: 2},
+        name: 'Project 2',
+        icon: 'icon-hyt_projectRSolo',
+        children: [
+          {
+            data: {id: 3},
+            name: 'Device 4',
+            children: [
+              { name: 'Packet_1', icon: 'icon-hyt_packets', children: [{ name: 'Just a test!', data: {id: 15} }], data: {id: 13} },
+              { name: 'Packet_2', icon: 'icon-hyt_packets', data: {id: 14} },
+            ]
+          }, {
+            data: {id: 4},
+            name: 'Orange',
+            children: [
+              { name: 'Pumpkins', icon: 'icon-hyt_packets', data: {id: 21} },
+              {
+                name: 'Carrots',
+                data: {id: 1},
+                children: [
+                  {
+                    name: 'Test',
+                    data: {id: 1}
+                  }
+                ]
+              },
+            ]
+          }
+        ]
+      },
+    ];
+  */
   treeData2 = JSON.parse(`
   [
     {
@@ -302,12 +306,17 @@ export class TreeViewProjectComponent implements OnInit {
     }
   ]  `) as TreeDataNode[];
 
+  constructor(private loggerService: LoggerService) {
+    this.logger = new Logger(this.loggerService);
+    this.logger.registerClass('TreeViewProjectComponent');
+  }
+
   ngOnInit() {
     // this.treeView.setData(this.treeData);
     this.treeView2.setData(this.treeData2);
   }
 
   onNodeClicked(node: any) {
-    console.log('onNodeClicked', node);
+    this.logger.debug('onNodeClicked method called', node);
   }
 }

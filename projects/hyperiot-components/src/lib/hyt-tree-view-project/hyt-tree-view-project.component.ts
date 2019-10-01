@@ -1,6 +1,7 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, ViewEncapsulation } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+// import { ConsoleReporter } from 'jasmine';
 
 /**
  * Data node that is used in the `treeData` array passed by the hosting component
@@ -12,6 +13,7 @@ export interface TreeDataNode {
   last?: boolean;
   parent?: TreeDataNode;
   data?: any;
+  visible: boolean;
 }
 
 /**
@@ -26,6 +28,7 @@ interface TreeViewNode {
   last: boolean;
   parent?: TreeDataNode;
   data?: any;
+  visible?: boolean;
 }
 
 @Component({
@@ -100,9 +103,9 @@ export class HytTreeViewProjectComponent implements OnInit {
     } else if (!node.active && (i === node.level - 1 && !node.last) && ((i < node.level && !node.last) || (i !== node.level - 1 && node.last) || this.treeControl.isExpanded(node))) {
       return 'line-right';
     } else if (node.active && (i === node.level - 1 && !node.last) && ((i < node.level && !node.last) || (i !== node.level - 1 && node.last) || this.treeControl.isExpanded(node))) {
-        return 'line-right-active';
+      return 'line-right-active';
     } else if (i === node.level - 1 && node.last && !node.active) {
-        return 'line-end';
+      return 'line-end';
     } else if (i === node.level - 1 && node.last && node.active) {
       return 'line-end-active';
     } else {
@@ -113,6 +116,9 @@ export class HytTreeViewProjectComponent implements OnInit {
   private prepareData(nodeList: TreeDataNode[], parent?: TreeDataNode) {
     let lastNode;
     nodeList.forEach((n) => {
+      if (n.visible == null) {
+        n.visible = true;
+      }
       if (parent) {
         n.parent = parent;
       }
@@ -135,7 +141,51 @@ export class HytTreeViewProjectComponent implements OnInit {
       last: node.last || false,
       parent: node.parent,
       expandable: !!node.children && node.children.length > 0,
-      data: node.data
+      data: node.data,
+      visible: node.visible
     };
+  }
+
+  propagateVisibilityUp(node: TreeDataNode, visibility: boolean) {
+    if (node.parent) {
+      node.parent.visible = visibility;
+      this.propagateVisibilityUp(node.parent, visibility);
+    }
+  }
+
+  propagateVisibilityDown(node: TreeDataNode, visibility: boolean) {
+    if (node.children) {
+      node.children.forEach(children => {
+        children.visible = visibility;
+        this.propagateVisibilityDown(children, visibility);
+      });
+    }
+  }
+
+  treeDataSearch(node: TreeDataNode, token: string): void {
+    if (node.name.toLocaleLowerCase().includes(token.toLocaleLowerCase())) {
+      console.log(node.name);
+      node.visible = true;
+      this.propagateVisibilityUp(node, true);
+      this.propagateVisibilityDown(node, true);
+    }
+    if (node.children) {
+      node.children.forEach(children => {
+        this.treeDataSearch(children, token);
+      });
+    }
+  }
+
+  onChangeInput(value: string) {
+    console.log('onChangeInput ' + value);
+    this.treeData.forEach(node => {
+      this.propagateVisibilityDown(node, false);
+    });
+    this.treeData.forEach(node => {
+      this.treeDataSearch(node, value);
+    });
+
+    this.setData(this.treeData);
+    this.treeControl.expandAll();
   }
 }

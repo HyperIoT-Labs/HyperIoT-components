@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Option } from '../../../projects/hyperiot-components/src/lib/hyt-radio-button/hyt-radio-button.component';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { LoggerService, Logger } from "@hyperiot/core";
 
 @Component({
   selector: 'app-buttons',
@@ -11,6 +12,8 @@ export class ButtonsComponent implements OnInit {
   form: FormGroup;
   form1: FormGroup;
   form2: FormGroup;
+
+  private logger: Logger;
 
   selectedOption: any;
 
@@ -31,8 +34,12 @@ export class ButtonsComponent implements OnInit {
   ];
 
   constructor(
-    private fb: FormBuilder
-  ) { }
+    private fb: FormBuilder,
+    private loggerService: LoggerService
+  ) {
+    this.logger = new Logger(this.loggerService);
+    this.logger.registerClass('ButtonsComponent');
+  }
 
   ngOnInit() {
     this.form = this.fb.group({});
@@ -41,11 +48,12 @@ export class ButtonsComponent implements OnInit {
   }
 
   onClick() {
-    console.log('clicked');
+    this.logger.debug('clicked', event);
   }
 
   onClickCheckbox(value) {
-    console.log('checked=' + this.checked, value);
+    this.checked = !this.checked;
+    this.logger.debug('checked = ' + this.checked);
   }
 
   onClickCheckbox2(value) {
@@ -54,9 +62,9 @@ export class ButtonsComponent implements OnInit {
 
   onChangeRadio(e: any) {
     if (this.selectedOption) {
-      console.log(this.selectedOption);
+      this.logger.debug(this.selectedOption.value);
     }
-    console.log('onChangeRadio: ' + e);
+    this.logger.debug('onChangeRadio: ' + e.value);
   }
 
   submit() { }

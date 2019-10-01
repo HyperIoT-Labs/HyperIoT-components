@@ -1,6 +1,12 @@
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
   <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
     <div class="flex-container">
+      <div class="noIcon">
+        <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.filename">
+          <mat-icon class="mat-icon-rtl-mirror">expand_more
+          </mat-icon>
+        </button>
+      </div>
       <div class="icon">
         <mat-icon>memory</mat-icon>
       </div>
@@ -13,6 +19,11 @@
       </div>
       <div class="type">
         {{node.type}}
+      </div>
+      <div class="button">
+        <button mat-icon-button (click)="modifyItem(node)">
+          <mat-icon>edit</mat-icon>
+        </button>
       </div>
       <div class="button">
         <button mat-icon-button (click)="removeItem(node)">
@@ -68,6 +79,11 @@
       </div>
       <div class="type">
         {{node.type}}
+      </div>
+      <div *ngIf="node.level != 0" class="button">
+        <button mat-icon-button (click)="modifyItem(node)">
+          <mat-icon>edit</mat-icon>
+        </button>
       </div>
       <div class="button">
         <button mat-icon-button (click)="addNewItem(node)">

@@ -131,6 +131,8 @@ export class HytTreeViewEditableComponent implements OnInit {
 
   @Output() addFn: EventEmitter<any> = new EventEmitter();
 
+  @Output() editFn: EventEmitter<any> = new EventEmitter();
+
   @Output() cancelFn: EventEmitter<any> = new EventEmitter();
 
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
@@ -307,6 +309,12 @@ export class HytTreeViewEditableComponent implements OnInit {
     const parentNode: Node = this.flatNodeMap.get(parentNodeFlat);
     this.database.removeItem(parentNode, flatNode.name);
     this.status = 'idle';
+  }
+
+  modifyItem(flatNode: FlatNode) {
+    const node = this.flatNodeMap.get(flatNode);
+    this.status = 'idle';
+    this.editFn.emit(node);
   }
 
   refresh(treeData: any, deviceName: string) {

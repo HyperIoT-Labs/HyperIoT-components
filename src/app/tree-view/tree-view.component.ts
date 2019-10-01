@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { TreeNode } from 'projects/hyperiot-components/src/public-api';
 import { Node } from 'projects/hyperiot-components/src/lib/hyt-tree-view-editable/hyt-tree-view-editable.component';
+import { LoggerService, Logger } from '@hyperiot/core';
 
 @Component({
   selector: 'app-tree-view',
@@ -10,6 +11,8 @@ import { Node } from 'projects/hyperiot-components/src/lib/hyt-tree-view-editabl
 export class TreeViewComponent implements OnInit {
 
   @ViewChild('editableTree', { static: false }) private editableTree: ElementRef;
+
+  private logger: Logger;
 
   treeData: TreeNode[] = [
     {
@@ -72,17 +75,20 @@ export class TreeViewComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(private loggerService: LoggerService) {
+    this.logger = new Logger(this.loggerService);
+    this.logger.registerClass('TreeViewComponent');
+   }
 
   ngOnInit() {
   }
 
   addCallback(parent: Node) {
-    console.log('addCallback', parent);
+    this.logger.debug('addCallback method called', parent);
   }
 
   removeCallback(node: Node) {
-    console.log('removeCallback', node);
+    this.logger.debug('removeCallback method called', node);
     this.Tree.forEach((n, i) => {
       if (n.name === node.name) {
         this.Tree.splice(i, 1);

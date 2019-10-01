@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectOption } from 'hyperiot-components/public-api';
+import { SelectOption } from 'projects/hyperiot-components/src/public-api';
+import { Logger, LoggerService } from '@hyperiot/core';
 
 @Component({
   selector: 'app-select-template',
@@ -18,14 +19,18 @@ export class SelectTemplateComponent implements OnInit {
     { value: 'tacos-2', label: 'Tacos' },
   ];
 
-  constructor() { }
+  private logger: Logger;
+
+  constructor(private loggerService: LoggerService) {
+    this.logger = new Logger(this.loggerService);
+    this.logger.registerClass('SelectTemplateComponent');
+   }
 
   ngOnInit() {
   }
 
   onChange(event) {
-    console.log('onChange called');
-    console.log(event);
+    this.logger.debug('onChange method called', event);
   }
 
   submit() { }

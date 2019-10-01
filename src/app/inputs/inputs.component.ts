@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { Logger, LoggerService } from '@hyperiot/core';
 
 @Component({
   selector: 'app-inputs',
@@ -8,6 +9,8 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
   encapsulation: ViewEncapsulation.None
 })
 export class InputsComponent implements OnInit {
+
+  private logger: Logger;
 
   form: FormGroup;
 
@@ -18,16 +21,19 @@ export class InputsComponent implements OnInit {
   username = 'err';
 
   constructor(
-    private fb: FormBuilder
-  ) { }
+    private fb: FormBuilder,
+    private loggerService: LoggerService
+  ) {
+    this.logger = new Logger(this.loggerService);
+    this.logger.registerClass('InputsComponent');
+   }
 
   ngOnInit() {
     this.form = this.fb.group({});
   }
 
   onChange(event: any) {
-    console.log('onChange called');
-    console.log(event.target.value);
+    this.logger.debug('onChange method called', event.target.value);
     this.inputText = event.target.value;
   }
 

@@ -1,6 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { TreeDataNode } from 'hyperiot-components/public-api';
+import { TreeDataNode } from './../../../projects/hyperiot-components/src/public-api';
 import { HytTreeViewProjectComponent } from 'projects/hyperiot-components/src/lib/hyt-tree-view-project/hyt-tree-view-project.component';
+import { Logger, LoggerService } from '@hyperiot/core';
 
 @Component({
   selector: 'app-tree-view-project',
@@ -8,7 +9,11 @@ import { HytTreeViewProjectComponent } from 'projects/hyperiot-components/src/li
   styleUrls: ['./tree-view-project.component.scss']
 })
 export class TreeViewProjectComponent implements OnInit {
+
   @ViewChild('treeView', {static: true}) treeView: HytTreeViewProjectComponent;
+
+  private logger: Logger
+  
   treeData: TreeDataNode[] = [
     {
       data: {id: 1},
@@ -43,11 +48,16 @@ export class TreeViewProjectComponent implements OnInit {
     },
   ];
 
+  constructor(private loggerService: LoggerService) {
+    this.logger = new Logger(this.loggerService);
+    this.logger.registerClass('TreeViewProjectComponent');
+  }
+
   ngOnInit() {
     this.treeView.setData(this.treeData);
   }
 
   onNodeClicked(node: any) {
-    console.log('onNodeClicked', node);
+    this.logger.debug('onNodeClicked method called', node);
   }
 }

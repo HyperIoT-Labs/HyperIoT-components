@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ButtonsComponent } from './buttons.component';
+import { By } from '@angular/platform-browser';
 
 describe('ButtonsComponent', () => {
   let component: ButtonsComponent;
@@ -21,5 +22,10 @@ describe('ButtonsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('', () => {
+    let btn = fixture.debugElement.query(By.css('mat-raised-button mat-button-base'));
+    btn.triggerEventHandler('onClick', null);
   });
 });

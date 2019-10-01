@@ -18,6 +18,7 @@ import {
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { Logger, LoggerService } from '@hyperiot/core';
 
 /**
  * Custom provider for NG_VALUE_ACCESSOR
@@ -58,6 +59,9 @@ export class CustomErrorStateMatcher implements ErrorStateMatcher {
   encapsulation: ViewEncapsulation.None
 })
 export class HytInputComponent implements OnInit, ControlValueAccessor {
+
+  private logger: Logger;
+
   /** FormGroup */
   @Input() form: FormGroup;
 
@@ -171,7 +175,11 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
    */
   constructor(
     private i18n: I18n,
-  ) { }
+    private loggerService: LoggerService
+  ) {
+    this.logger = new Logger(this.loggerService);
+    this.logger.registerClass('HytInputComponent')
+   }
 
   /**
    * ngOnInit
@@ -342,7 +350,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
 
   /** onChange callback */
   onChange(event: any) {
-    console.log(JSON.stringify(event));
+    this.logger.debug(JSON.stringify(event));
     this.onChangeFn(event);
   }
 

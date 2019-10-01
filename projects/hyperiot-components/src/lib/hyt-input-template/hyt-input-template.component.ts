@@ -19,6 +19,7 @@ import {
 import { ErrorStateMatcher } from '@angular/material/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Observable } from 'rxjs';
+import { LoggerService, Logger } from '@hyperiot/core';
 
 /**
  * Custom provider for NG_VALUE_ACCESSOR
@@ -133,12 +134,18 @@ export class HytInputTemplateComponent implements OnInit, ControlValueAccessor {
   /** Callback function for blur event */
   private onTouchedFn = () => { };
 
+  private logger: Logger;
+
   /**
    * Constructor
    */
   constructor(
     private i18n: I18n,
-  ) { }
+    private loggerService: LoggerService
+  ) {
+    this.logger = new Logger(this.loggerService);
+    this.logger.registerClass('HytInputTemplateComponent');
+   }
 
   /**
    * ngOnInit
@@ -188,20 +195,20 @@ export class HytInputTemplateComponent implements OnInit, ControlValueAccessor {
 
   /** onChange callback */
   onChange(event: any) {
-    console.log('onChange called');
-    console.log(JSON.stringify(event));
+    this.logger.info('onChange method called');
+    this.logger.debug(JSON.stringify(event));
     this.onChangeFn(event);
   }
 
   /** onKeyup callback */
   onKeyup(event: any) {
-    console.log('onKeyup called');
+    this.logger.info('onKeyup method called');
     this.onChangeFn(event.target.value);
   }
 
   /** onBlur callback */
   onBlur() {
-    console.log('onBlur called');
+    this.logger.info('onBlur method called');
     this.onTouchedFn();
   }
 

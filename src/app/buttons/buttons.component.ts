@@ -51,7 +51,7 @@ export class ButtonsComponent implements OnInit {
     this.logger.debug('clicked', event);
   }
 
-  onClickCheckbox() {
+  onClickCheckbox(value) {
     this.checked = !this.checked;
     this.logger.debug('checked = ' + this.checked);
   }

@@ -36,7 +36,7 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 })
 export class HytSelectComponent implements OnInit, ControlValueAccessor {
   /** Selected element */
-  selected: any;
+  @Input() selected: any;
 
   /** FormGroup */
   @Input() form: FormGroup;
@@ -128,6 +128,9 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
     }
     if (this.form) {
       this.form.addControl(this.name, this.formControl);
+    }
+    if (this.selected) {
+      this.formControl.setValue(this.selected);
     }
   }
 

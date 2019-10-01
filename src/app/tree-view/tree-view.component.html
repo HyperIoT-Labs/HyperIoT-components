@@ -1,23 +1,25 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-4">
-            <span>
-                <h4>Nested Tree</h4>
-            </span>
-            <hyt-tree-view [treeData]="treeData"></hyt-tree-view>
-        </div>
-        <div class="col-8">
-            <span>
-                <h4>Editable Tree</h4>
-            </span>
-            <hyt-tree-view-editable 
-                #editableTree
-                [deviceName]="deviceName" 
-                [treeData]="Tree"
-                (addFn)="addCallback($event)"
-                (removeFn)="removeCallback($event)"
-            >
-            </hyt-tree-view-editable>
-        </div>
-    </div> 
+  <div class="row">
+    <div class="col-3">
+      <span>
+        <h4>Nested Tree</h4>
+      </span>
+      <hyt-tree-view [treeData]="treeData"></hyt-tree-view>
+    </div>
+    <div class="col-3">
+      <span>
+        <h4>Category Tree</h4>
+      </span>
+      <hyt-tree-view-category [treeDataFlat]="treeCategory" (cbAdd)="cbAdd($event)" (cbChange)="cbChange($event)">
+      </hyt-tree-view-category>
+    </div>
+    <div class="col-6">
+      <span>
+        <h4>Editable Tree</h4>
+      </span>
+      <hyt-tree-view-editable #editableTree [deviceName]="deviceName" [treeData]="Tree" (addFn)="addCallback($event)"
+        (removeFn)="removeCallback($event)">
+      </hyt-tree-view-editable>
+    </div>
+  </div>
 </div>

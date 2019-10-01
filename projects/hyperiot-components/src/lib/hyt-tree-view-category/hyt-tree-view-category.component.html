@@ -1,0 +1,42 @@
+<mat-tree *ngIf="treeData.length!=0" [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
+
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+    <li class="mat-tree-node">
+      <!-- use a disabled button to provide padding for tree leaf -->
+      <button mat-icon-button disabled></button>
+      <hyt-checkbox [(ngModel)]="node.active" (changeFn)="cbChanged(node)"></hyt-checkbox>
+      {{node.label}} <button (click)="addNode(node)">+</button>
+    </li>
+  </mat-tree-node>
+
+  <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
+    <mat-form-field>
+      <form [formGroup]="catForm" (ngSubmit)="addCategory()">
+        <input matInput #itemValue placeholder="Name" formControlName="name">
+        <button type="submit" [disabled]="!catForm.valid">ADD</button>
+      </form>
+    </mat-form-field>
+    <div class="button">
+      <button mat-button (click)="cancelNode()">Cancel</button>
+    </div>
+  </mat-tree-node>
+
+  <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+    <li>
+      <div class="mat-tree-node">
+        <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.label">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </button>
+        <hyt-tri-checkbox [(ngModel)]="node.active" (changeFn)="cbChanged(node)"></hyt-tri-checkbox>
+        {{node.label}} <button (click)="addNode(node)">+</button>
+      </div>
+      <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+        <ng-container matTreeNodeOutlet></ng-container>
+      </ul>
+    </li>
+  </mat-nested-tree-node>
+
+</mat-tree>
+<button mat-mini-fab color="primary" (click)="addNode(null)">+</button>

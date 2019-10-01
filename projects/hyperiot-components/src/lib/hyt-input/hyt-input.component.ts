@@ -127,6 +127,8 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
    */
   @Input() confirmPassword = '';
 
+  @Input() autocomplete: HTMLElement;
+
   /** The internal data */
   private innerValue: any = '';
 
@@ -190,7 +192,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
 
     function validateUperCase(c: FormControl) {
       const PASS_REGEX: RegExp = new RegExp('^(?=.*[a-z])(?=.*[A-Z]).*$');
-      return PASS_REGEX.test(c.value) || c.value.length === 0 ? null : {
+      return PASS_REGEX.test(c.value) || !c.value || c.value.length === 0 ? null : {
         validateUperCase: {
           valid: false
         }
@@ -198,7 +200,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     }
     function validateNumber(c: FormControl) {
       const PASS_REGEX: RegExp = new RegExp('^(?=.*[a-z])(?=.*[0-9]).*$');
-      return PASS_REGEX.test(c.value) || c.value.length === 0 ? null : {
+      return PASS_REGEX.test(c.value) || !c.value || c.value.length === 0 ? null : {
         validateNumber: {
           valid: false
         }
@@ -206,7 +208,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     }
     function validateSpecialChar(c: FormControl) {
       const PASS_REGEX: RegExp = new RegExp('[^A-Za-z0-9]');
-      return PASS_REGEX.test(c.value) || c.value.length === 0 ? null : {
+      return PASS_REGEX.test(c.value) || !c.value || c.value.length === 0 ? null : {
         validateSpecialChar: {
           valid: false
         }

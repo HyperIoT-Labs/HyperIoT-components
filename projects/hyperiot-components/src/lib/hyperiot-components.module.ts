@@ -25,6 +25,9 @@ import { HytTreeViewEditableComponent } from './hyt-tree-view-editable/hyt-tree-
 import { HytModalComponent } from './hyt-modal/hyt-modal.component';
 import { HytTagComponent } from './hyt-tag/hyt-tag.component';
 import { HytTagListComponent } from './hyt-tag-list/hyt-tag-list.component';
+import { HytTreeViewCategoryComponent } from './hyt-tree-view-category/hyt-tree-view-category.component';
+import { HytAutocompleteComponent } from './hyt-autocomplete/hyt-autocomplete.component';
+import { HytTriCheckboxComponent } from './hyt-tri-checkbox/hyt-tri-checkbox.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,9 @@ import { HytTagListComponent } from './hyt-tag-list/hyt-tag-list.component';
     HytModalComponent,
     HytTagComponent,
     HytTagListComponent,
+    HytTreeViewCategoryComponent,
+    HytAutocompleteComponent,
+    HytTriCheckboxComponent,
   ],
   imports: [
     CommonModule,
@@ -68,13 +74,16 @@ import { HytTagListComponent } from './hyt-tag-list/hyt-tag-list.component';
     HytTextAreaComponent,
     HytSelectComponent,
     HytTreeViewComponent,
+    HytTreeViewCategoryComponent,
     HytInputTemplateComponent,
     HytSelectTemplateComponent,
     HytTreeViewProjectComponent,
     HytTreeViewEditableComponent,
     HytTagComponent,
     HytTagListComponent,
-    HytModalComponent
+    HytModalComponent,
+    HytAutocompleteComponent,
+    HytTriCheckboxComponent
   ]
 })
 export class HyperiotComponentsModule { }

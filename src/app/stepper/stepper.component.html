@@ -80,6 +80,7 @@
         [stepArray]="[firstTemplate, secondTemplate, thirdTemplate]"
         [labelArray]="['Fill out your name', 'Fill out your address', 'Fill out your email']"
         [completedArray]="[firstCompleted, true, false]"
+        (selectionChange)="selectionChange($event)"
       >
       </hyt-stepper>
      

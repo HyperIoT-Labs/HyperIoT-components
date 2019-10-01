@@ -102,7 +102,7 @@ export class HytRadioButtonComponent implements OnInit, ControlValueAccessor {
     // set checked option
     for (const option of this.options) {
       if (option.checked) {
-        this.formControl.setValue({ source: 'MatRadioButton', value: option.value });
+        this.formControl.setValue(option.value);
       }
     }
     if (this.form) {
@@ -153,7 +153,7 @@ export class HytRadioButtonComponent implements OnInit, ControlValueAccessor {
   }
 
   onChange(e: any) {
-    this.changeFn.emit(e);
-    this.onChangeFn(e);
+    this.changeFn.emit(e.value);
+    this.onChangeFn(e.value);
   }
 }

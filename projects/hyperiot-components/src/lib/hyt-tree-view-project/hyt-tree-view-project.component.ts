@@ -116,6 +116,7 @@ export class HytTreeViewProjectComponent implements OnInit {
   private prepareData(nodeList: TreeDataNode[], parent?: TreeDataNode) {
     let lastNode;
     nodeList.forEach((n) => {
+      n.last = false;
       if (n.visible == null) {
         n.visible = true;
       }
@@ -125,7 +126,9 @@ export class HytTreeViewProjectComponent implements OnInit {
       if (n.children) {
         this.prepareData(n.children, n);
       }
-      lastNode = n;
+      if (n.visible) {
+        lastNode = n;
+      }
     });
     if (lastNode) {
       lastNode.last = true;
@@ -155,23 +158,25 @@ export class HytTreeViewProjectComponent implements OnInit {
 
   propagateVisibilityDown(node: TreeDataNode, visibility: boolean) {
     if (node.children) {
-      node.children.forEach(children => {
-        children.visible = visibility;
-        this.propagateVisibilityDown(children, visibility);
+      node.children.forEach(child => {
+        child.visible = visibility;
+        this.propagateVisibilityDown(child, visibility);
       });
     }
   }
 
   treeDataSearch(node: TreeDataNode, token: string): void {
-    if (node.name.toLocaleLowerCase().includes(token.toLocaleLowerCase())) {
-      console.log(node.name);
-      node.visible = true;
-      this.propagateVisibilityUp(node, true);
-      this.propagateVisibilityDown(node, true);
-    }
     if (node.children) {
-      node.children.forEach(children => {
-        this.treeDataSearch(children, token);
+      if (node.name.toLocaleLowerCase().includes(token.toLocaleLowerCase())) {
+        console.log(node.name);
+        node.visible = true;
+        this.propagateVisibilityUp(node, true);
+        this.propagateVisibilityDown(node, true);
+      }
+      node.children.forEach(child => {
+        if (!child.visible) {
+          this.treeDataSearch(child, token);
+        }
       });
     }
   }
@@ -179,6 +184,7 @@ export class HytTreeViewProjectComponent implements OnInit {
   onChangeInput(value: string) {
     console.log('onChangeInput ' + value);
     this.treeData.forEach(node => {
+      node.visible = false;
       this.propagateVisibilityDown(node, false);
     });
     this.treeData.forEach(node => {

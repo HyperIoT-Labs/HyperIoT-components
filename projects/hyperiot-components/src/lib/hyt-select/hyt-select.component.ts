@@ -3,7 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, Validators, FormG
 
 /** Interface for select option element */
 export interface SelectOption {
-  value?: string;
+  value?: any;
   label: string;
 }
 

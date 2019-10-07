@@ -103,13 +103,13 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   @Input() isRequired = false;
 
   /** Disabled option */
-  isDisabled = false;
+  isDisabled: boolean;
   @Input()
-  get disabled(): boolean {
-    return this.isDisabled;
-  }
   set disabled(d: boolean) {
     this.isDisabled = d;
+  }
+  get disabled(): boolean {
+    return this.isDisabled;
   }
 
   /** Applies email validation */
@@ -181,7 +181,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
   ) {
     this.logger = new Logger(this.loggerService);
     this.logger.registerClass('HytInputComponent')
-   }
+  }
 
   /**
    * ngOnInit
@@ -268,6 +268,9 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
     this.formControl = new FormControl('', Validators.compose(validators));
     if (this.fieldValue) {
       this.formControl.setValue(this.fieldValue);
+    }
+    if (this.isDisabled) {
+      this.formControl.disable();
     }
     if (this.form) {
       this.form.addControl(this.name, this.formControl);

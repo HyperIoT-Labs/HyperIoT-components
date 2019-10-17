@@ -8,6 +8,8 @@
       id="{{id}}" 
       placeholder="{{placeholder}}" 
       value="{{fieldValue}}"
+      (focus)="onFocus()"
+      (blur)="onBlur()" 
       [formControl]="formControl" 
       [errorStateMatcher]="matcher">
     </textarea>

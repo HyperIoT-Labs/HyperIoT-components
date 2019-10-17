@@ -5,7 +5,9 @@ import {
   ViewChild,
   ElementRef,
   forwardRef,
-  ViewEncapsulation
+  ViewEncapsulation,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -88,6 +90,10 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
 
   /** If 'bottom' is specified errors appears at the bottom */
   @Input() errorPosition = '';
+
+  @Input() externalHint = null;
+
+  @Output() outHint: EventEmitter<string> = new EventEmitter<string>();
 
   /** ViewChild */
   @ViewChild('input', { static: false }) private inputElement: ElementRef;
@@ -366,7 +372,12 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
 
   /** onBlur callback */
   onBlur() {
+    this.outHint.emit(null);
     this.onTouchedFn();
+  }
+
+  onFocus(){
+    this.outHint.emit(this.externalHint);
   }
 
 }

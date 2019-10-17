@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, forwardRef, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, Validators, FormGroupDirective, NgForm, FormGroup } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
@@ -41,6 +41,8 @@ export class HytTextAreaComponent implements OnInit, ControlValueAccessor {
   @Input() id: string;
   @Input() name: string;
   @Input() hint = '';
+  @Input() externalHint = null;
+  @Output() outHint: EventEmitter<string> = new EventEmitter<string>();
 
   value: any = '';
 
@@ -94,8 +96,14 @@ export class HytTextAreaComponent implements OnInit, ControlValueAccessor {
     this.onChangeFn(event.target.value);
   }
 
-  onBlur(event: any) {
+  /** onBlur callback */
+  onBlur() {
+    this.outHint.emit(null);
     this.onTouchedFn();
+  }
+
+  onFocus() {
+    this.outHint.emit(this.externalHint);
   }
 
 

@@ -30,7 +30,7 @@
             <h4>Validated password</h4>
           </span>
           <hyt-input-text [form]="form" formControlName="password" name="password" [isPassword]="true"
-            type="password" [isRequired]="true" hint="Errors appears instantly!" placeholder="Insert password"
+            type="password" [isRequired]="false" hint="Errors appears instantly!" placeholder="Insert password"
             errorPosition="bottom">
           </hyt-input-text>
         </div>
@@ -71,7 +71,7 @@
           </hyt-input-text>
         </div>
         <div class="submit">
-          <hyt-button type="submit" color="primary">Submit</hyt-button>
+          <hyt-button type="submit" color="primary" [isDisabled]="isFormInvalid()">Submit</hyt-button>
         </div>
       </div>
     </div>

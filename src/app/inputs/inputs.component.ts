@@ -10,6 +10,11 @@ import { Logger, LoggerService } from '@hyperiot/core';
 })
 export class InputsComponent implements OnInit {
 
+  isFormInvalid(): boolean {
+    console.log(this.form.get('required'));
+    return this.form.get('required').invalid;
+  }
+  
   private logger: Logger;
 
   form: FormGroup;
@@ -26,7 +31,7 @@ export class InputsComponent implements OnInit {
   ) {
     this.logger = new Logger(this.loggerService);
     this.logger.registerClass('InputsComponent');
-   }
+  }
 
   ngOnInit() {
     this.form = this.fb.group({});

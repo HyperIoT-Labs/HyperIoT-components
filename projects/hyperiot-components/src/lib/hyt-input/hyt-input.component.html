@@ -10,7 +10,7 @@
       name="{{name}}" 
       id="{{id}}" 
       type="{{type}}"
-      placeholder="{{placeholder}}" 
+      [placeholder]="(_isRequired)? placeholder + ' *': placeholder"
       value="{{fieldValue}}"
       (focus)="onFocus()"
       (blur)="onBlur()" 

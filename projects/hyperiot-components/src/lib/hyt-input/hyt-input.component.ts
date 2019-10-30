@@ -7,8 +7,7 @@ import {
   forwardRef,
   ViewEncapsulation,
   Output,
-  EventEmitter,
-  OnChanges
+  EventEmitter
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -61,7 +60,7 @@ export class CustomErrorStateMatcher implements ErrorStateMatcher {
   providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
   encapsulation: ViewEncapsulation.None
 })
-export class HytInputComponent implements OnInit, ControlValueAccessor, OnChanges {
+export class HytInputComponent implements OnInit, ControlValueAccessor {
 
   private logger: Logger;
 
@@ -107,14 +106,7 @@ export class HytInputComponent implements OnInit, ControlValueAccessor, OnChange
   }
 
   /** Applies required validation */
-   _isRequired = false;
-   @Input()
-  set isRequired(d: boolean) {
-    this._isRequired = d;
-  }
-  get isRequired(): boolean {
-    return this._isRequired;
-  }
+  @Input() isRequired = false;
 
   /** Disabled option */
   isDisabled: boolean;
@@ -197,7 +189,10 @@ export class HytInputComponent implements OnInit, ControlValueAccessor, OnChange
     this.logger.registerClass('HytInputComponent')
   }
 
-  ngOnChanges(){
+  /**
+   * ngOnInit
+   */
+  ngOnInit() {
     const validators = [];
     const self = this;
 
@@ -254,8 +249,9 @@ export class HytInputComponent implements OnInit, ControlValueAccessor, OnChange
           );
       };
 */
-    if (this._isRequired) {
+    if (this.isRequired) {
       validators.push(Validators.required);
+      this.placeholder += ' *';
     }
     if (this.isEmail) {
       validators.push(Validators.email);
@@ -283,16 +279,8 @@ export class HytInputComponent implements OnInit, ControlValueAccessor, OnChange
       this.formControl.disable();
     }
     if (this.form) {
-      this.form.removeControl(this.name);
       this.form.addControl(this.name, this.formControl);
     }
-  }
-
-  /**
-   * ngOnInit
-   */
-  ngOnInit() {
-   
   }
 
   /** get accessor */

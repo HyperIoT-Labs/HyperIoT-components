@@ -5,6 +5,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, Validators, FormG
 export interface SelectOption {
   value?: any;
   label: string;
+  disabled?: boolean;
 }
 
 /** Interface for a group of select options element */

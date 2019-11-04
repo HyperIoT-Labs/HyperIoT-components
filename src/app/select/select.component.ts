@@ -20,8 +20,8 @@ export class SelectComponent implements OnInit {
   options: SelectOption[] = [
     { label: 'None' },
     { value: 'steak-0', label: 'Steak' },
-    { value: 'pizza-1', label: 'Pizza' },
-    { value: 'tacos-2', label: 'Tacos' },
+    { value: 'pizza-1', label: 'Pizza', disabled: true },
+    { value: 'tacos-2', label: 'Tacos', disabled: false },
   ];
 
   pokemonGroups: SelectOptionGroup[] = [

@@ -28,6 +28,7 @@
     <mat-option 
       *ngFor="let option of selectOptions" 
       [value]="option.value"
+      [disabled]="option.disabled ? true : null"
     >
       {{ option.label }}
     </mat-option>

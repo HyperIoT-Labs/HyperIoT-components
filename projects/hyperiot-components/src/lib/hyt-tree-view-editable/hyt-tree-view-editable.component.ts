@@ -133,7 +133,7 @@ export class HytTreeViewEditableComponent implements OnInit {
 
   @Output() editFn: EventEmitter<any> = new EventEmitter();
 
-  @Output() cancelFn: EventEmitter<any> = new EventEmitter();
+  //@Output() cancelFn: EventEmitter<any> = new EventEmitter();
 
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap = new Map<FlatNode, Node>();
@@ -287,9 +287,9 @@ export class HytTreeViewEditableComponent implements OnInit {
   addNewItem(node: FlatNode) {
     const parentNode: Node = this.flatNodeMap.get(node);
     if (this.status !== 'nodeInsertion') {
-      this.status = 'nodeInsertion';
-      this.database.insertItem(parentNode!, '', '', '', 0, false);
-      this.treeControl.expand(node);
+      //this.status = 'nodeInsertion';
+      //this.database.insertItem(parentNode!, '', '', '', 0, false);
+      //this.treeControl.expand(node);
       this.addFn.emit(parentNode);
     }
   }
@@ -322,7 +322,7 @@ export class HytTreeViewEditableComponent implements OnInit {
     this.treeControl.expandAll();
     this.status = 'idle';
   }
-
+/*
   cancelInsertion(flatNode: FlatNode) {
     const parentNodeFlat = this.getParentNode(flatNode);
     const parentNode: Node = this.flatNodeMap.get(parentNodeFlat);
@@ -330,8 +330,9 @@ export class HytTreeViewEditableComponent implements OnInit {
     this.status = 'idle';
     this.cancelFn.emit(parentNode);
   }
+*/
 
-  /** Save the node to database */
+/** Save the node to database */
   saveNode(node: FlatNode, name: string, lom: string, type: string, data: any, root: boolean) {
     const nestedNode = this.flatNodeMap.get(node);
     this.database.updateItem(nestedNode!, name, lom, type, data, root);

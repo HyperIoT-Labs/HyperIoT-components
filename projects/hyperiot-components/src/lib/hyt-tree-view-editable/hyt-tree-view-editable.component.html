@@ -33,6 +33,7 @@
     </div>
   </mat-tree-node>
 
+  <!--
   <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
     <button mat-icon-button disabled></button>
     <div class="flex-container">
@@ -58,6 +59,7 @@
       </div>
     </div>
   </mat-tree-node>
+  -->
 
   <mat-tree-node *matTreeNodeDef="let node; when: hasChild" [ngClass]="{'rootItem': node.level == 0}"
     matTreeNodePadding>

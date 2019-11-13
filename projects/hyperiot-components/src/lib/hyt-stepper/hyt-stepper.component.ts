@@ -1,11 +1,12 @@
-import { Component, OnInit, Input, TemplateRef, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef, ViewChild, ElementRef, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'hyt-stepper',
   templateUrl: './hyt-stepper.component.html',
-  styleUrls: ['./hyt-stepper.component.scss']
+  styleUrls: ['./hyt-stepper.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HytStepperComponent implements OnInit {
   /** ViewChild */

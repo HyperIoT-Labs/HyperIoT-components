@@ -3,14 +3,18 @@
     (selectionChange)="change($event)"
    >
     
-    <mat-step 
+    <mat-step
+
       *ngFor="let template of stepArray; let i = index" 
       [completed]="completed[i]"
+
     >
       <ng-template matStepLabel>{{ labelArray[i] }}</ng-template>
+
       <ng-container 
         *ngTemplateOutlet="template">
       </ng-container>
+
     </mat-step>
 
   </mat-horizontal-stepper>

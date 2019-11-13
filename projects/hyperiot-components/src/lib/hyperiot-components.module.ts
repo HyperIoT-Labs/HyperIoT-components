@@ -28,6 +28,7 @@ import { HytTagListComponent } from './hyt-tag-list/hyt-tag-list.component';
 import { HytTreeViewCategoryComponent } from './hyt-tree-view-category/hyt-tree-view-category.component';
 import { HytAutocompleteComponent } from './hyt-autocomplete/hyt-autocomplete.component';
 import { HytTriCheckboxComponent } from './hyt-tri-checkbox/hyt-tri-checkbox.component';
+import { HytHexagonComponent } from './hyt-hexagon/hyt-hexagon.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { HytTriCheckboxComponent } from './hyt-tri-checkbox/hyt-tri-checkbox.com
     HytTreeViewCategoryComponent,
     HytAutocompleteComponent,
     HytTriCheckboxComponent,
+    HytHexagonComponent,
   ],
   imports: [
     CommonModule,
@@ -83,7 +85,8 @@ import { HytTriCheckboxComponent } from './hyt-tri-checkbox/hyt-tri-checkbox.com
     HytTagListComponent,
     HytModalComponent,
     HytAutocompleteComponent,
-    HytTriCheckboxComponent
+    HytTriCheckboxComponent,
+    HytHexagonComponent
   ]
 })
 export class HyperiotComponentsModule { }

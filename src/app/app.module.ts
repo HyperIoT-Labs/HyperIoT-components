@@ -34,6 +34,7 @@ import { TreeViewProjectComponent } from './tree-view-project/tree-view-project.
 import { TagsComponent } from './tags/tags.component';
 import { ModalComponent } from './modal/modal.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
+import { HexagonComponent } from './hexagon/hexagon.component';
 
 const appRoutes: Routes = [
   { path: 'inputs', component: InputsComponent },
@@ -49,7 +50,7 @@ const appRoutes: Routes = [
   { path: 'modal', component: ModalComponent },
   { path: 'tags', component: TagsComponent },
   { path: 'autocomplete', component: AutocompleteComponent },
-
+  { path: 'hexagon', component: HexagonComponent }
 ];
 
 @NgModule({
@@ -67,7 +68,8 @@ const appRoutes: Routes = [
     TreeViewProjectComponent,
     TagsComponent,
     ModalComponent,
-    AutocompleteComponent
+    AutocompleteComponent,
+    HexagonComponent
   ],
   imports: [
     RouterModule.forRoot(

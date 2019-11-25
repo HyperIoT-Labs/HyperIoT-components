@@ -9,7 +9,15 @@
       [completed]="completed[i]"
 
     >
-      <ng-template matStepLabel>{{ labelArray[i] }}</ng-template>
+      <ng-template matStepLabel>
+
+        <div [ngClass]="{'stepIsDirty': isDirty[i], 'stepIsNotDirty': !isDirty[i]}">
+          <span class="hyt-icon icon-hyt_warnT"></span>
+        </div>
+
+        {{ labelArray[i] }}
+
+      </ng-template>
 
       <ng-container 
         *ngTemplateOutlet="template">

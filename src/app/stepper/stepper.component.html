@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <span>
-        <h4>Stepper - 4 step, linear</h4>
+        <h4 >Stepper - 4 step, linear</h4>
       </span>
 
       <ng-template #firstTemplate>
@@ -81,6 +81,7 @@
         [labelArray]="['Fill out your name', 'Fill out your address', 'Fill out your email']"
         [completedArray]="[firstCompleted, true, false]"
         (selectionChange)="selectionChange($event)"
+        [isDirty] = "[true, true, false]"
       >
       </hyt-stepper>
      

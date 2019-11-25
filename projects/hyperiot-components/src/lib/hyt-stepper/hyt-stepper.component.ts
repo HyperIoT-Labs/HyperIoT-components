@@ -15,7 +15,10 @@ export class HytStepperComponent implements OnInit {
   /** Function called when click event is triggered */
   @Output() selectionChange: EventEmitter<any> = new EventEmitter();
 
-  /** Eneable liner stepper */
+  /** Variable used to display an alert icon if the field is Dirty */
+  @Input() isDirty : boolean[];
+
+  /** Enable liner stepper */
   @Input() isLinear = false;
 
   @Input() stepArray: TemplateRef<any>[];

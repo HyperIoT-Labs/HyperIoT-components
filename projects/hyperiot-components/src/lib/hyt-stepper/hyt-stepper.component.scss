@@ -9,6 +9,21 @@
 
             .mat-step-label {
                 padding-top: 0px;
+
+                .stepIsDirty {
+                    width: 25px;
+                    height: 25px;
+                    color: #ea8f15;
+                    position: absolute;
+                    top: 50px;
+                    left: 50%;
+                    font-size: 1.6em;
+                    transform: translate(17px, -39px);
+                }
+
+                .stepIsNotDirty {
+                    display: none;
+                }
             }
         }
 
@@ -63,7 +78,6 @@
                 &::after {
                     width: 60px;
                     height: 60px;
-                    // background-color: red;
                     position: absolute;
                     top: 0px;
                     left: 0px;
@@ -107,6 +121,7 @@
                     }
                 }
             }
+            /* END */
         }
 
         &:nth-of-type(2) { /* Device Icon */
@@ -165,7 +180,7 @@
                     content: "\e91f";
                     font-size: 2.2em;
                     padding-top: 13px;
-                    padding-left: 2px;
+                    padding-left: 0px;
                     transform: scale(1);
                     color: #fff;
                 }

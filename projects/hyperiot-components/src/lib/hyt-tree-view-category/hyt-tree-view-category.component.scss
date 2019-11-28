@@ -41,6 +41,73 @@ mat-tree {
 
           margin-right: 15px;
 
+          mat-checkbox {
+
+            label {
+              margin: 0px;
+            }
+
+            .mat-ripple-element {
+
+              &:nth-child(1),
+              &:nth-child(2) {
+                display: none;
+              }
+              
+            }
+
+            &.mat-checkbox-checked {
+
+              .mat-checkbox-background {
+                background-color: #ffffff;
+                border: 2px solid #1a3f73;
+
+                &::before {
+
+                  content: "";
+                  width: 8px;
+                  height: 8px;
+                  background-color: #1a3f73;
+                  position: absolute;
+
+                }
+
+                svg {
+                  display: none;
+                }
+              }
+
+            }
+
+            &.mat-checkbox-indeterminate {
+              .mat-checkbox-background {
+                background-color: #ffffff;
+                border: 2px solid #1a3f73;
+
+                &::before {
+                  content: '';
+                  border-left: 13px solid transparent;
+                  border-right: 0px solid transparent;
+                  border-top: 13px solid #1a3f73;
+                  transform: rotate(90deg);
+                }
+
+                svg {
+                  display: none;
+                }
+              }
+            }
+
+            &.mat-checkbox-anim-indeterminate-unchecked {
+              .mat-checkbox-background {
+                .mat-checkbox-mixedmark {
+                  display: none;
+                }
+              }
+            }
+
+          }
+
         }
 
         span {
@@ -100,6 +167,77 @@ mat-tree {
 
         margin-right: 15px;
 
+        mat-checkbox {
+          
+          label {
+            margin: 0px;
+          }
+
+          .mat-ripple-element {
+
+            &:nth-child(1),
+            &:nth-child(2) {
+              display: none;
+            }
+            
+          }
+
+          &.mat-checkbox-checked {
+
+            &.mat-accent {
+
+              .mat-checkbox-background {
+                background-color: #ffffff;
+                border: 2px solid #1a3f73;
+  
+                &::before {
+  
+                  content: "";
+                  width: 8px;
+                  height: 8px;
+                  background-color: #1a3f73;
+                  position: absolute;
+  
+                }
+  
+                svg {
+                  display: none;
+                }
+              }
+
+            }
+
+          }
+
+          &.mat-checkbox-indeterminate {
+            .mat-checkbox-background {
+              background-color: #ffffff;
+              border: 2px solid #1a3f73;
+
+              &::before {
+                content: '';
+                border-left: 13px solid transparent;
+                border-right: 0px solid transparent;
+                border-top: 13px solid #1a3f73;
+                transform: rotate(90deg);
+              }
+
+              svg {
+                display: none;
+              }
+            }
+          }
+
+          &.mat-checkbox-anim-indeterminate-unchecked {
+            .mat-checkbox-background {
+              .mat-checkbox-mixedmark {
+                display: none;
+              }
+            }
+          }
+
+        }
+
       }
 
       span {
@@ -145,6 +283,7 @@ mat-tree {
             &:hover {
 
               color: #008aff;
+              cursor: pointer;
 
             }
 
@@ -164,6 +303,7 @@ mat-tree {
       &:hover.btn-delete-node {
 
         color: #fd0c17;
+        cursor: pointer;
 
       }
 

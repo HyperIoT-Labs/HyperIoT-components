@@ -15,7 +15,7 @@ export interface TreeNodeCategory {
 @Component({
   selector: 'hyt-tree-view-category',
   templateUrl: './hyt-tree-view-category.component.html',
-  styleUrls: ['./hyt-tree-view-category.component.css'],
+  styleUrls: ['./hyt-tree-view-category.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class HytTreeViewCategoryComponent implements OnInit, OnChanges {

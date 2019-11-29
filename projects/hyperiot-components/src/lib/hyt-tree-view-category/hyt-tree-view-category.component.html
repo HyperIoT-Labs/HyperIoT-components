@@ -5,7 +5,7 @@
       <!-- use a disabled button to provide padding for tree leaf -->
       <button mat-icon-button disabled></button>
       <hyt-checkbox [(ngModel)]="node.active" (changeFn)="cbChanged(node)"></hyt-checkbox>
-      <!-- {{node.label}} <button class="btn-add-node" (click)="addNode(node)">+</button> -->
+      
       {{node.label}} <span class="btn-add-node hyt-icon icon-hyt_plus" (click)="addNode(node)"></span>
     </li>
   </mat-tree-node>
@@ -14,7 +14,6 @@
     <mat-form-field class="tree-form">
       <form [formGroup]="catForm" (ngSubmit)="addCategory()">
         <input matInput #itemValue placeholder="Name" formControlName="name">
-        <!-- <button type="submit" [disabled]="!catForm.valid">ADD</button> -->
 
         <button type="submit" [disabled]="!catForm.valid">
           <span class="hyt-icon icon-hyt_plus"></span>
@@ -23,7 +22,7 @@
       </form>
     </mat-form-field>
     <div class="button">
-      <!-- <button mat-button (click)="cancelNode()">Cancel</button> -->
+      
       <span class="btn-delete-node hyt-icon icon-hyt_cancel" (click)="cancelNode()"></span>
     </div>
   </mat-tree-node>
@@ -37,7 +36,7 @@
           </mat-icon>
         </button>
         <hyt-tri-checkbox [(ngModel)]="node.active" (changeFn)="cbChanged(node)"></hyt-tri-checkbox>
-        <!-- {{node.label}} <button class="btn-add-node" (click)="addNode(node)">+</button> -->
+        
         {{node.label}} <span class="btn-add-node hyt-icon icon-hyt_plus" (click)="addNode(node)"></span>
       </div>
       <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
@@ -47,7 +46,7 @@
   </mat-nested-tree-node>
 
 </mat-tree>
-<!-- <button mat-mini-fab color="primary" (click)="addNode(null)">+</button> -->
+
 <hyt-button
   id="add-node-btn"
   mat-mini-fab 

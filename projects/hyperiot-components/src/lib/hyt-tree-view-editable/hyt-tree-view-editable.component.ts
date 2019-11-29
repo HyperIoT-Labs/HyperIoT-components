@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, Injectable, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, Injectable, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { BehaviorSubject } from 'rxjs';
 
@@ -110,7 +110,8 @@ export class NodeDatabase {
   selector: 'hyt-tree-view-editable',
   templateUrl: './hyt-tree-view-editable.component.html',
   styleUrls: ['./hyt-tree-view-editable.component.scss'],
-  providers: [NodeDatabase]
+  providers: [NodeDatabase],
+  encapsulation: ViewEncapsulation.None
 })
 export class HytTreeViewEditableComponent implements OnInit {
 

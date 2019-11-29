@@ -53,11 +53,37 @@ export class HytTreeViewProjectComponent implements OnInit {
 
   ngOnInit() {
     if (this.treeData) {
+      this.addTagsAndCategories(this.treeData);
       this.setData(this.treeData);
     }
   }
 
-  setData(data: any) {
+  addTagsAndCategories(data: TreeDataNode[]) {
+    data.forEach(node => {
+      const tags: TreeDataNode = {
+        data: {
+          id: 999999999
+        },
+        name: 'Project Tags',
+        icon: 'icon-hyt_tags',
+        visible: true,
+        children: []
+      };
+      node.children.push(tags);
+      const categories: TreeDataNode = {
+        data: {
+          id: 999999998
+        },
+        name: 'Project Categories',
+        icon: 'icon-hyt_categories',
+        visible: true,
+        children: []
+      };
+      node.children.push(categories);
+    });
+  }
+
+  setData(data: TreeDataNode[]) {
     this.prepareData(data);
     this.treeData = data;
     this.dataSource.data = this.treeData;
@@ -159,8 +185,10 @@ export class HytTreeViewProjectComponent implements OnInit {
   propagateVisibilityDown(node: TreeDataNode, visibility: boolean) {
     if (node.children) {
       node.children.forEach(child => {
-        child.visible = visibility;
-        this.propagateVisibilityDown(child, visibility);
+        if (child.name !== 'Project Tags' && child.name !== 'Project Categories') {
+          child.visible = visibility;
+          this.propagateVisibilityDown(child, visibility);
+        }
       });
     }
   }

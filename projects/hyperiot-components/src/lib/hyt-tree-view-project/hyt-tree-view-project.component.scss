@@ -176,3 +176,15 @@
 .hide {
     display: none !important;
 }
+
+.tags-container, 
+.category-container {
+    cursor: pointer;
+    padding: 5px;
+}
+
+.hyt-icon {
+    font-size: 1.6em;
+    vertical-align: middle;
+    font-family: Exo; 
+}

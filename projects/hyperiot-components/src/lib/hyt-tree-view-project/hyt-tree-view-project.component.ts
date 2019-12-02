@@ -48,42 +48,68 @@ export class HytTreeViewProjectComponent implements OnInit {
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
   private lastActiveNode: TreeViewNode;
+
   constructor() {
   }
 
   ngOnInit() {
     if (this.treeData) {
-      this.addTagsAndCategories(this.treeData);
       this.setData(this.treeData);
     }
   }
 
+  nodeHasTags(node: TreeDataNode) {
+    let hasTags = false;
+    node.children.forEach(child => {
+      if (child.data.id === 999999999) {
+        hasTags = true;
+      }
+    });
+    return hasTags;
+  }
+
+  nodeHasCategories(node: TreeDataNode) {
+    let hasCategories = false;
+    node.children.forEach(child => {
+      if (child.data.id === 999999998) {
+        hasCategories = true;
+      }
+    });
+    return hasCategories;
+  }
+
   addTagsAndCategories(data: TreeDataNode[]) {
+    console.log('addTagsAndCategories');
     data.forEach(node => {
-      const tags: TreeDataNode = {
-        data: {
-          id: 999999999
-        },
-        name: 'Project Tags',
-        icon: 'icon-hyt_tags',
-        visible: true,
-        children: []
-      };
-      node.children.push(tags);
-      const categories: TreeDataNode = {
-        data: {
-          id: 999999998
-        },
-        name: 'Project Categories',
-        icon: 'icon-hyt_categories',
-        visible: true,
-        children: []
-      };
-      node.children.push(categories);
+      if (this.nodeHasTags(node) === false) {
+        const tags: TreeDataNode = {
+          data: {
+            id: 999999999
+          },
+          name: 'Project Tags',
+          icon: 'icon-hyt_tags',
+          visible: true,
+          children: []
+        };
+        node.children.push(tags);
+      }
+      if (this.nodeHasCategories(node) === false) {
+        const categories: TreeDataNode = {
+          data: {
+            id: 999999998
+          },
+          name: 'Project Categories',
+          icon: 'icon-hyt_categories',
+          visible: true,
+          children: []
+        };
+        node.children.push(categories);
+      }
     });
   }
 
   setData(data: TreeDataNode[]) {
+    this.addTagsAndCategories(this.treeData);
     this.prepareData(data);
     this.treeData = data;
     this.dataSource.data = this.treeData;
@@ -185,7 +211,7 @@ export class HytTreeViewProjectComponent implements OnInit {
   propagateVisibilityDown(node: TreeDataNode, visibility: boolean) {
     if (node.children) {
       node.children.forEach(child => {
-        if (child.name !== 'Project Tags' && child.name !== 'Project Categories') {
+        if (child.data.id !== 999999999 && child.data.id !== 999999998) {
           child.visible = visibility;
           this.propagateVisibilityDown(child, visibility);
         }

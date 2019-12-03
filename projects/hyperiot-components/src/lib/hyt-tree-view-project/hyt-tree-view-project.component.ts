@@ -84,7 +84,8 @@ export class HytTreeViewProjectComponent implements OnInit {
       if (this.nodeHasTags(node) === false) {
         const tags: TreeDataNode = {
           data: {
-            id: 999999999
+            id: 999999999,
+            type: 'tags'
           },
           name: 'Project Tags',
           icon: 'icon-hyt_tags',
@@ -96,7 +97,8 @@ export class HytTreeViewProjectComponent implements OnInit {
       if (this.nodeHasCategories(node) === false) {
         const categories: TreeDataNode = {
           data: {
-            id: 999999998
+            id: 999999998,
+            type: 'categories'
           },
           name: 'Project Categories',
           icon: 'icon-hyt_categories',

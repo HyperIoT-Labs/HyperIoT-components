@@ -56,6 +56,15 @@
 
     </div>
 
+    <div class="button ui-element">
+
+      <h4>hyt-base-total-white</h4>
+      <hyt-button [color]="'hyt-base-total-white'" (clickFn)="onClick()">
+        BUTTON
+      </hyt-button>
+
+    </div>
+
   </div>
 
   <div class="row">
@@ -82,6 +91,15 @@
 
       <h4>hyt-base-white-rounded ICON</h4>
       <hyt-button [color]="'hyt-base-white-rounded'" (clickFn)="onClick()">
+        <span class="hyt-icon icon-hyt_plusC"></span>  BUTTON
+      </hyt-button>
+
+    </div>
+
+    <div class="button ui-element">
+
+      <h4>hyt-base-total-white ICON</h4>
+      <hyt-button [color]="'hyt-base-total-white'" (clickFn)="onClick()">
         <span class="hyt-icon icon-hyt_plusC"></span>  BUTTON
       </hyt-button>
 
@@ -118,6 +136,15 @@
 
     </div>
 
+    <div class="button ui-element">
+
+      <h4>hyt-base-total-white DISABLED</h4>
+      <hyt-button [color]="'hyt-base-total-white'" (clickFn)="onClick()" [isDisabled]="true">
+        <span class="hyt-icon icon-hyt_plusC"></span>  BUTTON
+      </hyt-button>
+
+    </div>
+
   </div>
 
   <div class="row">
@@ -125,7 +152,7 @@
     <div class="button ui-element">
 
       <h4>STEPPER NEXT</h4>
-      <hyt-button [color]="'hyt-stepper-next-prev'" (clickFn)="onClick()">
+      <hyt-button [color]="'hyt-stepper-next'" (clickFn)="onClick()">
         Next <span class="hyt-icon icon-hyt_arrowRight"></span>
       </hyt-button>
 
@@ -134,7 +161,25 @@
     <div class="button ui-element">
 
       <h4>STEPPER PREV</h4>
-      <hyt-button [color]="'hyt-stepper-next-prev'" (clickFn)="onClick()">
+      <hyt-button [color]="'hyt-stepper-prev'" (clickFn)="onClick()">
+        <span class="hyt-icon icon-hyt_arrowLeft"></span> Prev
+      </hyt-button>
+
+    </div>
+
+    <div class="button ui-element">
+
+      <h4>STEPPER NEXT DISABLED</h4>
+      <hyt-button [color]="'hyt-stepper-next'" (clickFn)="onClick()" [isDisabled]="true">
+        Next <span class="hyt-icon icon-hyt_arrowRight"></span>
+      </hyt-button>
+
+    </div>
+
+    <div class="button ui-element">
+
+      <h4>STEPPER PREV DISABLED</h4>
+      <hyt-button [color]="'hyt-stepper-prev'" (clickFn)="onClick()" [isDisabled]="true">
         <span class="hyt-icon icon-hyt_arrowLeft"></span> Prev
       </hyt-button>
 

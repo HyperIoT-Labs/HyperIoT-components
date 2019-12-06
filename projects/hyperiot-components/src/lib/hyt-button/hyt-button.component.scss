@@ -209,7 +209,68 @@
                 cursor: not-allowed;
             }
     
-        } /* TOTAL WHITE BUTTON */
+        } /* END TOTAL WHITE BUTTON */
+
+        &.mat-hyt-base-total-green {
+
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+
+            border: none;
+            color: #007d00;
+
+            &[disabled] {
+                color: #007d0070;
+                background-color: transparent;
+
+                &:hover {
+                    color: #007d0070;
+                    background-color: transparent;
+                    cursor: not-allowed;
+                }
+
+            }
+
+            &:hover {
+
+                background-color: #007d00;
+                color: #ffffff;
+
+            }
+
+        } /* END TOTAL GREEN BUTTON */
+
+        &.mat-hyt-base-total-red {
+
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+
+            border: none;
+            color: #e60000;
+
+            &[disabled] {
+
+                color: #e6000070;
+                background-color: transparent;
+
+                &:hover {
+                    color: #e6000070;
+                    background-color: transparent;
+                    cursor: not-allowed;
+                }
+
+            }
+
+            &:hover {
+
+                background-color: #e60000;
+                color: #ffffff;
+
+            }
+
+        } /* END TOTAL RED BUTTON */
     
         &.mat-hyt-stepper-next,
         &.mat-hyt-stepper-prev {

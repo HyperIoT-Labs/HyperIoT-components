@@ -71,6 +71,48 @@
 
     <div class="button ui-element">
 
+      <h4>hyt-base-total-green</h4>
+      <hyt-button [color]="'hyt-base-total-green'" (clickFn)="onClick()">
+          <span class="hyt-icon icon-hyt_arrowLeft"></span> BUTTON
+      </hyt-button>
+
+    </div>
+
+    <div class="button ui-element">
+
+      <h4>hyt-base-total-red</h4>
+      <hyt-button [color]="'hyt-base-total-red'" (clickFn)="onClick()">
+        BUTTON <span class="hyt-icon icon-hyt_cancel"></span>
+      </hyt-button>
+
+    </div>
+
+    <!----->
+
+    <div class="button ui-element">
+
+      <h4>hyt-base-total-green DISABLED</h4>
+      <hyt-button [color]="'hyt-base-total-green'" (clickFn)="onClick()" [isDisabled]="true">
+          <span class="hyt-icon icon-hyt_arrowLeft"></span> BUTTON
+      </hyt-button>
+
+    </div>
+
+    <div class="button ui-element">
+
+      <h4>hyt-base-total-red DISABLED</h4>
+      <hyt-button [color]="'hyt-base-total-red'" (clickFn)="onClick()" [isDisabled]="true">
+        BUTTON <span class="hyt-icon icon-hyt_cancel"></span>
+      </hyt-button>
+
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="button ui-element">
+
       <h4>hyt-base ICON</h4>
       <hyt-button [color]="'hyt-base'" (clickFn)="onClick()">
         <span class="hyt-icon icon-hyt_plusC"></span>  BUTTON

@@ -87,7 +87,7 @@ export class HytTreeViewProjectComponent implements OnInit {
             id: 999999999,
             type: 'tags'
           },
-          name: 'Project Tags',
+          name: 'Tags',
           icon: 'icon-hyt_tags',
           visible: true,
           children: []
@@ -100,7 +100,7 @@ export class HytTreeViewProjectComponent implements OnInit {
             id: 999999998,
             type: 'categories'
           },
-          name: 'Project Categories',
+          name: 'Categories',
           icon: 'icon-hyt_categories',
           visible: true,
           children: []

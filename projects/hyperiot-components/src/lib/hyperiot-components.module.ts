@@ -29,6 +29,7 @@ import { HytTreeViewCategoryComponent } from './hyt-tree-view-category/hyt-tree-
 import { HytAutocompleteComponent } from './hyt-autocomplete/hyt-autocomplete.component';
 import { HytTriCheckboxComponent } from './hyt-tri-checkbox/hyt-tri-checkbox.component';
 import { HytHexagonComponent } from './hyt-hexagon/hyt-hexagon.component';
+import { HytConfirmDialogComponent } from './hyt-confirm-dialog/hyt-confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { HytHexagonComponent } from './hyt-hexagon/hyt-hexagon.component';
     HytAutocompleteComponent,
     HytTriCheckboxComponent,
     HytHexagonComponent,
+    HytConfirmDialogComponent
   ],
   imports: [
     CommonModule,

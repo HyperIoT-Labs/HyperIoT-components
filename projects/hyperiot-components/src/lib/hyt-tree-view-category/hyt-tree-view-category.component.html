@@ -1,3 +1,7 @@
+<div *ngIf="treeData.length == 0" class="empty-message">
+  <b>There are no categories for this Project.<br>Please add one.</b>
+</div>
+
 <mat-tree *ngIf="treeData.length!=0" [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
 
   <mat-tree-node class="hyt-tree-node spaced-node" *matTreeNodeDef="let node" matTreeNodeToggle>
@@ -7,7 +11,7 @@
         <button mat-icon-button disabled></button>
         <hyt-checkbox *ngIf="mode !== 'edit'" [(ngModel)]="node.active" (changeFn)="cbChanged(node)"></hyt-checkbox>
         <span *ngIf="!node.editing || node.editing === false" (dblclick)="myFunction(node)">{{node.label}}</span>
-        <input id="inputNodeLeaf" *ngIf="node.editing === true" (blur)="onBlur(node)" (change)="onChange($event, node)" matInput [value]="node.label">
+        <input matInput *ngIf="node.editing === true" id="inputNodeLeaf" [value]="node.label" (blur)="onBlur(node)" (change)="onChange($event, node)">
       </div>
       <div class="btn-container">
         <span class="btn-add-node hyt-icon icon-hyt_plus" (click)="addNode(node)"></span>

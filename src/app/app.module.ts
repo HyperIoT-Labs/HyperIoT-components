@@ -35,6 +35,7 @@ import { TagsComponent } from './tags/tags.component';
 import { ModalComponent } from './modal/modal.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import { HexagonComponent } from './hexagon/hexagon.component';
+import { HytConfirmDialogComponent } from '../../projects/hyperiot-components/src/lib/hyt-confirm-dialog/hyt-confirm-dialog.component';
 
 const appRoutes: Routes = [
   { path: 'inputs', component: InputsComponent },
@@ -70,6 +71,9 @@ const appRoutes: Routes = [
     ModalComponent,
     AutocompleteComponent,
     HexagonComponent
+  ],
+  entryComponents: [
+    HytConfirmDialogComponent
   ],
   imports: [
     RouterModule.forRoot(

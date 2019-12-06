@@ -2,7 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, View
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { splitClasses } from '@angular/compiler';
+import { MatDialog } from '@angular/material';
+import { HytConfirmDialogComponent } from '../hyt-confirm-dialog/hyt-confirm-dialog.component';
+import { Logger } from '@hyperiot/core';
 
 export interface TreeNodeCategory {
   id: number;
@@ -24,7 +26,7 @@ export class HytTreeViewCategoryComponent implements OnInit, OnChanges, AfterVie
 
   @Input() treeDataFlat: TreeNodeCategory[] = [];
 
-  @Input() mode = 'edit';
+  @Input() mode: string;
 
   treeData: TreeNodeCategory[] = [];
 
@@ -38,7 +40,9 @@ export class HytTreeViewCategoryComponent implements OnInit, OnChanges, AfterVie
 
   catForm: FormGroup;
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit() {
 
@@ -54,14 +58,14 @@ export class HytTreeViewCategoryComponent implements OnInit, OnChanges, AfterVie
 
   createTree() {
     this.treeData = [];
-    var lookup = {};
+    const lookup = {};
     this.treeDataFlat.forEach((x) => {
-      lookup[x['id']] = x;
-      x['children'] = [];
+      lookup[x.id] = x;
+      x.children = [];
     });
     this.treeDataFlat.forEach((x) => {
-      if (x['parent'] != null) {
-        lookup[x['parent'].id]['children'].push(x);
+      if (x.parent != null) {
+        lookup[x.parent.id].children.push(x);
       } else {
         this.treeData.push(x);
       }
@@ -195,9 +199,25 @@ export class HytTreeViewCategoryComponent implements OnInit, OnChanges, AfterVie
     });
   }
 
-  removeNode(n: TreeNodeCategory) {
-    this.removeNodeRec(this.treeData, n);
-    this.triggerChange();
+  openDeleteDialog(node: TreeNodeCategory) {
+    const dialogRef = this.dialog.open(HytConfirmDialogComponent, {
+      data: { title: 'Are you sure you want to delete the Category?', message: 'This operation cannot be undone.' }
+    });
+
+    dialogRef.afterClosed().subscribe(
+      (result) => {
+        if (result === 'delete') {
+          this.removeNodeRec(this.treeData, node);
+          this.triggerChange();
+        }
+      }, (err) => {
+        console.log('Errore nell\' AFTER CLOSED del DIALOG di MATERIAL \n', err);
+      }
+    );
+  }
+
+  removeNode(node: TreeNodeCategory) {
+    this.openDeleteDialog(node);
   }
 
   cancelNode() {

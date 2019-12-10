@@ -30,7 +30,14 @@ export class HytTagComponent implements OnInit {
     this.isDisabled = d;
   }
 
+  @Input() editable: boolean;
+
   @Input() removable: boolean;
+
+  @Input()
+  value: any;
+
+  @Output() edited: EventEmitter<any> = new EventEmitter();
 
   @Output() removed: EventEmitter<any> = new EventEmitter();
 
@@ -45,7 +52,12 @@ export class HytTagComponent implements OnInit {
     this.clickFn.emit(event);
   }
 
+  editedFn(event: any) {
+    this.edited.emit(event);
+  }
+
   removedFn(event: any) {
     this.removed.emit(event);
   }
+
 }

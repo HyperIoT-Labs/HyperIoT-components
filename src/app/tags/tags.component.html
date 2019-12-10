@@ -8,10 +8,11 @@
                     [selectable]="true"
                     [selected]="true"
                     [removable]="true"
+                    [editable]="true"
                     (clickFn)="click(fruit)"
                     (removed)="remove(fruit)"
+                    [value]="fruit.name"
                 >
-                {{ fruit.name }}
                 </hyt-tag>
             </hyt-tag-list>
         </div>

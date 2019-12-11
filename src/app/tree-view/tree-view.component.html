@@ -10,7 +10,7 @@
       <span>
         <h4>Category Tree</h4>
       </span>
-      <hyt-tree-view-category [treeDataFlat]="treeCategory" (cbAdd)="cbAdd($event)" (cbChange)="cbChange($event)">
+      <hyt-tree-view-category [treeDataFlat]="treeCategory" mode="packet" (treeAction)="treeAction($event)">
       </hyt-tree-view-category>
     </div>
     <div class="col-6">

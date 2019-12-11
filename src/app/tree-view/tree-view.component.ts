@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { TreeNode } from 'projects/hyperiot-components/src/public-api';
 import { Node } from 'projects/hyperiot-components/src/lib/hyt-tree-view-editable/hyt-tree-view-editable.component';
 import { LoggerService, Logger } from '@hyperiot/core';
-import { TreeNodeCategory } from 'projects/hyperiot-components/src/lib/hyt-tree-view-category/hyt-tree-view-category.component';
+import { TreeNodeCategory, CategoryTreeEvent } from 'projects/hyperiot-components/src/lib/hyt-tree-view-category/hyt-tree-view-category.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-tree-view',
@@ -50,44 +51,76 @@ export class TreeViewComponent implements OnInit {
   ]
 
   createTreeCategory() {
-    this.dataCategories.forEach(x => {
-      this.treeCategory.push({
-        id: x.id,
-        label: x.name,
-        parent: null,
-        children: null,
-        data: x,
-        active: false
-      })
-    })
+    this.treeCategory = this.dataCategories.map((d) => ({
+      id: d.id,
+      label: d.name,
+      parent: null,
+      children: null,
+      data: d,
+      active: false
+    }));
     this.treeCategory.forEach(x => {
       x.parent = (x.data.parent) ? this.treeCategory.find(y => y.id == x.data.parent.id) : null;
-    })
+    });
   }
 
-  cbAdd(event) {
-    let newData = {
-      entityVersion: 1,
-      name: event.label,
-      owner: { ownerResourceName: "it.acsoftware.hyperiot.hproject", ownerResourceId: 364 },
-      parent: event.parent ? event.parent.data : null
+  treeAction(event: CategoryTreeEvent) {
+    switch (event.action) {
+      case 'add':
+        console.log('adding with parent: ', event.node);
+        break;
+      case 'checked':
+        console.log('checked: ' + event.node.data.name + ' -> ' + event.node.active);
+        break;
+      case 'delete':
+        console.log('delete: ', event.node);
+        break;
+      case 'edit':
+        console.log('edit: ', event.node);
+        break;
     }
-    let fakeRes = {
-      id: 987,
-      entityVersion: 1,
-      name: event.label,
-      owner: { ownerResourceName: "it.acsoftware.hyperiot.hproject", ownerResourceId: 364 },
-      parent: event.parent ? event.parent.data : null
-    }
-    this.treeCategory.push({
-      id: Math.random() * 10000,
-      label: fakeRes.name,
-      parent: event.parent,
-      children: [],
-      data: fakeRes,
-      active: false
-    })
+  }
+
+  // examples
+  idInc = 368;
+
+  cbEdit(event) {
+      const newData = {
+        entityVersion: 1,
+        name: event.label,
+        owner: { ownerResourceName: 'it.acsoftware.hyperiot.hproject', ownerResourceId: 364 },
+        parent: event.parent ? event.parent.data : null
+      };
+      // this.service.addCAtegory()
+      const fakeRes = {
+        id: this.idInc,
+        entityVersion: 1,
+        name: event.label,
+        owner: { ownerResourceName: 'it.acsoftware.hyperiot.hproject', ownerResourceId: 364 },
+        parent: event.parent ? event.parent.data : null
+      };
+      this.idInc++;
+      this.treeCategory.push({
+        id: fakeRes.id,
+        label: fakeRes.name,
+        parent: event.parent,
+        children: [],
+        data: fakeRes,
+        active: false
+      });
+
     this.treeCategory = [...this.treeCategory];
+  }
+
+  cbRemove($event) {
+    console.log('DELETE: ' + event);
+  }
+
+  removeNodeAndChildren(node: TreeNodeCategory) {
+    this.treeCategory.filter(t => (t.parent) ? t.parent.id === node.id : false).forEach(element => {
+      this.removeNodeAndChildren(element);
+    });
+    this.treeCategory = this.treeCategory.filter(t => t.id !== node.id);
   }
 
   treeCategory: TreeNodeCategory[] = [];
@@ -125,10 +158,13 @@ export class TreeViewComponent implements OnInit {
     }
   ];
 
-  constructor(private loggerService: LoggerService) {
+  constructor(
+    private loggerService: LoggerService,
+    private dialog: MatDialog
+  ) {
     this.logger = new Logger(this.loggerService);
     this.logger.registerClass('TreeViewComponent');
-   }
+  }
 
   ngOnInit() {
     this.createTreeCategory();

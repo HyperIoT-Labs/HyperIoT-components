@@ -9,32 +9,14 @@
       <!-- use a disabled button to provide padding for tree leaf -->
       <div>
         <button mat-icon-button disabled></button>
-        <hyt-checkbox *ngIf="mode !== 'edit'" [(ngModel)]="node.active" (changeFn)="cbChanged(node)"></hyt-checkbox>
-        <span *ngIf="!node.editing || node.editing === false" (dblclick)="myFunction(node)">{{node.label}}</span>
-        <input matInput *ngIf="node.editing === true" id="inputNodeLeaf" [value]="node.label" (blur)="onBlur(node)" (change)="onChange($event, node)">
+        <hyt-checkbox *ngIf="mode === 'packet'" [(ngModel)]="node.active" (changeFn)="cbChanged(node)"></hyt-checkbox>
+        <span (click)="editNode(node)">{{node.label}}</span>
       </div>
       <div class="btn-container">
         <span class="btn-add-node hyt-icon icon-hyt_plus" (click)="addNode(node)"></span>
         <span class="btn-add-node hyt-icon icon-hyt_cancel" (click)="removeNode(node)"></span>
       </div>
     </li>
-  </mat-tree-node>
-
-  <mat-tree-node class="hyt-tree-node spaced-node" *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
-    <mat-form-field class="tree-form">
-      <form [formGroup]="catForm" (ngSubmit)="addCategory()">
-        <input matInput #itemValue placeholder="Name" formControlName="name">
-
-        <button type="submit" [disabled]="!catForm.valid">
-          <span class="hyt-icon icon-hyt_plus"></span>
-        </button>
-
-      </form>
-    </mat-form-field>
-    <div class="button">
-      
-      <span class="btn-delete-node hyt-icon icon-hyt_cancel" (click)="cancelNode()"></span>
-    </div>
   </mat-tree-node>
 
   <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
@@ -46,9 +28,8 @@
               {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
             </mat-icon>
           </button>
-          <hyt-tri-checkbox *ngIf="mode !== 'edit'" [(ngModel)]="node.active" (changeFn)="cbChanged(node)"></hyt-tri-checkbox>
-          <span *ngIf="!node.editing || node.editing === false" (dblclick)="myFunction(node)">{{node.label}}</span>
-          <input id="inputNodeLeaf" *ngIf="node.editing === true" (blur)="onBlur(node)" (change)="onChange($event, node)" matInput [value]="node.label">
+          <hyt-tri-checkbox *ngIf="mode === 'packet'" [(ngModel)]="node.active" (changeFn)="cbChanged(node)"></hyt-tri-checkbox>
+          <span (click)="editNode(node)">{{node.label}}</span>
         </div>
         <div class="btn-container">
           <span class="btn-add-node hyt-icon icon-hyt_plus" (click)="addNode(node)"></span>
@@ -63,10 +44,11 @@
 
 </mat-tree>
 
-<hyt-button
+<hyt-button 
+  [color]="'hyt-base-total-white'" 
   id="add-node-btn"
   mat-mini-fab 
   (click)="addNode(null)"
 >
-  Add Node <span class="hyt-icon icon-hyt_plus"></span>
+  Add Node <span class="hyt-icon icon-hyt_plusC"></span> 
 </hyt-button>

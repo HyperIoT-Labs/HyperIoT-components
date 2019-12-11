@@ -1,10 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, ViewChild, OnChanges, AfterViewInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewEncapsulation, OnChanges } from '@angular/core';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material';
-import { HytConfirmDialogComponent } from '../hyt-confirm-dialog/hyt-confirm-dialog.component';
-import { Logger } from '@hyperiot/core';
 
 export interface TreeNodeCategory {
   id: number;
@@ -13,16 +9,21 @@ export interface TreeNodeCategory {
   active: any;
   children: TreeNodeCategory[];
   parent: TreeNodeCategory;
-  editing?: boolean;
 }
 
+export type CategoryTreeAction = 'checked' | 'add' | 'edit' | 'delete';
+
+export interface CategoryTreeEvent {
+  action: CategoryTreeAction;
+  node: TreeNodeCategory;
+}
 @Component({
   selector: 'hyt-tree-view-category',
   templateUrl: './hyt-tree-view-category.component.html',
   styleUrls: ['./hyt-tree-view-category.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class HytTreeViewCategoryComponent implements OnInit, OnChanges, AfterViewInit {
+export class HytTreeViewCategoryComponent implements OnChanges {
 
   @Input() treeDataFlat: TreeNodeCategory[] = [];
 
@@ -30,27 +31,13 @@ export class HytTreeViewCategoryComponent implements OnInit, OnChanges, AfterVie
 
   treeData: TreeNodeCategory[] = [];
 
-  @Output() cbChange = new EventEmitter<TreeNodeCategory>();
-
-  @Output() cbAdd = new EventEmitter<TreeNodeCategory>();
+  @Output() treeAction = new EventEmitter<CategoryTreeEvent>();
 
   treeControl = new NestedTreeControl<TreeNodeCategory>(node => node.children);
 
   dataSource = new MatTreeNestedDataSource<TreeNodeCategory>();
 
-  catForm: FormGroup;
-
-  constructor(
-    private dialog: MatDialog
-  ) { }
-
-  ngOnInit() {
-
-  }
-
-  ngAfterViewInit() {
-
-  }
+  constructor() { }
 
   ngOnChanges() {
     this.createTree();
@@ -76,8 +63,6 @@ export class HytTreeViewCategoryComponent implements OnInit, OnChanges, AfterVie
 
   hasChild = (_: number, node: TreeNodeCategory) => !!node.children && node.children.length > 0;
 
-  hasNoContent = (_: number, nodeData: TreeNodeCategory) => nodeData.label === '';
-
   checkChildren(node: TreeNodeCategory) {
     if (node.children) {
       for (let i = 0; i < node.children.length; i++) {
@@ -94,7 +79,6 @@ export class HytTreeViewCategoryComponent implements OnInit, OnChanges, AfterVie
       let countFalse = 0;
       let countNull = 0;
       node.parent.children.forEach(children => {
-        console.log(node.parent.label + ' children: ' + children.active);
         if (children.active === true) {
           countTrue++;
         } else if (children.active === false) {
@@ -114,143 +98,46 @@ export class HytTreeViewCategoryComponent implements OnInit, OnChanges, AfterVie
     }
   }
 
+  updateCheckStatus() {
+    this.treeDataFlat
+      .filter(y => y.active)
+      .forEach(el => {
+        this.checkRelatives(el);
+      });
+  }
+
   cbChanged(node: TreeNodeCategory) {
     if (node.active == null) {
       node.active = true;
     }
+    this.checkRelatives(node);
+    this.treeAction.emit({ action: 'checked', node });
+  }
+
+  checkRelatives(node: TreeNodeCategory) {
     this.checkChildren(node);
     this.checkParent(node);
-    this.cbChange.emit(node);
   }
 
-  creatingParentNode;
-  creatingNode;
-  creating: string = '';
-
-  generateId() {
-    let id = 0;
-    let used = true;
-    while (used === true) {
-      const usedNode = this.dataSource.data.find(x => x.data.id === id);
-      if (usedNode) {
-        id++;
-      } else {
-        used = false;
-      }
-    }
-    console.log('Generated id: ' + id);
-    return id;
+  addNode(node) {
+    this.treeAction.emit({ action: 'add', node });
   }
 
-  addNode(parentNode) {
-    if (this.creating != '') {
-      this.cancelNode();
-    }
-    this.creating = 'true';
-    this.catForm = new FormGroup({
-      name: new FormControl('', Validators.required)
-    });
-
-    const emptyNode: TreeNodeCategory = {
-      id: this.generateId(),
-      label: '',
-      data: {},
-      active: false,
-      children: [],
-      parent: null
-    };
-
-    if (!parentNode) {
-      this.creating = 'root';
-      this.dataSource.data.push(emptyNode);
-      this.creatingNode = this.dataSource.data.find(x => x.label == '');
-    } else {
-      this.creating = '!root';
-      this.creatingParentNode = parentNode;
-      this.treeControl.expand(this.creatingParentNode);
-      this.creatingParentNode.children.push(emptyNode);
-      this.creatingNode = this.creatingParentNode.children.find(x => x.label == '');
-      this.creatingNode.parent = this.creatingParentNode;
-    }
-    this.triggerChange();
-  }
-
-  myFunction(node: TreeNodeCategory) {
-    node.editing = true;
-  }
-
-  onChange(event, node) {
-    node.label = event.target.value;
-    node.editing = false;
-  }
-
-  onBlur(node) {
-    node.editing = false;
-  }
-
-  removeNodeRec(nodeArray, n) {
-    nodeArray.forEach(node => {
-      if (node.data.id === n.data.id) {
-        const i = nodeArray.indexOf(node);
-        nodeArray.splice(i, 1);
-      } else if (node.children) {
-        this.removeNodeRec(node.children, n);
-      }
-    });
-  }
-
-  openDeleteDialog(node: TreeNodeCategory) {
-    const dialogRef = this.dialog.open(HytConfirmDialogComponent, {
-      data: { title: 'Are you sure you want to delete the Category?', message: 'This operation cannot be undone.' }
-    });
-
-    dialogRef.afterClosed().subscribe(
-      (result) => {
-        if (result === 'delete') {
-          this.removeNodeRec(this.treeData, node);
-          this.triggerChange();
-        }
-      }, (err) => {
-        console.log('Errore nell\' AFTER CLOSED del DIALOG di MATERIAL \n', err);
-      }
-    );
+  editNode(node) {
+    this.treeAction.emit({ action: 'edit', node });
   }
 
   removeNode(node: TreeNodeCategory) {
-    this.openDeleteDialog(node);
-  }
-
-  cancelNode() {
-    if (this.creating == 'root') {
-      for (let k = 0; k < this.dataSource.data.length; k++) {
-        if (this.dataSource.data[k] == this.creatingNode) {
-          this.dataSource.data.splice(k, 1);
-        }
-      }
-    } else if (this.creating == '!root') {
-      if (this.creatingNode && this.creatingNode.label == '') {
-        for (let k = 0; k < this.creatingParentNode.children.length; k++) {
-          if (this.creatingParentNode.children[k] == this.creatingNode) {
-            this.creatingParentNode.children.splice(k, 1);
-          }
-        }
-      }
-    }
-
-    this.triggerChange();
-  }
-
-  addCategory() {
-    this.creatingNode.label = this.catForm.get('name').value;
-    this.cbAdd.emit(this.creatingNode);
-    this.triggerChange();
-    this.creating = '';
+    this.treeAction.emit({ action: 'delete', node });
   }
 
   triggerChange() {
     const data = this.dataSource.data;
     this.dataSource.data = null;
     this.dataSource.data = data;
+    this.updateCheckStatus();
+    this.treeControl.dataNodes = this.dataSource.data;
+    this.treeControl.expandAll();
   }
 
 }

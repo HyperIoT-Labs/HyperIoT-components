@@ -115,6 +115,7 @@ mat-tree {
             font-size: 1.4em;
             margin-left: auto;
             cursor: pointer;
+            vertical-align: sub;
 
             &:hover.btn-add-node {
               color: #008aff;

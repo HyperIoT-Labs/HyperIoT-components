@@ -65,6 +65,7 @@
             background-color: #ffffff;
             color: #0956B6;
             border-color: #17A4FA;
+            transition: all .1s linear;
     
             &:hover {
                 color: #0956B6;
@@ -117,12 +118,38 @@
             }
     
         } /* END WHITE BUTTON */
+
+        &.mat-hyt-base-default-white {
+
+            background-color: #ffffff;
+            color: #000000;
+            border-color: #074290;
+            transition: all .1s linear;
+
+            &:hover {
+                background-color: #ffffff;
+                color: #17a4fa;
+                border-color: #0956b6;
+    
+            }
+
+            &[disabled] {
+
+                background-color: #ffffff70;
+                color: #00000070;
+                border-color: #07429070;
+                cursor: not-allowed;
+
+            }
+
+        } /* END BASE DEFAULT WHITE */
     
         &.mat-hyt-base-white-rounded {
     
             background-color: #ffffff;
             color: #0956B6;
             border-color: #17A4FA;
+            transition: all .1s linear;
     
             -moz-border-radius: 5px;
             -webkit-border-radius: 5px;
@@ -191,6 +218,7 @@
             -webkit-border-radius: 5px;
             border-radius: 5px;
             border: none;
+            transition: all .1s linear;
     
             &:hover {
     
@@ -216,6 +244,7 @@
             -moz-border-radius: 5px;
             -webkit-border-radius: 5px;
             border-radius: 5px;
+            transition: all .1s linear;
 
             border: none;
             color: #007d00;
@@ -246,6 +275,7 @@
             -moz-border-radius: 5px;
             -webkit-border-radius: 5px;
             border-radius: 5px;
+            transition: all .1s linear;
 
             border: none;
             color: #e60000;
@@ -277,6 +307,7 @@
     
             border-color: #0956b6;
             color: #000;
+            transition: all .1s linear;
     
             &:hover,
             &:active {

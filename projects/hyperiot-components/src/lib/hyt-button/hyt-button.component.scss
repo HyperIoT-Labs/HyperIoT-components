@@ -133,6 +133,15 @@
     
             }
 
+            &[disabled] {
+
+                background-color: #ffffff70;
+                color: #00000070;
+                border-color: #07429070;
+                cursor: not-allowed;
+
+            }
+
         } /* END BASE DEFAULT WHITE */
     
         &.mat-hyt-base-white-rounded {

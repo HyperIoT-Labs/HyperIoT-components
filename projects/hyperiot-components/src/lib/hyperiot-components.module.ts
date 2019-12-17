@@ -22,7 +22,7 @@ import { HytInputTemplateComponent } from './hyt-input-template/hyt-input-templa
 import { HytSelectTemplateComponent } from './hyt-select-template/hyt-select-template.component';
 import { HytTreeViewProjectComponent } from './hyt-tree-view-project/hyt-tree-view-project.component';
 import { HytTreeViewEditableComponent } from './hyt-tree-view-editable/hyt-tree-view-editable.component';
-import { HytModalComponent } from './hyt-modal/hyt-modal.component';
+import { HytModalEComponent } from './hyt-modal-e/hyt-modal-e.component';
 import { HytTagComponent } from './hyt-tag/hyt-tag.component';
 import { HytTagListComponent } from './hyt-tag-list/hyt-tag-list.component';
 import { HytTreeViewCategoryComponent } from './hyt-tree-view-category/hyt-tree-view-category.component';
@@ -30,6 +30,8 @@ import { HytAutocompleteComponent } from './hyt-autocomplete/hyt-autocomplete.co
 import { HytTriCheckboxComponent } from './hyt-tri-checkbox/hyt-tri-checkbox.component';
 import { HytHexagonComponent } from './hyt-hexagon/hyt-hexagon.component';
 import { HytConfirmDialogComponent } from './hyt-confirm-dialog/hyt-confirm-dialog.component';
+import { HytModalContainerComponent } from './hyt-modal/hyt-modal-container.component';
+import { HytModalContentDirective } from './hyt-modal/hyt-modal-content.directive';
 
 @NgModule({
   declarations: [
@@ -46,14 +48,16 @@ import { HytConfirmDialogComponent } from './hyt-confirm-dialog/hyt-confirm-dial
     HytSelectTemplateComponent,
     HytTreeViewProjectComponent,
     HytTreeViewEditableComponent,
-    HytModalComponent,
+    HytModalEComponent,
     HytTagComponent,
     HytTagListComponent,
     HytTreeViewCategoryComponent,
     HytAutocompleteComponent,
     HytTriCheckboxComponent,
     HytHexagonComponent,
-    HytConfirmDialogComponent
+    HytConfirmDialogComponent,
+    HytModalContainerComponent,
+    HytModalContentDirective
   ],
   imports: [
     CommonModule,
@@ -85,10 +89,15 @@ import { HytConfirmDialogComponent } from './hyt-confirm-dialog/hyt-confirm-dial
     HytTreeViewEditableComponent,
     HytTagComponent,
     HytTagListComponent,
-    HytModalComponent,
+    HytModalEComponent,
     HytAutocompleteComponent,
     HytTriCheckboxComponent,
-    HytHexagonComponent
+    HytHexagonComponent,
+    HytModalContainerComponent,
+    HytModalContentDirective
+  ],
+  entryComponents: [
+    HytModalContainerComponent
   ]
 })
 export class HyperiotComponentsModule { }

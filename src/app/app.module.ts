@@ -32,10 +32,12 @@ import { TreeViewComponent } from './tree-view/tree-view.component';
 import { SelectTemplateComponent } from './select-template/select-template.component';
 import { TreeViewProjectComponent } from './tree-view-project/tree-view-project.component';
 import { TagsComponent } from './tags/tags.component';
-import { ModalComponent } from './modal/modal.component';
+import { ModalEComponent } from './modal-e/modal-e.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import { HexagonComponent } from './hexagon/hexagon.component';
 import { HytConfirmDialogComponent } from '../../projects/hyperiot-components/src/lib/hyt-confirm-dialog/hyt-confirm-dialog.component';
+import { ModalComponent } from './modal/modal.component';
+import { ModalExampleComponent } from './modal/modal-example/modal-example.component';
 
 const appRoutes: Routes = [
   { path: 'inputs', component: InputsComponent },
@@ -68,12 +70,15 @@ const appRoutes: Routes = [
     SelectTemplateComponent,
     TreeViewProjectComponent,
     TagsComponent,
-    ModalComponent,
+    ModalEComponent,
     AutocompleteComponent,
-    HexagonComponent
+    HexagonComponent,
+    ModalComponent,
+    ModalExampleComponent
   ],
   entryComponents: [
-    HytConfirmDialogComponent
+    HytConfirmDialogComponent,
+    ModalExampleComponent
   ],
   imports: [
     RouterModule.forRoot(

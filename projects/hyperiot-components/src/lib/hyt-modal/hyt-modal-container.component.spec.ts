@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HytModalComponent } from './hyt-modal.component';
+import { HytModalContainerComponent } from './hyt-modal-container.component';
 
 describe('HytModalComponent', () => {
-  let component: HytModalComponent;
-  let fixture: ComponentFixture<HytModalComponent>;
+  let component: HytModalContainerComponent;
+  let fixture: ComponentFixture<HytModalContainerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HytModalComponent ]
+      declarations: [ HytModalContainerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HytModalComponent);
+    fixture = TestBed.createComponent(HytModalContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

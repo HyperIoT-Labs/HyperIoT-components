@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { HytModalRef } from './hyt-modal-ref';
 import { HytModalContainerComponent } from './hyt-modal-container.component';
+import { HytModalConf } from './hyt-modal-conf';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,12 @@ export class HytModalService {
 
   modalComponentRef: ComponentRef<HytModalContainerComponent>;
 
-  modalSubscription;
-
   public modalRef: HytModalRef;
+
+  public modalHytConf: HytModalConf = {
+    isClosableFromBackground: true,
+    data: {}
+  };
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -28,13 +32,14 @@ export class HytModalService {
     private injector: Injector
   ) { }
 
-  public open(componentType: Type<any>, data?: any): HytModalRef {
-    this.modalComponentRef = this._appendModalComponentToBody(data);
-
-    this.modalRef = new HytModalRef(componentType, this, data);
-
+  public open(componentType: Type<any>, data?: any, isClosableFromBackground?: boolean): HytModalRef {
+    this.modalComponentRef = this._appendModalComponentToBody();
+    if (isClosableFromBackground != undefined) {
+      this.modalHytConf.isClosableFromBackground = isClosableFromBackground;
+    }
+    this.modalHytConf.data = (data) ? data : {};
+    this.modalRef = new HytModalRef(componentType, this, this.modalHytConf);
     this.modalComponentRef.instance.childComponent = this.modalRef;
-
     return this.modalRef;
   }
 
@@ -42,25 +47,15 @@ export class HytModalService {
     this._removeModalComponentFromBody();
   }
 
-  private _appendModalComponentToBody(data?: any) {
-
-    // 1. Create a component reference from the component
+  private _appendModalComponentToBody() {
     const componentRef = this.componentFactoryResolver
-    .resolveComponentFactory(HytModalContainerComponent)
-    .create(this.injector);
-
-    // 2. Attach component to the appRef so that it's inside the ng component tree
+      .resolveComponentFactory(HytModalContainerComponent)
+      .create(this.injector);
     this.appRef.attachView(componentRef.hostView);
-
-    // 3. Get DOM element from component
     const domElem = (componentRef.hostView as EmbeddedViewRef<any>)
       .rootNodes[0] as HTMLElement;
-
-    // 4. Append DOM element to the body
     document.body.appendChild(domElem);
-
     document.body.classList.add('hyt-modal-open');
-
     return componentRef;
   }
 

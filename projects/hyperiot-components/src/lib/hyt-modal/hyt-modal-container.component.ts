@@ -42,10 +42,8 @@ export class HytModalContainerComponent implements OnInit, AfterViewInit, OnDest
 
   loadChildComponent(componentType: Type<HytModal>) {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentType);
-
     const viewContainerRef = this.hytModalContent.viewContainerRef;
     viewContainerRef.clear();
-
     this.componentRef = viewContainerRef.createComponent(componentFactory);
   }
 
@@ -60,12 +58,13 @@ export class HytModalContainerComponent implements OnInit, AfterViewInit, OnDest
   }
 
   onOverlayClicked(evt: MouseEvent) {
-    this.close(evt);
+    if (this.childComponent.conf.isClosableFromBackground) {
+      this.close(evt);
+    }
   }
 
   onDialogClicked(evt: MouseEvent) {
     evt.stopPropagation();
   }
-
 
 }

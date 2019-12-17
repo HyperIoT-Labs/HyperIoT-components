@@ -10,10 +10,12 @@ export abstract class HytModal {
 
     constructor(private hytModalService: HytModalService) {
         this.hytModalref = this.hytModalService.modalRef;
-        this.data = this.hytModalService.modalRef.data;
+        if (this.hytModalService.modalRef && this.hytModalService.modalRef.conf) {
+            this.data = (this.hytModalService.modalRef.conf.data) ? this.hytModalService.modalRef.conf.data : {};
+        }
     }
 
-    close(data) {
+    close(data?: any) {
         this.hytModalref.close(data);
     }
 

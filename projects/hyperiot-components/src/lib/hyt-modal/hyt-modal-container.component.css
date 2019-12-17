@@ -1,44 +1,28 @@
 
 .hyt-modal {
-    /* modal container fixed across whole screen */
     position: absolute;
-
-    /* z-index must be higher than .hyt-modal-background */
     z-index: 1004;
-    /* enables scrolling for tall modals */
-
 }
 
 .hyt-modal-body {
-
     position: fixed;
     top: 50%;
     left: 50%;
-
     background-color: white;
     padding: 12px;
     border-radius: 8px;
-
     transform: scale(0.9);
-
     -webkit-animation-name: modalTransform;
-    /* Safari 4.0 - 8.0 */
     -webkit-animation-duration: .4s;
-    /* Safari 4.0 - 8.0 */
     animation-name: modalTransform;
     animation-duration: .4s cubic-bezier(.25, .8, .25, 1);
-
     -webkit-animation-name: modalOpacityBody;
-    /* Safari 4.0 - 8.0 */
     -webkit-animation-duration: .4s;
-    /* Safari 4.0 - 8.0 */
     animation-name: modalOpacityBody;
     animation-duration: .4s cubic-bezier(.25, .8, .25, 1);
-
     transform: scale(1);
     transform: translate(-50%, -50%);
-
-    /* margin exposes part of the modal background */
+    min-width: 300px;
 }
   
 .hyt-modal-background {
@@ -48,15 +32,11 @@
     height: 100%;
     background-color: #000;
     opacity: 0.65;
-    z-index: 1000;
-
+    z-index: 1003;
     -webkit-animation-name: modalOpacity;
-    /* Safari 4.0 - 8.0 */
     -webkit-animation-duration: .4s;
-    /* Safari 4.0 - 8.0 */
     animation-name: modalOpacity;
     animation-duration: .4s cubic-bezier(.25, .8, .25, 1);
-
 }
 
 @keyframes modalOpacity {

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HytModalService } from 'projects/hyperiot-components/src/lib/hyt-modal/hyt-modal.service';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
-import { HytModalRef } from 'projects/hyperiot-components/src/lib/hyt-modal/hyt-modal-ref';
 
 @Component({
   selector: 'app-modal',
@@ -19,11 +18,23 @@ export class ModalComponent implements OnInit {
 
   openModal() {
 
-    const ref = this.hytModalService.open(ModalExampleComponent, { data: { message: 'I am a dynamic component inside of a dialog!' } });
+    const ref = this.hytModalService.open(
+      ModalExampleComponent,
+      {
+        message: 'I am a dynamic component inside of a dialog!'
+      }
+    );
 
     ref.onClosed.subscribe(result => {
-      console.log('Dialog closed', result);
-    });
+        console.log('Dialog closed', result);
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        console.log('closed');
+      }
+    );
   }
 
 }

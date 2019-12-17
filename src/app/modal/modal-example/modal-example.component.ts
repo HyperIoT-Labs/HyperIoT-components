@@ -17,7 +17,6 @@ export class ModalExampleComponent extends HytModal implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data)
   }
 
 }

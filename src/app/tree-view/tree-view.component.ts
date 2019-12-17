@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { TreeNode } from 'projects/hyperiot-components/src/public-api';
 import { Node } from 'projects/hyperiot-components/src/lib/hyt-tree-view-editable/hyt-tree-view-editable.component';
 import { LoggerService, Logger } from '@hyperiot/core';
-import { TreeNodeCategory, CategoryTreeEvent } from 'projects/hyperiot-components/src/lib/hyt-tree-view-category/hyt-tree-view-category.component';
+import { TreeNodeCategory } from 'projects/hyperiot-components/src/lib/hyt-tree-view-category/hyt-tree-view-category.component';
 import { MatDialog } from '@angular/material';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tree-view',
@@ -64,63 +65,62 @@ export class TreeViewComponent implements OnInit {
     });
   }
 
-  treeAction(event: CategoryTreeEvent) {
-    switch (event.action) {
-      case 'add':
-        console.log('adding with parent: ', event.node);
-        break;
-      case 'checked':
-        console.log('checked: ' + event.node.data.name + ' -> ' + event.node.active);
-        break;
-      case 'delete':
-        console.log('delete: ', event.node);
-        break;
-      case 'edit':
-        console.log('edit: ', event.node);
-        break;
-    }
-  }
-
   // examples
   idInc = 368;
 
-  cbEdit(event) {
-      const newData = {
-        entityVersion: 1,
-        name: event.label,
-        owner: { ownerResourceName: 'it.acsoftware.hyperiot.hproject', ownerResourceId: 364 },
-        parent: event.parent ? event.parent.data : null
-      };
-      // this.service.addCAtegory()
-      const fakeRes = {
-        id: this.idInc,
-        entityVersion: 1,
-        name: event.label,
-        owner: { ownerResourceName: 'it.acsoftware.hyperiot.hproject', ownerResourceId: 364 },
-        parent: event.parent ? event.parent.data : null
-      };
-      this.idInc++;
-      this.treeCategory.push({
-        id: fakeRes.id,
-        label: fakeRes.name,
-        parent: event.parent,
-        children: [],
-        data: fakeRes,
-        active: false
-      });
+  // removeNodeAndChildren(node: TreeNodeCategory) {
+  //   this.treeCategory.filter(t => (t.parent) ? t.parent.id === node.id : false).forEach(element => {
+  //     this.removeNodeAndChildren(element);
+  //   });
+  //   this.treeCategory = this.treeCategory.filter(t => t.id !== node.id);
+  // }
 
-    this.treeCategory = [...this.treeCategory];
-  }
-
-  cbRemove($event) {
-    console.log('DELETE: ' + event);
-  }
-
-  removeNodeAndChildren(node: TreeNodeCategory) {
-    this.treeCategory.filter(t => (t.parent) ? t.parent.id === node.id : false).forEach(element => {
-      this.removeNodeAndChildren(element);
+  editFunction: (node: TreeNodeCategory) => Observable<TreeNodeCategory> = (node) => {
+    return new Observable(sub => {
+      setTimeout(() => {
+        sub.next({
+          id: node.id,
+          label: 'modificato',
+          parent: null,
+          children: [],
+          data: {},
+          active: false
+        });
+      }, 1000);
+      // this.http.ask(node).subscribe(
+      //   res => sub.next(res)
+      // )
     });
-    this.treeCategory = this.treeCategory.filter(t => t.id !== node.id);
+  }
+
+  removeFunction: (node: TreeNodeCategory) => Observable<TreeNodeCategory> = (node) => {
+    return new Observable(sub => {
+      setTimeout(() => {
+        sub.next();
+      }, 1000);
+      // this.http.ask(node).subscribe(
+      //   res => sub.next(res)
+      // )
+    });
+  }
+
+  addFunction: (node: TreeNodeCategory) => Observable<TreeNodeCategory> = (node) => {
+    return new Observable(sub => {
+      setTimeout(() => {
+        sub.next({
+          id: this.idInc,
+          label: 'd.name',
+          parent: null,
+          children: [],
+          data: {},
+          active: false
+        });
+        this.idInc++;
+      }, 1000);
+    });
+    // this.http.ask(node).subscribe(
+    //   res => sub.next(res)
+    // )
   }
 
   treeCategory: TreeNodeCategory[] = [];

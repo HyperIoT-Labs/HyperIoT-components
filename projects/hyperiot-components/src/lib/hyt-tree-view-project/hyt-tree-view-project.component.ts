@@ -79,7 +79,6 @@ export class HytTreeViewProjectComponent implements OnInit {
   }
 
   addTagsAndCategories(data: TreeDataNode[]) {
-    console.log('addTagsAndCategories');
     data.forEach(node => {
       if (this.nodeHasTags(node) === false) {
         const tags: TreeDataNode = {
@@ -224,7 +223,6 @@ export class HytTreeViewProjectComponent implements OnInit {
   treeDataSearch(node: TreeDataNode, token: string): void {
     if (node.children) {
       if (node.name.toLocaleLowerCase().includes(token.toLocaleLowerCase())) {
-        console.log(node.name);
         node.visible = true;
         this.propagateVisibilityUp(node, true);
         this.propagateVisibilityDown(node, true);
@@ -238,7 +236,6 @@ export class HytTreeViewProjectComponent implements OnInit {
   }
 
   onChangeInput(value: string) {
-    console.log('onChangeInput ' + value);
     this.treeData.forEach(node => {
       node.visible = false;
       this.propagateVisibilityDown(node, false);

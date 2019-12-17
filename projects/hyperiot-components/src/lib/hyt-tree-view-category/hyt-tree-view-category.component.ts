@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, ViewEncapsulation, OnChanges } from '@angular/core';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
+import { Observable } from 'rxjs';
 
 export interface TreeNodeCategory {
   id: number;
@@ -11,12 +12,6 @@ export interface TreeNodeCategory {
   parent: TreeNodeCategory;
 }
 
-export type CategoryTreeAction = 'checked' | 'add' | 'edit' | 'delete';
-
-export interface CategoryTreeEvent {
-  action: CategoryTreeAction;
-  node: TreeNodeCategory;
-}
 @Component({
   selector: 'hyt-tree-view-category',
   templateUrl: './hyt-tree-view-category.component.html',
@@ -25,13 +20,24 @@ export interface CategoryTreeEvent {
 })
 export class HytTreeViewCategoryComponent implements OnChanges {
 
-  @Input() treeDataFlat: TreeNodeCategory[] = [];
+  @Input()
+  treeDataFlat: TreeNodeCategory[] = [];
 
-  @Input() mode: string;
+  @Input()
+  mode: string;
+
+  @Input()
+  addFunction: (treeNodeCategory) => Observable<TreeNodeCategory>;
+
+  @Input()
+  editFunction: (treeNodeCategory) => Observable<TreeNodeCategory>;
+
+  @Input()
+  removeFunction: (treeNodeCategory) => Observable<TreeNodeCategory>;
 
   treeData: TreeNodeCategory[] = [];
 
-  @Output() treeAction = new EventEmitter<CategoryTreeEvent>();
+  @Output() nodeChecked = new EventEmitter<TreeNodeCategory>();
 
   treeControl = new NestedTreeControl<TreeNodeCategory>(node => node.children);
 
@@ -74,7 +80,6 @@ export class HytTreeViewCategoryComponent implements OnChanges {
 
   checkParent(node: TreeNodeCategory) {
     if (node.parent) {
-      //      node.parent.active = node.active;
       let countTrue = 0;
       let countFalse = 0;
       let countNull = 0;
@@ -98,46 +103,96 @@ export class HytTreeViewCategoryComponent implements OnChanges {
     }
   }
 
-  updateCheckStatus() {
-    this.treeDataFlat
-      .filter(y => y.active)
-      .forEach(el => {
-        this.checkRelatives(el);
-      });
+  updateCheckStatus(nodeArray: TreeNodeCategory[]) {
+    nodeArray.forEach(node => {
+      if (!node.children || node.children.length === 0) {
+        this.checkParent(node);
+      } else if (node.children) {
+        this.updateCheckStatus(node.children);
+      }
+    });
   }
 
   cbChanged(node: TreeNodeCategory) {
     if (node.active == null) {
       node.active = true;
     }
-    this.checkRelatives(node);
-    this.treeAction.emit({ action: 'checked', node });
-  }
-
-  checkRelatives(node: TreeNodeCategory) {
     this.checkChildren(node);
     this.checkParent(node);
+    this.nodeChecked.emit(node);
   }
 
-  addNode(node) {
-    this.treeAction.emit({ action: 'add', node });
+  addNodeRec(nodeArray: TreeNodeCategory[], parentNode: TreeNodeCategory, n: TreeNodeCategory) {
+    nodeArray.forEach(node => {
+      if (node.id === parentNode.id) {
+        n.parent = node;
+        node.children.push(n);
+        this.treeControl.expand(parentNode);
+      } else if (node.children) {
+        this.addNodeRec(node.children, parentNode, n);
+      }
+    });
   }
 
-  editNode(node) {
-    this.treeAction.emit({ action: 'edit', node });
+  addNode(parentNode: TreeNodeCategory) {
+    this.addFunction(parentNode).subscribe(
+      res => {
+        if (!parentNode) {
+          this.dataSource.data.push(res);
+        } else {
+          this.addNodeRec(this.treeData, parentNode, res);
+        }
+        this.triggerChange();
+      }
+    );
+  }
+
+  editNodeRec(nodeArray: TreeNodeCategory[], n: TreeNodeCategory) {
+    nodeArray.forEach(node => {
+      if (node.id === n.id) {
+        const i = nodeArray.indexOf(node);
+        nodeArray[i].data = { ...n.data };
+        nodeArray[i].label = n.label;
+      } else if (node.children) {
+        this.editNodeRec(node.children, n);
+      }
+    });
+  }
+
+  editNode(node: TreeNodeCategory) {
+    this.editFunction(node).subscribe(
+      res => {
+        this.editNodeRec(this.treeData, res);
+        this.triggerChange();
+      }
+    );
+  }
+
+  removeNodeRec(nodeArray: TreeNodeCategory[], n: TreeNodeCategory) {
+    nodeArray.forEach(node => {
+      if (node.id === n.id) {
+        const i = nodeArray.indexOf(node);
+        nodeArray.splice(i, 1);
+      } else if (node.children) {
+        this.removeNodeRec(node.children, n);
+      }
+    });
   }
 
   removeNode(node: TreeNodeCategory) {
-    this.treeAction.emit({ action: 'delete', node });
+    this.removeFunction(node).subscribe(
+      res => {
+        this.removeNodeRec(this.treeData, node);
+        this.triggerChange();
+      }
+    );
   }
 
   triggerChange() {
     const data = this.dataSource.data;
     this.dataSource.data = null;
     this.dataSource.data = data;
-    this.updateCheckStatus();
-    this.treeControl.dataNodes = this.dataSource.data;
-    this.treeControl.expandAll();
+    this.updateCheckStatus(this.treeData);
   }
 
 }

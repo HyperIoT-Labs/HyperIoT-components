@@ -53,13 +53,9 @@ export class HytModalContainerComponent implements OnInit, AfterViewInit, OnDest
     }
   }
 
-  close(event) {
-    this.childComponent.close(event);
-  }
-
   onOverlayClicked(evt: MouseEvent) {
     if (this.childComponent.conf.isClosableFromBackground) {
-      this.close(evt);
+      this.childComponent.close();
     }
   }
 

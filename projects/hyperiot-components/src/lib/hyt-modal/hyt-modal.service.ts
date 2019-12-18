@@ -34,7 +34,9 @@ export class HytModalService {
 
   public open(componentType: Type<any>, data?: any, isClosableFromBackground?: boolean): HytModalRef {
     this.modalComponentRef = this._appendModalComponentToBody();
-    if (isClosableFromBackground != undefined) {
+    if (isClosableFromBackground === undefined) {
+      this.modalHytConf.isClosableFromBackground = true;
+    } else {
       this.modalHytConf.isClosableFromBackground = isClosableFromBackground;
     }
     this.modalHytConf.data = (data) ? data : {};

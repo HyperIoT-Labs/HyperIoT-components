@@ -8,8 +8,7 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    background-color: white;
-    border-radius: 8px;
+    background-color: transparent;
     transform: scale(0.9);
     -webkit-animation-name: modalTransform;
     -webkit-animation-duration: .4s;

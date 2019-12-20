@@ -5,6 +5,6 @@
     (click)="click($event)"
 >
     {{value}}
-    <mat-icon *ngIf="editable" (click)="editedFn($event)">edit</mat-icon>
-    <mat-icon *ngIf="removable" (click)="removedFn($event)">cancel</mat-icon>
+    <span class="hyt-icon icon-hyt_pencil" *ngIf="editable" (click)="editedFn($event)"></span>
+    <span class="hyt-icon icon-hyt_cancelC" *ngIf="removable" (click)="removedFn($event)"></span>
 </mat-chip>

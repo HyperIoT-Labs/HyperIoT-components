@@ -44,6 +44,27 @@ export class HytTextAreaComponent implements OnInit, ControlValueAccessor {
   @Input() externalHint = null;
   @Output() outHint: EventEmitter<string> = new EventEmitter<string>();
 
+  /** This error appears in case of injected error */
+  private injectedError = '';
+
+  /** Map error type with default error string */
+  errorMap = {
+    validateInjectedError: ''
+  };
+
+  /**
+   * Default errors are displayed at the top of the field
+   */
+  private defaultErrors: string[] = [
+    'validateInjectedError'
+  ];
+
+  @Input()
+  set injectedErrorMsg(msg: string) {
+    this.injectedError = msg;
+    this.errorMap.validateInjectedError = msg;
+  }
+
   value: any = '';
 
   // @ViewChild('inputElement', {}) private inputElement: ElementRef;
@@ -106,5 +127,17 @@ export class HytTextAreaComponent implements OnInit, ControlValueAccessor {
     this.outHint.emit(this.externalHint);
   }
 
+  getDefaultErrorList(): string[] {
+    const errorList: string[] = [];
+
+    for (const key in this.formControl.errors) {
+      if (this.formControl.errors.hasOwnProperty(key)) {
+        if (this.errorMap.hasOwnProperty(key) && this.defaultErrors.includes(key)) {
+          errorList.push(this.errorMap[key]);
+        }
+      }
+    }
+    return errorList;
+  }
 
 }

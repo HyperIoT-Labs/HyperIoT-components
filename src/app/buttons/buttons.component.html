@@ -289,6 +289,12 @@
     </div>
     <div class="col-4 ui-element">
       <span>
+        <h4>Checkbox checked</h4>
+      </span>
+      <hyt-checkbox [(ngModel)]="checked3" [value]="checked3" (changeFn)="onClickCheckbox3($event)">Check me!</hyt-checkbox>
+    </div>
+    <div class="col-4 ui-element">
+      <span>
         <h4>Tri State Checkbox</h4>
       </span>
       <hyt-tri-checkbox [(ngModel)]="checked2" (changeFn)="onClickCheckbox2($event)">Check me!</hyt-tri-checkbox>

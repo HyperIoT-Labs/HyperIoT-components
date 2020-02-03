@@ -45,13 +45,9 @@ export class HytDatePickerComponent implements OnInit {
 
   outputToShow = '';
 
-  constructor() {
+  constructor() { }
 
-  }
-
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   setDate(event: moment_.Moment) {
     // TODO set moment in input

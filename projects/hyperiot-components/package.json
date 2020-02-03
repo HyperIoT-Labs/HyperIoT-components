@@ -1,6 +1,6 @@
 {
   "name": "@hyperiot/components",
-  "version": "0.0.69",
+  "version": "0.0.70",
   "publishConfig": {
     "registry": "https://nexus.acsoftware.it/nexus/repository/acs-npm/",
     "always-auth": "true"
@@ -24,6 +24,7 @@
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
     "web-animations-js": "^2.3.2",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "ngx-mask": "^8.1.7"
   }
 }

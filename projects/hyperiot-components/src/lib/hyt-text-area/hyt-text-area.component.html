@@ -23,6 +23,10 @@
       *ngIf="isRequired && formControl.hasError('required')">
       {{ errMsgRequired }}
     </mat-error>
+
+    <mat-error *ngFor="let error of getDefaultErrorList()">
+      {{ error }}
+    </mat-error>
   
   </mat-form-field>
 

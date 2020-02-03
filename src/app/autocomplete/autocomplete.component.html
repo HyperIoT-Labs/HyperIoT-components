@@ -4,11 +4,16 @@
             <div class="ui-element">
                 <h4>Autocomplete</h4>
                 <mat-form-field class="hyt-full-width">
-                    <input matInput #input type="text" [formControl]="formControl" [placeholder]="'Pick One'" [matAutocomplete]="auto">
+                    <input matInput #input type="text" [formControl]="formControl" [placeholder]="'Pick One'"
+                        [matAutocomplete]="auto">
                 </mat-form-field>
-                <hyt-autocomplete #auto="hytAutocomplete" [input]="input" [formControl]="formControl" [options]="options">
+                <hyt-autocomplete #auto="hytAutocomplete" [input]="input" [formControl]="formControl"
+                    [options]="options">
                 </hyt-autocomplete>
             </div>
         </div>
     </div>
 </div>
+
+<hyt-date-picker (selectedDate)="changeDate($event)"></hyt-date-picker>
+OUT:{{selectedDate}}

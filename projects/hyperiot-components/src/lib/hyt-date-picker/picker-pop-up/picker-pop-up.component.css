@@ -1,0 +1,14 @@
+.calendar-popup {
+  position: absolute;
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+.calendar-popup.visible {
+  opacity: 1;
+}
+
+/* TODO: remove everything under this comment */
+th,tr,td  {
+    border: 1px black dotted;
+}

@@ -32,6 +32,11 @@ import { HytHexagonComponent } from './hyt-hexagon/hyt-hexagon.component';
 import { HytConfirmDialogComponent } from './hyt-confirm-dialog/hyt-confirm-dialog.component';
 import { HytModalContainerComponent } from './hyt-modal/hyt-modal-container.component';
 import { HytModalContentDirective } from './hyt-modal/hyt-modal-content.directive';
+import { HytDatePickerComponent } from './hyt-date-picker/hyt-date-picker.component';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { PickerPopUpComponent } from './hyt-date-picker/picker-pop-up/picker-pop-up.component';
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 @NgModule({
   declarations: [
@@ -57,7 +62,9 @@ import { HytModalContentDirective } from './hyt-modal/hyt-modal-content.directiv
     HytHexagonComponent,
     HytConfirmDialogComponent,
     HytModalContainerComponent,
-    HytModalContentDirective
+    HytModalContentDirective,
+    HytDatePickerComponent,
+    PickerPopUpComponent
   ],
   imports: [
     CommonModule,
@@ -70,7 +77,8 @@ import { HytModalContentDirective } from './hyt-modal/hyt-modal-content.directiv
     MatCardModule,
     MatStepperModule,
     MatNativeDateModule,
-    DemoMaterialModule
+    DemoMaterialModule,
+    NgxMaskModule.forRoot(options)
   ],
   exports: [
     HytInputComponent,
@@ -94,7 +102,8 @@ import { HytModalContentDirective } from './hyt-modal/hyt-modal-content.directiv
     HytTriCheckboxComponent,
     HytHexagonComponent,
     HytModalContainerComponent,
-    HytModalContentDirective
+    HytModalContentDirective,
+    HytDatePickerComponent
   ],
   entryComponents: [
     HytModalContainerComponent

@@ -1,0 +1,7 @@
+<input type="text" [specialCharacters]="['/', ':', ' ' ]" [dropSpecialCharacters]="false" [mask]="actualMask"
+    (blur)="blur()" [(ngModel)]="dateString" />
+<button (click)="openCal()">O</button>
+
+<lib-picker-pop-up [dateInput]="" [show]="showPopup" (dateOutput)="setDate($event)"></lib-picker-pop-up>
+HYT-DATE-PICKER:
+{{outputToShow}}

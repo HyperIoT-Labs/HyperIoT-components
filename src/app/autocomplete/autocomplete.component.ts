@@ -11,10 +11,16 @@ export class AutocompleteComponent implements OnInit {
   formControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
 
+  selectedDate: Date;
+
   constructor(
   ) { }
 
   ngOnInit() {
+  }
+
+  changeDate(event) {
+    this.selectedDate = event;
   }
 
 }

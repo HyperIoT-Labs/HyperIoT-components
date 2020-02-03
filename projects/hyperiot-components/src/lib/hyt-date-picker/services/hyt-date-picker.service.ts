@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import * as moment from 'moment';
+import * as moment_ from 'moment';
+const moment = moment_;
 
 export interface CalendarContextData {
-  headerFormat: (m: moment.Moment) => string;
-  subtract: (m: moment.Moment) => moment.Moment;
-  add: (m: moment.Moment) => moment.Moment;
+  headerFormat: (m: moment_.Moment) => string;
+  subtract: (m: moment_.Moment) => moment_.Moment;
+  add: (m: moment_.Moment) => moment_.Moment;
   toPrevious: any;
   toNext: any;
   elementFormat: string;

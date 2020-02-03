@@ -1,8 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import * as moment from 'moment';
+import * as moment_ from 'moment';
 import { CalendarContextData, HytDatePickerService } from '../services/hyt-date-picker.service';
 
 export type TimeStep = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second' | 'millisecond';
+const moment = moment_;
 
 interface CalElement {
   action: () => void;
@@ -32,7 +33,7 @@ export class PickerPopUpComponent implements OnInit {
   model: CalendarContext;
 
   @Input()
-  dateInput: moment.Moment;
+  dateInput: moment_.Moment;
 
   @Input()
   lawView: TimeStep = 'second';
@@ -41,7 +42,7 @@ export class PickerPopUpComponent implements OnInit {
   show = false;
 
   @Output()
-  dateOutput: EventEmitter<moment.Moment> = new EventEmitter<moment.Moment>();
+  dateOutput: EventEmitter<moment_.Moment> = new EventEmitter<moment_.Moment>();
 
   constructor(
     private calendarService: HytDatePickerService
@@ -51,7 +52,7 @@ export class PickerPopUpComponent implements OnInit {
     this.buildModel('year', moment(new Date()).startOf('year'));
   }
 
-  public buildModel(step: any, mom: moment.Moment): void {
+  public buildModel(step: any, mom: moment_.Moment): void {
 
     const calendarContextData: CalendarContextData = this.calendarService.getContextDataByStep(step);
     mom.startOf(calendarContextData.toPrevious);

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import * as moment from 'moment';
+import * as moment_ from 'moment';
+const moment = moment_;
 
 export type TimeStep = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second' | 'millisecond';
 
@@ -52,7 +53,7 @@ export class HytDatePickerComponent implements OnInit {
 
   }
 
-  setDate(event: moment.Moment) {
+  setDate(event: moment_.Moment) {
     // TODO set moment in input
     this.outputToShow = event.format('DD/MM/YYYY HH:mm:ss');
 

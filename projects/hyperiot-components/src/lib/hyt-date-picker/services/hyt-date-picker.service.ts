@@ -88,7 +88,7 @@ export class HytDatePickerService {
     elementFormat: 'HH:mm:ss',
     brows: 10,
     bcols: 6
-  }
+  };
 
   constructor() { }
 

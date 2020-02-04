@@ -10,6 +10,7 @@ export { TreeDataNode } from './lib/hyt-tree-view-project/hyt-tree-view-project.
 export { Option } from './lib/hyt-radio-button/hyt-radio-button.component';
 export { TreeNodeCategory } from './lib/hyt-tree-view-category/hyt-tree-view-category.component';
 export { HytConfirmDialogComponent } from './lib/hyt-confirm-dialog/hyt-confirm-dialog.component';
-export { HytModal }  from './lib/hyt-modal/hyt-modal';
-export { HytModalService }  from './lib/hyt-modal/hyt-modal.service';
-export { HytModalRef }  from './lib/hyt-modal/hyt-modal-ref';
+export { HytModal } from './lib/hyt-modal/hyt-modal';
+export { HytModalService } from './lib/hyt-modal/hyt-modal.service';
+export { HytModalRef } from './lib/hyt-modal/hyt-modal-ref';
+export { TimeStep } from './lib/hyt-date-picker/hyt-date-picker.component';

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
 import * as moment_ from 'moment';
 import { CalendarContextData, HytDatePickerService } from '../services/hyt-date-picker.service';
 
@@ -28,7 +28,7 @@ interface CalendarContext {
   templateUrl: './picker-pop-up.component.html',
   styleUrls: ['./picker-pop-up.component.css']
 })
-export class PickerPopUpComponent implements OnInit {
+export class PickerPopUpComponent implements OnInit, OnChanges {
 
   model: CalendarContext;
 
@@ -36,7 +36,7 @@ export class PickerPopUpComponent implements OnInit {
   dateInput: moment_.Moment;
 
   @Input()
-  lawView: TimeStep = 'second';
+  lowView: TimeStep = 'second';
 
   @Input()
   show = false;
@@ -52,11 +52,14 @@ export class PickerPopUpComponent implements OnInit {
     this.buildModel('year', moment(new Date()).startOf('year'));
   }
 
+  ngOnChanges() {
+    this.buildModel('year', moment(new Date()).startOf('year'));
+  }
+
   public buildModel(step: any, mom: moment_.Moment): void {
 
     const calendarContextData: CalendarContextData = this.calendarService.getContextDataByStep(step);
     mom.startOf(calendarContextData.toPrevious);
-    console.log(mom.toDate())
 
     const hRows: CalendarRow[] = [];
     const defHeader: CalElement[] = [];
@@ -91,7 +94,7 @@ export class PickerPopUpComponent implements OnInit {
       bRows.push({ elements: [] });
       for (let k = 0; k < calendarContextData.bcols; k++) {
         bRows[i].elements.push({
-          action: () => (step !== this.lawView) ? this.buildModel(
+          action: () => (step !== this.lowView) ? this.buildModel(
             calendarContextData.toNext,
             mom.clone().set(step, calendarContextData.bcols * i + k + ((step === 'year') ? this.getYearStart(mom) : 0))
           ) : this.emitValue(mom.clone().set(step, calendarContextData.bcols * i + k + ((step === 'year') ? this.getYearStart(mom) : 0))),

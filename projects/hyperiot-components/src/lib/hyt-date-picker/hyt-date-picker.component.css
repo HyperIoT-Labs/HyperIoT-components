@@ -1,0 +1,4 @@
+.input-error {
+  background-color: #ff000040;
+  border: 1px solid red;
+}

@@ -70,12 +70,18 @@ export class HytDatePickerComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.actualMask = TimeFormat[this.minStep].maskFormat;
-    this.dateString = moment(this.date).format(TimeFormat[this.minStep].momentFormat);
+    //TODO replace with changeDetection
+    setTimeout(() => {
+      this.dateString = moment(this.date).format(TimeFormat[this.minStep].momentFormat);
+    }, 0);
   }
 
   ngOnChanges(): void {
     this.actualMask = TimeFormat[this.minStep].maskFormat;
-    this.dateString = moment(this.date).format(TimeFormat[this.minStep].momentFormat);
+    //TODO replace with changeDetection
+    setTimeout(() => {
+      this.dateString = moment(this.date).format(TimeFormat[this.minStep].momentFormat);
+    }, 0);
   }
 
   openCal() {

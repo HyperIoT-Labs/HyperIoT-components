@@ -48,9 +48,7 @@ export class PickerPopUpComponent implements OnInit, OnChanges {
     private calendarService: HytDatePickerService
   ) { }
 
-  ngOnInit() {
-    this.buildModel('year', moment(new Date()).startOf('year'));
-  }
+  ngOnInit() { }
 
   ngOnChanges() {
     this.buildModel('year', moment(new Date()).startOf('year'));
@@ -106,7 +104,6 @@ export class PickerPopUpComponent implements OnInit, OnChanges {
         });
       }
     }
-    console.log(bRows);
 
     this.model = {
       headRows: hRows,

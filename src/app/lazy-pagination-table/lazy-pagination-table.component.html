@@ -1,0 +1,7 @@
+Numero dati: <input type="number" value="100">
+<button #num (click)="submitDataNum(num.value)">Sub</button>
+<hr>
+<div class="fake-widget-container">
+    <hyt-lazy-pagination-table [totalRows]="fakeTotalLength" [headers]="['random', 'random2']" [pageData]="pageData"
+        (pageRequest)="pageRequest($event)"></hyt-lazy-pagination-table>
+</div>

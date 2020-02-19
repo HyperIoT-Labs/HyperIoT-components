@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "hyperiot": {
+    "hyperiot-components": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/hyperiot",
+            "outputPath": "dist/hyperiot-components",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -80,7 +80,7 @@
             },
             "it": {
               "aot": true,
-              "outputPath": "dist/hyperiot-it/",
+              "outputPath": "dist/hyperiot-components-it/",
               "i18nFile": "src/locale/translations.it-IT.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "it-IT",
@@ -105,7 +105,7 @@
             },
             "en": {
               "aot": true,
-              "outputPath": "dist/hyperiot-en/",
+              "outputPath": "dist/hyperiot-components-en/",
               "i18nFile": "src/locale/translations.en-US.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "en-US",
@@ -116,24 +116,24 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "hyperiot:build:en"
+            "browserTarget": "hyperiot-components:build:en"
           },
           "configurations": {
             "production": {
-              "browserTarget": "hyperiot:build:production"
+              "browserTarget": "hyperiot-components:build:production"
             },
             "it": {
-              "browserTarget": "hyperiot:build:it"
+              "browserTarget": "hyperiot-components:build:it"
             },
             "en": {
-              "browserTarget": "ssysweb:build:en"
+              "browserTarget": "hyperiot-components:build:en"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "hyperiot:build"
+            "browserTarget": "hyperiot-components:build"
           }
         },
         "test": {
@@ -170,43 +170,43 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "hyperiot:serve"
+            "devServerTarget": "hyperiot-components:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "hyperiot:serve:production"
+              "devServerTarget": "hyperiot-components:serve:production"
             }
           }
         }
       }
     },
-    "hyperiot-components": {
+    "components": {
       "projectType": "library",
-      "root": "projects/hyperiot-components",
-      "sourceRoot": "projects/hyperiot-components/src",
-      "prefix": "lib",
+      "root": "projects/components",
+      "sourceRoot": "projects/components/src",
+      "prefix": "hyt",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/hyperiot-components/tsconfig.lib.json",
-            "project": "projects/hyperiot-components/ng-package.json"
+            "tsConfig": "projects/components/tsconfig.lib.json",
+            "project": "projects/components/ng-package.json"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/hyperiot-components/src/test.ts",
-            "tsConfig": "projects/hyperiot-components/tsconfig.spec.json",
-            "karmaConfig": "projects/hyperiot-components/karma.conf.js"
+            "main": "projects/components/src/test.ts",
+            "tsConfig": "projects/components/tsconfig.spec.json",
+            "karmaConfig": "projects/components/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/hyperiot-components/tsconfig.lib.json",
-              "projects/hyperiot-components/tsconfig.spec.json"
+              "projects/components/tsconfig.lib.json",
+              "projects/components/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -216,5 +216,5 @@
       }
     }
   },
-  "defaultProject": "hyperiot"
+  "defaultProject": "hyperiot-components"
 }

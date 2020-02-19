@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectOption } from 'projects/hyperiot-components/src/public-api';
+import { SelectOption } from 'projects/components/src/public-api';
 import { Logger, LoggerService } from '@hyperiot/core';
 
 @Component({

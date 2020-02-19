@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HytModalService } from 'projects/hyperiot-components/src/lib/hyt-modal/hyt-modal.service';
+import { HytModalService } from 'projects/components/src/lib/hyt-modal/hyt-modal.service';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
 
 @Component({
@@ -26,8 +26,8 @@ export class ModalComponent implements OnInit {
     );
 
     ref.onClosed.subscribe(result => {
-        console.log('Dialog closed', result);
-      },
+      console.log('Dialog closed', result);
+    },
       error => {
         console.log(error);
       },

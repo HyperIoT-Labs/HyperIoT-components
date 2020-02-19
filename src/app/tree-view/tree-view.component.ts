@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { TreeNode } from 'projects/hyperiot-components/src/public-api';
-import { Node } from 'projects/hyperiot-components/src/lib/hyt-tree-view-editable/hyt-tree-view-editable.component';
-import { LoggerService, Logger } from '@hyperiot/core';
-import { TreeNodeCategory } from 'projects/hyperiot-components/src/lib/hyt-tree-view-category/hyt-tree-view-category.component';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { Logger, LoggerService } from '@hyperiot/core';
+import { TreeNodeCategory } from 'projects/components/src/lib/hyt-tree-view-category/hyt-tree-view-category.component';
+import { Node } from 'projects/components/src/lib/hyt-tree-view-editable/hyt-tree-view-editable.component';
+import { TreeNode } from 'projects/components/src/public-api';
 import { Observable } from 'rxjs';
 
 @Component({

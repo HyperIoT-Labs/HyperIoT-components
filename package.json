@@ -1,5 +1,5 @@
 {
-  "name": "hyperiot",
+  "name": "hyperiot-components",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

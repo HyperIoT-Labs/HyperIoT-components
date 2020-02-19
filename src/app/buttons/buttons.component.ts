@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Option } from '../../../projects/hyperiot-components/src/lib/hyt-radio-button/hyt-radio-button.component';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { LoggerService, Logger } from "@hyperiot/core";
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Logger, LoggerService } from '@hyperiot/core';
+import { Option } from '../../../projects/components/src/lib/hyt-radio-button/hyt-radio-button.component';
 
 @Component({
   selector: 'app-buttons',

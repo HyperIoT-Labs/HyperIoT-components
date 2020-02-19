@@ -1,0 +1,5 @@
+<input type="text" [specialCharacters]="['/', ':', ' ' ]" [dropSpecialCharacters]="false" [mask]="actualMask"
+    [(ngModel)]="dateString" (ngModelChange)="dateError = false" [ngClass]="{'input-error': dateError}" [placeholder]="actualMask"/>
+<button (click)="openCal()">O</button>
+<hyt-picker-pop-up [lowView]="minStep" [show]="showPopup" (dateOutput)="setDate($event)"></hyt-picker-pop-up>
+<button (click)="submit()">Submit</button>

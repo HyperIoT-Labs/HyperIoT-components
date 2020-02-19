@@ -1,0 +1,49 @@
+<div class="hyt-lazy-pagination-table">
+    <div *ngIf="pageData" class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th *ngFor="let data of headers">{{data}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of pageData">
+                    <td *ngFor="let item of data | keyvalue">{{item.value}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="!pageData">
+        Loading
+    </div>
+    <div class="table-navigation">
+        <div style="float: left;">
+            Items per page:
+            <hyt-select (changeFn)="onRowPerPageChanged($event)" [options]="rowPerPageSelection"
+                [selected]="rowPerPage">
+            </hyt-select>
+        </div>
+        <div style="float: right;">
+            {{actualRowsIndexes[0]}}-{{actualRowsIndexes[1]}} of {{totalRows}}
+            <hyt-button [color]="'hyt-base-icon-only'" [isDisabled]="selectedPage <= 0" (clickFn)="onPageChange(0)">
+                --
+            </hyt-button>
+            <hyt-button [color]="'hyt-base-icon-only'" [isDisabled]="selectedPage <= 0"
+                (clickFn)="onPageChange(+selectedPage - 1)">
+                -
+            </hyt-button>
+            <input #selPage type="text" [(value)]="selectedPage" (input)="validate(selPage.value)" [ngClass]="{'input-error': validationError}">
+            <hyt-button [color]="'hyt-base-icon-only'" [isDisabled]="selectedPage >= math.floor(totalRows/rowPerPage)"
+                (clickFn)="onPageChange(+selectedPage + 1)">
+                +
+            </hyt-button>
+            <hyt-button [color]="'hyt-base-icon-only'" [isDisabled]="selectedPage >= math.floor(totalRows/rowPerPage)"
+                (clickFn)="onPageChange(math.floor(totalRows/rowPerPage))">
+                ++
+            </hyt-button>
+        </div>
+    </div>
+</div>
+
+
+<!-- (keyup.enter)="onPageChange(+selPage.value)"-->

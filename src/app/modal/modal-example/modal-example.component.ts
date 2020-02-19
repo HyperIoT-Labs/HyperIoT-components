@@ -1,8 +1,6 @@
-import { Component, OnInit, Injector } from '@angular/core';
-import { HytModalRef } from 'projects/hyperiot-components/src/lib/hyt-modal/hyt-modal-ref';
-import { Subject, Observable, Subscriber } from 'rxjs';
-import { HytModalService } from 'projects/hyperiot-components/src/lib/hyt-modal/hyt-modal.service';
-import { HytModal } from 'projects/hyperiot-components/src/lib/hyt-modal/hyt-modal';
+import { Component, OnInit } from '@angular/core';
+import { HytModal } from 'projects/components/src/lib/hyt-modal/hyt-modal';
+import { HytModalService } from 'projects/components/src/lib/hyt-modal/hyt-modal.service';
 
 @Component({
   selector: 'app-modal-example',
@@ -10,7 +8,6 @@ import { HytModal } from 'projects/hyperiot-components/src/lib/hyt-modal/hyt-mod
   styleUrls: ['./modal-example.component.scss']
 })
 export class ModalExampleComponent extends HytModal implements OnInit {
-
 
   constructor(hytModalService: HytModalService) {
     super(hytModalService);

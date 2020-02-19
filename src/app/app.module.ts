@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import { HyperiotComponentsModule } from '../../projects/hyperiot-components/src/lib/hyperiot-components.module';
+import { ComponentsModule } from '../../projects/components/src/lib/components.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
@@ -35,9 +35,11 @@ import { TagsComponent } from './tags/tags.component';
 import { ModalEComponent } from './modal-e/modal-e.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import { HexagonComponent } from './hexagon/hexagon.component';
-import { HytConfirmDialogComponent } from '../../projects/hyperiot-components/src/lib/hyt-confirm-dialog/hyt-confirm-dialog.component';
+import { HytConfirmDialogComponent } from '../../projects/components/src/lib/hyt-confirm-dialog/hyt-confirm-dialog.component';
 import { ModalComponent } from './modal/modal.component';
 import { ModalExampleComponent } from './modal/modal-example/modal-example.component';
+import { TimelineCalendarComponent } from './timeline-calendar/timeline-calendar.component';
+import { LazyPaginationTableComponent } from './lazy-pagination-table/lazy-pagination-table.component';
 
 const appRoutes: Routes = [
   { path: 'inputs', component: InputsComponent },
@@ -53,7 +55,9 @@ const appRoutes: Routes = [
   { path: 'modal', component: ModalComponent },
   { path: 'tags', component: TagsComponent },
   { path: 'autocomplete', component: AutocompleteComponent },
-  { path: 'hexagon', component: HexagonComponent }
+  { path: 'hexagon', component: HexagonComponent },
+  { path: 'timeline-calendar', component: TimelineCalendarComponent },
+  { path: 'lazy-pagination-table', component: LazyPaginationTableComponent }
 ];
 
 @NgModule({
@@ -74,7 +78,9 @@ const appRoutes: Routes = [
     AutocompleteComponent,
     HexagonComponent,
     ModalComponent,
-    ModalExampleComponent
+    ModalExampleComponent,
+    TimelineCalendarComponent,
+    LazyPaginationTableComponent
   ],
   entryComponents: [
     HytConfirmDialogComponent,
@@ -87,7 +93,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HyperiotComponentsModule,
+    ComponentsModule,
     MatToolbarModule,
     MatSidenavModule,
     MatNativeDateModule,
@@ -107,7 +113,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule
   ],
   providers: [I18n,
-    { provide: TRANSLATIONS_FORMAT, useValue: "xlf" },
+    { provide: TRANSLATIONS_FORMAT, useValue: 'xlf' },
     {
       provide: TRANSLATIONS,
       useFactory: (locale) => {

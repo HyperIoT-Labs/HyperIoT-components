@@ -1,26 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-autocomplete',
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss']
 })
-export class AutocompleteComponent implements OnInit {
+export class AutocompleteComponent {
 
   formControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
-
-  selectedDate: Date;
-
-  constructor(
-  ) { }
-
-  ngOnInit() {
-  }
-
-  changeDate(event) {
-    this.selectedDate = event;
-  }
 
 }

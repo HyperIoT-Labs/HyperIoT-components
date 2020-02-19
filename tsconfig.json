@@ -19,11 +19,11 @@
       "dom"
     ],
     "paths": {
-      "hyperiot-components": [
-        "dist/hyperiot-components"
+      "components": [
+        "dist/components"
       ],
-      "hyperiot-components/*": [
-        "dist/hyperiot-components/*"
+      "components/*": [
+        "dist/components/*"
       ]
     }
   },

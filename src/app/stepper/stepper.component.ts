@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { SelectOption } from 'projects/hyperiot-components/src/public-api';
+import { SelectOption } from 'projects/components/src/public-api';
 
 @Component({
   selector: 'app-stepper',

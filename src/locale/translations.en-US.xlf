@@ -6,7 +6,7 @@
         <source>HYT_field_required</source>
         <target>This field is mandatory</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/hyperiot-components/src/lib/hyt-input/hyt-input.component.ts</context>
+          <context context-type="sourcefile">projects/components/src/lib/hyt-input/hyt-input.component.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
@@ -14,7 +14,7 @@
         <source>HYT_valid_email</source>
         <target>Please enter a valid email address</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/hyperiot-components/src/lib/hyt-input/hyt-input.component.ts</context>
+          <context context-type="sourcefile">projects/components/src/lib/hyt-input/hyt-input.component.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
@@ -22,7 +22,7 @@
         <source>HYT_min_length</source>
         <target>At least 8 character length</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/hyperiot-components/src/lib/hyt-input/hyt-input.component.ts</context>
+          <context context-type="sourcefile">projects/components/src/lib/hyt-input/hyt-input.component.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
@@ -30,7 +30,7 @@
         <source>HYT_min_one_number</source>
         <target>At least one enumber</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/hyperiot-components/src/lib/hyt-input/hyt-input.component.ts</context>
+          <context context-type="sourcefile">projects/components/src/lib/hyt-input/hyt-input.component.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
@@ -38,7 +38,7 @@
         <source>HYT_upper_case</source>
         <target>At least one uppercase character</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/hyperiot-components/src/lib/hyt-input/hyt-input.component.ts</context>
+          <context context-type="sourcefile">projects/components/src/lib/hyt-input/hyt-input.component.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
@@ -46,7 +46,7 @@
         <source>HYT_special_char</source>
         <target>At least one special character</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/hyperiot-components/src/lib/hyt-input/hyt-input.component.ts</context>
+          <context context-type="sourcefile">projects/components/src/lib/hyt-input/hyt-input.component.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>

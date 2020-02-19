@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { SelectOption, SelectOptionGroup } from '../../../projects/hyperiot-components/src/lib/hyt-select/hyt-select.component';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { LoggerService, Logger } from '@hyperiot/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Logger, LoggerService } from '@hyperiot/core';
+import { SelectOption, SelectOptionGroup } from '../../../projects/components/src/lib/hyt-select/hyt-select.component';
 
 @Component({
   selector: 'app-select',

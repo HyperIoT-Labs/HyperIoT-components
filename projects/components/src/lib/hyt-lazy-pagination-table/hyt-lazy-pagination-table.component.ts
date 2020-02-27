@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { SelectOption } from '../hyt-select/hyt-select.component';
-import { ViewEncapsulation } from '@angular/core';
 
 export type TableRowIndexes = [number, number];
 
@@ -10,7 +9,7 @@ export type TableRowIndexes = [number, number];
   styleUrls: ['./hyt-lazy-pagination-table.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class HytLazyPaginationTableComponent implements OnInit, OnChanges {
+export class HytLazyPaginationTableComponent implements OnInit {
 
   math = Math;
 
@@ -43,42 +42,18 @@ export class HytLazyPaginationTableComponent implements OnInit, OnChanges {
 
   pageStatus = 0;
 
-  ngOnChanges(): void {
-    console.log(this.pageData);
-  }
-
-  constructor(private cdr:ChangeDetectorRef) {
-    setInterval(() => {
-      console.log(this.selectedPage)
-    }, 500)
-  }
+  constructor() { }
   ngOnInit() {
-    this.updatePageData();
-  }
-
-  onPageChange(pageNumber: number) {
-    console.log(pageNumber)
-    setTimeout(() => {
-      if (pageNumber < 0) {
-        this.selectedPage = 0;
-      } else if (pageNumber > Math.floor(this.totalRows / this.rowPerPage)) {
-        this.selectedPage = Math.floor(this.totalRows / this.rowPerPage);
-      } else {
-        this.selectedPage = pageNumber;
-      }
-      this.updatePageData();
-      this.cdr.detectChanges();
-    }, 500);
-
+    this.updatePageData(0);
   }
 
   onRowPerPageChanged(event) {
     this.rowPerPage = event.value;
-    this.selectedPage = 0;
-    this.updatePageData();
+    this.updatePageData(0);
   }
 
-  updatePageData() {
+  updatePageData(asd: number) {
+    this.selectedPage = +asd;
     const dataIndexes: [number, number] = [
       this.selectedPage * this.rowPerPage,
       (this.selectedPage + 1) * this.rowPerPage < this.totalRows ? (this.selectedPage + 1) * this.rowPerPage : this.totalRows
@@ -90,13 +65,4 @@ export class HytLazyPaginationTableComponent implements OnInit, OnChanges {
     }
   }
 
-  validate(event) {
-    if (/^\d+$/.test(event)) {
-      // const pageNumber = 
-      this.validationError = false;
-      this.onPageChange(+event);
-    } else {
-      this.validationError = true;
-    }
-  }
 }

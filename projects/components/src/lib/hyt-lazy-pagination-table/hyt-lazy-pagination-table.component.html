@@ -24,26 +24,24 @@
             </hyt-select>
         </div>
         <div style="float: right;">
-            {{actualRowsIndexes[0]}}-{{actualRowsIndexes[1]}} of {{totalRows}}
-            <hyt-button [color]="'hyt-base-icon-only'" [isDisabled]="selectedPage <= 0" (clickFn)="onPageChange(0)">
-                --
+            {{actualRowsIndexes[0] + 1}}-{{actualRowsIndexes[1]}} of {{totalRows}}
+            <hyt-button [color]="'hyt-base-icon-only'" [isDisabled]="selectedPage <= 0" (clickFn)="updatePageData(0)">
+                &lt;&lt;
             </hyt-button>
             <hyt-button [color]="'hyt-base-icon-only'" [isDisabled]="selectedPage <= 0"
-                (clickFn)="onPageChange(+selectedPage - 1)">
-                -
+                (clickFn)="updatePageData(selectedPage - 1)">
+                &lt;
             </hyt-button>
-            <input #selPage type="text" [(value)]="selectedPage" (input)="validate(selPage.value)" [ngClass]="{'input-error': validationError}">
-            <hyt-button [color]="'hyt-base-icon-only'" [isDisabled]="selectedPage >= math.floor(totalRows/rowPerPage)"
-                (clickFn)="onPageChange(+selectedPage + 1)">
-                +
+            <input type="text" [hytPageInput]="math.ceil(totalRows/rowPerPage) - 1" [pageValue]="selectedPage"
+                (pageEvent)="updatePageData($event)">
+            <hyt-button [color]="'hyt-base-icon-only'" [isDisabled]=" selectedPage >= (math.ceil(totalRows/rowPerPage) - 1)"
+                (clickFn)="updatePageData(selectedPage + 1)">
+                &gt;
             </hyt-button>
-            <hyt-button [color]="'hyt-base-icon-only'" [isDisabled]="selectedPage >= math.floor(totalRows/rowPerPage)"
-                (clickFn)="onPageChange(math.floor(totalRows/rowPerPage))">
-                ++
+            <hyt-button [color]="'hyt-base-icon-only'" [isDisabled]="selectedPage >= (math.ceil(totalRows/rowPerPage) - 1)"
+                (clickFn)="updatePageData(math.ceil(totalRows/rowPerPage) - 1)">
+                &gt;&gt;
             </hyt-button>
         </div>
     </div>
 </div>
-
-
-<!-- (keyup.enter)="onPageChange(+selPage.value)"-->

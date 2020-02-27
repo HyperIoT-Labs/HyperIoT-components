@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LazyPaginationTableComponent implements OnInit {
 
-  fakeTotalLength = 36;
+  fakeTotalLength = 16;
 
   pageData;
 
@@ -31,10 +31,6 @@ export class LazyPaginationTableComponent implements OnInit {
 
   pageRequest(event) {
     this.fakeRequest(event);
-  }
-
-  submitDataNum(num: number) {
-    this.fakeTotalLength = num;
   }
 
 }

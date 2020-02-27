@@ -40,11 +40,6 @@
 }
 
 .hyt-lazy-pagination-table .table-navigation input {
-  width: 50px;
+  width: 70px;
   height: 25px;
-}
-
-.hyt-lazy-pagination-table .table-navigation input.input-error {
-  background-color: #ff000040;
-  border: 1px solid red;
 }

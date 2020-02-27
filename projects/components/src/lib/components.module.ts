@@ -36,6 +36,7 @@ import { HytDatePickerComponent } from './hyt-date-picker/hyt-date-picker.compon
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { PickerPopUpComponent } from './hyt-date-picker/picker-pop-up/picker-pop-up.component';
 import { HytLazyPaginationTableComponent } from './hyt-lazy-pagination-table/hyt-lazy-pagination-table.component';
+import { PageInputDirective } from './hyt-lazy-pagination-table/page-input.directive';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -66,7 +67,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     HytModalContentDirective,
     HytDatePickerComponent,
     PickerPopUpComponent,
-    HytLazyPaginationTableComponent
+    HytLazyPaginationTableComponent,
+    PageInputDirective
   ],
   imports: [
     CommonModule,

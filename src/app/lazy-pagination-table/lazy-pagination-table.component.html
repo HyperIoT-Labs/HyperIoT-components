@@ -1,4 +1,5 @@
+<input #numRows type="number"><button (click)="submitNumRows(numRows.value)">SUBMIT</button>
 <div class="fake-widget-container">
-    <hyt-lazy-pagination-table [totalRows]="fakeTotalLength" [headers]="['random', 'random2']" [pageData]="pageData"
+    <hyt-lazy-pagination-table #tableChild [headers]="['random', 'random2']" [dataSource]="pageData"
         (pageRequest)="pageRequest($event)"></hyt-lazy-pagination-table>
 </div>

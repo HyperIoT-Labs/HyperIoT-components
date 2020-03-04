@@ -52,7 +52,6 @@ export class PageInputDirective implements OnChanges {
   ngOnChanges(): void {
     this.el.nativeElement.value = this.pageValue + 1;
     this.validateInput();
-    this.pageEvent.emit(this.pageValue);
   }
 
 }

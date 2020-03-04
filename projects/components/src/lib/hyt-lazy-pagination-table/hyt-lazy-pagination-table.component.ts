@@ -1,7 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Subject } from 'rxjs';
 import { SelectOption } from '../hyt-select/hyt-select.component';
 
 export type TableRowIndexes = [number, number];
+
+enum TableStatus {
+  NoData = -1,
+  LoadingData = 0,
+  ShowData = 1
+}
 
 @Component({
   selector: 'hyt-lazy-pagination-table',
@@ -11,17 +18,18 @@ export type TableRowIndexes = [number, number];
 })
 export class HytLazyPaginationTableComponent implements OnInit {
 
-  math = Math;
+  tableStatus: TableStatus = TableStatus.NoData;
 
-  validationError = false;
+  @Input()
+  dataSource: Subject<any[]>;
 
   @Input()
   headers: string[];
 
-  @Input()
-  pageData: any[];
+  math = Math;
 
-  @Input()
+  pageData: any[] = [];
+
   totalRows = 0;
 
   rowPerPageSelection: SelectOption[] = [
@@ -40,11 +48,15 @@ export class HytLazyPaginationTableComponent implements OnInit {
   @Output()
   pageRequest: EventEmitter<TableRowIndexes> = new EventEmitter<TableRowIndexes>();
 
-  pageStatus = 0;
-
   constructor() { }
-  ngOnInit() {
-    this.updatePageData(0);
+
+  ngOnInit(): void {
+    this.dataSource.subscribe(
+      r => {
+        this.pageData = r;
+        this.tableStatus = TableStatus.ShowData;
+      }
+    );
   }
 
   onRowPerPageChanged(event) {
@@ -58,11 +70,18 @@ export class HytLazyPaginationTableComponent implements OnInit {
       this.selectedPage * this.rowPerPage,
       (this.selectedPage + 1) * this.rowPerPage < this.totalRows ? (this.selectedPage + 1) * this.rowPerPage : this.totalRows
     ];
-    if (dataIndexes[0] !== this.actualRowsIndexes[0] || dataIndexes[1] !== this.actualRowsIndexes[1]) {
-      this.actualRowsIndexes = dataIndexes;
-      this.pageData = null;
+    this.actualRowsIndexes = dataIndexes;
+    if (this.totalRows !== 0) {
+      this.tableStatus = TableStatus.LoadingData;
       this.pageRequest.emit(this.actualRowsIndexes);
+    } else {
+      this.tableStatus = TableStatus.NoData;
     }
+  }
+
+  resetTable(numRow: number) {
+    this.totalRows = +numRow;
+    this.updatePageData(0);
   }
 
 }

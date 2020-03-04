@@ -1,20 +1,23 @@
 <div class="hyt-lazy-pagination-table">
-    <div *ngIf="pageData" class="table-wrapper">
+    <div class="table-wrapper">
         <table>
             <thead>
                 <tr>
                     <th *ngFor="let data of headers">{{data}}</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="tableStatus == 1">
                 <tr *ngFor="let data of pageData">
-                    <td *ngFor="let item of data | keyvalue">{{item.value}}</td>
+                    <td *ngFor="let item of headers">{{data[item] || '-'}}</td>
                 </tr>
             </tbody>
         </table>
-    </div>
-    <div *ngIf="!pageData">
-        Loading
+        <div *ngIf="tableStatus == 0">
+            Loading
+        </div>
+        <div *ngIf="tableStatus == -1">
+            No data to show
+        </div>
     </div>
     <div class="table-navigation">
         <div style="float: left;">
@@ -24,7 +27,10 @@
             </hyt-select>
         </div>
         <div style="float: right;">
-            {{actualRowsIndexes[0] + 1}}-{{actualRowsIndexes[1]}} of {{totalRows}}
+            <ng-container *ngIf="tableStatus == -1">No Data</ng-container>
+            <ng-container *ngIf="tableStatus != -1">
+                {{actualRowsIndexes[0] + 1}}-{{actualRowsIndexes[1]}} of {{totalRows}}
+            </ng-container>
             <hyt-button [color]="'hyt-base-icon-only'" [isDisabled]="selectedPage <= 0" (clickFn)="updatePageData(0)">
                 &lt;&lt;
             </hyt-button>
@@ -33,12 +39,14 @@
                 &lt;
             </hyt-button>
             <input type="text" [hytPageInput]="math.ceil(totalRows/rowPerPage) - 1" [pageValue]="selectedPage"
-                (pageEvent)="updatePageData($event)">
-            <hyt-button [color]="'hyt-base-icon-only'" [isDisabled]=" selectedPage >= (math.ceil(totalRows/rowPerPage) - 1)"
+                (pageEvent)="updatePageData($event)" [attr.disabled]="tableStatus == -1 ? '' : null">
+            <hyt-button [color]="'hyt-base-icon-only'"
+                [isDisabled]=" selectedPage >= (math.ceil(totalRows/rowPerPage) - 1)"
                 (clickFn)="updatePageData(selectedPage + 1)">
                 &gt;
             </hyt-button>
-            <hyt-button [color]="'hyt-base-icon-only'" [isDisabled]="selectedPage >= (math.ceil(totalRows/rowPerPage) - 1)"
+            <hyt-button [color]="'hyt-base-icon-only'"
+                [isDisabled]="selectedPage >= (math.ceil(totalRows/rowPerPage) - 1)"
                 (clickFn)="updatePageData(math.ceil(totalRows/rowPerPage) - 1)">
                 &gt;&gt;
             </hyt-button>

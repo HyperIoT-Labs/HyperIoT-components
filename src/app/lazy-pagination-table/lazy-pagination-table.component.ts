@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { HytLazyPaginationTableComponent } from 'projects/components/src/lib/hyt-lazy-pagination-table/hyt-lazy-pagination-table.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-lazy-pagination-table',
@@ -7,14 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LazyPaginationTableComponent implements OnInit {
 
+  @ViewChild('tableChild', { static: false }) tableChild: HytLazyPaginationTableComponent;
+
   fakeTotalLength = 16;
 
-  pageData;
+  pageData: Subject<any[]>;
 
   timeOut;
 
   ngOnInit(): void {
-    //this.fakeRequest();
+    this.pageData = new Subject<any[]>();
+  }
+
+  submitNumRows(num: number) {
+    this.fakeTotalLength = num;
+    this.tableChild.resetTable(this.fakeTotalLength);
   }
 
   fakeRequest(event) {
@@ -22,10 +31,11 @@ export class LazyPaginationTableComponent implements OnInit {
       clearTimeout(this.timeOut);
     }
     this.timeOut = setTimeout(() => {
-      this.pageData = [];
+      const data = [];
       for (let i = event[0]; i < event[1]; i++) {
-        this.pageData.push({ data: Math.random(), data2: Math.random() });
+        data.push({ random: Math.random(), random2: Math.random() });
       }
+      this.pageData.next(data);
     }, Math.floor(Math.random() * 1000) + 500); // random beteen 500ms and 5000ms
   }
 

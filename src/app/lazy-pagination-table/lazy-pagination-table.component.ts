@@ -23,7 +23,7 @@ export class LazyPaginationTableComponent implements OnInit {
 
   submitNumRows(num: number) {
     this.fakeTotalLength = num;
-    this.tableChild.resetTable(this.fakeTotalLength);
+    this.tableChild.resetTable(this.fakeTotalLength, true);
   }
 
   fakeRequest(event) {

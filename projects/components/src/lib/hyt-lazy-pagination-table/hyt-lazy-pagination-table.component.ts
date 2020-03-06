@@ -65,7 +65,9 @@ export class HytLazyPaginationTableComponent implements OnInit {
   }
 
   updatePageData(asd: number) {
-    this.selectedPage = +asd;
+    if (asd !== null) {
+      this.selectedPage = +asd;
+    }
     const dataIndexes: [number, number] = [
       this.selectedPage * this.rowPerPage,
       (this.selectedPage + 1) * this.rowPerPage < this.totalRows ? (this.selectedPage + 1) * this.rowPerPage : this.totalRows
@@ -79,9 +81,9 @@ export class HytLazyPaginationTableComponent implements OnInit {
     }
   }
 
-  resetTable(numRow: number) {
+  resetTable(numRow: number, resetPage: boolean) {
     this.totalRows = +numRow;
-    this.updatePageData(0);
+    this.updatePageData(resetPage ? 0 : null);
   }
 
 }

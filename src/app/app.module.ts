@@ -27,7 +27,6 @@ import { StepperComponent } from './stepper/stepper.component';
 import { CardsComponent } from './cards/cards.component';
 import { LayoutComponent } from './layout/layout.component';
 import { SelectComponent } from './select/select.component';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { TreeViewComponent } from './tree-view/tree-view.component';
 import { SelectTemplateComponent } from './select-template/select-template.component';
 import { TreeViewProjectComponent } from './tree-view-project/tree-view-project.component';
@@ -35,7 +34,6 @@ import { TagsComponent } from './tags/tags.component';
 import { ModalEComponent } from './modal-e/modal-e.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import { HexagonComponent } from './hexagon/hexagon.component';
-import { HytConfirmDialogComponent } from '../../projects/components/src/lib/hyt-confirm-dialog/hyt-confirm-dialog.component';
 import { ModalComponent } from './modal/modal.component';
 import { ModalExampleComponent } from './modal/modal-example/modal-example.component';
 import { TimelineCalendarComponent } from './timeline-calendar/timeline-calendar.component';
@@ -83,7 +81,6 @@ const appRoutes: Routes = [
     LazyPaginationTableComponent
   ],
   entryComponents: [
-    HytConfirmDialogComponent,
     ModalExampleComponent
   ],
   imports: [
@@ -112,17 +109,7 @@ const appRoutes: Routes = [
     MatSlideToggleModule,
     BrowserAnimationsModule
   ],
-  providers: [I18n,
-    { provide: TRANSLATIONS_FORMAT, useValue: 'xlf' },
-    {
-      provide: TRANSLATIONS,
-      useFactory: (locale) => {
-        locale = locale || 'en-US'; // default to english if no locale provided
-        return require(`raw-loader!../locale/translations.${locale}.xlf`);
-      },
-      deps: [LOCALE_ID]
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

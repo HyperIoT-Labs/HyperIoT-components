@@ -4,7 +4,7 @@ IF EXIST "package.json" (
     echo.
     CALL ng xi18n --output-path src/locale --out-file translations.xlf || echo echo ERRORE && EXIT
     echo ngx-extractor on hyperiot...
-    CALL npm run ngx-extractor -- -i "./projects/**/*.ts" -o "src/locale/translations.xlf" || echo echo ERRORE && EXIT
+    CALL npm run locl-extract || echo echo ERRORE && EXIT
     echo.
     echo Finito
 ) ELSE (

@@ -9,7 +9,7 @@ import { Subject } from 'rxjs';
 })
 export class LazyPaginationTableComponent implements OnInit {
 
-  @ViewChild('tableChild', { static: false }) tableChild: HytLazyPaginationTableComponent;
+  @ViewChild('tableChild') tableChild: HytLazyPaginationTableComponent;
 
   fakeTotalLength = 16;
 

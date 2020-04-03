@@ -39,6 +39,7 @@ export class ButtonsComponent implements OnInit {
     private fb: FormBuilder,
     private loggerService: LoggerService
   ) {
+    console.log("AIUTO")
     this.logger = new Logger(this.loggerService);
     this.logger.registerClass('ButtonsComponent');
   }

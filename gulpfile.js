@@ -57,7 +57,7 @@ gulp.task('compodocAll', function () {
 })
 
 gulp.task('buildLib', () => {
-  return spawn('ng', ['build', library], {
+  return spawn('ng', ['build', library, '--prod'], {
     stdio: 'inherit'
   });
 });

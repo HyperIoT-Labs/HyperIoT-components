@@ -114,7 +114,7 @@ export class NodeDatabase {
 })
 export class HytTreeViewEditableComponent implements OnInit {
 
-  @ViewChild('editableTree', { static: false }) private Element: ElementRef;
+  @ViewChild('editableTree') private Element: ElementRef;
 
   @Input() deviceName: string;
 

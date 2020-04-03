@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class TreeViewComponent implements OnInit {
 
-  @ViewChild('editableTree', { static: false }) private editableTree: ElementRef;
+  @ViewChild('editableTree') private editableTree: ElementRef;
 
   private logger: Logger;
 

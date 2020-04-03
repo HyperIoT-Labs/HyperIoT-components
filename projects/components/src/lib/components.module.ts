@@ -29,7 +29,6 @@ import { HytTreeViewCategoryComponent } from './hyt-tree-view-category/hyt-tree-
 import { HytAutocompleteComponent } from './hyt-autocomplete/hyt-autocomplete.component';
 import { HytTriCheckboxComponent } from './hyt-tri-checkbox/hyt-tri-checkbox.component';
 import { HytHexagonComponent } from './hyt-hexagon/hyt-hexagon.component';
-import { HytConfirmDialogComponent } from './hyt-confirm-dialog/hyt-confirm-dialog.component';
 import { HytModalContainerComponent } from './hyt-modal/hyt-modal-container.component';
 import { HytModalContentDirective } from './hyt-modal/hyt-modal-content.directive';
 import { HytDatePickerComponent } from './hyt-date-picker/hyt-date-picker.component';
@@ -62,7 +61,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     HytAutocompleteComponent,
     HytTriCheckboxComponent,
     HytHexagonComponent,
-    HytConfirmDialogComponent,
     HytModalContainerComponent,
     HytModalContentDirective,
     HytDatePickerComponent,

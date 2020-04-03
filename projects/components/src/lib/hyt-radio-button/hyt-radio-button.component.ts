@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, forwardRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, FormGroup, Validators, FormGroupDirective, NgForm } from '@angular/forms';
-import { I18n } from '@ngx-translate/i18n-polyfill';
+import '@angular/localize/init';
 
 /**
  * Class used to represent a select option.
@@ -65,10 +65,9 @@ export class HytRadioButtonComponent implements OnInit, ControlValueAccessor {
 
   /** Map error type with default error string */
   errorMap = {
-    required: this.i18n('HYT_field_required'), // 'The field is required.',
-    validateRequired: this.i18n('HYT_field_required'), // 'The field is required.',
+    required: $localize`:@@HYT_field_required:The field is required`, // 'The field is required.',
+    validateRequired: $localize`:@@HYT_field_required:The field is required`,
   };
-
   /**
    * Callback function for change event
    */
@@ -82,9 +81,7 @@ export class HytRadioButtonComponent implements OnInit, ControlValueAccessor {
   /**
    * constructor
    */
-  constructor(
-    private i18n: I18n,
-  ) { }
+  constructor() { }
 
   /**
    * ngOnInit

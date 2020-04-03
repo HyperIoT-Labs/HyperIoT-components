@@ -22,7 +22,7 @@ export class HytAutocompleteComponent implements OnInit {
   filteredOptions: Observable<string[]>;
 
   /** ViewChild */
-  @ViewChild('auto', { static: false }) private matAuto: ElementRef;
+  @ViewChild('auto') private matAuto: ElementRef;
 
   /** Function called when click event is triggered */
   @Output() optionSelected: EventEmitter<any> = new EventEmitter();

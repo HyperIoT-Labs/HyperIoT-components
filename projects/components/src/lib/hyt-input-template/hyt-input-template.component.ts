@@ -17,9 +17,9 @@ import {
   FormGroup
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Observable } from 'rxjs';
 import { LoggerService, Logger } from '@hyperiot/core';
+import '@angular/localize/init';
 
 /**
  * Custom provider for NG_VALUE_ACCESSOR
@@ -81,7 +81,7 @@ export class HytInputTemplateComponent implements OnInit, ControlValueAccessor {
   @Input() errorPosition = '';
 
   /** ViewChild */
-  @ViewChild('input', { static: false }) private inputElement: ElementRef;
+  @ViewChild('input') private inputElement: ElementRef;
 
   /** Applies required validation */
   @Input() isRequired = false;
@@ -103,13 +103,13 @@ export class HytInputTemplateComponent implements OnInit, ControlValueAccessor {
 
   /** Map error type with default error string */
   errorMap = {
-    required: this.i18n('HYT_field_required'), // 'The field is required.',
-    validateRequired: this.i18n('HYT_field_required'),
-    email: this.i18n('HYT_valid_email'),
-    minlength: this.i18n('HYT_min_length'),
-    validateNumber: this.i18n('HYT_min_one_number'),
-    validateUperCase: this.i18n('HYT_upper_case'),
-    validateSpecialChar: this.i18n('HYT_special_char'),
+    required: $localize`:@@HYT_field_required:The field is required`, // 'The field is required.',
+    validateRequired: $localize`:@@HYT_field_required:The field is required`,
+    email: $localize`:@@HYT_valid_email:Please enter a valid email address`,
+    minlength: $localize`:@@HYT_min_length:At least 8 character length`,
+    validateNumber: $localize`:@@HYT_min_one_number:At least one enumber`,
+    validateUperCase: $localize`:@@HYT_upper_case:At least one uppercase character`,
+    validateSpecialChar: $localize`:@@HYT_special_char:At least one special character`,
     validateConfirmPassword: 'Password Mismatch',
     validatePassword: 'Password must be valid',
     validateInjectedError: ''
@@ -139,7 +139,6 @@ export class HytInputTemplateComponent implements OnInit, ControlValueAccessor {
    * Constructor
    */
   constructor(
-    private i18n: I18n,
     private loggerService: LoggerService
   ) {
     this.logger = new Logger(this.loggerService);

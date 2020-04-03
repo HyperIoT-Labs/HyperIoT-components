@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class HytStepperComponent implements OnInit {
   /** ViewChild */
-  @ViewChild('stepper', { static: false }) private stepperElement: ElementRef;
+  @ViewChild('stepper') private stepperElement: ElementRef;
 
   /** Function called when click event is triggered */
   @Output() selectionChange: EventEmitter<any> = new EventEmitter();

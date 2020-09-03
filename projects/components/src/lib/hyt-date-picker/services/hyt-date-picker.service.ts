@@ -94,32 +94,33 @@ export class HytDatePickerService {
 
   getContextDataByStep(step: string): CalendarContextData {
     // TODO avoid switch case with string literals? -> lint issue
-    switch (step) {
-      case 'year': {
-        return this.year;
-        break;
-      }
-      case 'month': {
-        return this.month;
-        break;
-      }
-      case 'day': {
-        return this.day;
-        break;
-      }
-      case 'hour': {
-        return this.hour;
-        break;
-      }
-      case 'minute': {
-        return this.minute;
-        break;
-      }
-      case 'second': {
-        return this.second;
-        break;
-      }
-    }
-    return;
+    return (this[step]) ? this[step] : {};
+    // switch (step) {
+    //   case 'year': {
+    //     return this.year;
+    //     break;
+    //   }
+    //   case 'month': {
+    //     return this.month;
+    //     break;
+    //   }
+    //   case 'day': {
+    //     return this.day;
+    //     break;
+    //   }
+    //   case 'hour': {
+    //     return this.hour;
+    //     break;
+    //   }
+    //   case 'minute': {
+    //     return this.minute;
+    //     break;
+    //   }
+    //   case 'second': {
+    //     return this.second;
+    //     break;
+    //   }
+    // }
+    // return;
   }
 }

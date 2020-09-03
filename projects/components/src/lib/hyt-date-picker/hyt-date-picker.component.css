@@ -1,4 +1,29 @@
-.input-error {
+#hyt-date-picker-input {
+  display: inline-block;
+}
+
+/* .input-error {
   background-color: #ff000040;
   border: 1px solid red;
+}
+
+.picker-button {
+  background-color: #ffffff;
+  color: #0956B6;
+  border-color: #17A4FA;
+  transition: all 0.1s linear;
+  border-radius: 5px;
+  box-shadow: 0px 0px 0px 1px #0956b6;
+} */
+
+#hyt-date-picker-button,
+#hyt-date-submit-button {
+  margin-left: 10px;
+}
+
+#hyt-date-picker-button button,
+#hyt-date-submit-button button {
+  font-size: 0.7em;
+  min-height: 10px;
+  height: 35px;
 }

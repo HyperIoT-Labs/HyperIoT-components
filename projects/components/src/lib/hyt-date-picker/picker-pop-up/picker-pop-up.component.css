@@ -1,14 +1,59 @@
-.calendar-popup {
+#hyt-picker-container #hyt-picker-table {
+  border: 1px solid rgba(0,0,0,.15);;
+  border-radius: 6px;
+  padding: 6px;
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  background-color: white;
+  top: 48px;
+}
+
+#hyt-picker-container .calendar-popup {
   position: absolute;
   display: none;
   z-index: 1000;
 }
 
-.calendar-popup.visible {
+#hyt-picker-container .calendar-popup.visible {
   display: block;
-} 
+}
 
-/* TODO: remove everything under this comment */
-th,tr,td  {
-    border: 1px black dotted;
+#hyt-picker-container thead th {
+  text-align: center;
+  cursor: pointer;
+}
+
+#hyt-picker-container td {
+  text-align: center;
+  cursor: pointer;
+}
+
+#hyt-picker-container td.h-row-day {
+  text-align: center;
+  min-width: 40px;
+}
+
+#hyt-picker-container td.b-row-year {
+  min-width: 50px;
+}
+
+#hyt-picker-container td.b-row-month {
+  min-width: 95px;
+}
+
+#hyt-picker-container td.b-row-hour  {
+  min-width: 60px;
+}
+
+#hyt-picker-container td.b-row-minute  {
+  min-width: 70px;
+}
+
+#hyt-picker-container td.b-row-second  {
+  min-width: 90px;
+}
+
+#hyt-picker-container td.disabled {
+  color: lightgray;
+  pointer-events: none;
+  cursor: none;
 }

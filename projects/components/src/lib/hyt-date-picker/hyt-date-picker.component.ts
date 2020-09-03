@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, ViewEncapsulation } from '@angular/core';
 import * as moment_ from 'moment';
+import { FormGroup } from '@angular/forms';
 const moment = moment_;
 
 export type TimeStep = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second' | 'millisecond';
@@ -7,36 +8,44 @@ export type TimeStep = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second' |
 interface DateFormat {
   maskFormat: string;
   momentFormat: string;
+  pattern: RegExp;
 }
 
 const TimeFormat: Record<string, DateFormat> = {
   year: {
     maskFormat: '0000',
-    momentFormat: 'YYYY'
+    momentFormat: 'YYYY',
+    pattern: new RegExp(/^(\d{4})$/)
   },
   month: {
     maskFormat: '0000/00',
-    momentFormat: 'YYYY/MM'
+    momentFormat: 'YYYY/MM',
+    pattern: new RegExp(/^(\d{4})\/(\d{2})$/)
   },
   day: {
     maskFormat: '0000/00/00',
-    momentFormat: 'YYYY/MM/DD'
+    momentFormat: 'YYYY/MM/DD',
+    pattern: new RegExp(/^(\d{4})\/(\d{2})\/(\d{2})$/)
   },
   hour: {
     maskFormat: '0000/00/00 00',
-    momentFormat: 'YYYY/MM/DD HH'
+    momentFormat: 'YYYY/MM/DD HH',
+    pattern: new RegExp(/^(\d{4})\/(\d{2})\/(\d{2}) (\d{2})$/)
   },
   minute: {
     maskFormat: '0000/00/00 00:00',
-    momentFormat: 'YYYY/MM/DD HH:mm'
+    momentFormat: 'YYYY/MM/DD HH:mm',
+    pattern: new RegExp(/^(\d{4})\/(\d{2})\/(\d{2}) (\d{2}):(\d{2})$/)
   },
   second: {
     maskFormat: '0000/00/00 00:00:00',
-    momentFormat: 'YYYY/MM/DD HH:mm:ss'
+    momentFormat: 'YYYY/MM/DD HH:mm:ss',
+    pattern: new RegExp(/^(\d{4})\/(\d{2})\/(\d{2}) (\d{2}):(\d{2}):(\d{2})$/)
   },
   millisecond: {
     maskFormat: '0000/00/00 00:00:00.000',
-    momentFormat: 'YYYY/MM/DD HH:mm:ss.SSS'
+    momentFormat: 'YYYY/MM/DD HH:mm:ss.SSS',
+    pattern: new RegExp(/^(\d{4})\/(\d{2})\/(\d{2}) (\d{2}):(\d{2}):(\d{2})\.(\d{3})$/)
   }
 };
 
@@ -45,14 +54,24 @@ const TimeFormat: Record<string, DateFormat> = {
   selector: 'hyt-date-picker',
   templateUrl: 'hyt-date-picker.component.html',
   styleUrls: ['hyt-date-picker.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HytDatePickerComponent implements OnInit, OnChanges {
+
+  @Input()
+  color: string = 'hyt-base-default-white';
 
   @Input()
   date: Date = new Date();
 
   @Input()
   minStep: TimeStep = 'day';
+
+  @Input()
+  pattern: RegExp = new RegExp('');
+
+  @Input()
+  languageCode: string = 'en';
 
   showPopup = false;
 
@@ -65,18 +84,23 @@ export class HytDatePickerComponent implements OnInit, OnChanges {
 
   actualMask: string;
 
+  initialValue: string;
+
   constructor() { }
 
   ngOnInit(): void {
     this.actualMask = TimeFormat[this.minStep].maskFormat;
+    this.pattern = TimeFormat[this.minStep].pattern;
     //TODO replace with changeDetection
     setTimeout(() => {
       this.dateString = moment(this.date).format(TimeFormat[this.minStep].momentFormat);
+      this.initialValue = this.dateString;
     }, 0);
   }
 
   ngOnChanges(): void {
     this.actualMask = TimeFormat[this.minStep].maskFormat;
+    this.pattern = TimeFormat[this.minStep].pattern;
     //TODO replace with changeDetection
     setTimeout(() => {
       this.dateString = moment(this.date).format(TimeFormat[this.minStep].momentFormat);
@@ -91,7 +115,7 @@ export class HytDatePickerComponent implements OnInit, OnChanges {
     this.showPopup = false;
     this.date = event.toDate();
     this.dateString = moment(this.date).format(TimeFormat[this.minStep].momentFormat);
-    this.selectedDate.emit(this.date);
+    // this.selectedDate.emit(this.date);
   }
 
   submit() {

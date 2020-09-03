@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, HostListener, ElementRef } from '@angular/core';
 import * as moment_ from 'moment';
 import { CalendarContextData, HytDatePickerService } from '../services/hyt-date-picker.service';
 
@@ -10,6 +10,7 @@ interface CalElement {
   label: string;
   selectable?: boolean;
   class?: string;
+  colspan?: string;
 }
 
 interface CalendarRow {
@@ -41,14 +42,44 @@ export class PickerPopUpComponent implements OnInit, OnChanges {
   @Input()
   show = false;
 
+  @Input()
+  languageCode: string;
+
   @Output()
   dateOutput: EventEmitter<moment_.Moment> = new EventEmitter<moment_.Moment>();
 
+  @Output()
+  popUpEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  colspanMap = {
+    'year': '2',
+    'month': '2',
+    'day': '5',
+    'hour': '2',
+    'minute': '4',
+    'second': '4',
+    'millisecond': '4'
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    const pickerPopUpElement = event.path.find(x => x == this.eRef.nativeElement);
+    const btn = document.getElementById('hyt-date-picker-button')
+    const buttonElement = event.path.find(x => x == btn);
+    if (!pickerPopUpElement && !buttonElement) {
+      this.show = false;
+      this.popUpEvent.emit(this.show);
+    }
+  }
+
   constructor(
-    private calendarService: HytDatePickerService
+    private calendarService: HytDatePickerService,
+    private eRef: ElementRef
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    moment.locale(this.languageCode)
+  }
 
   ngOnChanges() {
     this.buildModel('year', moment(new Date()).startOf('year'));
@@ -62,7 +93,7 @@ export class PickerPopUpComponent implements OnInit, OnChanges {
     const hRows: CalendarRow[] = [];
     const defHeader: CalElement[] = [];
     defHeader.push({
-      label: '<-',
+      label: '<',
       action: () => this.buildModel(step, calendarContextData.subtract(mom))
     });
     defHeader.push({
@@ -70,10 +101,11 @@ export class PickerPopUpComponent implements OnInit, OnChanges {
       action: () =>
         (step === 'year') ?
           {} :
-          this.buildModel(calendarContextData.toPrevious, moment(mom).startOf(calendarContextData.toPrevious))
+          this.buildModel(calendarContextData.toPrevious, moment(mom).startOf(calendarContextData.toPrevious)),
+      colspan: this.colspanMap[step]
     });
     defHeader.push({
-      label: '->',
+      label: '>',
       action: () => this.buildModel(step, calendarContextData.add(mom))
     });
     hRows.push({ elements: defHeader });
@@ -82,15 +114,26 @@ export class PickerPopUpComponent implements OnInit, OnChanges {
       for (let i = 0; i < 7; i++) {
         hRows[1].elements.push({
           label: mom.clone().day(i).format('ddd'),
-          action: () => { }
+          action: () => { },
+          class: 'h-row-day'
         });
       }
     }
 
     const bRows: CalendarRow[] = [];
+    let dayOneChecked = false;
     for (let i = 0; i < calendarContextData.brows; i++) {
       bRows.push({ elements: [] });
       for (let k = 0; k < calendarContextData.bcols; k++) {
+        let isOtherMonth = false;
+        if (step === "day") {
+          const day = mom.clone().set(step, calendarContextData.bcols * i + k + ((step === 'year') ? this.getYearStart(mom) : 0)).format(calendarContextData.elementFormat);
+          const numberDay = new Number(day).valueOf();
+          if (numberDay == 1) {
+            dayOneChecked = !dayOneChecked;
+          }
+          isOtherMonth = (!dayOneChecked) ? true : false;
+        }
         bRows[i].elements.push({
           action: () => (step !== this.lowView) ? this.buildModel(
             calendarContextData.toNext,
@@ -100,7 +143,8 @@ export class PickerPopUpComponent implements OnInit, OnChanges {
             step,
             calendarContextData.bcols * i + k + ((step === 'year') ? this.getYearStart(mom) : 0)
           ).format(calendarContextData.elementFormat),
-          selectable: true
+          selectable: !isOtherMonth,
+          class: `b-row-${step}${(isOtherMonth) ? ' disabled' : ''}`
         });
       }
     }

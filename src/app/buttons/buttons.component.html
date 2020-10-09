@@ -302,4 +302,14 @@
       value: {{ checked2 }}
     </div>
   </div>
+  <div class="row">
+    <div class="col-12 ui-element">
+      <span>
+        <h4>Toggle button</h4>
+      </span>
+      <hyt-button-toggle [selectedValue]="domainInterval" [range]="timeRange" (valueChanged)="rangeChanged($event)"></hyt-button-toggle>
+      <br>
+      value: {{ domainInterval }}
+    </div>
+  </div>
 </div>

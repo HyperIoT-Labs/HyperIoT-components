@@ -35,6 +35,16 @@ export class ButtonsComponent implements OnInit {
     }
   ];
 
+  domainInterval = 'month';
+
+  timeRange: {} = [
+    { label: 'Seconds', value: 'second' },
+    { label: 'Minutes', value: 'minute' },
+    { label: 'Hours', value: 'hour' },
+    { label: 'Days', value: 'day' },
+    { label: 'Months', value: 'month' }
+  ];
+
   constructor(
     private fb: FormBuilder,
     private loggerService: LoggerService
@@ -76,4 +86,8 @@ export class ButtonsComponent implements OnInit {
   }
 
   submit() { }
+
+  rangeChanged(value: string) {
+    this.domainInterval = value;
+  }
 }

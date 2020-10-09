@@ -58,36 +58,69 @@ const TimeFormat: Record<string, DateFormat> = {
 })
 export class HytDatePickerComponent implements OnInit, OnChanges {
 
+  /**
+   * Input of the style class
+   */
   @Input()
   color: string = 'hyt-base-default-white';
 
+  /**
+   * Default selected date
+   */
   @Input()
   date: Date = new Date();
 
+  /**
+   * Min time step selectable
+   */
   @Input()
   minStep: TimeStep = 'day';
 
+  /**
+   * RegExp pattern of input field
+   */
   @Input()
   pattern: RegExp = new RegExp('');
 
+  /**
+   * Language code for the time format
+   */
   @Input()
   languageCode: string = 'en';
 
+  /**
+   * Boolean to manage the popup visibility
+   */
   showPopup = false;
 
+  /**
+   * Value of ngModel
+   */
   dateString = '';
 
+  /**
+   * Output of the selected date changes
+   */
   @Output()
   selectedDate: EventEmitter<Date> = new EventEmitter<Date>();
 
+  /**
+   * Date error status
+   */
   dateError = false;
 
+  /**
+   * Input mask
+   */
   actualMask: string;
 
   initialValue: string;
 
   constructor() { }
 
+  /**
+   * This is an angular lifecycle hook that initializes the data.
+   */
   ngOnInit(): void {
     this.actualMask = TimeFormat[this.minStep].maskFormat;
     this.pattern = TimeFormat[this.minStep].pattern;
@@ -98,6 +131,9 @@ export class HytDatePickerComponent implements OnInit, OnChanges {
     }, 0);
   }
 
+  /**
+   * ngOnChanges() is called after the input has changed. It updates the timeline data.
+   */
   ngOnChanges(): void {
     this.actualMask = TimeFormat[this.minStep].maskFormat;
     this.pattern = TimeFormat[this.minStep].pattern;
@@ -107,10 +143,17 @@ export class HytDatePickerComponent implements OnInit, OnChanges {
     }, 0);
   }
 
+  /**
+   * Open the calendar pop up
+   */
   openCal() {
     this.showPopup = !this.showPopup;
   }
 
+  /**
+   * Close the pop up and set the date value
+   * @param event 
+   */
   setDate(event: moment_.Moment) {
     this.showPopup = false;
     this.date = event.toDate();
@@ -118,6 +161,9 @@ export class HytDatePickerComponent implements OnInit, OnChanges {
     // this.selectedDate.emit(this.date);
   }
 
+  /**
+   * Emit the new data value
+   */
   submit() {
     const arr = this.dateString.split(/[\/\s\:]+/);
     const dateString = `${+arr[0] || 0}/${+arr[1] || 1}/${+arr[2] || 1} ${+arr[3] || '00'}:${+arr[4] || '00'}:${+arr[5] || '00'}`;

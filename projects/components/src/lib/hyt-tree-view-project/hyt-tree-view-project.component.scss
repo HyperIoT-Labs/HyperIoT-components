@@ -51,6 +51,10 @@
             position: relative;
             font-weight: 600;
         }
+
+        &[role="treeitem"] {
+            position: relative;
+        }
     
         span {
 
@@ -112,6 +116,7 @@
                 white-space: nowrap;
                 overflow: hidden;
                 margin-right: var(--line-height);
+                padding-right: 15px;
 
                 span {
                     &.hyt-icon {
@@ -133,6 +138,36 @@
                         font-size: 1em;
                         margin-left: 5px;
                         font-weight: 400;
+                    }
+
+                }
+
+                .btn-tooltip {
+
+                    width: 12px;
+                    height: 22px;
+                    position: absolute;
+                    top: 50%;
+                    right: 36px;
+                    transform: translateY(-12px);
+                    cursor: help;
+                    z-index: 1003;
+                    text-align: center;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    span {
+                        font-size: .8em;
+                        text-align: center;
+                        vertical-align: middle;
+                        color: #4050a2;
+                    }
+
+                    &:hover {
+                        span {
+                            color: #0fdc90;
+                        }
                     }
 
                 }

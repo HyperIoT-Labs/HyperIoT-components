@@ -61,6 +61,12 @@ export class HytSelectTemplateComponent implements OnInit, ControlValueAccessor 
   /** Specifies if it is a multiple select */
   @Input() isMultiple = false;
 
+  /** Tells if the elements are sortable */
+  @Input() isSortable = false;
+
+  /** Specify the element sorting algorithm */
+  @Input() sortingAlgorithm = 'A-Z';
+
   /**
    * Map an error key with the displayed message
    */
@@ -87,6 +93,50 @@ export class HytSelectTemplateComponent implements OnInit, ControlValueAccessor 
    * ngOnInit
    */
   ngOnInit() {
+
+    // sort elements
+    if (this.isSortable) {
+      switch (this.sortingAlgorithm) {
+        case 'A-Z':
+          this.sortOptionsAlphabetically(true);
+          break;
+        case 'Z-A':
+          this.sortOptionsAlphabetically(false);
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
+  /**
+   * Sort the selectOptions alphabetically
+   * @param order If true options are sorted asc else desc
+   */
+  sortOptionsAlphabetically(order: boolean) {
+    let sortedSelectOptions: SelectOption[] = [];
+
+    if (order) {
+      sortedSelectOptions = this.options.sort((option1, option2) => {
+        if (option1.label.localeCompare(option2.label) === 1) {
+            return 1;
+        } else  if (option1.label.localeCompare(option2.label) === -1) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
+    } else {
+      sortedSelectOptions = this.options.sort((option1, option2) => {
+        if (option1.label.localeCompare(option2.label) === 1) {
+            return -1;
+        } else  if (option1.label.localeCompare(option2.label) === -1) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
   }
 
   // get accessor

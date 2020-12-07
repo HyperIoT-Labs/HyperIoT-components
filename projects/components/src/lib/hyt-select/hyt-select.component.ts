@@ -50,28 +50,14 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
   /** Select main label */
   @Input() label = '';
 
+  /** Tells if the elements are sortable */
+  @Input() isSortable = false;
+
   /** Specify the element sorting algorithm */
   @Input() sortingAlgorithm = 'A-Z';
 
   /** Array of displayed options */
   selectOptions: SelectOption[] = [];
-
-  /** Tells if the elements are sortable */
-  @Input()
-  set isSortable(sortable: boolean) {
-    if (sortable) {
-      switch (this.sortingAlgorithm) {
-        case 'A-Z':
-          this.sortOptionsAlphabetically(true);
-          break;
-        case 'Z-A':
-          this.sortOptionsAlphabetically(false);
-          break;
-        default:
-          break;
-      }
-    }
-  }
 
   @Input()
   get options(): SelectOption[] {
@@ -151,6 +137,20 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
     }
     if (this.selected) {
       this.formControl.setValue(this.selected);
+    }
+
+    // sort elements
+    if (this.isSortable) {
+      switch (this.sortingAlgorithm) {
+        case 'A-Z':
+          this.sortOptionsAlphabetically(true);
+          break;
+        case 'Z-A':
+          this.sortOptionsAlphabetically(false);
+          break;
+        default:
+          break;
+      }
     }
   }
 

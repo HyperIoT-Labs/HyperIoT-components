@@ -4,7 +4,8 @@
       <div class="col-4">
         <div class="ui-element">
           <h4>Simple select</h4>
-          <hyt-select [label]="'Favourite Food'" (changeFn)="onChange($event)" [options]="options" [selected]="'steak-0'"></hyt-select>
+          <hyt-select [label]="'Favourite Food'" (changeFn)="onChange($event)" [options]="options" [selected]="'steak-0'"
+            [sortingAlgorithm]="'A-Z'" [isSortable]="true" ></hyt-select>
           <p>You selected: {{selected}}</p>
         </div>
         <div class="ui-element">

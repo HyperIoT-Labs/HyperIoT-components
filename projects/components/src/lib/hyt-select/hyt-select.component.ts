@@ -50,8 +50,28 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
   /** Select main label */
   @Input() label = '';
 
+  /** Specify the element sorting algorithm */
+  @Input() sortingAlgorithm = 'A-Z';
+
   /** Array of displayed options */
   selectOptions: SelectOption[] = [];
+
+  /** Tells if the elements are sortable */
+  @Input()
+  set isSortable(sortable: boolean) {
+    if (sortable) {
+      switch (this.sortingAlgorithm) {
+        case 'A-Z':
+          this.sortOptionsAlphabetically(true);
+          break;
+        case 'Z-A':
+          this.sortOptionsAlphabetically(false);
+          break;
+        default:
+          break;
+      }
+    }
+  }
 
   @Input()
   get options(): SelectOption[] {
@@ -144,6 +164,36 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
     if (v !== this.selected) {
       this.selected = v;
       this.onChangeFn(v);
+    }
+  }
+
+  /**
+   * Sort the selectOptions alphabetically
+   * @param order If true options are sorted asc else desc
+   */
+  sortOptionsAlphabetically(order: boolean) {
+    let sortedSelectOptions: SelectOption[] = [];
+
+    if (order) {
+      sortedSelectOptions = this.selectOptions.sort((option1, option2) => {
+        if (option1.label.localeCompare(option2.label) === 1) {
+            return 1;
+        } else  if (option1.label.localeCompare(option2.label) === -1) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
+    } else {
+      sortedSelectOptions = this.selectOptions.sort((option1, option2) => {
+        if (option1.label.localeCompare(option2.label) === 1) {
+            return -1;
+        } else  if (option1.label.localeCompare(option2.label) === -1) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
     }
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, ViewEncapsulation, OnChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, Validators, FormGroup } from '@angular/forms';
 
 /** Interface for select option element */
@@ -29,7 +29,7 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
   encapsulation: ViewEncapsulation.None
 })
-export class HytSelectTemplateComponent implements OnInit, ControlValueAccessor {
+export class HytSelectTemplateComponent implements OnInit, ControlValueAccessor, OnChanges {
 
   /** Selected element */
   selected: any;
@@ -66,6 +66,9 @@ export class HytSelectTemplateComponent implements OnInit, ControlValueAccessor 
 
   /** Specify the element sorting algorithm */
   @Input() sortingAlgorithm = 'A-Z';
+
+  /** Function used to compare elements */
+  @Input() compareFn: Function;
 
   /**
    * Map an error key with the displayed message
@@ -109,13 +112,9 @@ export class HytSelectTemplateComponent implements OnInit, ControlValueAccessor 
     }
   }
 
-  /**
-   * ngOnInit
-   */
-  ngOnInit() {
-
-    // sort elements
+  sortOptions() {
     if (this.isSortable) {
+
       let sortingFunction: (option1: SelectOption, option2: SelectOption) => 1 | -1 | 0 ;
 
       switch (this.sortingAlgorithm) {
@@ -132,7 +131,17 @@ export class HytSelectTemplateComponent implements OnInit, ControlValueAccessor 
 
       this.options = this.options.sort(sortingFunction);
     }
+  }
 
+  ngOnChanges(): void {
+    this.sortOptions();    
+  }
+  
+  /**
+   * ngOnInit
+   */
+  ngOnInit() {
+    this.sortOptions();
   }
 
   /**

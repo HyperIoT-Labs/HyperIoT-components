@@ -5,9 +5,10 @@
         </mat-label>
         
         <mat-select 
-          [(ngModel)]="value" 
+          [(ngModel)]="value"
           [required]="isRequired"
           [multiple]="isMultiple ? '' : null"
+          [compareWith]="compareFn"
           [name]="name"
         >
           

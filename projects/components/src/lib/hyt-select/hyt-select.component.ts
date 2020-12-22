@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, ViewEncapsulation, Output, EventEmitter, OnChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, Validators, FormGroup } from '@angular/forms';
 
 /** Interface for select option element */
@@ -34,7 +34,7 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
   encapsulation: ViewEncapsulation.None
 })
-export class HytSelectComponent implements OnInit, ControlValueAccessor {
+export class HytSelectComponent implements OnInit, ControlValueAccessor, OnChanges {
   /** Selected element */
   @Input() selected: any;
 
@@ -139,6 +139,31 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
     }
   }
 
+  sortOptions(): void {
+    if (this.isSortable) {
+
+      let sortingFunction: (option1: SelectOption, option2: SelectOption) => 1 | -1 | 0 ;
+
+      switch (this.sortingAlgorithm) {
+        case 'A-Z':
+          sortingFunction = this.sortAlphabeticallyAsc;
+          break;
+        case 'Z-A':
+          sortingFunction = this.sortAlphabeticallyDesc;
+          break;
+        default:
+          sortingFunction = (o1: SelectOption, o2: SelectOption) => 0;
+          break;
+      }
+
+      this.options = this.options.sort(sortingFunction);
+    }
+  }
+
+  ngOnChanges(): void {
+    this.sortOptions();    
+  }
+
   /**
    * ngOnInit
    */
@@ -159,24 +184,7 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
       this.formControl.setValue(this.selected);
     }
 
-    // sort elements
-    if (this.isSortable) {
-      let sortingFunction: (option1: SelectOption, option2: SelectOption) => 1 | -1 | 0 ;
-
-      switch (this.sortingAlgorithm) {
-        case 'A-Z':
-          sortingFunction = this.sortAlphabeticallyAsc;
-          break;
-        case 'Z-A':
-          sortingFunction = this.sortAlphabeticallyDesc;
-          break;
-        default:
-          sortingFunction = (o1: SelectOption, o2: SelectOption) => 0;
-          break;
-      }
-
-      this.options = this.options.sort(sortingFunction);
-    }
+    this.sortOptions();
   }
 
   // get accessor

@@ -14,7 +14,7 @@
             <div class="ui-element">
                 <h4>Required select</h4>
                 <hyt-select-template [label]="'Favourite Food'" [hint]="'Inserisci il tuo cibo preferito'" [isRequired]="true"
-                    [errorMsgRequired]="'Prego selezionare un cibo'" [options]="options">
+                    [errorMsgRequired]="'Prego selezionare un cibo'" [options]="options" [sortingAlgorithm]="'A-Z'" [isSortable]="true">
                 </hyt-select-template>
             </div>
         </div>
@@ -22,7 +22,7 @@
             <div class="ui-element multiselect">
                 <h4>Multiple select</h4>
                 <hyt-select-template [label]="'Favourite Food'" [hint]="'Inserisci i tuoi cibi preferiti'" [isMultiple]="true"
-                    [options]="options">
+                    [options]="options" [sortingAlgorithm]="'A-Z'" [isSortable]="true">
                 </hyt-select-template>
             </div>
             <hyt-button type="submit" color="primary">Submit</hyt-button>

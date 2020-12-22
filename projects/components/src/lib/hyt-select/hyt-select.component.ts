@@ -119,6 +119,26 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
    */
   constructor() { }
 
+  sortAlphabeticallyAsc (option1: SelectOption, option2: SelectOption): 1 | -1 | 0  {
+    if (option1.label.localeCompare(option2.label) === 1) {
+      return 1;
+    } else  if (option1.label.localeCompare(option2.label) === -1) {
+      return -1;
+    } else {
+      return 0;
+    }
+  }
+
+  sortAlphabeticallyDesc (option1: SelectOption, option2: SelectOption): 1 | -1 | 0 {
+    if (option1.label.localeCompare(option2.label) === 1) {
+      return -1;
+    } else  if (option1.label.localeCompare(option2.label) === -1) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
   /**
    * ngOnInit
    */
@@ -141,16 +161,21 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
 
     // sort elements
     if (this.isSortable) {
+      let sortingFunction: (option1: SelectOption, option2: SelectOption) => 1 | -1 | 0 ;
+
       switch (this.sortingAlgorithm) {
         case 'A-Z':
-          this.sortOptionsAlphabetically(true);
+          sortingFunction = this.sortAlphabeticallyAsc;
           break;
         case 'Z-A':
-          this.sortOptionsAlphabetically(false);
+          sortingFunction = this.sortAlphabeticallyDesc;
           break;
         default:
+          sortingFunction = (o1: SelectOption, o2: SelectOption) => 0;
           break;
       }
+
+      this.options = this.options.sort(sortingFunction);
     }
   }
 
@@ -164,36 +189,6 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor {
     if (v !== this.selected) {
       this.selected = v;
       this.onChangeFn(v);
-    }
-  }
-
-  /**
-   * Sort the selectOptions alphabetically
-   * @param order If true options are sorted asc else desc
-   */
-  sortOptionsAlphabetically(order: boolean) {
-    let sortedSelectOptions: SelectOption[] = [];
-
-    if (order) {
-      sortedSelectOptions = this.selectOptions.sort((option1, option2) => {
-        if (option1.label.localeCompare(option2.label) === 1) {
-            return 1;
-        } else  if (option1.label.localeCompare(option2.label) === -1) {
-          return -1;
-        } else {
-          return 0;
-        }
-      });
-    } else {
-      sortedSelectOptions = this.selectOptions.sort((option1, option2) => {
-        if (option1.label.localeCompare(option2.label) === 1) {
-            return -1;
-        } else  if (option1.label.localeCompare(option2.label) === -1) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
     }
   }
 

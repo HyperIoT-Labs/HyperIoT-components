@@ -89,6 +89,26 @@ export class HytSelectTemplateComponent implements OnInit, ControlValueAccessor 
    */
   constructor() { }
 
+  sortAlphabeticallyAsc (option1: SelectOption, option2: SelectOption): 1 | -1 | 0  {
+    if (option1.label.localeCompare(option2.label) === 1) {
+      return 1;
+    } else  if (option1.label.localeCompare(option2.label) === -1) {
+      return -1;
+    } else {
+      return 0;
+    }
+  }
+
+  sortAlphabeticallyDesc (option1: SelectOption, option2: SelectOption): 1 | -1 | 0 {
+    if (option1.label.localeCompare(option2.label) === 1) {
+      return -1;
+    } else  if (option1.label.localeCompare(option2.label) === -1) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
   /**
    * ngOnInit
    */
@@ -96,17 +116,23 @@ export class HytSelectTemplateComponent implements OnInit, ControlValueAccessor 
 
     // sort elements
     if (this.isSortable) {
+      let sortingFunction: (option1: SelectOption, option2: SelectOption) => 1 | -1 | 0 ;
+
       switch (this.sortingAlgorithm) {
         case 'A-Z':
-          this.sortOptionsAlphabetically(true);
+          sortingFunction = this.sortAlphabeticallyAsc;
           break;
         case 'Z-A':
-          this.sortOptionsAlphabetically(false);
+          sortingFunction = this.sortAlphabeticallyDesc;
           break;
         default:
+          sortingFunction = (o1: SelectOption, o2: SelectOption) => 0;
           break;
       }
+
+      this.options = this.options.sort(sortingFunction);
     }
+
   }
 
   /**

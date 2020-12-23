@@ -39,7 +39,7 @@ export class HytLazyPaginationTableComponent implements OnInit {
     { label: '50', value: 50 }
   ];
 
-  rowPerPage = 5;
+  rowPerPage = 10;
 
   selectedPage = 0;
 

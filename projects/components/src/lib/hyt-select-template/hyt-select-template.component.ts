@@ -40,6 +40,9 @@ export class HytSelectTemplateComponent implements OnInit, ControlValueAccessor,
   /** Select main label */
   @Input() label = '';
 
+  /** Element name, connected to the formcontrol */
+  @Input() placeholder = '';
+
   /** Array of displayed options */
   @Input() options: SelectOption[] = [];
 
@@ -68,7 +71,7 @@ export class HytSelectTemplateComponent implements OnInit, ControlValueAccessor,
   @Input() sortingAlgorithm = 'A-Z';
 
   /** Function used to compare elements */
-  @Input() compareFn: Function;
+  // @Input() compareFn: Function;
 
   /**
    * Map an error key with the displayed message

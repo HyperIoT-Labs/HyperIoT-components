@@ -90,6 +90,9 @@ export class HytTextAreaComponent implements OnInit, ControlValueAccessor {
     }
 
     this.formControl = new FormControl('', Validators.compose(validators));
+    if (this.fieldValue) {
+      this.formControl.setValue(this.fieldValue);
+    }
     this.form.addControl(this.name, this.formControl);
   }
 

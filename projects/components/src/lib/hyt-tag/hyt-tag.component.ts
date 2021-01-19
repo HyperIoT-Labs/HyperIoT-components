@@ -9,6 +9,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } fro
 export class HytTagComponent implements OnInit {
 
   @Input() color: string;
+  @Input() textColor: string;
 
   isSelected: boolean;
   @Input()

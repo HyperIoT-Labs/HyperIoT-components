@@ -47,6 +47,9 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor, OnChang
   /** Element name, connected to the formcontrol */
   @Input() name = '';
 
+  /** Element name, connected to the formcontrol */
+  @Input() placeholder = '';
+
   /** Select main label */
   @Input() label = '';
 

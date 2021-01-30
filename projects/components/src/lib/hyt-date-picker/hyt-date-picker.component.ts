@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter, OnChanges, ViewEncapsulation } from '@angular/core';
 import * as moment_ from 'moment';
-import { FormGroup } from '@angular/forms';
 const moment = moment_;
 
 export type TimeStep = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second' | 'millisecond';

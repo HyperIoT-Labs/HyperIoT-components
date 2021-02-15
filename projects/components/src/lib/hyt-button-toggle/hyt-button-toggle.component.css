@@ -4,9 +4,13 @@
     font-family: "Exo";
 }
 
-.base-theme .mat-button-toggle-group-appearance-standard, 
-.base-theme .mat-button-toggle-standalone.mat-button-toggle-appearance-standard {
-    border: solid 1px rgb(10 17 72 / 35%);
+.base-theme .mat-button-toggle button.mat-button-toggle-button {
+    outline: none;
+}
+
+.base-theme.mat-button-toggle-group-appearance-standard, 
+.base-theme.mat-button-toggle-standalone.mat-button-toggle-appearance-standard {
+    border: none;
 }
 
 .base-theme .mat-button-toggle-appearance-standard.mat-button-toggle-checked {

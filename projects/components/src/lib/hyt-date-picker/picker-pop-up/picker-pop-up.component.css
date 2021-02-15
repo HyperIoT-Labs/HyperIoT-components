@@ -1,10 +1,32 @@
 #hyt-picker-container #hyt-picker-table {
-  border: 1px solid rgba(0,0,0,.15);;
+  width: auto;
+  /* border: 1px solid rgba(68,77,88,.42); */
   border-radius: 6px;
-  padding: 6px;
-  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  box-shadow: 0 6px 15px rgba(0,0,0,.50);
   background-color: white;
   top: 48px;
+  font-family: "Exo";
+}
+
+#hyt-picker-container #hyt-picker-table .thead {
+  color: #ffffff;
+  background-color: #0956b6;
+  padding: 8px;
+}
+
+#hyt-picker-container #hyt-picker-table .thead tr th {
+  padding: 8px;
+}
+
+#hyt-picker-container #hyt-picker-table .tbody:before {
+  line-height: .9em;
+  content: "_";
+  color: transparent;
+  display: block;
+}
+
+#hyt-picker-container #hyt-picker-table .tbody tr td {
+  padding: 5px 10px;
 }
 
 #hyt-picker-container .calendar-popup {

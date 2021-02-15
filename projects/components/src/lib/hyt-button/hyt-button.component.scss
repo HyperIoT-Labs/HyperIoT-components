@@ -302,6 +302,32 @@
 
         } /* END TOTAL RED BUTTON */
 
+        &.mat-hyt-base-total-blue {
+
+            background-color: #0956B6;
+            color: #ffffff;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            border: none;
+            transition: all .1s linear;
+
+            &:hover {
+                background-color: #2083ff;
+            }
+
+            &:focus {
+                outline: unset;
+            }
+
+            &[disabled] {
+                background-color: #0956B670;
+                color: #ffffff70;
+                cursor: not-allowed;
+            }
+
+        }
+
         &.mat-hyt-base-icon-only {
 
             padding: 0;

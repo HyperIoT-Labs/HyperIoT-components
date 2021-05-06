@@ -220,23 +220,25 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
       };
     }
     function validateConfirmPassword(c: FormControl) {
-      const passwordForm = self.form.get(self.confirmPassword);
-      let password = '';
-      let passwordValid = true;
-      if (passwordForm) {
-        password = self.form.get(self.confirmPassword).value;
-        passwordValid = passwordForm.valid;
+      if(c.touched){
+        const passwordForm = self.form.get(self.confirmPassword);
+        let password = '';
+        let passwordValid = true;
+        if (passwordForm) {
+          password = self.form.get(self.confirmPassword).value;
+          passwordValid = passwordForm.valid;
+        }
+        return (passwordValid || c.value.length === 0) ?
+          (c.value === password || c.value.length === 0) ? null : {
+            validateConfirmPassword: {
+              valid: false
+            }
+          } : {
+            validatePassword: {
+              valid: false
+            }
+          };
       }
-      return (passwordValid || c.value.length === 0) ?
-        (c.value === password || c.value.length === 0) ? null : {
-          validateConfirmPassword: {
-            valid: false
-          }
-        } : {
-          validatePassword: {
-            valid: false
-          }
-        };
     }
 
     /*

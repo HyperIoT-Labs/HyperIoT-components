@@ -7,7 +7,7 @@
             <h4>Input Text</h4>
           </span>
           <hyt-input-text [form]="form" formControlName="input" name="input" placeholder="Insert text here"
-            (change)="onChange($event)" [disabled]="true">
+            (change)="onChange($event)" [disabled]="false">
           </hyt-input-text>
           <p>You inserted: {{ inputText }}</p>
         </div>

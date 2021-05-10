@@ -15,7 +15,7 @@
   "private": true,
   "dependencies": {
     "@compodoc/compodoc": "^1.1.11",
-    "@hyperiot/components": "^0.1.15",
+    "@hyperiot/components": "^0.1.16",
     "bootstrap": "^4.3.1",
     "core-js": "^3.1.4",
     "cross-spawn": "^6.0.5",

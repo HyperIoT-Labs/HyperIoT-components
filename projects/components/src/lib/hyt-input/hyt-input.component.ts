@@ -26,7 +26,7 @@ import '@angular/localize/init';
 /**
  * Custom provider for NG_VALUE_ACCESSOR
  */
-export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
+export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR_INPUT: any = {
   provide: NG_VALUE_ACCESSOR,
   // tslint:disable-next-line: no-use-before-declare
   useExisting: forwardRef(() => HytInputComponent),
@@ -57,7 +57,7 @@ export class CustomErrorStateMatcher implements ErrorStateMatcher {
   selector: 'hyt-input-text',
   templateUrl: './hyt-input.component.html',
   styleUrls: ['./hyt-input.component.scss'],
-  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
+  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR_INPUT],
   encapsulation: ViewEncapsulation.None
 })
 export class HytInputComponent implements OnInit, ControlValueAccessor {
@@ -263,13 +263,11 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
       this.errorMap.validateInjectedError = this.injectedErrorMsg;
     }
 
-    this.formControl = new FormControl('', Validators.compose(validators));
+    this.formControl = new FormControl({value:'', disabled:this.isDisabled }, Validators.compose(validators));
     if (this.fieldValue) {
       this.formControl.setValue(this.fieldValue);
     }
-    if (this.isDisabled) {
-      this.formControl.disable();
-    }
+    
     if (this.form) {
       this.form.addControl(this.name, this.formControl);
     }

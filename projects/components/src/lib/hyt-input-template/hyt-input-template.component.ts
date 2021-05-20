@@ -24,7 +24,7 @@ import '@angular/localize/init';
 /**
  * Custom provider for NG_VALUE_ACCESSOR
  */
-export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
+export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR_INPUT_TEMPLATE: any = {
   provide: NG_VALUE_ACCESSOR,
   // tslint:disable-next-line: no-use-before-declare
   useExisting: forwardRef(() => HytInputTemplateComponent),
@@ -34,7 +34,7 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 /**
  * Error when invalid control is dirty, touched, or submitted
  */
-export class CustomErrorStateMatcher implements ErrorStateMatcher {
+export class CustomErrorStateMatcherInputTemplate implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
@@ -52,36 +52,36 @@ export class CustomErrorStateMatcher implements ErrorStateMatcher {
  * isInputPassword: password without validators
  */
 @Component({
-  selector: 'hyt-input-template',
-  templateUrl: './hyt-input-template.component.html',
-  styleUrls: ['./hyt-input-template.component.scss'],
-  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
-  encapsulation: ViewEncapsulation.None
+  selector: "hyt-input-template",
+  templateUrl: "./hyt-input-template.component.html",
+  styleUrls: ["./hyt-input-template.component.scss"],
+  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR_INPUT_TEMPLATE],
+  encapsulation: ViewEncapsulation.None,
 })
 export class HytInputTemplateComponent implements OnInit, ControlValueAccessor {
   /** Foloating label of the input */
-  @Input() placeholder: any = '';
+  @Input() placeholder: any = "";
 
   /** Initial field value */
   @Input() fieldValue: string;
 
   /** Element id */
-  @Input() id = '';
+  @Input() id = "";
 
   /** Element name, connected to the formcontrol */
-  @Input() name = '';
+  @Input() name = "";
 
   /** Type of the input: text or passowrd */
-  @Input() type = '';
+  @Input() type = "";
 
   /** Optional additional hint */
-  @Input() hint = '';
+  @Input() hint = "";
 
   /** If 'bottom' is specified errors appears at the bottom */
-  @Input() errorPosition = '';
+  @Input() errorPosition = "";
 
   /** ViewChild */
-  @ViewChild('input') private inputElement: ElementRef;
+  @ViewChild("input") private inputElement: ElementRef;
 
   /** Applies required validation */
   @Input() isRequired = false;
@@ -93,13 +93,13 @@ export class HytInputTemplateComponent implements OnInit, ControlValueAccessor {
   @Input() pattern: RegExp;
 
   /** The internal data */
-  private innerValue: any = '';
+  private innerValue: any = "";
 
   /** Custom error matcher */
-  matcher = new CustomErrorStateMatcher();
+  matcher = new CustomErrorStateMatcherInputTemplate();
 
   /** The password visibility icon */
-  visibilityIcon = 'visibility';
+  visibilityIcon = "visibility";
 
   /** Map error type with default error string */
   errorMap = {
@@ -110,40 +110,38 @@ export class HytInputTemplateComponent implements OnInit, ControlValueAccessor {
     validateNumber: $localize`:@@HYT_min_one_number:At least one enumber`,
     validateUperCase: $localize`:@@HYT_upper_case:At least one uppercase character`,
     validateSpecialChar: $localize`:@@HYT_special_char:At least one special character`,
-    validateConfirmPassword: 'Password Mismatch',
-    validatePassword: 'Password must be valid',
-    validateInjectedError: ''
+    validateConfirmPassword: "Password Mismatch",
+    validatePassword: "Password must be valid",
+    validateInjectedError: "",
   };
 
   /**
    * Default errors are displayed at the top of the field
    */
   private defaultErrors: string[] = [
-    'required',
-    'validateRequired',
-    'email',
-    'validateConfirmPassword',
-    'validatePassword',
-    'validateInjectedError'
+    "required",
+    "validateRequired",
+    "email",
+    "validateConfirmPassword",
+    "validatePassword",
+    "validateInjectedError",
   ];
 
   /** Callback function for change event */
-  private onChangeFn = (_: any) => { };
+  private onChangeFn = (_: any) => {};
 
   /** Callback function for blur event */
-  private onTouchedFn = () => { };
+  private onTouchedFn = () => {};
 
   private logger: Logger;
 
   /**
    * Constructor
    */
-  constructor(
-    private loggerService: LoggerService
-  ) {
+  constructor(private loggerService: LoggerService) {
     this.logger = new Logger(this.loggerService);
-    this.logger.registerClass('HytInputTemplateComponent');
-   }
+    this.logger.registerClass("HytInputTemplateComponent");
+  }
 
   /**
    * ngOnInit
@@ -193,21 +191,20 @@ export class HytInputTemplateComponent implements OnInit, ControlValueAccessor {
 
   /** onChange callback */
   onChange(event: any) {
-    this.logger.info('onChange method called');
+    this.logger.info("onChange method called");
     this.logger.debug(JSON.stringify(event));
     this.onChangeFn(event);
   }
 
   /** onKeyup callback */
   onKeyup(event: any) {
-    this.logger.info('onKeyup method called');
+    this.logger.info("onKeyup method called");
     this.onChangeFn(event.target.value);
   }
 
   /** onBlur callback */
   onBlur() {
-    this.logger.info('onBlur method called');
+    this.logger.info("onBlur method called");
     this.onTouchedFn();
   }
-
 }

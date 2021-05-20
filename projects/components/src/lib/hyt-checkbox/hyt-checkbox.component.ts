@@ -4,7 +4,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 /**
  * Custom provider for NG_VALUE_ACCESSOR
  */
-export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
+export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR_CHECKBOX: any = {
   provide: NG_VALUE_ACCESSOR,
   // tslint:disable-next-line: no-use-before-declare
   useExisting: forwardRef(() => HytCheckboxComponent),
@@ -12,15 +12,13 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 };
 
 @Component({
-  selector: 'hyt-checkbox',
-  templateUrl: './hyt-checkbox.component.html',
-  styleUrls: ['./hyt-checkbox.component.css'],
-  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
-  encapsulation: ViewEncapsulation.None
+  selector: "hyt-checkbox",
+  templateUrl: "./hyt-checkbox.component.html",
+  styleUrls: ["./hyt-checkbox.component.css"],
+  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR_CHECKBOX],
+  encapsulation: ViewEncapsulation.None,
 })
-
 export class HytCheckboxComponent implements OnInit, ControlValueAccessor {
-
   /** Function called when click event is triggered */
   @Output() changeFn: EventEmitter<any> = new EventEmitter();
 
@@ -31,10 +29,9 @@ export class HytCheckboxComponent implements OnInit, ControlValueAccessor {
 
   private onTouched: () => void;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onClick() {
     this.onChange(!this.value);
@@ -65,5 +62,4 @@ export class HytCheckboxComponent implements OnInit, ControlValueAccessor {
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
-
 }

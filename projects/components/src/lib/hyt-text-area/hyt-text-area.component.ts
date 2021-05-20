@@ -14,7 +14,7 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 /**
  * Error when invalid control is dirty, touched, or submitted
  */
-export class CustomErrorStateMatcher implements ErrorStateMatcher {
+export class CustomErrorStateMatcherArea implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
@@ -22,41 +22,38 @@ export class CustomErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'hyt-text-area',
-  templateUrl: './hyt-text-area.component.html',
-  styleUrls: ['./hyt-text-area.component.scss'],
-  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
+  selector: "hyt-text-area",
+  templateUrl: "./hyt-text-area.component.html",
+  styleUrls: ["./hyt-text-area.component.scss"],
+  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
 })
 export class HytTextAreaComponent implements OnInit, ControlValueAccessor {
-
   /**
    * Binding variables with text area element
    */
   @Input() formControl: FormControl;
   @Input() form: FormGroup;
-  @Input() placeholder: any = '';
+  @Input() placeholder: any = "";
   @Input() fieldValue: string;
   @Input() type: string;
   @Input() id: string;
   @Input() name: string;
-  @Input() hint = '';
+  @Input() hint = "";
   @Input() externalHint = null;
   @Output() outHint: EventEmitter<string> = new EventEmitter<string>();
 
   /** This error appears in case of injected error */
-  private injectedError = '';
+  private injectedError = "";
 
   /** Map error type with default error string */
   errorMap = {
-    validateInjectedError: ''
+    validateInjectedError: "",
   };
 
   /**
    * Default errors are displayed at the top of the field
    */
-  private defaultErrors: string[] = [
-    'validateInjectedError'
-  ];
+  private defaultErrors: string[] = ["validateInjectedError"];
 
   @Input()
   set injectedErrorMsg(msg: string) {
@@ -64,40 +61,38 @@ export class HytTextAreaComponent implements OnInit, ControlValueAccessor {
     this.errorMap.validateInjectedError = msg;
   }
 
-  value: any = '';
+  value: any = "";
 
   // @ViewChild('inputElement', {}) private inputElement: ElementRef;
 
   @Input() isRequired = false;
   @Input() errorMsgRequired: string;
-  errMsgRequired = 'The field is required';
+  errMsgRequired = "The field is required";
 
-  matcher = new CustomErrorStateMatcher();
+  matcher = new CustomErrorStateMatcherArea();
 
-  constructor(
-  ) { }
+  constructor() {}
 
   ngOnInit() {
-
     const validators = [];
     if (this.isRequired) {
       validators.push(Validators.required);
-      this.placeholder += ' *';
+      this.placeholder += " *";
     }
 
     if (this.errorMsgRequired) {
       this.errMsgRequired = this.errorMsgRequired;
     }
 
-    this.formControl = new FormControl('', Validators.compose(validators));
+    this.formControl = new FormControl("", Validators.compose(validators));
     if (this.fieldValue) {
       this.formControl.setValue(this.fieldValue);
     }
     this.form.addControl(this.name, this.formControl);
   }
 
-  private onChangeFn = (_: any) => { };
-  private onTouchedFn = () => { };
+  private onChangeFn = (_: any) => {};
+  private onTouchedFn = () => {};
 
   writeValue(obj: any): void {
     this.value = obj;
@@ -134,12 +129,14 @@ export class HytTextAreaComponent implements OnInit, ControlValueAccessor {
 
     for (const key in this.formControl.errors) {
       if (this.formControl.errors.hasOwnProperty(key)) {
-        if (this.errorMap.hasOwnProperty(key) && this.defaultErrors.includes(key)) {
+        if (
+          this.errorMap.hasOwnProperty(key) &&
+          this.defaultErrors.includes(key)
+        ) {
           errorList.push(this.errorMap[key]);
         }
       }
     }
     return errorList;
   }
-
 }

@@ -15,7 +15,7 @@ export interface SelectOptionGroup {
 }
 
 /** Custom provider for NG_VALUE_ACCESSOR */
-export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
+export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR_TEMPLATE: any = {
   provide: NG_VALUE_ACCESSOR,
   // tslint:disable-next-line: no-use-before-declare
   useExisting: forwardRef(() => HytSelectTemplateComponent),
@@ -26,7 +26,7 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   selector: 'hyt-select-template',
   templateUrl: './hyt-select-template.component.html',
   styleUrls: ['./hyt-select-template.component.scss'],
-  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
+  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR_TEMPLATE],
   encapsulation: ViewEncapsulation.None
 })
 export class HytSelectTemplateComponent implements OnInit, ControlValueAccessor, OnChanges {

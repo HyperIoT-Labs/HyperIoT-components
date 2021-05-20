@@ -5,7 +5,7 @@ import { MAT_CHECKBOX_CLICK_ACTION } from '@angular/material';
 /**
  * Custom provider for NG_VALUE_ACCESSOR
  */
-export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
+export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR_TRI_CHECKBOX: any = {
   provide: NG_VALUE_ACCESSOR,
   // tslint:disable-next-line: no-use-before-declare
   useExisting: forwardRef(() => HytTriCheckboxComponent),
@@ -13,17 +13,16 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 };
 
 @Component({
-  selector: 'hyt-tri-checkbox',
-  templateUrl: './hyt-tri-checkbox.component.html',
-  styleUrls: ['./hyt-tri-checkbox.component.scss'],
+  selector: "hyt-tri-checkbox",
+  templateUrl: "./hyt-tri-checkbox.component.html",
+  styleUrls: ["./hyt-tri-checkbox.component.scss"],
   providers: [
-    CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR,
-    { provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'noop' }
+    CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR_TRI_CHECKBOX,
+    { provide: MAT_CHECKBOX_CLICK_ACTION, useValue: "noop" },
   ],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class HytTriCheckboxComponent implements OnInit, ControlValueAccessor {
-
   /** Disabled */
   @Input() disabled: boolean;
 
@@ -39,15 +38,17 @@ export class HytTriCheckboxComponent implements OnInit, ControlValueAccessor {
 
   private onTouched: () => void;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onClick() {
-    this.onChange(this.value = this.tape[(this.tape.indexOf(this.value) + 1) % this.tape.length]);
+    this.onChange(
+      (this.value =
+        this.tape[(this.tape.indexOf(this.value) + 1) % this.tape.length])
+    );
     this.onTouched();
-    this.changeFn.emit(this.value)
+    this.changeFn.emit(this.value);
   }
 
   // onClick(event) {
@@ -81,5 +82,4 @@ export class HytTriCheckboxComponent implements OnInit, ControlValueAccessor {
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
-
 }

@@ -16,7 +16,7 @@ export interface SelectOptionGroup {
 }
 
 /** Custom provider for NG_VALUE_ACCESSOR */
-export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
+export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR_SELECT: any = {
   provide: NG_VALUE_ACCESSOR,
   // tslint:disable-next-line: no-use-before-declare
   useExisting: forwardRef(() => HytSelectComponent),
@@ -28,13 +28,15 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
  * This compoenent allows to select an element in a set of options.
  */
 @Component({
-  selector: 'hyt-select',
-  templateUrl: './hyt-select.component.html',
-  styleUrls: ['./hyt-select.component.scss'],
-  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
-  encapsulation: ViewEncapsulation.None
+  selector: "hyt-select",
+  templateUrl: "./hyt-select.component.html",
+  styleUrls: ["./hyt-select.component.scss"],
+  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR_SELECT],
+  encapsulation: ViewEncapsulation.None,
 })
-export class HytSelectComponent implements OnInit, ControlValueAccessor, OnChanges {
+export class HytSelectComponent
+  implements OnInit, ControlValueAccessor, OnChanges
+{
   /** Selected element */
   @Input() selected: any;
 
@@ -45,19 +47,19 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor, OnChang
   @Input() formControl: FormControl;
 
   /** Element name, connected to the formcontrol */
-  @Input() name = '';
+  @Input() name = "";
 
   /** Element name, connected to the formcontrol */
-  @Input() placeholder = '';
+  @Input() placeholder = "";
 
   /** Select main label */
-  @Input() label = '';
+  @Input() label = "";
 
   /** Tells if the elements are sortable */
   @Input() isSortable = false;
 
   /** Specify the element sorting algorithm */
-  @Input() sortingAlgorithm = 'A-Z';
+  @Input() sortingAlgorithm = "A-Z";
 
   /** Array of displayed options */
   selectOptions: SelectOption[] = [];
@@ -99,18 +101,18 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor, OnChang
    * Map an error key with the displayed message
    */
   errorMap = {
-    required: 'The field is required.',
+    required: "The field is required.",
   };
 
   /**
    * Callback functions for change
    */
-  @Input() onChangeFn = (_: any) => { };
+  @Input() onChangeFn = (_: any) => {};
 
   /**
    * Callback functions for blur
    */
-  @Input() onTouchedFn = () => { };
+  @Input() onTouchedFn = () => {};
 
   /**
    * Callback functions for change
@@ -120,22 +122,28 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor, OnChang
   /**
    * Constructor
    */
-  constructor() { }
+  constructor() {}
 
-  sortAlphabeticallyAsc (option1: SelectOption, option2: SelectOption): 1 | -1 | 0  {
+  sortAlphabeticallyAsc(
+    option1: SelectOption,
+    option2: SelectOption
+  ): 1 | -1 | 0 {
     if (option1.label.localeCompare(option2.label) === 1) {
       return 1;
-    } else  if (option1.label.localeCompare(option2.label) === -1) {
+    } else if (option1.label.localeCompare(option2.label) === -1) {
       return -1;
     } else {
       return 0;
     }
   }
 
-  sortAlphabeticallyDesc (option1: SelectOption, option2: SelectOption): 1 | -1 | 0 {
+  sortAlphabeticallyDesc(
+    option1: SelectOption,
+    option2: SelectOption
+  ): 1 | -1 | 0 {
     if (option1.label.localeCompare(option2.label) === 1) {
       return -1;
-    } else  if (option1.label.localeCompare(option2.label) === -1) {
+    } else if (option1.label.localeCompare(option2.label) === -1) {
       return 1;
     } else {
       return 0;
@@ -144,14 +152,16 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor, OnChang
 
   sortOptions(): void {
     if (this.isSortable) {
-
-      let sortingFunction: (option1: SelectOption, option2: SelectOption) => 1 | -1 | 0 ;
+      let sortingFunction: (
+        option1: SelectOption,
+        option2: SelectOption
+      ) => 1 | -1 | 0;
 
       switch (this.sortingAlgorithm) {
-        case 'A-Z':
+        case "A-Z":
           sortingFunction = this.sortAlphabeticallyAsc;
           break;
-        case 'Z-A':
+        case "Z-A":
           sortingFunction = this.sortAlphabeticallyDesc;
           break;
         default:
@@ -164,7 +174,7 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor, OnChang
   }
 
   ngOnChanges(): void {
-    this.sortOptions();    
+    this.sortOptions();
   }
 
   /**
@@ -174,9 +184,9 @@ export class HytSelectComponent implements OnInit, ControlValueAccessor, OnChang
     const validators = [];
     if (this.isRequired) {
       validators.push(Validators.required);
-      this.label += ' *';
+      this.label += " *";
     }
-    this.formControl = new FormControl('', Validators.compose(validators));
+    this.formControl = new FormControl("", Validators.compose(validators));
     if (this.disabled) {
       this.formControl.disable();
     }

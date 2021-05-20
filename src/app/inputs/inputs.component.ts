@@ -12,7 +12,7 @@ export class InputsComponent implements OnInit {
 
   isFormInvalid(): boolean {
     console.log(this.form.get('required'));
-    return this.form.get('required').invalid;
+    return  this.form.get('required').invalid;
   }
   
   private logger: Logger;

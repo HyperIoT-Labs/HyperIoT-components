@@ -241,15 +241,6 @@ export class HytInputComponent implements OnInit, ControlValueAccessor {
       }
     }
 
-    /*
-    function userValidator(): AsyncValidatorFn {
-      return (control: AbstractControl): Observable<{ [key: string]: any } | null> => {
-        return self.injectedErrorState ? null : { userNameExists: true };
-              }
-            })
-          );
-      };
-*/
     if (this.isRequired) {
       validators.push(Validators.required);
       this.placeholder += ' *';

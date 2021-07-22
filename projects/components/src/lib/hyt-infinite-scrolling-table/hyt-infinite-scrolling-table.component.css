@@ -1,0 +1,19 @@
+.table-wrapper {
+  height: 360px;
+  width: 100%;
+  overflow-y: auto;
+  border: 1px solid grey;
+}
+.table-wrapper table {
+  width: 100%;
+}
+
+.table-wrapper table tr {
+  border-bottom: 1px solid lightgrey;
+}
+
+.table-wrapper table thead th {
+  position: sticky;
+  background-color: white;
+  top: 0;
+}

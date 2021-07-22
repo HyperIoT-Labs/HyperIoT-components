@@ -1,0 +1,9 @@
+<input #numRows type="number"><button (click)="submitNumRows(numRows.value)">SUBMIT</button>
+<div class="fake-widget-container">
+  <hyt-infinite-scrolling-table
+    #tableChild
+    [dataSource]="pageData"
+    [headers]="['random', 'random2']"
+    (dataRequest)="dataRequest($event)"
+  ></hyt-infinite-scrolling-table>
+</div>

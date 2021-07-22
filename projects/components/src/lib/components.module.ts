@@ -37,6 +37,7 @@ import { PickerPopUpComponent } from './hyt-date-picker/picker-pop-up/picker-pop
 import { HytLazyPaginationTableComponent } from './hyt-lazy-pagination-table/hyt-lazy-pagination-table.component';
 import { PageInputDirective } from './hyt-lazy-pagination-table/page-input.directive';
 import { HytButtonToggleComponent } from './hyt-button-toggle/hyt-button-toggle.component';
+import { HytInfiniteScrollingTableComponent } from './hyt-infinite-scrolling-table/hyt-infinite-scrolling-table.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -68,7 +69,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     PickerPopUpComponent,
     HytLazyPaginationTableComponent,
     PageInputDirective,
-    HytButtonToggleComponent
+    HytButtonToggleComponent,
+    HytInfiniteScrollingTableComponent
   ],
   imports: [
     CommonModule,
@@ -109,7 +111,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     HytModalContentDirective,
     HytDatePickerComponent,
     HytLazyPaginationTableComponent,
-    HytButtonToggleComponent
+    HytButtonToggleComponent,
+    HytInfiniteScrollingTableComponent
   ],
   entryComponents: [
     HytModalContainerComponent

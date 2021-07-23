@@ -3,6 +3,7 @@
   <hyt-infinite-scrolling-table
     #tableChild
     [dataSource]="pageData"
+    [dataLimit]="LIMIT_SIZE"
     [headers]="['random', 'random2']"
     (dataRequest)="dataRequest($event)"
   ></hyt-infinite-scrolling-table>

@@ -11,11 +11,13 @@ export class InfiniteScrollingTableComponent implements OnInit {
 
   CHUNK_SIZE = 50;
 
+  LIMIT_SIZE = 200;
+
   @ViewChild('tableChild') tableChild: HytInfiniteScrollingTableComponent;
 
-  fakeTotalLength = 16;
+  fakeTotalLength = 0;
 
-  pageData: Subject<any[]>;
+  pageData: Subject<any>;
 
   timeOut;
 
@@ -36,10 +38,18 @@ export class InfiniteScrollingTableComponent implements OnInit {
       clearTimeout(this.timeOut);
     }
     this.timeOut = setTimeout(() => {
-      for (let i = 0; i < this.CHUNK_SIZE; i++) {
-        this.allData.push({ random: chunk * this.CHUNK_SIZE + i, random2: Math.random() });
+      if(chunk * this.CHUNK_SIZE > this.fakeTotalLength) {
+        this.pageData.next({ type: 'EVENT', event: 'DATA_END'});
       }
-      this.pageData.next(this.allData);
+      else {
+        for (let i = 0; i < this.CHUNK_SIZE; i++) {
+          this.allData.push({ random: chunk * this.CHUNK_SIZE + i, random2: Math.random() });
+        }
+        this.pageData.next({ type: 'DATA', values: this.allData});
+        if(this.allData.length >= this.LIMIT_SIZE) {
+          this.pageData.next({ type: 'EVENT', event: 'LIMIT_REACHED'});
+        }
+      }
     }, Math.floor(Math.random() * 1000) + 500); // random beteen 500ms and 5000ms
   }
 

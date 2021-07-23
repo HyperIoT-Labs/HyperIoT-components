@@ -1,23 +1,52 @@
-import { ViewChild, ElementRef, Input, Output, EventEmitter, OnInit, Component } from '@angular/core';
+import {
+  ViewChild,
+  ElementRef,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  Component,
+  ViewEncapsulation,
+} from '@angular/core';
 import { Subject } from 'rxjs';
+
+export interface TableEvent {
+  type: 'DATA' | 'EVENT';
+  values?: any[];
+  event?: 'LIMIT_REACHED' | 'DATA_END';
+}
+
+enum TableStatus {
+  Error = -2,
+  NoData = -1,
+  LoadingChunkData = 0,
+  ShowData = 1,
+  DataEnd = 2,
+  LimitReached = 3
+}
 
 @Component({
   selector: 'hyt-infinite-scrolling-table',
   templateUrl: './hyt-infinite-scrolling-table.component.html',
-  styleUrls: ['./hyt-infinite-scrolling-table.component.css']
+  styleUrls: ['./hyt-infinite-scrolling-table.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
-export class HytInfiniteScrollingTableComponent implements OnInit{
+export class HytInfiniteScrollingTableComponent implements OnInit {
+
+  tableStatus: TableStatus = TableStatus.NoData;
 
   @Input()
-  dataSource: Subject<any[]>;
+  dataSource: Subject<TableEvent>;
 
   @Input()
   headers: string[];
 
+  @Input()
+  dataLimit = 0;
+
   tableData = [];
-  askingData;
   startToLoadData = 200;
-  totalRows;
+  totalRows = 0;
   chunk = 0;
 
   @ViewChild('tableContainer') private tableContainer: ElementRef;
@@ -26,34 +55,44 @@ export class HytInfiniteScrollingTableComponent implements OnInit{
   dataRequest: EventEmitter<any> = new EventEmitter<any>();
 
   ngOnInit(): void {
-    this.dataSource.subscribe(
-      data => {
-        console.log('data res', data)
-        this.tableData = data;
-        this.askingData = false;
+    this.dataSource.subscribe((data) => {
+      if (data.type === 'DATA') {
+        this.tableData = data.values;
+        this.tableStatus = TableStatus.ShowData;
+      } else {
+        if(data.event === 'LIMIT_REACHED') {
+          this.tableStatus = TableStatus.LimitReached;
+        }
+        if(data.event === 'DATA_END') {
+          this.tableStatus = TableStatus.DataEnd;
+        }
       }
-    );
+    }, err => {
+        this.tableStatus = TableStatus.Error;
+    });
   }
 
   updateData() {
-    console.log('updateData()', this.chunk);
-    if (this.totalRows === 0 || this.tableData.length > this.totalRows) {
+    if (this.totalRows === 0) {
+      this.tableStatus = TableStatus.NoData;
       return;
     }
-    this.askingData = true;
+    if(this.tableData.length > this.totalRows) {
+
+    }
+    this.tableStatus = TableStatus.LoadingChunkData;
     this.dataRequest.emit(this.chunk);
-    this.chunk ++;
+    this.chunk++;
   }
 
   resetTable(numRow: number) {
-    console.log('reset table');
     this.totalRows = +numRow;
     this.chunk = 0;
     this.updateData();
   }
 
   onScroll() {
-    if(this.askingData) {
+    if (this.tableStatus !== TableStatus.ShowData) {
       return;
     }
     const offsetHeight = this.tableContainer.nativeElement.offsetHeight;
@@ -62,9 +101,7 @@ export class HytInfiniteScrollingTableComponent implements OnInit{
 
     const scrollToBottom = scrollHeight - scrollTop - offsetHeight;
 
-    // console.log(scrollToBottom + "<" + this.startToLoadData)
-    if(scrollToBottom < this.startToLoadData) {
-      // console.log("LOADING")
+    if (scrollToBottom < this.startToLoadData) {
       this.updateData();
     }
   }

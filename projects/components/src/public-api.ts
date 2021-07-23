@@ -40,6 +40,7 @@ export { HytModal } from './lib/hyt-modal/hyt-modal';
 export { HytModalService } from './lib/hyt-modal/hyt-modal.service';
 export { HytModalRef } from './lib/hyt-modal/hyt-modal-ref';
 export { TimeStep } from './lib/hyt-date-picker/hyt-date-picker.component';
+export { TableEvent } from './lib/hyt-infinite-scrolling-table/hyt-infinite-scrolling-table.component';
 
 export { HytInputComponent } from './lib/hyt-input/hyt-input.component';
 export { HytButtonComponent } from './lib/hyt-button/hyt-button.component';

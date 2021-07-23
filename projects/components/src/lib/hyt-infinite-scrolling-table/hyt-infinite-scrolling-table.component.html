@@ -1,22 +1,3 @@
-<!--
-<div class="example-container mat-elevation-z8">
-    <mat-table #table [dataSource]="dataSource" (scroll)="onTableScroll($event)">
-  
-      <ng-container matColumnDef="index">
-        <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.index}} </mat-cell>
-      </ng-container>
-  
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-      </ng-container>
-  
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-  </div>
-  -->
 <div class="hyt-lazy-pagination-table">
   <div #tableContainer class="table-wrapper" (scroll)="onScroll()">
     <table>
@@ -29,10 +10,13 @@
         <tr *ngFor="let data of tableData">
           <td *ngFor="let item of headers">{{ data[item] || "-" }}</td>
         </tr>
-        <tr>
+        <tr *ngIf="tableStatus !== 2">
           <td colspan="2">
             <div style="width: 100%; height: 50px; text-align: -webkit-center;">
-              <mat-spinner strokeWidth="5" diameter="42"></mat-spinner>
+              <mat-spinner *ngIf="tableStatus === 0 || tableStatus === 1" strokeWidth="5" diameter="42"></mat-spinner>
+              <p *ngIf="tableStatus === -2">Error loading additional data</p>
+              <p *ngIf="tableStatus === 3">Limite dati visualizzabili raggiunto. Per ottenere altri dati rifinisci la tua query</p>
+              <p *ngIf="tableStatus == -1">No data to show</p>
             </div>
           </td>
         </tr>
@@ -41,5 +25,6 @@
   </div>
   <div class="table-navigation">
     Numero dati: {{ totalRows }}
+    <ng-container *ngIf="totalRows > dataLimit"><br>(Saranno mostrati i primi {{dataLimit}})</ng-container>
   </div>
 </div>

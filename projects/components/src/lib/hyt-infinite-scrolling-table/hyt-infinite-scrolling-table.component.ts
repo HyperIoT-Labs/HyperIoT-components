@@ -86,6 +86,7 @@ export class HytInfiniteScrollingTableComponent implements OnInit {
   }
 
   resetTable(numRow: number) {
+    this.tableData = [];
     this.totalRows = +numRow;
     this.chunk = 0;
     this.updateData();

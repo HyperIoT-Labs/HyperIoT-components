@@ -11,7 +11,7 @@
           <td *ngFor="let item of headers">{{ data[item] || "-" }}</td>
         </tr>
         <tr *ngIf="tableStatus !== 2">
-          <td colspan="2">
+          <td [attr.colspan]="headers.length">
             <div style="width: 100%; height: 50px; text-align: -webkit-center;">
               <mat-spinner *ngIf="tableStatus === 0 || tableStatus === 1" strokeWidth="5" diameter="42"></mat-spinner>
               <p *ngIf="tableStatus === -2">Error loading additional data</p>

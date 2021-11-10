@@ -29,6 +29,7 @@ export * from './lib/hyt-tri-checkbox/hyt-tri-checkbox.component';
 export * from './lib/hyt-modal/hyt-modal-container.component';
 export * from './lib/hyt-modal/hyt-modal-content.directive';
 export * from './lib/hyt-infinite-scrolling-table/hyt-infinite-scrolling-table.component';
+export * from './lib/hyt-notification-box/notification-box.component'
 
 export { SelectOption, SelectOptionGroup } from './lib/hyt-select/hyt-select.component';
 export { TreeNode } from './lib/hyt-tree-view/hyt-tree-view.component';
@@ -68,4 +69,5 @@ export { HytDatePickerComponent } from './lib/hyt-date-picker/hyt-date-picker.co
 export { HytLazyPaginationTableComponent } from './lib/hyt-lazy-pagination-table/hyt-lazy-pagination-table.component';
 export { HytInfiniteScrollingTableComponent } from './lib/hyt-infinite-scrolling-table/hyt-infinite-scrolling-table.component';
 export { HytButtonToggleComponent } from './lib/hyt-button-toggle/hyt-button-toggle.component';
+export { HytNotificationBoxComponent } from './lib/hyt-notification-box/notification-box.component';
 

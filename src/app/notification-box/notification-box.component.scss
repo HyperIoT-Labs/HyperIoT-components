@@ -1,0 +1,18 @@
+#container-notitication-box {
+
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+
+    #container-button-notification-actions {
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-top: 40px;
+        flex-wrap: wrap;
+
+    }
+
+}

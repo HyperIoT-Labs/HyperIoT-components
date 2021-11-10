@@ -1,0 +1,23 @@
+<div id="container-notitication-box">
+
+    <h2>Notification Box</h2>
+
+    <div id="container-button-notification-actions">
+
+        <hyt-button [color]="'primary'" (clickFn)="createSuccessNotification()">SUCCESS NOTIFICATION</hyt-button>
+
+        <hyt-button [color]="'primary'" (clickFn)="createInfoNotification()">INFO NOTIFICATION</hyt-button>
+
+        <hyt-button [color]="'primary'" (clickFn)="createWarningNotification()">WARNING NOTIFICATION</hyt-button>
+
+        <hyt-button [color]="'primary'" (clickFn)="createErrorNotification()">ERROR NOTIFICATION</hyt-button>
+
+        <hyt-button [color]="'accent'" (clickFn)="clearNotification()">CLEAR NOTIFICATION</hyt-button>
+
+    </div>
+
+    <hyt-notification-box [notify-position]="'classe-sbagliata'" [append-to]="'ciccio'"></hyt-notification-box>
+
+    <div id="ciccio" #ciccio></div>
+
+</div>

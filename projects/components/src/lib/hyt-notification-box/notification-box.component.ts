@@ -33,6 +33,8 @@ export class HytNotificationBoxComponent implements OnInit, AfterViewInit {
 
     if (!(this.notifyPosition in NotifyPosition)) {
       this.notifyPosition = 'notify-top-right';
+    }else{
+      this.notifyPosition = NotifyPosition[this.notifyPosition];
     }
   
     this.notificationService.getAlert().subscribe((alert: Notification) => {

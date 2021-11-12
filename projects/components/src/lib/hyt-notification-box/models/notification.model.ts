@@ -12,12 +12,12 @@ export enum NotificationType {
 } 
 
 export enum NotifyPosition {
-    TOPCENTER = "notify-top-center",
-    BOTTOMCENTER = "notify-bottom-center",
-    TOPFW = "notify-top-full-width",
-    BOTTOMFW = "notify-bottom-full-width", 
-    TOPLEFT = "notify-top-left",
-    TOPRIGHT = "notify-top-right", 
-    BOTTOMRIGHT = "notify-bottom-right",
-    BOTTOMLEFT = "notify-bottom-left"
+    TOP_CENTER    = "notify-top-center",
+    BOTTOM_CENTER = "notify-bottom-center",
+    TOP_FW        = "notify-top-full-width",
+    BOTTOM_FW     = "notify-bottom-full-width", 
+    TOP_LEFT      = "notify-top-left",
+    TOP_RIGHT     = "notify-top-right", 
+    BOTTOM_RIGHT  = "notify-bottom-right",
+    BOTTOM_LEFT   = "notify-bottom-left"
   }

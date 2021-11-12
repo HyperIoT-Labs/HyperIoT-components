@@ -1,3 +1,4 @@
+import { NotificationService } from './lib/hyt-notification-box/services/notification.service';
 /*
  * Public API Surface of components
  */
@@ -70,4 +71,5 @@ export { HytLazyPaginationTableComponent } from './lib/hyt-lazy-pagination-table
 export { HytInfiniteScrollingTableComponent } from './lib/hyt-infinite-scrolling-table/hyt-infinite-scrolling-table.component';
 export { HytButtonToggleComponent } from './lib/hyt-button-toggle/hyt-button-toggle.component';
 export { HytNotificationBoxComponent } from './lib/hyt-notification-box/notification-box.component';
+export { NotificationService } from './lib/hyt-notification-box/services/notification.service';
 

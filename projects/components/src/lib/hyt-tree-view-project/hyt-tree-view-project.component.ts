@@ -1,7 +1,6 @@
-import { Component, OnInit, EventEmitter, Output, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-// import { ConsoleReporter } from 'jasmine';
 
 /**
  * Data node that is used in the `treeData` array passed by the hosting component
@@ -49,19 +48,70 @@ export class HytTreeViewProjectComponent implements OnInit {
 
   private lastActiveNode: TreeViewNode;
 
+  defaultData = [
+    {
+      "data": {
+          "type": "source"
+      },
+      "name": "Sources",
+      "icon": "icon-hyt_StreamCloud_Lamp",
+      "children": []
+    },
+    {
+      "data": {
+        "type": "statistics"
+      },
+      "name": "Statistics",
+      "icon": "icon-hyt_statistics"
+    },
+    {
+      "data": {
+        "type": "events"
+      },
+      "name": "Events",
+      "icon": "icon-hyt_event"
+    },
+    {
+      "data": {
+        "type": "tags"
+      },
+      "name": "Tags",
+      "icon": "icon-hyt_tags"
+    },
+    {
+      "data": {
+        "type": "categories"
+      },
+      "name": "Categories",
+      "icon": "icon-hyt_categories"
+    },
+    {
+      "data": {
+        "type": "areas"
+      },
+      "name": "Areas",
+      "icon": "icon-hyt_areaB16"
+    }
+  ];
+
   constructor() {
   }
 
   ngOnInit() {
+
     if (this.treeData) {
       this.setData(this.treeData);
     }
+
+
   }
 
   setData(data: TreeDataNode[]) {
+
     this.prepareData(data);
     this.treeData = data;
     this.dataSource.data = this.treeData;
+    
   }
 
   setActiveNode(node: TreeViewNode) {
@@ -191,8 +241,9 @@ export class HytTreeViewProjectComponent implements OnInit {
     this.treeData.forEach(node => {
       this.treeDataSearch(node, value);
     });
-
+    
     this.setData(this.treeData);
     this.treeControl.expandAll();
   }
 }
+

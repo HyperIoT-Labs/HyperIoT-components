@@ -94,7 +94,282 @@ export class TreeViewProjectComponent implements OnInit {
         },
       ];
     */
-    treeData2 = JSON.parse(`
+
+//     treeData2 = JSON.parse(`
+//   [
+//     {
+//         "data": {
+//             "id": 12
+//         },
+//         "name": "Test project22",
+//         "icon": "icon-hyt_projectRSolo",
+//         "last": true,
+//         "children": [
+//             {
+//                 "data": {
+//                     "id": 30,
+//                     "type": "source"
+//                 },
+//                 "name": "Sources",
+//                 "icon": "icon-hyt_StreamCloud_Lamp",
+//                 "children": [
+//                     {
+//                         "data": {
+//                             "id": 31,
+//                             "type": "application"
+//                         },
+//                         "name": "TestApplication31 prova overflow testo lungo",
+//                         "icon": "icon-hyt_fieldsPlusHalf",
+//                         "children": [
+//                             {
+//                                 "data": {
+//                                     "id": 32,
+//                                     "type": "packet"
+//                                 },
+//                                 "name": "TestPacket331",
+//                                 "icon": "icon-hyt_packets",
+//                                 "children": [
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-fields"
+//                                         },
+//                                         "name": "Fields",
+//                                         "icon": "icon-hyt_fields"
+//                                     },
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-enrichments"
+//                                         },
+//                                         "name": "Enrichments with text overflow test the quick brown",
+//                                         "icon": "icon-hyt_enrichments"
+//                                     },
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-statistics"
+//                                         },
+//                                         "name": "Statistics",
+//                                         "icon": "icon-hyt_statistics"
+//                                     },
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-events"
+//                                         },
+//                                         "name": "Events",
+//                                         "icon": "icon-hyt_event"
+//                                     }
+//                                 ]
+//                             }
+//                         ]
+//                     },
+//                     {
+//                         "data": {
+//                             "id": 22,
+//                             "type": "device"
+//                         },
+//                         "name": "TestDevice212 prova overflow testo lungo",
+//                         "icon": "icon-hyt_device",
+//                         "children": [
+//                             {
+//                                 "data": {
+//                                     "id": 23,
+//                                     "type": "packet"
+//                                 },
+//                                 "name": "TestPacket2uy",
+//                                 "icon": "icon-hyt_packets",
+//                                 "children": [
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-fields"
+//                                         },
+//                                         "name": "Fields",
+//                                         "icon": "icon-hyt_fields"
+//                                     },
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-enrichments"
+//                                         },
+//                                         "name": "Enrichments with text overflow test the quick brown",
+//                                         "icon": "icon-hyt_enrichments"
+//                                     },
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-statistics"
+//                                         },
+//                                         "name": "Statistics",
+//                                         "icon": "icon-hyt_statistics"
+//                                     },
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-events"
+//                                         },
+//                                         "name": "Events",
+//                                         "icon": "icon-hyt_event"
+//                                     }
+//                                 ]
+//                             }
+//                         ]
+//                     },
+//                     {
+//                         "data": {
+//                             "id": 23,
+//                             "type": "device"
+//                         },
+//                         "name": "TestDevice39",
+//                         "icon": "icon-hyt_device",
+//                         "children": [
+//                             {
+//                                 "data": {
+//                                     "id": 26,
+//                                     "type": "packet"
+//                                 },
+//                                 "name": "TestPacket2133",
+//                                 "icon": "icon-hyt_packets",
+//                                 "children": [
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-fields"
+//                                         },
+//                                         "name": "Fields",
+//                                         "icon": "icon-hyt_fields"
+//                                     },
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-enrichments"
+//                                         },
+//                                         "name": "Enrichments",
+//                                         "icon": "icon-hyt_enrichments"
+//                                     },
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-statistics"
+//                                         },
+//                                         "name": "Statistics",
+//                                         "icon": "icon-hyt_statistics"
+//                                     },
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-events"
+//                                         },
+//                                         "name": "Events",
+//                                         "icon": "icon-hyt_event"
+//                                     }
+//                                 ]
+//                             },
+//                             {
+//                                 "data": {
+//                                     "id": 25,
+//                                     "type": "packet"
+//                                 },
+//                                 "name": "TestPacket2152 3 3  32 eeww test text overflow",
+//                                 "icon": "icon-hyt_packets",
+//                                 "children": [
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-fields"
+//                                         },
+//                                         "name": "Fields",
+//                                         "icon": "icon-hyt_fields"
+//                                     },
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-enrichments"
+//                                         },
+//                                         "name": "Enrichments",
+//                                         "icon": "icon-hyt_enrichments"
+//                                     },
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-statistics"
+//                                         },
+//                                         "name": "Statistics",
+//                                         "icon": "icon-hyt_statistics"
+//                                     },
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-events"
+//                                         },
+//                                         "name": "Events",
+//                                         "icon": "icon-hyt_event"
+//                                     }
+//                                 ]
+//                             }
+//                         ]
+//                     },
+//                     {
+//                         "data": {
+//                             "id": 13,
+//                             "type": "device"
+//                         },
+//                         "name": "TestDevice123",
+//                         "icon": "icon-hyt_device",
+//                         "children": [
+//                             {
+//                                 "data": {
+//                                     "id": 14,
+//                                     "type": "packet"
+//                                 },
+//                                 "name": "TestPacket1",
+//                                 "icon": "icon-hyt_packets",
+//                                 "children": [
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-fields"
+//                                         },
+//                                         "name": "Fields",
+//                                         "icon": "icon-hyt_fields"
+//                                     },
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-enrichments"
+//                                         },
+//                                         "name": "Enrichments",
+//                                         "icon": "icon-hyt_enrichments"
+//                                     },
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-statistics"
+//                                         },
+//                                         "name": "Statistics",
+//                                         "icon": "icon-hyt_statistics"
+//                                     },
+//                                     {
+//                                         "data": {
+//                                             "id": 0,
+//                                             "type": "packet-events"
+//                                         },
+//                                         "name": "Events",
+//                                         "icon": "icon-hyt_event"
+//                                     }
+//                                 ]
+//                             }
+//                         ]
+//                     }
+//                 ]
+//             }
+//         ]
+//     }
+// ]`) 
+
+treeData2 = JSON.parse(`
   [
     {
         "data": {
@@ -104,269 +379,20 @@ export class TreeViewProjectComponent implements OnInit {
         "icon": "icon-hyt_projectRSolo",
         "last": true,
         "children": [
-            {
-                "data": {
-                    "id": 30,
-                    "type": "source"
-                },
-                "name": "Sources",
-                "icon": "icon-hyt_StreamCloud_Lamp",
-                "children": [
-                    {
-                        "data": {
-                            "id": 31,
-                            "type": "application"
-                        },
-                        "name": "TestApplication31 prova overflow testo lungo",
-                        "icon": "icon-hyt_fieldsPlusHalf",
-                        "children": [
-                            {
-                                "data": {
-                                    "id": 32,
-                                    "type": "packet"
-                                },
-                                "name": "TestPacket331",
-                                "icon": "icon-hyt_packets",
-                                "children": [
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-fields"
-                                        },
-                                        "name": "Fields",
-                                        "icon": "icon-hyt_fields"
-                                    },
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-enrichments"
-                                        },
-                                        "name": "Enrichments with text overflow test the quick brown",
-                                        "icon": "icon-hyt_enrichments"
-                                    },
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-statistics"
-                                        },
-                                        "name": "Statistics",
-                                        "icon": "icon-hyt_statistics"
-                                    },
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-events"
-                                        },
-                                        "name": "Events",
-                                        "icon": "icon-hyt_event"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "data": {
-                            "id": 22,
-                            "type": "device"
-                        },
-                        "name": "TestDevice212 prova overflow testo lungo",
-                        "icon": "icon-hyt_device",
-                        "children": [
-                            {
-                                "data": {
-                                    "id": 23,
-                                    "type": "packet"
-                                },
-                                "name": "TestPacket2uy",
-                                "icon": "icon-hyt_packets",
-                                "children": [
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-fields"
-                                        },
-                                        "name": "Fields",
-                                        "icon": "icon-hyt_fields"
-                                    },
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-enrichments"
-                                        },
-                                        "name": "Enrichments with text overflow test the quick brown",
-                                        "icon": "icon-hyt_enrichments"
-                                    },
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-statistics"
-                                        },
-                                        "name": "Statistics",
-                                        "icon": "icon-hyt_statistics"
-                                    },
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-events"
-                                        },
-                                        "name": "Events",
-                                        "icon": "icon-hyt_event"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "data": {
-                            "id": 23,
-                            "type": "device"
-                        },
-                        "name": "TestDevice39",
-                        "icon": "icon-hyt_device",
-                        "children": [
-                            {
-                                "data": {
-                                    "id": 26,
-                                    "type": "packet"
-                                },
-                                "name": "TestPacket2133",
-                                "icon": "icon-hyt_packets",
-                                "children": [
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-fields"
-                                        },
-                                        "name": "Fields",
-                                        "icon": "icon-hyt_fields"
-                                    },
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-enrichments"
-                                        },
-                                        "name": "Enrichments",
-                                        "icon": "icon-hyt_enrichments"
-                                    },
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-statistics"
-                                        },
-                                        "name": "Statistics",
-                                        "icon": "icon-hyt_statistics"
-                                    },
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-events"
-                                        },
-                                        "name": "Events",
-                                        "icon": "icon-hyt_event"
-                                    }
-                                ]
-                            },
-                            {
-                                "data": {
-                                    "id": 25,
-                                    "type": "packet"
-                                },
-                                "name": "TestPacket2152 3 3  32 eeww test text overflow",
-                                "icon": "icon-hyt_packets",
-                                "children": [
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-fields"
-                                        },
-                                        "name": "Fields",
-                                        "icon": "icon-hyt_fields"
-                                    },
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-enrichments"
-                                        },
-                                        "name": "Enrichments",
-                                        "icon": "icon-hyt_enrichments"
-                                    },
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-statistics"
-                                        },
-                                        "name": "Statistics",
-                                        "icon": "icon-hyt_statistics"
-                                    },
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-events"
-                                        },
-                                        "name": "Events",
-                                        "icon": "icon-hyt_event"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "data": {
-                            "id": 13,
-                            "type": "device"
-                        },
-                        "name": "TestDevice123",
-                        "icon": "icon-hyt_device",
-                        "children": [
-                            {
-                                "data": {
-                                    "id": 14,
-                                    "type": "packet"
-                                },
-                                "name": "TestPacket1",
-                                "icon": "icon-hyt_packets",
-                                "children": [
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-fields"
-                                        },
-                                        "name": "Fields",
-                                        "icon": "icon-hyt_fields"
-                                    },
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-enrichments"
-                                        },
-                                        "name": "Enrichments",
-                                        "icon": "icon-hyt_enrichments"
-                                    },
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-statistics"
-                                        },
-                                        "name": "Statistics",
-                                        "icon": "icon-hyt_statistics"
-                                    },
-                                    {
-                                        "data": {
-                                            "id": 0,
-                                            "type": "packet-events"
-                                        },
-                                        "name": "Events",
-                                        "icon": "icon-hyt_event"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
+          {
+            "data": {
+                "id": 12
+            },
+            "name": "Source",
+            "icon": "icon-hyt_projectRSolo",
+            "last": true,
+            "children": [
+              
+            ]
+          }  
         ]
     }
-]`) as TreeDataNode[];
+ ]`) as TreeDataNode[];
 
     constructor(private loggerService: LoggerService) {
         this.logger = new Logger(this.loggerService);

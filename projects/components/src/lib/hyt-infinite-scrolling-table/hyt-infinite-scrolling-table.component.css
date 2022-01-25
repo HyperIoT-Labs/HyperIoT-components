@@ -10,6 +10,7 @@
 }
 .hyt-lazy-pagination-table .table-wrapper table {
   width: 100%;
+  table-layout: fixed;
 }
 
 .hyt-lazy-pagination-table .table-wrapper table tr {
@@ -30,4 +31,15 @@
   overflow: auto;
   bottom: 0;
   left: 0;
+}
+
+.hyt-lazy-pagination-table tr.single-row-data-elements td {
+  padding: 0px 5px;
+}
+
+/* Rule to change according to use */
+.hyt-lazy-pagination-table tr.single-row-data-elements td:first-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

@@ -7,8 +7,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of tableData">
-          <td *ngFor="let item of headers">{{ data[item] || "-" }}</td>
+        <tr class="single-row-data-elements" *ngFor="let data of tableData">
+          <td [ngStyle]="{'width': getTdStyleClassByHeader(headers)}" *ngFor="let item of headers">{{ data[item] || "-" }}</td>
         </tr>
         <tr *ngIf="tableStatus !== 2">
           <td [attr.colspan]="headers.length">

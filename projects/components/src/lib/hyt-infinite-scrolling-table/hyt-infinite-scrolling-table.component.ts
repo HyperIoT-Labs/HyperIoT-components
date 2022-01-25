@@ -106,4 +106,11 @@ export class HytInfiniteScrollingTableComponent implements OnInit {
       this.updateData();
     }
   }
+
+  getTdStyleClassByHeader(headers: string[]): string{
+    const percent = 100 / headers.length;
+    const cssPercent = `${percent.toFixed(3).slice(0,-1)}%`;
+    return cssPercent;
+  }
+
 }

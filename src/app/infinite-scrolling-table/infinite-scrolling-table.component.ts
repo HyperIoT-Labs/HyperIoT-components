@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HytInfiniteScrollingTableComponent } from 'projects/components/src/lib/hyt-infinite-scrolling-table/hyt-infinite-scrolling-table.component';
+import { TableHeader, HytInfiniteScrollingTableComponent } from 'projects/components/src/lib/hyt-infinite-scrolling-table/hyt-infinite-scrolling-table.component';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -22,6 +22,8 @@ export class InfiniteScrollingTableComponent implements OnInit {
   timeOut;
 
   allData = [];
+
+  headers: TableHeader[] = [{ value: 'random', label: ' Random' }, { value: 'random2' }];
 
   ngOnInit(): void {
     this.pageData = new Subject<any[]>();

@@ -40,6 +40,7 @@ import { HytButtonToggleComponent } from './hyt-button-toggle/hyt-button-toggle.
 import { HytInfiniteScrollingTableComponent } from './hyt-infinite-scrolling-table/hyt-infinite-scrolling-table.component';
 import { HytNotificationBoxComponent } from './hyt-notification-box/notification-box.component';
 import { NotificationService } from './hyt-notification-box/services/notification.service';
+import { HytInfoComponent } from './hyt-info/hyt-info.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -73,7 +74,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     PageInputDirective,
     HytButtonToggleComponent,
     HytInfiniteScrollingTableComponent,
-    HytNotificationBoxComponent
+    HytNotificationBoxComponent,
+    HytInfoComponent
   ],
   imports: [
     CommonModule,
@@ -116,7 +118,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     HytLazyPaginationTableComponent,
     HytButtonToggleComponent,
     HytInfiniteScrollingTableComponent,
-    HytNotificationBoxComponent
+    HytNotificationBoxComponent,
+    HytInfoComponent
   ],
   providers: [ NotificationService ],
   entryComponents: [

@@ -21,6 +21,8 @@
   position: sticky;
   background-color: white;
   top: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .hyt-lazy-pagination-table .table-navigation {
@@ -42,4 +44,11 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.cdk-overlay-container .hyt-header-tooltip {
+  margin: 0px;
+  word-break: break-all;
+  white-space: normal;
+  background-color: #266dca;
 }

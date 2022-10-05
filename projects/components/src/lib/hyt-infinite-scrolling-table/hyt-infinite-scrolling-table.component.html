@@ -3,12 +3,15 @@
     <table>
       <thead>
         <tr>
-          <th *ngFor="let data of headers">{{ data }}</th>
+          <th *ngFor="let header of headers" [matTooltip]="header.label || header.value" matTooltipPosition="above"
+            matTooltipClass="hyt-header-tooltip">
+            {{ header.label || header.value }} 
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr class="single-row-data-elements" *ngFor="let data of tableData">
-          <td [ngStyle]="{'width': getTdStyleClassByHeader(headers)}" *ngFor="let item of headers">{{ data[item] || "-" }}</td>
+          <td [ngStyle]="{'width': getTdStyleClassByHeader(headers)}" *ngFor="let item of headers">{{ data[item.value] || "-" }}</td>
         </tr>
         <tr *ngIf="tableStatus !== 2">
           <td [attr.colspan]="headers.length">

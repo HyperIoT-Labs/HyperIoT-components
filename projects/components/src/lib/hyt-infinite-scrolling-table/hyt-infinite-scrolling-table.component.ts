@@ -16,6 +16,11 @@ export interface TableEvent {
   event?: 'LIMIT_REACHED' | 'DATA_END';
 }
 
+export interface TableHeader {
+  value: string;
+  label?: string;
+}
+
 enum TableStatus {
   Error = -2,
   NoData = -1,
@@ -39,7 +44,7 @@ export class HytInfiniteScrollingTableComponent implements OnInit {
   dataSource: Subject<TableEvent>;
 
   @Input()
-  headers: string[];
+  headers: TableHeader[] = [];
 
   @Input()
   dataLimit = 0;
@@ -107,7 +112,7 @@ export class HytInfiniteScrollingTableComponent implements OnInit {
     }
   }
 
-  getTdStyleClassByHeader(headers: string[]): string{
+  getTdStyleClassByHeader(headers: TableHeader[]): string{
     const percent = 100 / headers.length;
     const cssPercent = `${percent.toFixed(3).slice(0,-1)}%`;
     return cssPercent;

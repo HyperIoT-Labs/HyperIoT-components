@@ -25,6 +25,7 @@
     "idb": "^5.0.1",
     "map-stream": "0.0.7",
     "moment": "^2.24.0",
+    "ngx-mask": "9.1.4",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "web-animations-js": "^2.3.2",

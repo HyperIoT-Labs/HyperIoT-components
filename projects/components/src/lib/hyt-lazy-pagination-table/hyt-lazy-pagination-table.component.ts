@@ -4,6 +4,11 @@ import { SelectOption } from '../hyt-select/hyt-select.component';
 
 export type TableRowIndexes = [number, number];
 
+export interface LazyTableHeader {
+  value: string;
+  label?: string;
+}
+
 enum TableStatus {
   NoData = -1,
   LoadingData = 0,
@@ -24,7 +29,7 @@ export class HytLazyPaginationTableComponent implements OnInit {
   dataSource: Subject<any[]>;
 
   @Input()
-  headers: string[];
+  headers: LazyTableHeader[] = [];
 
   math = Math;
 

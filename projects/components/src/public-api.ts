@@ -67,7 +67,7 @@ export { HytHexagonComponent } from './lib/hyt-hexagon/hyt-hexagon.component';
 export { HytModalContainerComponent } from './lib/hyt-modal/hyt-modal-container.component';
 export { HytModalContentDirective } from './lib/hyt-modal/hyt-modal-content.directive';
 export { HytDatePickerComponent } from './lib/hyt-date-picker/hyt-date-picker.component';
-export { HytLazyPaginationTableComponent } from './lib/hyt-lazy-pagination-table/hyt-lazy-pagination-table.component';
+export { HytLazyPaginationTableComponent, LazyTableHeader } from './lib/hyt-lazy-pagination-table/hyt-lazy-pagination-table.component';
 export { HytInfiniteScrollingTableComponent, TableHeader } from './lib/hyt-infinite-scrolling-table/hyt-infinite-scrolling-table.component';
 export { HytInfoComponent } from './lib/hyt-info/hyt-info.component';
 export { HytButtonToggleComponent } from './lib/hyt-button-toggle/hyt-button-toggle.component';

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HytLazyPaginationTableComponent } from 'projects/components/src/lib/hyt-lazy-pagination-table/hyt-lazy-pagination-table.component';
+import { HytLazyPaginationTableComponent, LazyTableHeader } from 'projects/components/src/lib/hyt-lazy-pagination-table/hyt-lazy-pagination-table.component';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -16,6 +16,8 @@ export class LazyPaginationTableComponent implements OnInit {
   pageData: Subject<any[]>;
 
   timeOut;
+
+  headers: LazyTableHeader[] = [{ value: 'random', label: ' Random' }, { value: 'random2' }];
 
   ngOnInit(): void {
     this.pageData = new Subject<any[]>();

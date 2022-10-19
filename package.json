@@ -15,7 +15,7 @@
   },
   "private": true,
   "dependencies": {
-    "@hyperiot/core": "0.7.14",
+    "@hyperiot/core": "0.7.15",
     "@compodoc/compodoc": "^1.1.11",
     "bootstrap": "^4.3.1",
     "core-js": "^3.1.4",

@@ -40,8 +40,11 @@ import { TimelineCalendarComponent } from './timeline-calendar/timeline-calendar
 import { LazyPaginationTableComponent } from './lazy-pagination-table/lazy-pagination-table.component';
 import { InfiniteScrollingTableComponent } from './infinite-scrolling-table/infinite-scrolling-table.component';
 import { NotificationBoxComponent } from './notification-box/notification-box.component';
+import { IntroductionComponent } from './introduction/introduction.component';
 
 const appRoutes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: '/introductions' },
+  { path: 'introductions', component: IntroductionComponent },
   { path: 'inputs', component: InputsComponent },
   { path: 'inputs-template', component: InputsTemplateComponent },
   { path: 'select', component: SelectComponent },
@@ -60,6 +63,7 @@ const appRoutes: Routes = [
   { path: 'lazy-pagination-table', component: LazyPaginationTableComponent },
   { path: 'infinite-scrolling-table', component: InfiniteScrollingTableComponent },
   { path: 'notification-box', component: NotificationBoxComponent },
+  { path: '**', component: IntroductionComponent }
 ];
 
 @NgModule({
@@ -84,7 +88,8 @@ const appRoutes: Routes = [
     TimelineCalendarComponent,
     LazyPaginationTableComponent,
     InfiniteScrollingTableComponent,
-    NotificationBoxComponent
+    NotificationBoxComponent,
+    IntroductionComponent
   ],
   entryComponents: [
     ModalExampleComponent
